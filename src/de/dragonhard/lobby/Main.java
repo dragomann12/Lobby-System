@@ -41,9 +41,16 @@ TODO add MY SQL db later
     public void onEnable(){
 
         if(cm.configExists()){
-            ConsoleWriter.writeWithTag("Enabled and config detected!");
+            ConsoleWriter.writeWithTag("checking Config version ...");
+            if(!cm.isCurrentVersion()){
+                ConsoleWriter.writeWithTag("old Config version detected! ...");
+                cm.getDefaultConfig();
+            }else{
+                ConsoleWriter.writeWithTag("Config version up to date ...");
+                ConsoleWriter.writeWithTag("Enabled!");
+            }
         }else{
-            ConsoleWriter.writeWithTag("Enabled with no detected config!");
+            ConsoleWriter.writeWithTag("installing ...");
             loadMenuConfig(); // load the Config for the Menu
             cm.getDefaultConfig();
         }
@@ -87,6 +94,8 @@ TODO add MY SQL db later
         return true;
 
     }
+
+
 
     public boolean loadConfig(String menuName, String material ,int lineAmount){
         ConfigManager cm = new ConfigManager();

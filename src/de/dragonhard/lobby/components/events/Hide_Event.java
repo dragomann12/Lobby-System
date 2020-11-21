@@ -41,10 +41,7 @@ public class Hide_Event implements Listener {
     public void onJoin(PlayerJoinEvent e){
         Player p = (Player) e.getPlayer();
 
-        hide.add(p.getName());
-        for (Player players : Bukkit.getOnlinePlayers()) {
-            p.hidePlayer(players);
-        }
+
 
     }
 

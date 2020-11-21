@@ -11,6 +11,7 @@ import java.io.IOException;
 public class ConfigManager extends PluginConfigReader {
 
     private static String defaultConfigFile = "config_main";
+    private static String configVersion = "1.1";
 
     public void createConfig(String fileName , String item, String value){
         this.setFile(fileName);
@@ -214,7 +215,7 @@ public class ConfigManager extends PluginConfigReader {
             this.setDefault("EndTagColor", "5");
 
             this.setDefault("DBVersion",1);
-
+            this.setDefault("ConfigVersion","1.1");
             this.setDefault("showWelcome",true);
             this.setDefault("MessageColor","b");
             this.setDefault("StartColor","b");
@@ -233,6 +234,26 @@ public class ConfigManager extends PluginConfigReader {
         ConsoleWriter.writeWithTag("config now created!");
         ConsoleWriter.writeWithTag("restart required stopping Server!");
         System.exit(0);
+    }
+
+    public String getConfigVersion(){
+        this.setFile(getDefaultConfigName());
+        return this.getString("ConfigVersion");
+    }
+
+    public boolean isCurrentVersion(){
+        this.setFile(getDefaultConfigName());
+        if(getConfigVersion() == configVersion){ return true;}
+        return false;
+    }
+
+    public void updateConfig(){
+        File file = this.getFile(getDefaultConfigName());
+        ConsoleWriter.writeWithTag("remove old config ... 0%");
+        file.delete();
+        ConsoleWriter.writeWithTag("done ... 100%");
+        getDefaultConfig();
+
     }
 
     public boolean configExists(){
