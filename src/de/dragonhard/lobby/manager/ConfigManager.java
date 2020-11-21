@@ -243,7 +243,7 @@ public class ConfigManager extends PluginConfigReader {
 
     public boolean isCurrentVersion(){
         this.setFile(getDefaultConfigName());
-        if(getConfigVersion() == configVersion){ return true;}
+        if(getConfigVersion().equals(configVersion)){ return true;}
         return false;
     }
 
