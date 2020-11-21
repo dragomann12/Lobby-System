@@ -98,7 +98,7 @@ public class Admin_Server_Menu extends Lobby_Inventory implements Listener {
                            case 10:
                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
                                ConsoleWriter.writeWithTag("The user " + p.getName() + " used the Admin-Item 'Stop' and closed the Server " + Bukkit.getServer().getServerName());
-                               System.exit(0); break;
+                               Bukkit.getServer().dispatchCommand(p,"stop"); break;
 
                            case 36:
                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
