@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.manager;
 
+import de.dragonhard.lobby.components.colorGenerator;
 import de.dragonhard.lobby.components.menu.admin.Admin_Menu;
 import de.dragonhard.lobby.components.menu.creativ.Creativ_Menu;
 import de.dragonhard.lobby.components.menu.debug.debug_Menu;
@@ -45,6 +46,9 @@ public class MessageManager extends PlayerConfigManager{
         } else if (message.startsWith(prefix + "devInv")){
             debug_Menu dm = new debug_Menu();
             dm.openInventory(p);
+        }else if (message.startsWith(prefix + "cGen")){
+            colorGenerator cGen = new colorGenerator();
+            p.sendMessage("Nummer: " + cGen.getColor(9,"test-generator"));
         }
     }
 

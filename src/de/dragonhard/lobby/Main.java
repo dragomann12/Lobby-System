@@ -10,6 +10,7 @@ import de.dragonhard.lobby.components.events.*;
 import de.dragonhard.lobby.components.menu.*;
 import de.dragonhard.lobby.components.menu.admin.Admin_Menu;
 import de.dragonhard.lobby.components.menu.admin.Admin_Server_Menu;
+import de.dragonhard.lobby.components.menu.debug.debug_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Menu;
 import de.dragonhard.lobby.manager.*;
 import org.bukkit.Bukkit;
@@ -131,8 +132,9 @@ TODO add MY SQL db later
         plm.registerEvents(new Admin_Server_Menu(),this);
         plm.registerEvents(new Event_Blocker(),this);
         plm.registerEvents(new Hide_Event(),this);
-        plm.registerEvents(new CommandListener(),this);
-
+        plm.registerEvents(new debug_Menu(), this);
+        //plm.registerEvents(new CommandListener(),this); work on the test server but not at the Dev-Server
+        //                                                          Conflict with other Plugin
 
         return true;
 

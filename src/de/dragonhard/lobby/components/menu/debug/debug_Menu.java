@@ -1,6 +1,7 @@
 package de.dragonhard.lobby.components.menu.debug;
 
 import de.dragonhard.lobby.components.PermissionList;
+import de.dragonhard.lobby.components.colorGenerator;
 import de.dragonhard.lobby.components.menu.Lobby_Inventory;
 import de.dragonhard.lobby.components.menu.admin.Admin_Server_Menu;
 import de.dragonhard.lobby.manager.*;
@@ -89,20 +90,10 @@ public class debug_Menu extends Lobby_Inventory implements Listener {
                 ){
                         p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
 
-                              String type = e.getCurrentItem().getItemMeta().getDisplayName();
-
-                       if(type.contains(":")){
-
-                           String[] types = type.split(":");
-
-                           String action = types[0];
-                           String value = types[1];
-                           String id = types[2];
-                           String title = types[3];
-
-
-
-                       }
+                        if(e.getCurrentItem().getItemMeta().getDisplayName() == "Farbe"){
+                            colorGenerator cGen = new colorGenerator();
+                            p.sendMessage("Nummer: " + cGen.getColor(9,"test-generator"));
+                        }
 
                 }
             }
