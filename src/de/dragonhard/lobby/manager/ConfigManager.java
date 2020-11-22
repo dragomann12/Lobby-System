@@ -228,12 +228,12 @@ public class ConfigManager extends PluginConfigReader {
         }catch (Exception e){
             ConsoleWriter.writeWithTag("An error occurred while creating the config");
             ConsoleWriter.write("Error: " + e.getCause());
+            error(2);
         }
 
-
         ConsoleWriter.writeWithTag("config now created!");
-        ConsoleWriter.writeWithTag("restart required stopping Server!");
-        System.exit(0);
+        error(0);
+
     }
 
     public String getConfigVersion(){
@@ -250,10 +250,26 @@ public class ConfigManager extends PluginConfigReader {
     public void updateConfig(){
         File file = this.getFile(getDefaultConfigName());
         ConsoleWriter.writeWithTag("remove old config ... 0%");
+        if(!file.exists()){error(1);}
         file.delete();
         ConsoleWriter.writeWithTag("done ... 100%");
         getDefaultConfig();
 
+    }
+
+    private void error(int code){
+
+        switch(code){
+            default:
+                ConsoleWriter.writeWithTag(" [Error] An unknown error has occurred the configuration will be deleted and recreated. If this error occurs again, please contact the developer via Discord: Dragonhard117");
+                System.exit(-1); break;
+            case 1:
+                ConsoleWriter.writeWithTag(" [Error] The configuration could not be deleted the server will be stopped and the configuration will newly created");
+                System.exit(1); break;
+            case 0:
+                ConsoleWriter.writeWithTag(" [Update] To avoid errors, a restart is absolutely necessary");
+                System.exit(0); break;
+        }
     }
 
     public boolean configExists(){
