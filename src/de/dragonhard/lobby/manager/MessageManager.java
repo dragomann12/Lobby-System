@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.manager;
 
+import de.dragonhard.lobby.components.ConsoleWriter;
 import de.dragonhard.lobby.components.colorGenerator;
 import de.dragonhard.lobby.components.menu.admin.Admin_Menu;
 import de.dragonhard.lobby.components.menu.creativ.Creativ_Menu;
@@ -49,7 +50,27 @@ public class MessageManager extends PlayerConfigManager{
         }else if (message.startsWith(prefix + "cGen")){
             colorGenerator cGen = new colorGenerator();
             p.sendMessage("Nummer: " + cGen.getColor(9,"test-generator"));
+        }else if (message.startsWith(prefix + "checkUpdate")){
+           ConfigManager cm = new ConfigManager();
+           if(!cm.isCurrentVersion()){
+               ConsoleWriter.writeWithTag("[Update] Ein Update für die Config ist verfügbar!");
+               p.sendMessage("§eEin Update für die Config ist verfügbar!");
+               cm.setUpdateReady(true);
+           }else{
+               ConsoleWriter.writeWithTag("[Update] Es ist kein Update verfügbar!");
+               p.sendMessage("§aEs ist kein Update verfügbar!");
+               cm.setUpdateReady(false);
+           }
+
+        }else if (message.startsWith(prefix + "update")){
+        ConfigManager cm = new ConfigManager();
+        if(cm.isUpdateReady()) {
+            p.sendMessage("§aDas Update wird geladen ...");
+            cm.updateConfig();
+        }else{
+            p.sendMessage("§4Es ist kein Update bereit!");
         }
+    }
     }
 
 }

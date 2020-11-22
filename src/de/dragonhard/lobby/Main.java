@@ -41,14 +41,21 @@ TODO add MY SQL db later
     public void onEnable(){
 
         if(cm.configExists()){
-            ConsoleWriter.writeWithTag("checking Config version ...");
+            ConsoleWriter.writeWithTag("checking Config ...");
+
             if(!cm.isCurrentVersion()){
                 ConsoleWriter.writeWithTag("old Config version detected! ...");
-                cm.updateConfig();
-            }else{
-                ConsoleWriter.writeWithTag("Config version up to date ...");
-                ConsoleWriter.writeWithTag("Enabled!");
+                if(cm.isUpdateReady()){
+                    cm.updateConfig();
+                }else{
+                    ConsoleWriter.writeWithTag(" [Update] an update for the config is available! write (in-game) @update to Update now or restart the Server");
+                    cm.setUpdateReady(true);
+                }
             }
+
+                ConsoleWriter.writeWithTag("Config is up to date ...");
+                ConsoleWriter.writeWithTag("Enabled!");
+
         }else{
             ConsoleWriter.writeWithTag("installing ...");
             loadMenuConfig(); // load the Config for the Menu
