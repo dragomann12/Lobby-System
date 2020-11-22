@@ -105,17 +105,6 @@ public class Interact_Event implements Listener {
                                 if (e.getItem().getType().equals(Material.GOLDEN_APPLE)) {
                                     p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
 
-
-                                } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                                    if (e.getItem().getType().equals(Material.IRON_CHESTPLATE)) {
-                                        p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-
-
-                                    } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                                        if (e.getItem().getType().equals(Material.DIAMOND_BOOTS)) {
-                                            p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-
-
                                         } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
                                             if (e.getItem().getType().equals(Material.REDSTONE)) {
                                                 p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);      //Gamemodi
@@ -130,7 +119,7 @@ public class Interact_Event implements Listener {
 
                                                 } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
                                                     if (e.getItem().getType().equals(Material.BANNER)) {
-                                                        p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                                                        p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);  //friend
                                                         Friend_Menu fm = new Friend_Menu();
                                                         fm.openInventory(p);
 
@@ -140,8 +129,6 @@ public class Interact_Event implements Listener {
                                                             Shop_Menu shm = new Shop_Menu();
                                                             shm.openInventory(p);
 
-                                                        }
-                                                    }
                                                 }
                                             }
                                         }

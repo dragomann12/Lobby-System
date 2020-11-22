@@ -60,9 +60,9 @@ public class PlayerConfigManager extends ConfigReader {
     public Material getHideStatusMaterial(Player p){
 
         if(getHideStatus(p)){
-            return  Material.STICK;
-        }else{
             return Material.BLAZE_ROD;
+        }else{
+            return  Material.STICK;
         }
 
     }

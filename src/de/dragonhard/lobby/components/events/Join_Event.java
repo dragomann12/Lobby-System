@@ -23,6 +23,8 @@ public class Join_Event implements Listener {
 
         pm.setFile(p,"config");
 
+        if(pm.getHideStatus(p)){pm.toggleHideStatus(p);}
+
         if(pm.isBuildModeEnabled(p)){
             p.sendMessage("§eAchtung du bist noch im Bau-Modus!");
         }
