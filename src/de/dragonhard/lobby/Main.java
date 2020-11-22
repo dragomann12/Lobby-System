@@ -44,7 +44,7 @@ TODO add MY SQL db later
             ConsoleWriter.writeWithTag("checking Config version ...");
             if(!cm.isCurrentVersion()){
                 ConsoleWriter.writeWithTag("old Config version detected! ...");
-                cm.getDefaultConfig();
+                cm.updateConfig();
             }else{
                 ConsoleWriter.writeWithTag("Config version up to date ...");
                 ConsoleWriter.writeWithTag("Enabled!");
