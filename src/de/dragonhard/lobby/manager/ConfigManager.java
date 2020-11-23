@@ -2,16 +2,14 @@ package de.dragonhard.lobby.manager;
 
 import de.dragonhard.lobby.components.ConsoleWriter;
 import de.dragonhard.lobby.reader.PluginConfigReader;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 
 import java.io.File;
-import java.io.IOException;
+
 
 public class ConfigManager extends PluginConfigReader {
 
     private static String defaultConfigFile = "config_main";
-    private static String configVersion = "1.2";
+    private static final String configVersion = "1.2";
 
     public void createConfig(String fileName , String item, String value){
         this.setFile(fileName);
