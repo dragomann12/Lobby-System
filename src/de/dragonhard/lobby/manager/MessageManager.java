@@ -70,7 +70,15 @@ public class MessageManager extends PlayerConfigManager{
         }else{
             p.sendMessage("§4Es ist kein Update bereit!");
         }
-    }
+        }else if (message.startsWith(prefix + "playSound")){
+            SoundManager sm = new SoundManager();
+            String[] msg = message.split(" ");
+            sm.getSoundOfString(msg[1]);
+
+                sm.play(p, msg[1]);
+
+
+        }
     }
 
 }

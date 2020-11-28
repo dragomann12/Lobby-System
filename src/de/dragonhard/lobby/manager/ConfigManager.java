@@ -9,7 +9,7 @@ import java.io.File;
 public class ConfigManager extends PluginConfigReader {
 
     private static String defaultConfigFile = "config_main";
-    private static final String configVersion = "1.2";
+    private static final String configVersion = "1.3";
 
     public void createConfig(String fileName , String item, String value){
         this.setFile(fileName);
@@ -213,7 +213,7 @@ public class ConfigManager extends PluginConfigReader {
             this.setDefault("EndTagColor", "5");
 
             this.setDefault("DBVersion",1);
-            this.setDefault("ConfigVersion","1.2");
+            this.setDefault("ConfigVersion","1.3");
             this.setDefault("UpdateReady",false);
             this.setDefault("showWelcome",true);
             this.setDefault("MessageColor","b");
@@ -224,6 +224,7 @@ public class ConfigManager extends PluginConfigReader {
             this.setDefault("MenuWallColor",15);
             this.setDefault("MenuInsideColor",8);
             this.setDefault("MessagePrefix","@");
+            this.setDefault("FriendsEnabled",false);
         }catch (Exception e){
             ConsoleWriter.writeWithTag("An error occurred while creating the config");
             ConsoleWriter.write("Error: " + e.getCause());
@@ -233,6 +234,16 @@ public class ConfigManager extends PluginConfigReader {
         ConsoleWriter.writeWithTag("config now created!");
         error(0);
 
+    }
+
+    public boolean isFriendsEnabled(){
+        this.setFile(getDefaultConfigName());
+        return this.getBoolean("FriendsEnabled");
+    }
+
+    public void setFriendsEnabled(Boolean enabled){
+        this.setFile(getDefaultConfigName());
+        this.set("FriendsEnabled",enabled);
     }
 
     public boolean isUpdateReady(){

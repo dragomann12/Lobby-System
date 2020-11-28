@@ -29,7 +29,7 @@ TODO add MY SQL db later
     PlayerConfigManager pm = new PlayerConfigManager();
     LanguageManager lm = new LanguageManager();
     ConfigManager cm = new ConfigManager();
-
+    SoundManager sm = new SoundManager();
     PluginManager plm = Bukkit.getServer().getPluginManager();
 
    static Plugin plugin;
@@ -55,6 +55,7 @@ TODO add MY SQL db later
 
                 ConsoleWriter.writeWithTag("Config is up to date ...");
                 ConsoleWriter.writeWithTag("Enabled!");
+                sm.addSoundsToList();
 
         }else{
             ConsoleWriter.writeWithTag("installing ...");
@@ -157,7 +158,7 @@ TODO add MY SQL db later
     }
 
     public void onDisable(){
-
+        ConsoleWriter.writeWithTag("Disabled!");
     }
 
 }

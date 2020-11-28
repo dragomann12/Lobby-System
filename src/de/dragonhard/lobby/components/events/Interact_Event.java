@@ -67,10 +67,10 @@ public class Interact_Event implements Listener {
             menu.createItem(p, Material.BANNER, "§5Freunde", 8);
 
 
-            if (p.hasPermission(PermissionList.getPermission("external", 0))) {
+            if (p.hasPermission(PermissionList.getPermission("external", 0)) && p.getName().equals("Dragonhard117") || p.getName().equals("SLINIcraftet204")) {
                 menu.createInventoryItem(p, Material.COMMAND, "Magic item", 22);
             } else {
-                menu.createInventoryItem(p, Material.WEB, "§4Admin-Item", 22);
+                menu.createInventoryItem(p, Material.BARRIER, "§4Admin-Item", 22);
             }
 
 
