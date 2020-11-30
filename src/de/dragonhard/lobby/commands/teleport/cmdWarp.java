@@ -178,6 +178,7 @@ public class cmdWarp extends WarpManager implements CommandExecutor {
         p.sendMessage("                                 §4Hilfe >> §e/warp §4config");
         p.sendMessage("                                 §4Hilfe >> §e/warp §4set [§ename§4]");
         p.sendMessage("                                 §4Hilfe >> §e/warp §4del [§ename§4]");
+        p.sendMessage("                                 §4Hilfe >> §e/warp §4ls");
     }
 
 }
