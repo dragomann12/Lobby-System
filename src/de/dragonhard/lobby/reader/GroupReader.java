@@ -2,7 +2,6 @@ package de.dragonhard.lobby.reader;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +9,6 @@ import java.util.UUID;
 
 public class GroupReader {
 	private static String fileName;
-	private static UUID pUUID;
 	
 	public void set(String item, String value) {
 		FileConfiguration cfg = getFileConfiguration();

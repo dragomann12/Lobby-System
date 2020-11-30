@@ -3,11 +3,7 @@ package de.dragonhard.lobby.manager;
 import de.dragonhard.lobby.reader.ConfigReader;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-
-import java.io.File;
 
 public class PlayerConfigManager extends ConfigReader {
 

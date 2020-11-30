@@ -1,6 +1,5 @@
 package de.dragonhard.lobby.manager;
 
-import de.dragonhard.lobby.components.Message;
 import de.dragonhard.lobby.reader.WarpReader;
 import de.dragonhard.lobby.components.*;
 import org.bukkit.Bukkit;
@@ -8,7 +7,6 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-import java.io.Console;
 import java.io.File;
 
 public class WarpManager extends WarpReader {

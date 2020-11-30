@@ -1,7 +1,6 @@
 package de.dragonhard.lobby.manager;
 
 import de.dragonhard.lobby.Main;
-import de.dragonhard.lobby.components.ConsoleWriter;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;

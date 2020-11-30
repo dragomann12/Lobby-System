@@ -1,15 +1,10 @@
 package de.dragonhard.lobby.components.events;
 
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.event.player.PlayerItemHeldEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
-import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 public class Event_Blocker implements Listener {
 private static boolean isMenu;

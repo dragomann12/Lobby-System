@@ -1,17 +1,13 @@
 package de.dragonhard.lobby.components.events;
 
-import de.dragonhard.lobby.components.MenuInventory;
 import de.dragonhard.lobby.components.PermissionList;
 import de.dragonhard.lobby.manager.InventoryManager;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
 
 public class Inventory_Click_Event implements Listener {
 

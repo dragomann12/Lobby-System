@@ -1,9 +1,7 @@
 package de.dragonhard.lobby.commands.teleport;
 
-import de.dragonhard.lobby.components.Message;
 import de.dragonhard.lobby.components.PermissionList;
 import de.dragonhard.lobby.manager.ConfigManager;
-import de.dragonhard.lobby.manager.LanguageManager;
 import de.dragonhard.lobby.manager.PlayerConfigManager;
 import de.dragonhard.lobby.manager.WarpManager;
 import org.bukkit.Bukkit;

@@ -1,5 +1,4 @@
 package de.dragonhard.lobby;
-import com.sun.xml.internal.bind.v2.TODO;
 import de.dragonhard.lobby.commands.cmdblock;
 import de.dragonhard.lobby.commands.teleport.cmdAutoWarp;
 import de.dragonhard.lobby.commands.teleport.cmdGlobalWarp;
@@ -14,7 +13,6 @@ import de.dragonhard.lobby.components.menu.debug.debug_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Menu;
 import de.dragonhard.lobby.manager.*;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -167,7 +165,6 @@ TODO add MY SQL db later
         plm.registerEvents(new Disconnect_Event(), this);
         //plm.registerEvents(new CommandListener(),this); work on the test server but not at the Dev-Server
         //                                                          Conflict with other Plugin
-
         return true;
 
     }

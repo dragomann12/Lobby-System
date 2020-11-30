@@ -1,6 +1,5 @@
 package de.dragonhard.lobby.components.events;
 
-import de.dragonhard.lobby.manager.InventoryManager;
 import de.dragonhard.lobby.manager.PlayerConfigManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
