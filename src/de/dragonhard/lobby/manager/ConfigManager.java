@@ -247,7 +247,6 @@ public class ConfigManager extends PluginConfigReader {
 
         ConsoleWriter.writeWithTag("config now created!");
         error(0);
-
     }
 
     public int getAccessLevelCount(){
