@@ -9,38 +9,36 @@ public class PermissionList {
 
             case "User":
                 switch(permissionID){
-                    case 0: return permissionBase + "Menu.Test";
-
-
+                    case 0: return permissionBase + "Menu.Test";//in use
                 }
                 break;
             case "Config":
 
                 switch(permissionID){
-                    case 0: return permissionBase + "Warp.config";
-                    case 1: return permissionBase + "Spawn.set";
-                    case 2: return permissionBase + "Spawn.remove";
-                    case 3: return permissionBase + "GlobalWarp.set";
-                    case 4: return permissionBase + "GlobalWarp.remove";
+                    case 0: return permissionBase + "Warp.config";//in use
+                    case 1: return permissionBase + "Spawn.set";//in use
+                    case 2: return permissionBase + "Spawn.remove";//in use
+                    case 3: return permissionBase + "GlobalWarp.set";//in use
+                    case 4: return permissionBase + "GlobalWarp.remove";//in use
                 }
                 break;
 
             case "Use":
 
                 switch(permissionID){
-                    case 0: return permissionBase + "Warp";
-                    case 1: return permissionBase + "Spawn";
-                    case 2: return permissionBase + "AutoWarp";
-                    case 3: return permissionBase + "GlobalWarp";
+                    case 0: return permissionBase + "Warp"; //in use
+                    case 1: return permissionBase + "Spawn"; //in use
+                    case 2: return permissionBase + "AutoWarp";//in use
+                    case 3: return permissionBase + "GlobalWarp";//in use
                 }
                 break;
 
             case "Message":
 
                 switch(permissionID){
-                    case 0: return permissionBase + "Message.Alert";
-                    case 1: return permissionBase + "Message.Warning";
-                    case 2: return permissionBase + "Message.Information";
+                    case 0: return permissionBase + "Message.Alert";//in use
+                    case 1: return permissionBase + "Message.Warning";//in use
+                    case 2: return permissionBase + "Message.Information";//in use
                 }
             break;
 

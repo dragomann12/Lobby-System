@@ -12,7 +12,8 @@ import org.bukkit.entity.Player;
 public class WarpReader {
 	private static String fileName;
 	private static UUID pUUID;
-	
+	private static boolean isList = false;
+
 	public void set(String item, String value) {
 		FileConfiguration cfg = getFileConfiguration();
 		
@@ -21,6 +22,19 @@ public class WarpReader {
 		
 		try {
 			cfg.save(getFile());
+		} catch(IOException e) {
+
+		}
+	}
+
+	public void addToList(String item, String value) {
+		FileConfiguration cfg = getFileConfiguration();
+
+		cfg.set(item, value);
+
+
+		try {
+			cfg.save(getList());
 		} catch(IOException e) {
 
 		}
@@ -103,10 +117,8 @@ public class WarpReader {
 	}
 
 	public int getInteger(String item) {
-		
 		FileConfiguration cfg = getFileConfiguration();
 		return cfg.getInt(item);
-		
 	}
 	
 	public Boolean getBoolean(String item) {
@@ -127,10 +139,25 @@ public class WarpReader {
 		return new File("plugins/LobbySystem/Data/Player/"+pUUID+"/warps", "warp_" + filename + ".yml");
 
 	}
-	
+
+	private File getList() {
+
+		return new File("plugins/LobbySystem/Data/Player/"+pUUID+"/warps", fileName + ".yml");
+
+	}
+
+	public void setList(Player p) {
+		fileName = "warpList";
+		pUUID = p.getUniqueId();return;
+	}
+
 	public void setFile(Player p ,String warpName) {
-		fileName = "warp_" + warpName;
-		pUUID = p.getUniqueId();
+			fileName = "warp_" + warpName;
+			pUUID = p.getUniqueId();return;
+	}
+
+	public void setIsList(boolean enabled){
+		isList = enabled;
 	}
 
 	public boolean exists(Player p, String warpName){

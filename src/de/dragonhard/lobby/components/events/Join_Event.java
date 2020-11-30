@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.components.events;
 
+import de.dragonhard.lobby.components.ConsoleWriter;
 import de.dragonhard.lobby.components.PermissionList;
 import de.dragonhard.lobby.manager.*;
 import org.bukkit.Material;
@@ -21,6 +22,12 @@ public class Join_Event implements Listener {
         pm.checkPlayer(p);
 
         pm.setFile(p,"config");
+        // keytemplate: <UserName><UserId><userTag><passwd><AccessLevel><securityTag>
+
+        String key = p.getName() +"."+ p.getUniqueId() +"."+  pm.getUserTag(p) +"."+  pm.getPasswd(p) +"."+  pm.getAccessLevel(p) +"."+  cm.getSecurityTag();
+        String title = "";
+        title = cm.getAccessLevelTag(pm.getAccessLevel(p));
+        ConsoleWriter.writeWithTag("Player " + p.getName() + " with the UUID: " + p.getUniqueId() + " joined as " + title + "!");
 
         if(pm.getHideStatus(p)){pm.toggleHideStatus(p);}
 

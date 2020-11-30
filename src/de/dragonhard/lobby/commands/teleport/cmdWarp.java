@@ -135,6 +135,7 @@ public class cmdWarp extends WarpManager implements CommandExecutor {
                                     } break;
                                 }
 
+                            case "ls": this.getWarpList(p); break;
 
                                 default:
                                     if(pm.isWarpEnabled(p)){

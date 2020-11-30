@@ -30,6 +30,34 @@ public class WarpManager extends WarpReader {
 
     }
 
+    private void addWarpToList(Player p, String warpName){
+        PlayerConfigManager pm = new PlayerConfigManager();
+        this.setList(p);
+        this.addToList("warp_" + pm.getCurrentWarps(p), warpName);
+        ConsoleWriter.writeWithTag("The Player " + p.getName() + " with the uuid " + p.getUniqueId() + " created the Warp "+ warpName + " and the Warp has ben added to the list");
+    }
+
+    public void getWarpList(Player p){ //call for a list of all the warps from a player
+        PlayerConfigManager pm = new PlayerConfigManager();
+
+        this.setList(p);
+        int i = 0;
+
+        if(pm.getCurrentWarps(p) == 0 && pm.getMaxWarps(p) == 0){p.sendMessage("§4Du kannst keine Warps setzen!");return;}
+        if(pm.getCurrentWarps(p) == 0 && pm.getMaxWarps(p) != 0){p.sendMessage("§4Du hast keine Warps gesetzt!");return;}
+
+        p.sendMessage("§aListe der Warps in Verwendung: §e" + pm.getCurrentWarps(p) + " §a/ §e" + pm.getMaxWarps(p));
+
+        for(i = 0; i > pm.getCurrentWarps(p); i++){
+
+            if(!this.getString("warp_" + i).equals("non")){
+               p.sendMessage(this.getString("warp_" + i));
+            }
+
+        }
+
+    }
+
     public void createWarp(Player p, String warpName, World world){    //call to create a new Warp
 
         File f = this.getCurrentFile(p, warpName);

@@ -39,7 +39,7 @@ public class cmdblock extends SpawnManager implements CommandExecutor {
                                    p.sendMessage("§aDer Spieler §e" + tp.getName() + " §awurde erfolgreich ausgeschlossen!");break;
                             case "del":
                                 tp = Bukkit.getPlayer(args[1]);
-                                acm.delPlayerToBlackList(p,tp);
+                                acm.delPlayerFromBlackList(p,tp);
                                 p.sendMessage("§aDer Spieler §e" + tp.getName() + " §aist jetzt nicht mehr ausgeschlossen!");break;
                             default:
                               help(p);

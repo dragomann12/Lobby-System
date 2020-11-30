@@ -28,7 +28,7 @@ public class PlayerConfigManager extends ConfigReader {
         this.setDefault("FirstTime",true);
         this.setDefault("WarpEnabled",true);
         this.setDefault("AutoWarpLocation", "non");
-        this.setDefault("DBVersion",1);
+        this.setDefault("DBVersion","1.0");
         this.setDefault("ChatStyle",false);
         this.setDefault("ChatNameColor","4");
         this.setDefault("ChatSeperatorColor","5");
@@ -36,6 +36,11 @@ public class PlayerConfigManager extends ConfigReader {
         this.setDefault("isBuildModeEnabled",false);
         this.setDefault("hide",false);
         this.setDefault("updateMenu",false);
+        this.setDefault("AccessLevel",0);
+        this.setDefault("AccessKeyEnabled",false);
+        this.setDefault("UserTag","" + p.getFoodLevel() + p.getUniqueId());
+        this.setDefault("passwd","");
+        // keytemplate: <UserName><UserId><userTag><passwd><AccessLevel><securityTag>
     }
 
     public void toggleUpdate(Player p){
@@ -45,6 +50,21 @@ public class PlayerConfigManager extends ConfigReader {
         }else{
             this.set("updateMenu",true);
         }
+    }
+
+    public int getAccessLevel(Player p){
+        this.setFile(p,"config");
+        return this.getInteger("AccessLevel");
+    }
+
+    public String getPasswd(Player p){
+        this.setFile(p,"config");
+        return this.getString("passwd");
+    }
+
+    public String getUserTag(Player p){
+        this.setFile(p,"config");
+        return this.getString("UserTag");
     }
 
     public boolean isUpdate(Player p){
@@ -136,9 +156,9 @@ public class PlayerConfigManager extends ConfigReader {
     public boolean isMatching(Player p){
         ConfigManager cm = new ConfigManager();
 
-        int currentDBVersion = cm.getDBVersion();
+        String currentDbVersion = cm.getDBVersion();
 
-        if(currentDBVersion == getPlayerDBVersion(p)){
+        if(currentDbVersion.equals(getPlayerDBVersion(p))){
             return true;
         }
         return false;

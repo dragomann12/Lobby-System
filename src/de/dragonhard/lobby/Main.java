@@ -26,11 +26,11 @@ TODO Bugfix (NULL Pointer) in the menu when click outside of th menu
 TODO add MY SQL db later
  */
 
-    PlayerConfigManager pm = new PlayerConfigManager();
-    LanguageManager lm = new LanguageManager();
     ConfigManager cm = new ConfigManager();
     SoundManager sm = new SoundManager();
     PluginManager plm = Bukkit.getServer().getPluginManager();
+    PluginComunicationManager pcm = new PluginComunicationManager();
+    PluginWithlistManager pwm = new PluginWithlistManager();
 
    static Plugin plugin;
 
@@ -55,6 +55,9 @@ TODO add MY SQL db later
 
                 ConsoleWriter.writeWithTag("Config is up to date ...");
                 ConsoleWriter.writeWithTag("Enabled!");
+
+                pwm.onLoad();
+
                 sm.addSoundsToList();
 
         }else{
@@ -65,12 +68,23 @@ TODO add MY SQL db later
 
          plugin = this;
 
-         Bukkit.getMessenger().registerOutgoingPluginChannel(this, BungeeCordManager.getChannel());
-
+         registerOutgoingChannel();
+         registerIngoingChannel();
 
          registerCommand(); // Register the Commands
          registerEvents(); // Register the Events
 
+    }
+
+    public boolean registerOutgoingChannel(){
+        Bukkit.getMessenger().registerOutgoingPluginChannel(this, BungeeCordManager.getChannel());
+        Bukkit.getMessenger().registerOutgoingPluginChannel(this, PluginComunicationManager.getChannelOut());
+        return true;
+    }
+
+    public boolean registerIngoingChannel(){
+        Bukkit.getMessenger().registerIncomingPluginChannel(this, PluginComunicationManager.getChannelIn(), pcm.getListener());
+        return true;
     }
 
     public boolean loadMenuConfig(){

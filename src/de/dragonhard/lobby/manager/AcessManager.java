@@ -13,7 +13,7 @@ public class AcessManager extends PlayerConfigManager {
         }
     }
 
-    public void delPlayerToBlackList(Player p, Player target){
+    public void delPlayerFromBlackList(Player p, Player target){
         this.setFile(target,"config");
         if(!this.getBoolean("isBlacklisted")){
             p.sendMessage("§4Dieser Spieler ist nicht auf der Blacklist!");

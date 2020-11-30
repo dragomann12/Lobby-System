@@ -9,7 +9,7 @@ import java.io.File;
 public class ConfigManager extends PluginConfigReader {
 
     private static String defaultConfigFile = "config_main";
-    private static final String configVersion = "1.3";
+    private static final String configVersion = "1.4";
 
     public void createConfig(String fileName , String item, String value){
         this.setFile(fileName);
@@ -212,8 +212,8 @@ public class ConfigManager extends PluginConfigReader {
             this.setDefault("TagColor", "a");
             this.setDefault("EndTagColor", "5");
 
-            this.setDefault("DBVersion",1);
-            this.setDefault("ConfigVersion","1.3");
+            this.setDefault("DBVersion","1.1");
+            this.setDefault("ConfigVersion","1.4");
             this.setDefault("UpdateReady",false);
             this.setDefault("showWelcome",true);
             this.setDefault("MessageColor","b");
@@ -225,6 +225,20 @@ public class ConfigManager extends PluginConfigReader {
             this.setDefault("MenuInsideColor",8);
             this.setDefault("MessagePrefix","@");
             this.setDefault("FriendsEnabled",false);
+            this.setDefault("securityTag","CC_CG");
+            this.setDefault("AccessLevelCount",5);
+            this.setDefault("AccessLevel_0","Player");
+            this.setDefault("AccessLevel_0_Tag","default_player");
+            this.setDefault("AccessLevel_1","Supporter");
+            this.setDefault("AccessLevel_1_Tag","team_supporter");
+            this.setDefault("AccessLevel_2","Moderator");
+            this.setDefault("AccessLevel_2_Tag","team_moderator");
+            this.setDefault("AccessLevel_3","Developer");
+            this.setDefault("AccessLevel_3_Tag","team_developer");
+            this.setDefault("AccessLevel_4","Team Leitung");
+            this.setDefault("AccessLevel_4_Tag","lead_team");
+            this.setDefault("AccessLevel_5","Owner");
+            this.setDefault("AccessLevel_5_Tag","server_owner");
         }catch (Exception e){
             ConsoleWriter.writeWithTag("An error occurred while creating the config");
             ConsoleWriter.write("Error: " + e.getCause());
@@ -234,6 +248,26 @@ public class ConfigManager extends PluginConfigReader {
         ConsoleWriter.writeWithTag("config now created!");
         error(0);
 
+    }
+
+    public int getAccessLevelCount(){
+        this.setFile(getDefaultConfigName());
+        return this.getInteger("AccessLevelCount");
+    }
+
+    public String getAccessLevelTag(int id){
+        this.setFile(getDefaultConfigName());
+        return this.getString("AccessLevel_" + id + "_Tag");
+    }
+
+    public String getAccessLevel(int id){
+        this.setFile(getDefaultConfigName());
+        return this.getString("AccessLevel_" + id);
+    }
+
+    public String getSecurityTag(){
+        this.setFile(getDefaultConfigName());
+        return this.getString("securityTag");
     }
 
     public boolean isFriendsEnabled(){
@@ -347,9 +381,9 @@ public class ConfigManager extends PluginConfigReader {
         return this.getString("WelcomeMessage");
     }
 
-    public int getDBVersion(){
+    public String getDBVersion(){
         this.setFile(getDefaultConfigName());
-        return this.getInteger("DBVersion");
+        return this.getString("DBVersion");
     }
 
     public boolean tagUseEnabled(){
