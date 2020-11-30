@@ -164,6 +164,7 @@ TODO add MY SQL db later
         plm.registerEvents(new Event_Blocker(),this);
         plm.registerEvents(new Hide_Event(),this);
         plm.registerEvents(new debug_Menu(), this);
+        plm.registerEvents(new Disconnect_Event(), this);
         //plm.registerEvents(new CommandListener(),this); work on the test server but not at the Dev-Server
         //                                                          Conflict with other Plugin
 

@@ -37,6 +37,25 @@ public class PluginComunicationManager implements PluginMessageListener {
     }
     @Override
     public void onPluginMessageReceived(String msg, Player p, byte[] b) {
+        PluginWithlistManager pwm = new PluginWithlistManager();
+        if(msg.contains("/")){
+            String[] args = msg.split("/");
+
+            switch(args[0]){    // base requests where no accessKey is required
+                case "get":
+                    if(pwm.isDeveloper(p) || pwm.isTeam_lead(p) || pwm.isOwner(p)){
+                        switch(args[1]){
+                            case "help connect Plugin": p.sendMessage("§aUm ein Plugin mit dem Lobby-System zu verbinden ist ein Zugangsschlüssel erforderlich dieser wird in der Datenbank zu finden sein");break;
+                            default: p.sendMessage("§4Anfrage nicht bekannt");break;
+                        }
+                    }else{
+                        p.sendMessage("§4Du besitzt nicht die erforderliche Berechtigung");
+                    }break;
+                default: p.sendMessage("§4Anfrage nicht bekannt");break;
+            }
+
+        }
+
 
     }
 }

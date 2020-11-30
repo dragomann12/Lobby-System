@@ -227,18 +227,18 @@ public class ConfigManager extends PluginConfigReader {
             this.setDefault("FriendsEnabled",false);
             this.setDefault("securityTag","CC_CG");
             this.setDefault("AccessLevelCount",5);
-            this.setDefault("AccessLevel_0","Player");
-            this.setDefault("AccessLevel_0_Tag","default_player");
-            this.setDefault("AccessLevel_1","Supporter");
-            this.setDefault("AccessLevel_1_Tag","team_supporter");
-            this.setDefault("AccessLevel_2","Moderator");
-            this.setDefault("AccessLevel_2_Tag","team_moderator");
-            this.setDefault("AccessLevel_3","Developer");
-            this.setDefault("AccessLevel_3_Tag","team_developer");
-            this.setDefault("AccessLevel_4","Team Leitung");
-            this.setDefault("AccessLevel_4_Tag","lead_team");
-            this.setDefault("AccessLevel_5","Owner");
-            this.setDefault("AccessLevel_5_Tag","server_owner");
+            this.setDefault("AccessLevel_0","default_player");
+            this.setDefault("AccessLevel_Tag_0","Player");
+            this.setDefault("AccessLevel_1","team_supporter");
+            this.setDefault("AccessLevel_Tag_1","Supporter");
+            this.setDefault("AccessLevel_2","team_moderator");
+            this.setDefault("AccessLevel_Tag_2","Moderator");
+            this.setDefault("AccessLevel_3","team_developer");
+            this.setDefault("AccessLevel_Tag_3","Developer");
+            this.setDefault("AccessLevel_4","lead_team");
+            this.setDefault("AccessLevel_Tag_4","Team Leitung");
+            this.setDefault("AccessLevel_5","server_owner");
+            this.setDefault("AccessLevel_Tag_5","Owner");
         }catch (Exception e){
             ConsoleWriter.writeWithTag("An error occurred while creating the config");
             ConsoleWriter.write("Error: " + e.getCause());
@@ -257,7 +257,7 @@ public class ConfigManager extends PluginConfigReader {
 
     public String getAccessLevelTag(int id){
         this.setFile(getDefaultConfigName());
-        return this.getString("AccessLevel_" + id + "_Tag");
+        return this.getString("AccessLevel_Tag_" + id);
     }
 
     public String getAccessLevel(int id){
