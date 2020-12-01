@@ -1,15 +1,14 @@
 package de.dragonhard.lobby.reader;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
-
-
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-public class WarpReader {
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
+public class WarpListReader {
 	private static String fileName;
 	private static UUID pUUID;
 	private static boolean isList = false;
@@ -136,7 +135,7 @@ public class WarpReader {
 	//plugins/LobbySystem/Data/Player/pUUID/warps
 	public File getFile(String filename) {
 
-		return new File("plugins/LobbySystem/Data/Player/"+pUUID+"/warps", "warp_" + filename + ".yml");
+		return new File("plugins/LobbySystem/Data/Player/"+pUUID+"/warps", filename + ".yml");
 
 	}
 
@@ -146,25 +145,17 @@ public class WarpReader {
 
 	}
 
-	public void setFile(Player p ,String warpName) {
-
-			fileName = "warp_" + warpName;
+	public void setFile(Player p) {
+			fileName = "warpList";
 			pUUID = p.getUniqueId();
-
-
 	}
 
 	public boolean exists(Player p, String warpName){
 		pUUID = p.getUniqueId();
-		File file = new File("plugins/LobbySystem/Data/Player/"+pUUID+"/warps",  "warp_" + warpName + ".yml");
+		File file = new File("plugins/LobbySystem/Data/Player/"+pUUID+"/warps",warpName + ".yml");
 
 		if(file.exists()){return true;}else{return false;}
 
-	}
-	public File getCurrentFile(Player p, String warpName){
-		pUUID = p.getUniqueId();
-
-		return new File("plugins/LobbySystem/Data/Player/"+pUUID+"/warps", "warp_" + warpName + ".yml");
 	}
 	
 	private FileConfiguration getFileConfiguration() {

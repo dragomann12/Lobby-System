@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.manager;
 
+import de.dragonhard.lobby.reader.WarpListReader;
 import de.dragonhard.lobby.reader.WarpReader;
 import de.dragonhard.lobby.components.*;
 import org.bukkit.Bukkit;
@@ -30,29 +31,28 @@ public class WarpManager extends WarpReader {
 
     private void addWarpToList(Player p, String warpName){
         PlayerConfigManager pm = new PlayerConfigManager();
-        this.setList(p);
-        this.addToList("warp_" + pm.getCurrentWarps(p), warpName);
+        WarpListReader wlr = new WarpListReader();
+        wlr.setFile(p);
+        wlr.addToList("warp_" + pm.getCurrentWarps(p), warpName);
         ConsoleWriter.writeWithTag("The Player " + p.getName() + " with the uuid " + p.getUniqueId() + " created the Warp "+ warpName + " and the Warp has ben added to the list");
     }
 
     public void getWarpList(Player p){ //call for a list of all the warps from a player
         PlayerConfigManager pm = new PlayerConfigManager();
+        WarpListReader wlr = new WarpListReader();
+        wlr.setFile(p);
 
-        this.setList(p);
-        int i = 0;
 
         if(pm.getCurrentWarps(p) == 0 && pm.getMaxWarps(p) == 0){p.sendMessage("§4Du kannst keine Warps setzen!");return;}
         if(pm.getCurrentWarps(p) == 0 && pm.getMaxWarps(p) != 0){p.sendMessage("§4Du hast keine Warps gesetzt!");return;}
 
-        p.sendMessage("§aListe der Warps in Verwendung: §e" + pm.getCurrentWarps(p) + " §a/ §e" + pm.getMaxWarps(p));
+        p.sendMessage("§aListe der Warps    Verwendung: §e" + pm.getCurrentWarps(p) + "§a/§e" + pm.getMaxWarps(p));
 
-        for(i = 0; i > pm.getCurrentWarps(p); i++){
-
-            if(!this.getString("warp_" + i).equals("non")){
-               p.sendMessage(this.getString("warp_" + i));
-            }
-
+        for(int i = 0; i >= pm.getMaxWarps(p); i++) {
+            ConsoleWriter.writeWithTag("[Debug] " + i);
+            p.sendMessage(i +". " + wlr.getString("warp_" + i));
         }
+
 
     }
 
@@ -72,7 +72,7 @@ public class WarpManager extends WarpReader {
             this.set("Pitch", p.getLocation().getPitch());
             this.set("Yaw", p.getLocation().getYaw());
 
-            p.sendMessage("§aDer Warp §e"+ warpName +" §awurde erfolgreich erstellt!");
+            p.sendMessage("§aDer Warp §e"+ warpName +" §awurde erfolgreich erstellt!"); addWarpToList(p, warpName);
         }
 
 
