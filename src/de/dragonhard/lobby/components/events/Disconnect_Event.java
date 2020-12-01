@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.components.events;
 
+import de.dragonhard.lobby.manager.ConfigManager;
 import de.dragonhard.lobby.manager.PluginWithlistManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,7 +11,12 @@ public class Disconnect_Event implements Listener {
 
     @EventHandler
     public void onDisconnect(PlayerQuitEvent e){
-        e.setQuitMessage("§akomm §ebald §5wieder :)");
+        ConfigManager cm = new ConfigManager();
+
+        if(cm.isQuitMessageEnabled()){
+            String message = cm.getQuitMessage().replaceAll("/c","§");
+            e.setQuitMessage(message);
+        }
         PluginWithlistManager pwm = new PluginWithlistManager();
         Player p = e.getPlayer();
 

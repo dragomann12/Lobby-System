@@ -221,6 +221,8 @@ public class ConfigManager extends PluginConfigReader {
             this.setDefault("MessageStart","Hey");
             this.setDefault("NameColor", "a");
             this.setDefault("WelcomeMessage","willkommen auf dem Server");
+            this.setDefault("setQuitMessage",true);
+            this.setDefault("QuitMessage", "/cakomm /cebald /cawieder :)");
             this.setDefault("MenuWallColor",15);
             this.setDefault("MenuInsideColor",8);
             this.setDefault("MessagePrefix","@");
@@ -247,6 +249,16 @@ public class ConfigManager extends PluginConfigReader {
 
         ConsoleWriter.writeWithTag("config now created!");
         error(0);
+    }
+
+    public String getQuitMessage(){
+        this.setFile(getDefaultConfigName());
+        return this.getString("QuitMessage");
+    }
+
+    public boolean isQuitMessageEnabled(){
+        this.setFile(getDefaultConfigName());
+        return this.getBoolean("setQuitMessage");
     }
 
     public int getAccessLevelCount(){
