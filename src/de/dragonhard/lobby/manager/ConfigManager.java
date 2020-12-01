@@ -228,7 +228,7 @@ public class ConfigManager extends PluginConfigReader {
             this.setDefault("MessagePrefix","@");
             this.setDefault("FriendsEnabled",false);
             this.setDefault("securityTag","CC_CG");
-            this.setDefault("AccessLevelCount",5);
+            this.setDefault("AccessLevelCount",6);
             this.setDefault("AccessLevel_0","default_player");
             this.setDefault("AccessLevel_Tag_0","Player");
             this.setDefault("AccessLevel_1","team_supporter");
@@ -237,10 +237,12 @@ public class ConfigManager extends PluginConfigReader {
             this.setDefault("AccessLevel_Tag_2","Moderator");
             this.setDefault("AccessLevel_3","team_developer");
             this.setDefault("AccessLevel_Tag_3","Developer");
-            this.setDefault("AccessLevel_4","lead_team");
-            this.setDefault("AccessLevel_Tag_4","Team Leitung");
-            this.setDefault("AccessLevel_5","server_owner");
-            this.setDefault("AccessLevel_Tag_5","Owner");
+            this.setDefault("AccessLevel_4","team_builder");
+            this.setDefault("AccessLevel_Tag_4","Builder");
+            this.setDefault("AccessLevel_5","lead_team");
+            this.setDefault("AccessLevel_Tag_5","Team Leitung");
+            this.setDefault("AccessLevel_6","server_owner");
+            this.setDefault("AccessLevel_Tag_6","Owner");
         }catch (Exception e){
             ConsoleWriter.writeWithTag("An error occurred while creating the config");
             ConsoleWriter.write("Error: " + e.getCause());

@@ -9,6 +9,7 @@ public class PluginWithlistManager {
 
     ArrayList<String> player = new ArrayList<String>(),
                       supporter = new ArrayList<String>(),
+                      builder = new ArrayList<String>(),
                       moderator = new ArrayList<String>(),
                       developer = new ArrayList<String>(),
                       team_lead = new ArrayList<String>(),
@@ -21,8 +22,9 @@ public class PluginWithlistManager {
         supporter.add(cm.getAccessLevelTag(1));
         moderator.add(cm.getAccessLevelTag(2));
         developer.add(cm.getAccessLevelTag(3));
-        team_lead.add(cm.getAccessLevelTag(4));
-        owner.add(cm.getAccessLevelTag(5));
+        builder.add(cm.getAccessLevelTag(4));
+        team_lead.add(cm.getAccessLevelTag(5));
+        owner.add(cm.getAccessLevelTag(6));
     }
 
     public boolean isPlayer(Player p){
@@ -31,6 +33,10 @@ public class PluginWithlistManager {
 
     public boolean isSupporter(Player p){
         if(supporter.contains(p.getName())){return true;}return false;
+    }
+
+    public boolean isBuilder(Player p){
+        if(builder.contains(p.getName())){return true;}return false;
     }
 
     public boolean isModerator(Player p){
@@ -59,6 +65,8 @@ public class PluginWithlistManager {
                     player.remove(p.getName());
                 }else if(supporter.contains(cm.getAccessLevelTag(i))){
                     supporter.remove(p.getName());
+                }else if(builder.contains(cm.getAccessLevelTag(i))){
+                    builder.add(p.getName());
                 }else if(moderator.contains(cm.getAccessLevelTag(i))){
                     moderator.remove(p.getName());
                 }else if(developer.contains(cm.getAccessLevelTag(i))){
@@ -86,6 +94,8 @@ public class PluginWithlistManager {
                     player.add(p.getName());
                 }else if(supporter.contains(cm.getAccessLevelTag(i))){
                     supporter.add(p.getName());
+                }else if(builder.contains(cm.getAccessLevelTag(i))){
+                    builder.add(p.getName());
                 }else if(moderator.contains(cm.getAccessLevelTag(i))){
                     moderator.add(p.getName());
                 }else if(developer.contains(cm.getAccessLevelTag(i))){
