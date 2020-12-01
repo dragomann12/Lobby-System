@@ -11,7 +11,6 @@ import java.util.UUID;
 public class WarpListReader {
 	private static String fileName;
 	private static UUID pUUID;
-	private static boolean isList = false;
 
 	public void set(String item, String value) {
 		FileConfiguration cfg = getFileConfiguration();

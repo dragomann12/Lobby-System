@@ -48,9 +48,11 @@ public class WarpManager extends WarpReader {
 
         p.sendMessage("§aListe der Warps    Verwendung: §e" + pm.getCurrentWarps(p) + "§a/§e" + pm.getMaxWarps(p));
 
-        for(int i = 0; i >= pm.getMaxWarps(p); i++) {
+        for(int i = 0; i < pm.getMaxWarps(p); i++) {
             ConsoleWriter.writeWithTag("[Debug] " + i);
-            p.sendMessage(i +". " + wlr.getString("warp_" + i));
+            int item = i+1;
+            p.sendMessage("§a" + item + ". §e" + wlr.getString("warp_" + i));
+
         }
 
 
