@@ -12,6 +12,9 @@ import java.io.File;
 
 public class WarpManager extends WarpReader {
 
+    PlayerConfigManager pm = new PlayerConfigManager();
+    WarpListReader wlr = new WarpListReader();
+
     public void teleportPlayer(Player p, String warpName){  //call to teleport the Player to a Warp
         if(this.exists(p, warpName)){
             this.setFile(p, warpName);
@@ -30,18 +33,13 @@ public class WarpManager extends WarpReader {
     }
 
     private void addWarpToList(Player p, String warpName){
-        PlayerConfigManager pm = new PlayerConfigManager();
-        WarpListReader wlr = new WarpListReader();
         wlr.setFile(p);
         wlr.addToList("warp_" + pm.getCurrentWarps(p), warpName);
         ConsoleWriter.writeWithTag("The Player " + p.getName() + " with the uuid " + p.getUniqueId() + " created the Warp "+ warpName + " and the Warp has ben added to the list");
     }
 
     public void getWarpList(Player p){ //call for a list of all the warps from a player
-        PlayerConfigManager pm = new PlayerConfigManager();
-        WarpListReader wlr = new WarpListReader();
         wlr.setFile(p);
-
 
         if(pm.getCurrentWarps(p) == 0 && pm.getMaxWarps(p) == 0){p.sendMessage("§4Du kannst keine Warps setzen!");return;}
         if(pm.getCurrentWarps(p) == 0 && pm.getMaxWarps(p) != 0){p.sendMessage("§4Du hast keine Warps gesetzt!");return;}
@@ -49,9 +47,15 @@ public class WarpManager extends WarpReader {
         p.sendMessage("§aListe der Warps    Verwendung: §e" + pm.getCurrentWarps(p) + "§a/§e" + pm.getMaxWarps(p));
 
         for(int i = 0; i < pm.getMaxWarps(p); i++) {
-            ConsoleWriter.writeWithTag("[Debug] " + i);
-            int item = i+1;
-            p.sendMessage("§a" + item + ". §e" + wlr.getString("warp_" + i));
+            ConsoleWriter.writeWithTag("[Debug] for loop work");
+            int item = i +1;
+
+                if(!exists(p,wlr.getString("warp_"+i))){wlr.set("warp_" + i, "frei");}else{
+                    ConsoleWriter.writeWithTag("[Debug] check file exists");
+                    p.sendMessage("§a| §e" + wlr.getString("warp_" + i));
+                }
+
+
 
         }
 
