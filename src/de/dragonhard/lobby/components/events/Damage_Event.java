@@ -1,6 +1,5 @@
 package de.dragonhard.lobby.components.events;
 
-import net.minecraft.server.v1_8_R3.EntityFallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,10 +9,8 @@ public class Damage_Event implements Listener {
 
     @EventHandler
     public void onPlayerDamage(EntityDamageEvent e){
-        if(e instanceof Player){
-            Player p = (Player) e.getEntity();
-            e.setCancelled(true);
-        }
+        e.setDamage(0);
+        e.setCancelled(false);
     }
 
 
