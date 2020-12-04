@@ -47,8 +47,6 @@ public class WarpManager extends WarpReader {
         p.sendMessage("§aListe der Warps    Verwendung: §e" + pm.getCurrentWarps(p) + "§a/§e" + pm.getMaxWarps(p));
 
         for(int i = 0; i < pm.getMaxWarps(p); i++) {
-            ConsoleWriter.writeWithTag("[Debug] for loop work");
-            int item = i +1;
 
                 if(!exists(p,wlr.getString("warp_"+i))){wlr.set("warp_" + i, "frei");}else{
                     ConsoleWriter.writeWithTag("[Debug] check file exists");
