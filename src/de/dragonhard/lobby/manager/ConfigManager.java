@@ -227,6 +227,7 @@ public class ConfigManager extends PluginConfigReader {
             this.setDefault("MenuInsideColor",8);
             this.setDefault("MessagePrefix","@");
             this.setDefault("FriendsEnabled",false);
+            this.setDefault("RunMode","Debug");
             this.setDefault("securityTag","CC_CG");
             this.setDefault("AccessLevelCount",6);
             this.setDefault("AccessLevel_0","default_player");
@@ -251,6 +252,12 @@ public class ConfigManager extends PluginConfigReader {
 
         ConsoleWriter.writeWithTag("config now created!");
         error(0);
+    }
+
+    public Boolean isDebugMode(){
+        this.setFile(getDefaultConfigName());
+        if(this.getString("RunMode").equals("Debug")){return true;}
+        return false;
     }
 
     public String getQuitMessage(){
