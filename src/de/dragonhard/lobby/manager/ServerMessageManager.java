@@ -18,6 +18,7 @@ public class ServerMessageManager extends MessageReader {
         String messageStart = this.getString("StartColor");
         String nameColor = this.getString("TitleColor");
         Boolean isImportant = this.getBoolean("isImportant");
+        Boolean isTeamMsg = this.getBoolean("isTeamMsg");
         String messageName = this.getString("MessageName");
         String messageColor = this.getString("MessageColor");
         String message = "§" + messageColor + this.getString("Message");
@@ -26,24 +27,56 @@ public class ServerMessageManager extends MessageReader {
 
         String title = "§" + messageStart + "++ §" + nameColor + messageName + " §" + messageStart + "++";
 
-        for(Player p :Bukkit.getOnlinePlayers()){
+        for(Player p : Bukkit.getOnlinePlayers()){
 
             if(cm.isDebugMode()){
                 ConsoleWriter.writeDebug("loading online Player ...");
             }
 
-            PluginWithlistManager pwm = new PluginWithlistManager();
-            if (pwm.isOwner(p) || pwm.isTeam_lead(p) || pwm.isDeveloper(p) || pwm.isBuilder(p)) {
+            if(isTeamMsg(p, name)){
+
+                if (isPlayerTeam(p)) {
+                    p.sendMessage("§5Team >> " + title);
+                    p.sendMessage(message);
+
+                    return;
+                }
+                    p.sendMessage(title);
+                    p.sendMessage(message);
+
+                    return;
+            }
 
                 p.sendMessage(title);
                 p.sendMessage(message);
-            }
+
+
+
         }
 
     }
 
-    public void createMessage(Player p,String name, String messageStart, String titleColor, String messageColor, String message, boolean isImportant){
-        if(messageExists(name)){p.sendMessage("§4");}
+    public boolean isPlayerTeam(Player p){
+        PluginWithlistManager pwm = new PluginWithlistManager();
+
+        if (pwm.isOwner(p) ||
+                pwm.isTeam_lead(p) ||
+                pwm.isDeveloper(p) ||
+                pwm.isBuilder(p) ||
+                pwm.isSupporter(p)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isTeamMsg(Player p, String name){
+        this.setFile(p, name);
+        return this.getBoolean("isTeamMsg");
+    }
+
+
+
+    public void createMessage(Player p,String name, String messageStart, String titleColor, String messageColor, String message, boolean isImportant, boolean isTeamMsg){
         this.setFile(p,name);
 
         this.setDefault("StartColor", messageStart);
@@ -55,6 +88,8 @@ public class ServerMessageManager extends MessageReader {
         this.setDefault("isImportant", isImportant);
         this.setDefault("Message", message);
 
+        this.setDefault("isTeamMsg", isTeamMsg);
+
     }
 
     public boolean messageExists(String msgName){
@@ -62,6 +97,12 @@ public class ServerMessageManager extends MessageReader {
 
         if(f.exists()){return true;}
         return false;
+    }
+
+    public String getJoinMessage(){
+        ConfigManager cm = new ConfigManager();
+
+        return "";
     }
 
 }
