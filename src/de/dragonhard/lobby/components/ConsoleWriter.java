@@ -7,4 +7,5 @@ public class ConsoleWriter {
     public static void write(String text){ System.out.println(text);}
     public static void writeWithTag(String text){ System.out.println(tag + " " + text);}
     public static void writeDebug(String text){ System.out.println("[Debug] " + text);}
+    public static void writeErrorWithTag(String text){ System.out.println(tag + " [Error] " + text);}
 }

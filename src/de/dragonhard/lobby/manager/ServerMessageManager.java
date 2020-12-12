@@ -63,7 +63,8 @@ public class ServerMessageManager extends MessageReader {
                 pwm.isTeam_lead(p) ||
                 pwm.isDeveloper(p) ||
                 pwm.isBuilder(p) ||
-                pwm.isSupporter(p)) {
+                pwm.isModerator(p) ||
+                pwm.isSupporter(p)){
             return true;
         }
         return false;
