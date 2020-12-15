@@ -95,7 +95,15 @@ public class Shop_XP_Menu extends Lobby_Inventory implements Listener {
                         String type = item[1];
                         String price = item[2];
                         String status = item[3];
-                        String[] blacklist = {"'","+","*","_","-","`"};
+
+                        String[] blacklist = {          //add a item to block for the shop-items
+                                        "'","+","*",
+                                        "(",")","{","}","[","]",
+                                        "_","-","`",
+                                        "~","#","@",
+                                        "^","|","<",">",
+                                        "%","$","§"
+                                };
 
                         for(int i = 0; i < blacklist.length; i ++){
                             if(title.contains(blacklist[i])){
