@@ -116,6 +116,11 @@ public class Shop_XP_Menu extends Lobby_Inventory implements Listener {
                                 break;
                             }
 
+                            if(type.contains(blacklist[i])){
+                                ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist im typ enthalten!");
+                                break;
+                            }
+
                             if(status.contains(blacklist[i])){
                                 ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist im status enthalten!");
                                 break;
