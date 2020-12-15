@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.components.menu.shop;
 
+import de.dragonhard.lobby.components.ConsoleWriter;
 import de.dragonhard.lobby.components.menu.Lobby_Inventory;
 import de.dragonhard.lobby.manager.*;
 import org.bukkit.Material;
@@ -89,70 +90,32 @@ public class Shop_XP_Menu extends Lobby_Inventory implements Listener {
 
                     default:
 
-                        switch(e.getSlot()){
+                        String[] item = e.getClickedInventory().getItem(e.getSlot()).getItemMeta().getDisplayName().split("/");
+                        String title = item[0];
+                        String type = item[1];
+                        String price = item[2];
+                        String status = item[3];
+                        String[] blacklist = {"'","+","*","_","-","`"};
 
-                            case 10:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                        for(int i = 0; i < blacklist.length; i ++){
+                            if(title.contains(blacklist[i])){
+                                ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist im Title enthalten!");
                                 break;
-                            case 12:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 13:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 14:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 15:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 16:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 19:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 20:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 21:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 22:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 23:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 24:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 25:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 28:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 29:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 30:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 31:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 32:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 33:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
-                            case 34:
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                break;
+                            }
 
+                            if(price.contains(blacklist[i])){
+                                ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist im Preis enthalten!");
+                                break;
+                            }
+
+                            if(status.contains(blacklist[i])){
+                                ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist im status enthalten!");
+                                break;
+                            }
                         }
+
+
+
                         break;
 
                 }

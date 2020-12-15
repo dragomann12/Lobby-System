@@ -86,13 +86,8 @@ public class Settings_Menu extends Lobby_Inventory implements Listener {
 
                     default:
 
-                        switch(e.getSlot()){
 
-                            case 20: p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);break;
-                            case 22: p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);break;
-                            case 24: p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);break;
-
-                        }break;
+                      break;
 
                 }
 
