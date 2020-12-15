@@ -7,6 +7,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.io.File;
+
 public class cmdServerMessage extends ServerMessageManager implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -18,7 +20,7 @@ public class cmdServerMessage extends ServerMessageManager implements CommandExe
             switch (args[0]){
                 case "del": delMessage(p, args[1]); break;
                 case "set": setMessage(p, args[1]); break;
-                default: ConsoleWriter.writeErrorWithTag("input not known");
+                default: ConsoleWriter.writeErrorWithTag("input not known"); break;
 
             }
 

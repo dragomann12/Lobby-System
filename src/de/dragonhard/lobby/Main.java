@@ -37,7 +37,7 @@ TODO add MY SQL db later
     }
 
     public void onEnable(){
-
+        plugin = this;
         if(cm.configExists()){
             ConsoleWriter.writeWithTag("checking Config ...");
 
@@ -52,6 +52,13 @@ TODO add MY SQL db later
             }
 
                 ConsoleWriter.writeWithTag("Config is up to date ...");
+
+                registerOutgoingChannel();
+                registerIngoingChannel();
+
+                registerCommand(); // Register the Commands
+                registerEvents(); // Register the Events
+
                 ConsoleWriter.writeWithTag("Enabled!");
 
                 pwm.onLoad();
@@ -64,29 +71,25 @@ TODO add MY SQL db later
             cm.getDefaultConfig();
         }
 
-         plugin = this;
-
-         registerOutgoingChannel();
-         registerIngoingChannel();
-
-         registerCommand(); // Register the Commands
-         registerEvents(); // Register the Events
-
     }
 
     public boolean registerOutgoingChannel(){
+        ConsoleWriter.writeWithTag("setting up outgoing communication channel ...");
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, BungeeCordManager.getChannel());
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, PluginComunicationManager.getChannelOut());
+        ConsoleWriter.writeWithTag("done");
         return true;
     }
 
     public boolean registerIngoingChannel(){
+        ConsoleWriter.writeWithTag("setting up ingoing communication channel ...");
         Bukkit.getMessenger().registerIncomingPluginChannel(this, PluginComunicationManager.getChannelIn(), pcm.getListener());
+        ConsoleWriter.writeWithTag("done");
         return true;
     }
 
     public boolean loadMenuConfig(){
-
+        ConsoleWriter.writeWithTag("loading menu configuration");
         loadConfig("creativMenu","BEACON",5);
         loadConfig("shopMenu","DIAMOND",5);
         loadConfig("AdminMenu","BEACON",5);
@@ -96,12 +99,13 @@ TODO add MY SQL db later
         loadConfig("XP_shopMenu","DIAMOND",5);
         loadConfig("FriendMenu","DIAMOND",5);
         loadConfig("DebugMenu","DIAMOND",5);
+        ConsoleWriter.writeWithTag("menu configuration loaded");
 
         return true;
     }
 
     public boolean registerCommand(){
-
+        ConsoleWriter.writeWithTag("loading command register");
         this.getCommand("warp").setExecutor(new cmdWarp());
         this.getCommand("spawn").setExecutor(new cmdSpawn());
         this.getCommand("autowarp").setExecutor(new cmdAutoWarp());
@@ -110,7 +114,7 @@ TODO add MY SQL db later
         //this.getCommand("cr").setExecutor(new cmdcreate());
         //this.getCommand("join").setExecutor(new cmdJoin());
         //this.getCommand("left").setExecutor(new cmdleft());
-
+        ConsoleWriter.writeWithTag("command register loaded");
         return true;
 
     }
@@ -144,7 +148,7 @@ TODO add MY SQL db later
     }
 
     public boolean registerEvents(){
-
+        ConsoleWriter.writeWithTag("loading event register");
         plm.registerEvents(new Interact_Event(),this);
         plm.registerEvents(new Join_Event(),this);
         plm.registerEvents(new Chat_Event(),this);
@@ -166,8 +170,7 @@ TODO add MY SQL db later
         plm.registerEvents(new Damage_Event(),this);
         plm.registerEvents(new Hunger_Event(),this);
         plm.registerEvents(new Health_Event(),this);
-        //plm.registerEvents(new CommandListener(),this); work on the test server but not at the Dev-Server
-        //                                                          Conflict with other Plugin
+        ConsoleWriter.writeWithTag("event register loaded");
         return true;
 
     }
