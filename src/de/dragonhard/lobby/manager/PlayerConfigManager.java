@@ -34,6 +34,8 @@ public class PlayerConfigManager extends ConfigReader {
         this.setDefault("updateMenu",false);
         this.setDefault("AccessLevel",0);
         this.setDefault("AccessKeyEnabled",false);
+        this.setDefault("Coins",0);
+        this.setDefault("warpUpgraded", false);
         this.setDefault("UserTag","" + p.getFoodLevel() + p.getUniqueId());
         this.setDefault("passwd","");
         // keytemplate: <UserName><UserId><userTag><passwd><AccessLevel><securityTag>
@@ -46,6 +48,21 @@ public class PlayerConfigManager extends ConfigReader {
         }else{
             this.set("updateMenu",true);
         }
+    }
+
+    public void setCoins(Player p, int value){
+        this.setFile(p,"config");
+        this.set("Coins", value);
+    }
+
+    public int getCoins(Player p){
+        this.setFile(p,"config");
+        return this.getInteger("Coins");
+    }
+
+    public boolean hasWarpUpgrade(Player p){
+        this.setFile(p,"config");
+        return this.getBoolean("warpUpgraded");
     }
 
     public int getAccessLevel(Player p){

@@ -94,7 +94,7 @@ public class Shop_XP_Menu extends Lobby_Inventory implements Listener {
                         String title = item[0];
                         String type = item[1];
                         String price = item[2];
-                        String status = item[3];
+                        String cost_type = item[3];
 
                         String[] blacklist = {          //add a item to block for the shop-items
                                         "'","+","*",
@@ -107,27 +107,42 @@ public class Shop_XP_Menu extends Lobby_Inventory implements Listener {
 
                         for(int i = 0; i < blacklist.length; i ++){
                             if(title.contains(blacklist[i])){
-                                ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist im Title enthalten!");
+                                ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist enthalten!");
                                 break;
                             }
 
                             if(price.contains(blacklist[i])){
-                                ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist im Preis enthalten!");
+                                ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist enthalten!");
                                 break;
                             }
 
                             if(type.contains(blacklist[i])){
-                                ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist im typ enthalten!");
+                                ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist enthalten!");
                                 break;
                             }
 
-                            if(status.contains(blacklist[i])){
-                                ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist im status enthalten!");
+                            if(cost_type.contains(blacklist[i])){
+                                ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist enthalten!");
                                 break;
                             }
                         }
 
+                        switch(type){
 
+                            case "Upgrade":
+
+
+
+                                break;
+
+                            case "Xp":
+
+
+
+                                break;
+
+                            default: ConsoleWriter.writeErrorWithTag("Ein Zeichen ist im type enthalten!"); break;
+                        }
 
                         break;
 
