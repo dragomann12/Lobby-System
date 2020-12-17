@@ -46,6 +46,7 @@ public class WarpManager extends WarpReader {
 
             if(!exists(p,wlr.getString("warp_"+i))){wlr.set("warp_" + i, "frei");}else{
                 this.delWarp(p, wlr.getString("warp_" + i));
+                pm.delWarpFromCount(p);
             }
 
         }

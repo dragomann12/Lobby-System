@@ -117,8 +117,9 @@ public class cmdWarp extends WarpManager implements CommandExecutor {
 
                                     if (args[1].equals("*")) {
 
-
-
+                                        p.sendMessage("§asuche alle warps ...");
+                                        this.delAllWarps(p);
+                                        p.sendMessage("§aAlle warps wurden erfolgreich entfernt!");
                                     }else {
 
                                         if (this.exists(p, args[1]) && pm.getCurrentWarps(p) != 0) {
