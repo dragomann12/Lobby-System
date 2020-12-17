@@ -112,11 +112,24 @@ public class cmdWarp extends WarpManager implements CommandExecutor {
                                 } break;
 
 
-                            case "del": if(!args[1].isEmpty()){
-                                if(this.exists(p,args[1]) && pm.getCurrentWarps(p) != 0){
-                                    pm.delWarpFromCount(p);
-                                }
-                                this.delWarp(p,args[1]);}else { help(p);} break;
+                            case "del":
+                                if(!args[1].isEmpty()) {
+
+                                    if (args[1].equals("*")) {
+
+
+
+                                    }else {
+
+                                        if (this.exists(p, args[1]) && pm.getCurrentWarps(p) != 0) {
+                                            pm.delWarpFromCount(p);
+                                        }
+                                        this.delWarp(p, args[1]);
+                                    }
+
+                                }else{help(p);}
+
+                                break;
 
                             case "count":
                                 if(cm.tagUseEnabled()){

@@ -38,6 +38,20 @@ public class WarpManager extends WarpReader {
         ConsoleWriter.writeWithTag("The Player " + p.getName() + " with the uuid " + p.getUniqueId() + " created the Warp "+ warpName + " and the Warp has ben added to the list");
     }
 
+    public void delAllWarps(Player p){
+        wlr.setFile(p);
+        if(pm.getCurrentWarps(p) == 0 && pm.getMaxWarps(p) != 0){p.sendMessage("§4Du hast keine Warps gesetzt!");return;}
+
+        for(int i = 0; i < pm.getMaxWarps(p); i++) {
+
+            if(!exists(p,wlr.getString("warp_"+i))){wlr.set("warp_" + i, "frei");}else{
+                this.delWarp(p, wlr.getString("warp_" + i));
+            }
+
+        }
+
+    }
+
     public void getWarpList(Player p){ //call for a list of all the warps from a player
         wlr.setFile(p);
 
@@ -49,7 +63,6 @@ public class WarpManager extends WarpReader {
         for(int i = 0; i < pm.getMaxWarps(p); i++) {
 
                 if(!exists(p,wlr.getString("warp_"+i))){wlr.set("warp_" + i, "frei");}else{
-                    ConsoleWriter.writeWithTag("[Debug] check file exists");
                     p.sendMessage("§a| §e" + wlr.getString("warp_" + i));
                 }
 
