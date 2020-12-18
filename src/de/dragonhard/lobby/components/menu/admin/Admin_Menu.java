@@ -14,7 +14,7 @@ import org.bukkit.permissions.Permission;
 
 public class Admin_Menu extends Lobby_Inventory implements Listener {
     private Player p;
-    private String menuName = "AdminMenu";
+    private String menuName = "Admin";
     public void openInventory(Player p){
         this.p = p;
 

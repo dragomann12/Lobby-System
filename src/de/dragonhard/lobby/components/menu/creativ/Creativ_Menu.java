@@ -15,7 +15,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 public class Creativ_Menu extends Lobby_Inventory implements Listener {
 
     private Player p;
-    private String menuName = "creativMenu";
+    private String menuName = "creativ";
     public void openInventory(Player p){
         this.p = p;
         ConfigManager cm = new ConfigManager();

@@ -22,7 +22,7 @@ public class Admin_Server_Menu extends Lobby_Inventory implements Listener {
    private AcessManager acm = new AcessManager();
    private PlayerConfigManager pm = new PlayerConfigManager();
 
-   private String menuName = "Admin_ServerMenu";
+   private String menuName = "Admin_Server";
 
    private Material material;
     public void openInventory(Player p){

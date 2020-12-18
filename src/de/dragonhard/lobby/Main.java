@@ -91,15 +91,15 @@ TODO add MY SQL db later
 
     public boolean loadMenuConfig(){
         ConsoleWriter.writeWithTag("loading menu configuration");
-        loadConfig("creativMenu","BEACON",5);
-        loadConfig("shopMenu","DIAMOND",5);
-        loadConfig("AdminMenu","BEACON",5);
-        loadConfig("SettingsMenu","DIAMOND",5);
-        loadConfig("LobbyMenu","NETHER_STAR",5);
-        loadConfig("GameMenu","DIAMOND",5);
-        loadConfig("XP_shopMenu","DIAMOND",5);
-        loadConfig("FriendMenu","DIAMOND",5);
-        loadConfig("DebugMenu","DIAMOND",5);
+        loadConfig("creativ","BEACON",5);
+        loadConfig("shop","DIAMOND",5);
+        loadConfig("Admin","BEACON",5);
+        loadConfig("Settings","DIAMOND",5);
+        loadConfig("Lobby","NETHER_STAR",5);
+        loadConfig("Game","DIAMOND",5);
+        loadConfig("XP_shop","DIAMOND",5);
+        loadConfig("Friend","DIAMOND",5);
+        loadConfig("Debug","DIAMOND",5);
         ConsoleWriter.writeWithTag("menu configuration loaded");
 
         return true;
@@ -112,7 +112,7 @@ TODO add MY SQL db later
         this.getCommand("autowarp").setExecutor(new cmdAutoWarp());
         this.getCommand("InvWarp").setExecutor(new cmdGlobalWarp());
         this.getCommand("block").setExecutor(new cmdblock());
-        this.getCommand("coins").setExecutor(new cmdCoins());
+        //this.getCommand("coins").setExecutor(new cmdCoins()); //@TODO bugfix ArreyindexoutoffBounds
         //this.getCommand("cr").setExecutor(new cmdcreate());
         //this.getCommand("join").setExecutor(new cmdJoin());
         //this.getCommand("left").setExecutor(new cmdleft());

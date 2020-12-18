@@ -20,7 +20,7 @@ public class Game_Menu extends Lobby_Inventory implements Listener {
    private GlobalWarpManager gwm = new GlobalWarpManager();
    private PlayerConfigManager pm = new PlayerConfigManager();
 
-   private String menuName = "GameMenu";
+   private String menuName = "Game";
    //private String title_slot_2 = cm.getSlotTitle(menuName,22).replace("-","_");
    //private String title_slot_3 = cm.getSlotTitle(menuName,24).replace("-","_");
 

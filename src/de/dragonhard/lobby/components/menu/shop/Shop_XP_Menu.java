@@ -14,7 +14,7 @@ public class Shop_XP_Menu extends Lobby_Inventory implements Listener {
 
 
     private Player p;
-    private String menuName = "XP_shopMenu";
+    private String menuName = "XP_shop";
     public void openInventory(Player p){
         AcessManager acm = new AcessManager();
         this.p = p;

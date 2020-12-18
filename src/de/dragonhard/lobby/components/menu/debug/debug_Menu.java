@@ -16,7 +16,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class debug_Menu extends Lobby_Inventory implements Listener {
     private Player p;
-    private String menuName = "DebugMenu";
+    private String menuName = "Debug";
     public void openInventory(Player p){
         this.p = p;
 

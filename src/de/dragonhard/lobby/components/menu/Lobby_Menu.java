@@ -18,7 +18,7 @@ import java.io.DataOutputStream;
 
 public class Lobby_Menu extends Lobby_Inventory implements Listener {
     private Player p;
-    private String menuName = "LobbyMenu";
+    private String menuName = "Lobby";
     public void openInventory(Player p){
         this.p = p;
         ConfigManager cm = new ConfigManager();
