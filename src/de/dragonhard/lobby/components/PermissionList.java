@@ -57,7 +57,7 @@ public class PermissionList {
             case "external":
 
                 switch(permissionID){
-                    case 0: return permissionBase + "cp.open";
+                    case 0: return permissionBase + "cp.open";//in use
                 }
 
                 break;
