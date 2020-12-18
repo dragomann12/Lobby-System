@@ -2,6 +2,7 @@ package de.dragonhard.lobby.commands.coins;
 
 import de.dragonhard.lobby.components.PermissionList;
 import de.dragonhard.lobby.manager.CoinManager;
+import de.dragonhard.lobby.manager.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,69 +17,46 @@ public class cmdCoins extends CoinManager implements CommandExecutor {
 
             Player p = (Player)sender;
 
-            if(args.length != 0) {
+            if(args[0].isEmpty()){
+                if(args[0].equals("help")){help(p); return false;}
+                p.sendMessage("§aDu hast §b"+ this.getCoins(p) + " §aChaos-Coins");
+            }else if(!args[1].isEmpty()){
+                Player target = Bukkit.getPlayer(args[1]);
+                switch (args[0]){
 
-                if(!args[0].isEmpty()){
-
-                    if(!args[1].isEmpty()){
-
-                        switch(args[1]){
-
-                            case "see":
-
-                                if(p.hasPermission(PermissionList.getPermission("see",0))){
-
-                                    if(!args[2].isEmpty()){
-                                        try{
-                                            Player target = Bukkit.getPlayer(args[2]);
-
-                                            p.sendMessage("§5" + target.getName() + "§bhat §5" + this.getCoins(target) + " §bCC");
-
-                                        }catch(NullPointerException e){
-
-                                        }
-
-                                    }
-
-                                }else{p.sendMessage("§4Du hast keine Berechtigung!");}
-
-                                break;
-
-                            case "set":
-                                if(p.hasPermission(PermissionList.getPermission("edit",0))){
-
-                                    if(!args[2].isEmpty()){
-                                        try{
-                                            Player target = Bukkit.getPlayer(args[2]);
-                                            int amount = Integer.parseInt(args[3]);
-
-                                            this.setCoins(target, amount);
-                                            p.sendMessage("§aDu hast die Coins von §b" + target.getName() + " §aauf §b" + amount + "§aCC gesetzt" );
-                                        }catch(NullPointerException e){
-
-                                        }
-
-                                    }
-
-                                }else{p.sendMessage("§4Du hast keine Berechtigung!");}
-                        }
-
-                    }else{
-
-                        p.sendMessage("§aDu hast §b" + this.getCoins(p) + " §aCC");
-
-                    }
-
-                }else{
-
-
-
+                    case "see":
+                        p.sendMessage("§5"+target.getName() + " §bhat " + this.getCoins(target) + " §aCC");break;
+                    case "set":
+                        if(args[2].isEmpty()){help(p);}
+                        this.setCoins(target, Integer.parseInt(args[2]));
+                        p.sendMessage("§5"+target.getName() + " §bhat jetzt" + this.getCoins(target) + " §aCC");break;
+                    case "add":
+                        if(args[2].isEmpty()){help(p);}
+                        this.setCoins(target, this.getCoins(p) + Integer.parseInt(args[2]));
+                        p.sendMessage("§5"+target.getName() + " §bwurden " + this.getCoins(target) + " §aCC hinzugefügt");break;
                 }
-
+            }else{
+                help(p);
             }
 
         }
 
         return false;
+    }
+
+    private void help(Player p){
+        ConfigManager cm = new ConfigManager();
+
+        if(cm.tagUseEnabled()){
+            p.sendMessage(cm.getTag() + "§4Fehler benutze den Befehl so: ");
+        }else{
+            p.sendMessage("§4Fehler benutze den Befehl so: ");
+        }
+
+        p.sendMessage("                                 §4Hilfe >> §e/coins  §4>> zeigt deine Chaos-Coins");
+        p.sendMessage("                                 §4Hilfe >> §e/coins §4see [§ename§4] §4>> zeigt die Chaos-Coins eines Spielers");
+        p.sendMessage("                                 §4Hilfe >> §e/coins §4set [§ename§4] [§evalue§4] §4>> setzt die Chaos-Coins eines Spielers");
+        p.sendMessage("                                 §4Hilfe >> §e/coins §4add [§ename§4] [§evalue§4] §4>> gibt einem Spieler Chaos-Coins");
+
     }
 }
