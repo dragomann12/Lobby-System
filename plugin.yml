@@ -24,3 +24,7 @@ commands:
     usage:
     description: keine Information!
     permission:
+  coins:
+    usage:
+    description: keine Information!
+    permission:
