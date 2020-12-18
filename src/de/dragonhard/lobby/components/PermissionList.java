@@ -7,6 +7,18 @@ public class PermissionList {
             // case 0: return permissionBase + "";
         switch(category){
 
+            case "see":
+                switch(permissionID){
+                    case 0: return permissionBase + "Coins.see";//in use
+                }
+                break;
+
+            case "edit":
+                switch(permissionID){
+                    case 0: return permissionBase + "Coins.set";//in use
+                }
+                break;
+
             case "User":
                 switch(permissionID){
                     case 0: return permissionBase + "Menu.Test";//in use
