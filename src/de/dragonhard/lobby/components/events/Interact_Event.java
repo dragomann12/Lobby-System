@@ -7,6 +7,7 @@ import de.dragonhard.lobby.components.menu.friend.Friend_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Menu;
 import de.dragonhard.lobby.manager.InventoryManager;
 import de.dragonhard.lobby.manager.PlayerConfigManager;
+import de.dragonhard.lobby.manager.PluginWithlistManager;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -23,7 +24,7 @@ public class Interact_Event implements Listener {
         p.setNoDamageTicks(999);
 
         PlayerConfigManager pm = new PlayerConfigManager();
-
+        PluginWithlistManager pwm = new PluginWithlistManager();
         InventoryManager im = new InventoryManager(),
                 menu = new InventoryManager();
 
@@ -67,7 +68,7 @@ public class Interact_Event implements Listener {
             menu.createItem(p, Material.BANNER, "§5Freunde", 8);
 
 
-            if (p.hasPermission(PermissionList.getPermission("external", 0)) && p.getName().equals("Dragonhard117") || p.getName().equals("SLINIcraftet204")) {
+            if (p.hasPermission(PermissionList.getPermission("external", 0)) && pwm.isOwner(p)) {
                 menu.createInventoryItem(p, Material.COMMAND, "Magic item", 22);
             } else {
                 menu.createInventoryItem(p, Material.BARRIER, "§4Admin-Item", 22);

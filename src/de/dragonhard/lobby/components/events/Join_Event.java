@@ -33,6 +33,7 @@ public class Join_Event implements Listener {
         if(pm.getHideStatus(p)){pm.toggleHideStatus(p);}
 
         if(pm.isBuildModeEnabled(p)){
+            ConsoleWriter.writeWithTag("[ALERT] Player " + p.getName() + " uuid: "+ p.getUniqueId() + " joined with build-mode enabled");
             p.sendMessage("§eAchtung du bist noch im Bau-Modus!");
         }
 
@@ -87,7 +88,7 @@ public class Join_Event implements Listener {
         menu.createItem(p, pm.getHideStatusMaterial(p),"§5Spieler verstecken",7);
         menu.createItem(p, Material.BANNER,"§5Freunde",8);
 
-        if(p.hasPermission(PermissionList.getPermission("external",0)) && p.getName().equals("Dragonhard117") || p.getName().equals("SLINIcraftet204")){menu.createInventoryItem(p, Material.COMMAND,"Magic-Item",22);}else{menu.createInventoryItem(p, Material.WEB,"§4Admin-item",22);} // Item 22
+        if(p.hasPermission(PermissionList.getPermission("external",0)) && pwm.isOwner(p)){menu.createInventoryItem(p, Material.COMMAND,"Magic-Item",22);}else{menu.createInventoryItem(p, Material.WEB,"§4Admin-item",22);} // Item 22
 
 
     }
