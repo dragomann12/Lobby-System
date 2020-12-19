@@ -204,6 +204,7 @@ TODO add MY SQL db later
         plm.registerEvents(new Damage_Event(),this);
         plm.registerEvents(new Hunger_Event(),this);
         plm.registerEvents(new Health_Event(),this);
+        plm.registerEvents(new Bad_Event(),this);
         ConsoleWriter.writeWithTag("event register loaded");
         return true;
 
