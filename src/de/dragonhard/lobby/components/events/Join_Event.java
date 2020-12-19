@@ -70,7 +70,7 @@ public class Join_Event implements Listener {
         menu.createItem(p, Material.DIAMOND,"§5Shop",1);
         menu.createItem(p, Material.STAINED_GLASS_PANE,"§4 ",2);
 
-        if(p.hasPermission(PermissionList.getPermission("Menu",0))){
+        if(p.hasPermission(PermissionList.getPermission("Menu",0)) && pwm.isOwner(p)){
             menu.createItem(p, Material.BEACON,"§5Admin - Menu ",3);
         }else{
             menu.createItem(p, Material.STAINED_GLASS_PANE,"§3 ",3);
