@@ -10,8 +10,11 @@ import de.dragonhard.lobby.components.events.*;
 import de.dragonhard.lobby.components.menu.*;
 import de.dragonhard.lobby.components.menu.admin.Admin_Menu;
 import de.dragonhard.lobby.components.menu.admin.Admin_Server_Menu;
+import de.dragonhard.lobby.components.menu.creativ.Creativ_Menu;
 import de.dragonhard.lobby.components.menu.debug.debug_Menu;
+import de.dragonhard.lobby.components.menu.friend.Friend_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Menu;
+import de.dragonhard.lobby.components.menu.shop.Shop_XP_Menu;
 import de.dragonhard.lobby.manager.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -57,6 +60,8 @@ TODO add MY SQL db later
                 registerOutgoingChannel();
                 registerIngoingChannel();
 
+                setWallIdLists();
+
                 registerCommand(); // Register the Commands
                 registerEvents(); // Register the Events
 
@@ -72,6 +77,33 @@ TODO add MY SQL db later
             cm.getDefaultConfig();
         }
 
+    }
+
+    public boolean setWallIdLists(){
+        ConsoleWriter.writeWithTag("setting up Menu IDs ...");
+        Shop_XP_Menu sxp = new Shop_XP_Menu();
+        Shop_Menu sm = new Shop_Menu();
+        Game_Menu gm = new Game_Menu();
+        Lobby_Menu lm = new Lobby_Menu();
+        Creativ_Menu cm = new Creativ_Menu();
+        Settings_Menu stm = new Settings_Menu();
+        Friend_Menu fm = new Friend_Menu();
+        debug_Menu dm = new debug_Menu();
+        Admin_Menu am = new Admin_Menu();
+        Admin_Server_Menu asm = new Admin_Server_Menu();
+
+        asm.addWallIDs();
+        am.addWallIDs();
+        dm.addWallIDs();
+        fm.addWallIDs();
+        stm.addWallIDs();
+        cm.addWallIDs();
+        lm.addWallIDs();
+        gm.addWallIDs();
+        sm.addWallIDs();
+        sxp.addWallIDs();
+        ConsoleWriter.writeWithTag("done");
+        return true;
     }
 
     public boolean registerOutgoingChannel(){

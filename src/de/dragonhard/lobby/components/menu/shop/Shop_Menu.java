@@ -10,11 +10,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
+import java.util.ArrayList;
+
 public class Shop_Menu extends Lobby_Inventory implements Listener {
 
 
     private Player p;
     private String menuName = "shop";
+    private static ArrayList<Integer> wall_item_id = new ArrayList<Integer>();
     public void openInventory(Player p){
         AcessManager acm = new AcessManager();
         this.p = p;
@@ -47,30 +50,32 @@ public class Shop_Menu extends Lobby_Inventory implements Listener {
                 if(i <= 8){
                     this.addWallItemToInventory(p,i);
                 }else {
-                    switch(i){
-                        case 9: this.addWallItemToInventory(p,i);break;
-                        case 17: this.addWallItemToInventory(p,i);break;
-                        case 18: this.addWallItemToInventory(p,i);break;
-                        case 26: this.addWallItemToInventory(p,i);break;
-                        case 27: this.addWallItemToInventory(p,i);break;
-                        case 35: this.addWallItemToInventory(p,i);break;
-                        case 36: this.addWallItemToInventory(p,i);break;
-                        case 37: this.addWallItemToInventory(p,i);break;
-                        case 38: this.addWallItemToInventory(p,i);break;
-                        case 39: this.addWallItemToInventory(p,i);break;
-                        case 40: this.addWallItemToInventory(p,i);break;
-                        case 41: this.addWallItemToInventory(p,i);break;
-                        case 42: this.addWallItemToInventory(p,i);break;
-                        case 43: this.addWallItemToInventory(p,i);break;
-                        case 44: this.addWallItemToInventory(p,i);break;
-                        default: this.addGoldWallItemToInventory(p,i);break;
+
+                    if(wall_item_id.contains(i)){
+                        this.addWallItemToInventory(p,i);
+                    }else{
+                        this.addGoldWallItemToInventory(p,i);
                     }
+
                 }
             }
 
         }
 
         p.openInventory(this.getInventory());
+
+    }
+
+    public void addWallIDs(){
+
+        wall_item_id.add(9);
+        wall_item_id.add(17);
+        wall_item_id.add(18);
+        wall_item_id.add(26);
+        wall_item_id.add(27);
+        for(int i = 35; i <=44; i++){
+            wall_item_id.add(i);
+        }
 
     }
 
@@ -90,8 +95,7 @@ public class Shop_Menu extends Lobby_Inventory implements Listener {
 
                     p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
                     Shop_XP_Menu sxpm = new Shop_XP_Menu();
-                    p.sendMessage("§4bald verfügbar"); return;
-                   // sxpm.openInventory(p);
+                    sxpm.openInventory(p);return;
 
                 }else if(!e.getClick().isShiftClick() && e.getSlot() == 22){
 

@@ -17,10 +17,11 @@ public class Join_Event implements Listener {
         e.setJoinMessage("");
         p.setNoDamageTicks(999999);
         PlayerConfigManager pm = new PlayerConfigManager();
+        PluginWithlistManager pwm = new PluginWithlistManager();
         ConfigManager cm = new ConfigManager();
 
         pm.checkPlayer(p);
-
+        pwm.addPlayerToGroup(p);
         pm.setFile(p,"config");
         // keytemplate: <UserName><UserId><userTag><passwd><AccessLevel><securityTag>
 
