@@ -43,9 +43,6 @@ public class Friend_Menu extends Lobby_Inventory implements Listener {
 
 
             }else{
-                if(i <= 8){
-                    this.addWallItemToInventory(p,i);
-                }else {
 
                     if(wall_item_id.contains(i)){
                         this.addWallItemToInventory(p,i);
@@ -53,7 +50,6 @@ public class Friend_Menu extends Lobby_Inventory implements Listener {
                         this.addGoldWallItemToInventory(p,i);
                     }
 
-                }
             }
 
         }
@@ -64,11 +60,15 @@ public class Friend_Menu extends Lobby_Inventory implements Listener {
 
     public void addWallIDs(){
 
-        wall_item_id.add(9);
+        for(int i = 0; i <=9; i++){
+            wall_item_id.add(i);
+        }
+
         wall_item_id.add(17);
         wall_item_id.add(18);
         wall_item_id.add(26);
         wall_item_id.add(27);
+
         for(int i = 35; i <=44; i++){
             wall_item_id.add(i);
         }
