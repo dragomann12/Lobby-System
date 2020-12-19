@@ -1,6 +1,5 @@
 package de.dragonhard.lobby;
 import de.dragonhard.lobby.commands.cmdblock;
-import de.dragonhard.lobby.commands.coins.cmdCoins;
 import de.dragonhard.lobby.commands.teleport.cmdAutoWarp;
 import de.dragonhard.lobby.commands.teleport.cmdGlobalWarp;
 import de.dragonhard.lobby.commands.teleport.cmdSpawn;
