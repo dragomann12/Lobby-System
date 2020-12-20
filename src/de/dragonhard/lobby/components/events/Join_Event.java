@@ -28,6 +28,7 @@ public class Join_Event implements Listener {
         String key = p.getName() +"."+ p.getUniqueId() +"."+  pm.getUserTag(p) +"."+  pm.getPasswd(p) +"."+  pm.getAccessLevel(p) +"."+  cm.getSecurityTag();
         String title = "";
         title = cm.getAccessLevelTag(pm.getAccessLevel(p));
+      //  if(pm.getAccessLevel(p) == 99 && pwm.isPluginDeveloper(p)){title = "Lobby-System Owner";}
         ConsoleWriter.writeWithTag("Player " + p.getName() + " with the UUID: " + p.getUniqueId() + " joined as " + title + "!");
 
         if(pm.getHideStatus(p)){pm.toggleHideStatus(p);}
@@ -70,7 +71,7 @@ public class Join_Event implements Listener {
         menu.createItem(p, Material.DIAMOND,"§5Shop",1);
         menu.createItem(p, Material.STAINED_GLASS_PANE,"§4 ",2);
 
-        if(p.hasPermission(PermissionList.getPermission("Menu",0)) && pwm.isOwner(p)){
+        if(p.hasPermission(PermissionList.getPermission("Menu",0)) && pwm.isAdmin(p) || pwm.isOwner(p) || pwm.isPluginDeveloper(p)){
             menu.createItem(p, Material.BEACON,"§5Admin - Menu ",3);
         }else{
             menu.createItem(p, Material.STAINED_GLASS_PANE,"§3 ",3);
@@ -78,7 +79,7 @@ public class Join_Event implements Listener {
 
         menu.createItem(p, Material.REDSTONE,"§5Minispiele",4);
 
-        if(p.hasPermission(PermissionList.getPermission("Menu",0))){
+        if(p.hasPermission(PermissionList.getPermission("Menu",0)) && pwm.isOwner(p) || pwm.isPluginDeveloper(p)){
             menu.createItem(p, Material.BOOK,"§5Einstellungen ",5);
         }else{
             menu.createItem(p, Material.STAINED_GLASS_PANE,"§2 ",5);
@@ -88,7 +89,7 @@ public class Join_Event implements Listener {
         menu.createItem(p, pm.getHideStatusMaterial(p),"§5Spieler verstecken",7);
         menu.createItem(p, Material.BANNER,"§5Freunde",8);
 
-        if(p.hasPermission(PermissionList.getPermission("external",0)) && pwm.isOwner(p)){menu.createInventoryItem(p, Material.COMMAND,"Magic-Item",22);}else{menu.createInventoryItem(p, Material.WEB,"§4Admin-item",22);} // Item 22
+       // if(p.hasPermission(PermissionList.getPermission("external",0)) && pwm.isOwner(p) || pwm.isPluginDeveloper(p)){menu.createInventoryItem(p, Material.COMMAND,"Magic-Item",22);}else{menu.createInventoryItem(p, Material.WEB,"§4Admin-item",22);} // Item 22
 
 
     }

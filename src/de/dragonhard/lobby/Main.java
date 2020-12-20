@@ -7,6 +7,7 @@ import de.dragonhard.lobby.commands.teleport.cmdWarp;
 import de.dragonhard.lobby.components.ConsoleWriter;
 import de.dragonhard.lobby.components.events.*;
 import de.dragonhard.lobby.components.menu.*;
+import de.dragonhard.lobby.components.menu.admin.Admin_External_Menu;
 import de.dragonhard.lobby.components.menu.admin.Admin_Menu;
 import de.dragonhard.lobby.components.menu.admin.Admin_Server_Menu;
 import de.dragonhard.lobby.components.menu.creativ.Creativ_Menu;
@@ -90,7 +91,9 @@ TODO add MY SQL db later
         debug_Menu dm = new debug_Menu();
         Admin_Menu am = new Admin_Menu();
         Admin_Server_Menu asm = new Admin_Server_Menu();
+        Admin_External_Menu aem = new Admin_External_Menu();
 
+        aem.addWallIDs();
         asm.addWallIDs();
         am.addWallIDs();
         dm.addWallIDs();
@@ -131,6 +134,7 @@ TODO add MY SQL db later
         loadConfig("XP_shop","DIAMOND",5);
         loadConfig("Friend","DIAMOND",5);
         loadConfig("Debug","DIAMOND",5);
+        loadConfig("Admin_External","DIAMOND",5);
         ConsoleWriter.writeWithTag("menu configuration loaded");
 
         return true;
@@ -189,7 +193,7 @@ TODO add MY SQL db later
         plm.registerEvents(new Drop_Event(),this);
         plm.registerEvents(new Drag_Event(),this);
         plm.registerEvents(new Build_Event(),this);
-        plm.registerEvents(new Inventory_Click_Event(),this);
+       // plm.registerEvents(new Inventory_Click_Event(),this);
         plm.registerEvents(new Lobby_Menu(),this);
         plm.registerEvents(new Game_Menu(),this);
         plm.registerEvents(new Shop_Menu(),this);
@@ -204,6 +208,7 @@ TODO add MY SQL db later
         plm.registerEvents(new Hunger_Event(),this);
         plm.registerEvents(new Health_Event(),this);
         plm.registerEvents(new Bad_Event(),this);
+        plm.registerEvents(new Admin_External_Menu(),this);
         ConsoleWriter.writeWithTag("event register loaded");
         return true;
 

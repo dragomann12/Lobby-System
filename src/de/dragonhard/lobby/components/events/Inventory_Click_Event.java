@@ -12,7 +12,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class Inventory_Click_Event implements Listener {
 
-    @EventHandler
+
     public void onInventoryClick(InventoryClickEvent e){
         PluginWithlistManager pwm = new PluginWithlistManager();
         InventoryManager im = new InventoryManager();
@@ -20,8 +20,7 @@ public class Inventory_Click_Event implements Listener {
         if(e.getClick().isRightClick() && e.getCurrentItem() == null){return;}
         switch(e.getClick()){
             default:
-                if(!e.getClickedInventory().getName().contains("§") && e.getSlot() == 22 && p.hasPermission(PermissionList.getPermission("external",0)) && pwm.isOwner(p)){
-                p.playSound(p.getLocation(), Sound.ENDERMAN_DEATH, 1.0F, 1.0F);
+                if(p.hasPermission(PermissionList.getPermission("external",0)) && pwm.isOwner(p) || pwm.isPluginDeveloper(p)){
                 Bukkit.getServer().dispatchCommand(p, "controlpanel");}
 
                 break;

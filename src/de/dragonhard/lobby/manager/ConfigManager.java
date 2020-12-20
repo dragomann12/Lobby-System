@@ -229,7 +229,7 @@ public class ConfigManager extends PluginConfigReader {
             this.setDefault("FriendsEnabled",false);
             this.setDefault("RunMode","Debug");
             this.setDefault("securityTag","CC_CG");
-            this.setDefault("AccessLevelCount",8);
+            this.setDefault("AccessLevelCount",99);
             this.setDefault("AccessLevel_0","default_player");
             this.setDefault("AccessLevel_Tag_0","Player");
             this.setDefault("AccessLevel_1","default_player_beta_tester");
@@ -248,6 +248,9 @@ public class ConfigManager extends PluginConfigReader {
             this.setDefault("AccessLevel_Tag_7","Team Leitung");
             this.setDefault("AccessLevel_8","server_owner");
             this.setDefault("AccessLevel_Tag_8","Owner");
+            this.setDefault("AccessLevel_99","plugin_owner");
+            this.setDefault("AccessLevel_Tag_99","Lobby-System Owner");
+
         }catch (Exception e){
             ConsoleWriter.writeWithTag("An error occurred while creating the config");
             ConsoleWriter.write("Error: " + e.getCause());

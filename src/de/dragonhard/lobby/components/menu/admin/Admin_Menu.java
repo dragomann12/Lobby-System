@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class Admin_Menu extends Lobby_Inventory implements Listener {
     private Player p;
     private String menuName = "Admin";
+    PluginWithlistManager pwm = new PluginWithlistManager();
     private static ArrayList<Integer> wall_item_id = new ArrayList<Integer>();
     public void openInventory(Player p){
         this.p = p;
@@ -107,9 +108,17 @@ public class Admin_Menu extends Lobby_Inventory implements Listener {
                                             Admin_Server_Menu asm = new Admin_Server_Menu();
                                             asm.openInventory(p);
                                         } else{
+
                                             p.sendMessage("§4keine Berechtigung!");
                                         }break;
-                                    case 24:break;
+                                    case 24:
+                                        if(pwm.isOwner(p) || pwm.isPluginDeveloper(p)){
+                                            Admin_External_Menu aem = new Admin_External_Menu();
+                                            aem.openInventory(p);
+                                        }else{
+                                            p.sendMessage("§4keine Berechtigung!");
+                                        }
+                                        break;
 
                                 }break;
                         }
