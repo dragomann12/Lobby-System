@@ -108,12 +108,9 @@ public class Game_Menu extends Lobby_Inventory implements Listener {
                 else if(slot.contains("offline")){p.sendMessage("§4Der Modus ist derzeit offline!"); return;}
                 else if(slot.contains("err")){p.sendMessage("§4Der Modus ist aufgrund eines Problems offline!"); return;}
 
-                else if(slot.contains("b")){
-                    if(pwm.isTester(p) || pwm.isDeveloper(p) || pwm.isPluginDeveloper(p) || pwm.isOwner(p)){p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);gwm.teleportPlayer(p,slot);}
-                    p.sendMessage("§4Der Modus ist nur für Beta-Tester"); return;}
+                else if(slot.contains("b")){ if(pwm.isTester(p) || pwm.isDeveloper(p) || pwm.isPluginDeveloper(p) || pwm.isOwner(p)){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);gwm.teleportPlayer(p,slot);}else{p.sendMessage("§4Der Modus ist nur für Beta-Tester"); return;}}
 
-                else if(slot.contains("a")){if(pwm.isDeveloper(p) || pwm.isPluginDeveloper(p) || pwm.isOwner(p)){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);gwm.teleportPlayer(p,slot);}
-                p.sendMessage("§4Der Modus ist nur für Alpha-Tester"); return;}
+                else if(slot.contains("a")){if(pwm.isDeveloper(p) || pwm.isPluginDeveloper(p) || pwm.isOwner(p)){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);gwm.teleportPlayer(p,slot);}else{p.sendMessage("§4Der Modus ist nur für Alpha-Tester"); return;}}
 
                 p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
                 gwm.teleportPlayer(p,slot);
