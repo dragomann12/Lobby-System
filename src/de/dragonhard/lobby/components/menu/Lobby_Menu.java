@@ -10,6 +10,7 @@ import org.bukkit.command.CommandException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.plugin.Plugin;
 
@@ -94,21 +95,22 @@ public class Lobby_Menu extends Lobby_Inventory implements Listener {
         ConfigManager cm = new ConfigManager();
 
         if(e.getInventory().getName().equals("§"+ cm.getMenuTitleColor(menuName) + cm.getMenuTitle(menuName))){
+            if (e.getCurrentItem() == null) {return;} else{
+                if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Item"))) {
 
-            if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Item"))) {
+                    String slot = cm.getSlotTitle(menuName,e.getSlot());
 
-                String slot = cm.getSlotTitle(menuName,e.getSlot());
+                    if(slot.contains("?")){p.sendMessage("§4Die Lobby ist nicht verfügbar!"); return;}
+                    else if(slot.contains("Wartung")){p.sendMessage("§4Die Lobby ist wegen arbeiten offline!"); return;}
+                    else if(slot.contains("offline")){p.sendMessage("§4Die Lobby ist derzeit offline!"); return;}
+                    else if(slot.contains("err")){p.sendMessage("§4Die Lobby ist aufgrund eines Problems offline!"); return;}
+                    else if(slot.contains("Spawn")){sm.teleportPlayerToSpawn(p); return;}
 
-                if(slot.contains("?")){p.sendMessage("§4Die Lobby ist nicht verfügbar!"); return;}
-                else if(slot.contains("Wartung")){p.sendMessage("§4Die Lobby ist wegen arbeiten offline!"); return;}
-                else if(slot.contains("offline")){p.sendMessage("§4Die Lobby ist derzeit offline!"); return;}
-                else if(slot.contains("err")){p.sendMessage("§4Die Lobby ist aufgrund eines Problems offline!"); return;}
-                else if(slot.contains("Spawn")){sm.teleportPlayerToSpawn(p); return;}
+                    p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
 
-                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                    BungeeCordManager.sendPlayerToServer(p, slot);
 
-                BungeeCordManager.sendPlayerToServer(p, slot);
-
+                }
             }
 
             return;

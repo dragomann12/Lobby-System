@@ -8,6 +8,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.util.ArrayList;
@@ -88,72 +89,75 @@ public class Shop_XP_Menu extends Lobby_Inventory implements Listener {
         ConfigManager cm = new ConfigManager();
 
         if(e.getInventory().getName().equals("§"+ cm.getMenuTitleColor(menuName) + cm.getMenuTitle(menuName))){
+            if (e.getCurrentItem() == null) {return;} else{
 
-            if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Item"))) {
+                if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Item"))) {
 
-                switch(e.getClick()){
+                    switch(e.getClick()){
 
-                    default:
+                        default:
 
-                        String[] item = e.getClickedInventory().getItem(e.getSlot()).getItemMeta().getDisplayName().split("/");
-                        String title = item[0];
-                        String type = item[1];
-                        String price = item[2];
-                        String cost_type = item[3];
+                            String[] item = e.getClickedInventory().getItem(e.getSlot()).getItemMeta().getDisplayName().split("/");
+                            String title = item[0];
+                            String type = item[1];
+                            String price = item[2];
+                            String cost_type = item[3];
 
-                        String[] blacklist = {          //add a item to block for the shop-items
-                                        "'","+","*",
-                                        "(",")","{","}","[","]",
-                                        "_","-","`",
-                                        "~","#","@",
-                                        "^","|","<",">",
-                                        "%","$","§"
-                                };
+                            String[] blacklist = {          //add a item to block for the shop-items
+                                    "'","+","*",
+                                    "(",")","{","}","[","]",
+                                    "_","-","`",
+                                    "~","#","@",
+                                    "^","|","<",">",
+                                    "%","$","§"
+                            };
 
-                        for(int i = 0; i < blacklist.length; i ++){
-                            if(title.contains(blacklist[i])){
-                                ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist enthalten!");
-                                break;
+                            for(int i = 0; i < blacklist.length; i ++){
+                                if(title.contains(blacklist[i])){
+                                    ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist enthalten!");
+                                    break;
+                                }
+
+                                if(price.contains(blacklist[i])){
+                                    ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist enthalten!");
+                                    break;
+                                }
+
+                                if(type.contains(blacklist[i])){
+                                    ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist enthalten!");
+                                    break;
+                                }
+
+                                if(cost_type.contains(blacklist[i])){
+                                    ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist enthalten!");
+                                    break;
+                                }
                             }
 
-                            if(price.contains(blacklist[i])){
-                                ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist enthalten!");
-                                break;
+                            switch(type){
+
+                                case "Upgrade":
+
+
+
+                                    break;
+
+                                case "Xp":
+
+
+
+                                    break;
+
+                                default: ConsoleWriter.writeErrorWithTag("Ein Zeichen ist im type enthalten!"); break;
                             }
 
-                            if(type.contains(blacklist[i])){
-                                ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist enthalten!");
-                                break;
-                            }
+                            break;
 
-                            if(cost_type.contains(blacklist[i])){
-                                ConsoleWriter.writeErrorWithTag("Ein nicht erlaubtes Zeichen ist enthalten!");
-                                break;
-                            }
-                        }
-
-                        switch(type){
-
-                            case "Upgrade":
-
-
-
-                                break;
-
-                            case "Xp":
-
-
-
-                                break;
-
-                            default: ConsoleWriter.writeErrorWithTag("Ein Zeichen ist im type enthalten!"); break;
-                        }
-
-                        break;
+                    }
+                    return;
 
                 }
-                return;
-             
+
             }
 
             return;

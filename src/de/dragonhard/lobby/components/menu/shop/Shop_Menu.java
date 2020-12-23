@@ -8,6 +8,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.util.ArrayList;
@@ -88,25 +89,26 @@ public class Shop_Menu extends Lobby_Inventory implements Listener {
         ConfigManager cm = new ConfigManager();
 
         if(e.getInventory().getName().equals("§"+ cm.getMenuTitleColor(menuName) + cm.getMenuTitle(menuName))){
+            if (e.getCurrentItem() == null) {return;} else{
+                if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Shop"))) {
 
-            if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Shop"))) {
+                    if(!e.getClick().isShiftClick() && e.getSlot() == 20){
 
-                if(!e.getClick().isShiftClick() && e.getSlot() == 20){
+                        p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                        Shop_XP_Menu sxpm = new Shop_XP_Menu();
+                        sxpm.openInventory(p);return;
 
-                    p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                    Shop_XP_Menu sxpm = new Shop_XP_Menu();
-                    sxpm.openInventory(p);return;
+                    }else if(!e.getClick().isShiftClick() && e.getSlot() == 22){
 
-                }else if(!e.getClick().isShiftClick() && e.getSlot() == 22){
+                        // add here another Item
 
-                    // add here another Item
+                    }else if(!e.getClick().isShiftClick() && e.getSlot() == 24){
 
-                }else if(!e.getClick().isShiftClick() && e.getSlot() == 24){
+                        // add here another Item
 
-                    // add here another Item
+                    }
 
                 }
-
             }
 
             return;

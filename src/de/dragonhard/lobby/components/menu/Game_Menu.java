@@ -7,6 +7,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class Game_Menu extends Lobby_Inventory implements Listener {
    private InventoryManager im = new InventoryManager();
    private GlobalWarpManager gwm = new GlobalWarpManager();
    private PlayerConfigManager pm = new PlayerConfigManager();
-
+   private PluginWithlistManager pwm = new PluginWithlistManager();
    private String menuName = "Game";
     private static ArrayList<Integer> wall_item_id = new ArrayList<Integer>();
    //private String title_slot_2 = cm.getSlotTitle(menuName,22).replace("-","_");
@@ -94,25 +95,27 @@ public class Game_Menu extends Lobby_Inventory implements Listener {
 
     @EventHandler
     public void onModeClick(InventoryClickEvent e){
-        Player p = (Player) e.getWhoClicked();
-        PluginWithlistManager pwm = new PluginWithlistManager();
 
         if(e.getInventory().getName().equals("§"+ cm.getMenuTitleColor(menuName) + cm.getMenuTitle(menuName))){
 
-            if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getGameTag())) {
+            if (e.getCurrentItem() == null) {return;} else{
 
-                String slot = cm.getSlotTitle(menuName,e.getSlot()).replace("-","_").replace(" /a","").replace(" /b","");
+                 if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getGameTag())) {
 
+                    String slot = cm.getSlotTitle(menuName,e.getSlot()).replace("-","_").replace(" /a","").replace(" /b","");
+                    Player p = (Player) e.getWhoClicked();
 
-                if(slot.contains("?")){p.sendMessage("§4Der Modus ist nicht verfügbar!"); return;}
-                else if(slot.contains("/Wartung")){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F); p.sendMessage("§4Der Modus ist wegen arbeiten offline!"); return;}
-                else if(slot.contains("/offline")){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F); p.sendMessage("§4Der Modus ist derzeit offline!"); return;}
-                else if(slot.contains("/err")){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F); p.sendMessage("§4Der Modus ist aufgrund eines Problems offline!"); return;}
-                else if(slot.contains("/b")){ if(pwm.isTester(p) || pwm.isDeveloper(p) || pwm.isPluginDeveloper(p) || pwm.isOwner(p)){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F); gwm.teleportPlayer(p,slot); return;}else{p.sendMessage("§4Der Modus ist nur für Beta-Tester"); return;}}
-                else if(slot.contains("/a")){if(pwm.isDeveloper(p) || pwm.isPluginDeveloper(p) || pwm.isOwner(p)){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F); gwm.teleportPlayer(p,slot);return;}else{p.sendMessage("§4Der Modus ist nur für Alpha-Tester"); return;}}
+                    if(slot.contains("?")){p.sendMessage("§4Der Modus ist nicht verfügbar!"); return;}
+                    else if(slot.contains("/Wartung")){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F); p.sendMessage("§4Der Modus ist wegen arbeiten offline!"); return;}
+                    else if(slot.contains("/offline")){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F); p.sendMessage("§4Der Modus ist derzeit offline!"); return;}
+                    else if(slot.contains("/err")){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F); p.sendMessage("§4Der Modus ist aufgrund eines Problems offline!"); return;}
+                    else if(slot.contains("/b")){ if(pwm.isTester(p) || pwm.isDeveloper(p) || pwm.isPluginDeveloper(p) || pwm.isOwner(p)){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F); gwm.teleportPlayer(p,slot); return;}else{p.sendMessage("§4Der Modus ist nur für Beta-Tester"); return;}}
+                    else if(slot.contains("/a")){if(pwm.isDeveloper(p) || pwm.isPluginDeveloper(p) || pwm.isOwner(p)){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F); gwm.teleportPlayer(p,slot);return;}else{p.sendMessage("§4Der Modus ist nur für Alpha-Tester"); return;}}
 
-                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                gwm.teleportPlayer(p,slot);
+                    p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                    gwm.teleportPlayer(p,slot);
+                }
+
 
             }
 

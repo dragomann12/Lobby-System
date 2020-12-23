@@ -81,15 +81,17 @@ public class Friend_Menu extends Lobby_Inventory implements Listener {
 
 
         if(e.getInventory().getName().equals("§"+ cm.getMenuTitleColor(menuName) + cm.getMenuTitle(menuName))){
+            if (e.getCurrentItem() == null) {return;} else{
+                if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getOnlineTag())
+                        || e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getOfflineTag()))
+                {
 
-            if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getOnlineTag())
-                    || e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getOfflineTag()))
-            {
+                    String slot = cm.getSlotTitle(menuName,e.getSlot());
+                    p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
 
-                String slot = cm.getSlotTitle(menuName,e.getSlot());
-                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-
+                }
             }
+
 
             return;
         }

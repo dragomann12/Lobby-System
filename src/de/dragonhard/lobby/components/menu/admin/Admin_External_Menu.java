@@ -10,6 +10,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.util.ArrayList;
@@ -89,39 +90,41 @@ public class Admin_External_Menu extends Lobby_Inventory implements Listener {
 
 
         if(e.getInventory().getName().equals("§"+ cm.getMenuTitleColor(menuName) + cm.getMenuTitle(menuName))){
+            if (e.getCurrentItem() == null) {return;} else{
+                if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Server-Event")) ||
+                        e.getCurrentItem().getItemMeta().getDisplayName().contains("Menu <<")) {
 
-            if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Server-Event")) ||
-                    e.getCurrentItem().getItemMeta().getDisplayName().contains("Menu <<")) {
+                    switch(e.getClick()){
 
-                switch(e.getClick()){
+                        default:
 
-                    default:
+                            switch(e.getSlot()) {
 
-                       switch(e.getSlot()) {
+                                default:
+                                    p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
 
-                           default:
-                               p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                                    if(p.hasPermission(PermissionList.getPermission("external",0)) && pwm.isOwner(p) || pwm.isPluginDeveloper(p)) {// controlpanel
+                                        String title = cm.getSlotTitle(menuName, e.getSlot());
 
-                               if(p.hasPermission(PermissionList.getPermission("external",0)) && pwm.isOwner(p) || pwm.isPluginDeveloper(p)) {// controlpanel
-                                   String title = cm.getSlotTitle(menuName, e.getSlot());
+                                        switch (title) {
+                                            case "Bungeecord Panel":Bukkit.getServer().dispatchCommand(p,"controlpanel");break;
+                                        }
 
-                                   switch (title) {
-                                       case "Bungeecord Panel":Bukkit.getServer().dispatchCommand(p,"controlpanel");break;
-                                   }
+                                    }
+                                    break;
 
-                               }
-                               break;
+                                case 36:
+                                    p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                                    Admin_Menu am = new Admin_Menu();
+                                    am.openInventory(p);break;
 
-                           case 36:
-                               p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                               Admin_Menu am = new Admin_Menu();
-                               am.openInventory(p);break;
+                            }break;
 
-                       }break;
+                    }
 
                 }
-
             }
+
 
             return;
         }

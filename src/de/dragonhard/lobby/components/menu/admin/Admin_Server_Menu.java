@@ -9,6 +9,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCreativeEvent;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -89,30 +90,32 @@ public class Admin_Server_Menu extends Lobby_Inventory implements Listener {
 
 
         if(e.getInventory().getName().equals("§"+ cm.getMenuTitleColor(menuName) + cm.getMenuTitle(menuName))){
+            if (e.getCurrentItem() == null) {return;} else{
 
-            if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Server-Event")) ||
-                    e.getCurrentItem().getItemMeta().getDisplayName().contains("Menu <<")) {
+                if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Server-Event")) ||
+                        e.getCurrentItem().getItemMeta().getDisplayName().contains("Menu <<")) {
 
-                switch(e.getClick()){
+                    switch(e.getClick()){
 
-                    default:
+                        default:
 
-                       switch(e.getSlot()) {
+                            switch(e.getSlot()) {
 
-                           case 10:
-                               p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                               ConsoleWriter.writeWithTag("The user " + p.getName() + " used the Admin-Item 'Stop' and closed the Server " + Bukkit.getServer().getServerName());
-                               Bukkit.getServer().dispatchCommand(p,"stop"); break;
+                                case 10:
+                                    p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                                    ConsoleWriter.writeWithTag("The user " + p.getName() + " used the Admin-Item 'Stop' and closed the Server " + Bukkit.getServer().getServerName());
+                                    Bukkit.getServer().dispatchCommand(p,"stop"); break;
 
-                           case 36:
-                               p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                               Admin_Menu am = new Admin_Menu();
-                               am.openInventory(p);break;
+                                case 36:
+                                    p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                                    Admin_Menu am = new Admin_Menu();
+                                    am.openInventory(p);break;
 
-                       }break;
+                            }break;
+
+                    }
 
                 }
-
             }
 
             return;

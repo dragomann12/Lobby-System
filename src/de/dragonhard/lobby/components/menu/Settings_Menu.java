@@ -6,6 +6,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.util.ArrayList;
@@ -84,22 +85,22 @@ public class Settings_Menu extends Lobby_Inventory implements Listener {
         ConfigManager cm = new ConfigManager();
 
         if(e.getInventory().getName().equals("§"+ cm.getMenuTitleColor(menuName) + cm.getMenuTitle(menuName))){
+            if (e.getCurrentItem() == null) {return;} else{
+                if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Item"))) {
 
-            if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Item"))) {
+                    switch(e.getClick()){
 
-                switch(e.getClick()){
+                        default:
 
-                    default:
+                            if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Spawn Nachricht")){cm.toggleWelcomeMessage(p);}
+                            if(e.getCurrentItem().getItemMeta().getDisplayName().contains("")){}
+                            if(e.getCurrentItem().getItemMeta().getDisplayName().contains("")){}
+                            if(e.getCurrentItem().getItemMeta().getDisplayName().contains("")){}
 
-                        if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Spawn Nachricht")){cm.toggleWelcomeMessage(p);}
-                        if(e.getCurrentItem().getItemMeta().getDisplayName().contains("")){}
-                        if(e.getCurrentItem().getItemMeta().getDisplayName().contains("")){}
-                        if(e.getCurrentItem().getItemMeta().getDisplayName().contains("")){}
+                            break;
 
-                      break;
-
-                }
-
+                    }
+            }
 
             }
 

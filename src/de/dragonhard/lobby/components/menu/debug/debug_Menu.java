@@ -12,6 +12,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.util.ArrayList;
@@ -89,10 +90,10 @@ public class debug_Menu extends Lobby_Inventory implements Listener {
         ConfigManager cm = new ConfigManager();
         try{
             if(e.getInventory().getName().equals("§"+ cm.getMenuTitleColor(menuName) + cm.getMenuTitle(menuName))) {
-
-                if (e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Item"))
-                        || e.getCurrentItem().getItemMeta().getDisplayName().contains("Menu <<")
-                ){
+                if (e.getCurrentItem() == null) {return;} else{
+                    if (e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Item"))
+                            || e.getCurrentItem().getItemMeta().getDisplayName().contains("Menu <<")
+                    ){
                         p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
 
                         if(e.getCurrentItem().getItemMeta().getDisplayName() == "Farbe"){
@@ -100,7 +101,9 @@ public class debug_Menu extends Lobby_Inventory implements Listener {
                             p.sendMessage("Nummer: " + cGen.getColor(9,"test-generator"));
                         }
 
+                    }
                 }
+
             }
         }catch (Exception ex){
 
