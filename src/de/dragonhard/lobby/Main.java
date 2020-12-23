@@ -13,6 +13,7 @@ import de.dragonhard.lobby.components.menu.admin.Admin_Server_Menu;
 import de.dragonhard.lobby.components.menu.creativ.Creativ_Menu;
 import de.dragonhard.lobby.components.menu.debug.debug_Menu;
 import de.dragonhard.lobby.components.menu.friend.Friend_Menu;
+import de.dragonhard.lobby.components.menu.player.Player_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_XP_Menu;
 import de.dragonhard.lobby.manager.*;
@@ -92,7 +93,9 @@ TODO add MY SQL db later
         Admin_Menu am = new Admin_Menu();
         Admin_Server_Menu asm = new Admin_Server_Menu();
         Admin_External_Menu aem = new Admin_External_Menu();
+        Player_Menu plm = new Player_Menu();
 
+        plm.addWallIDs();
         aem.addWallIDs();
         asm.addWallIDs();
         am.addWallIDs();
@@ -135,6 +138,7 @@ TODO add MY SQL db later
         loadConfig("Friend","DIAMOND",5);
         loadConfig("Debug","DIAMOND",5);
         loadConfig("Admin_External","DIAMOND",5);
+        loadConfig("Player","DIAMOND",5);
         ConsoleWriter.writeWithTag("menu configuration loaded");
 
         return true;
@@ -207,6 +211,7 @@ TODO add MY SQL db later
         plm.registerEvents(new Hunger_Event(),this);
         plm.registerEvents(new Health_Event(),this);
         plm.registerEvents(new Admin_External_Menu(),this);
+        plm.registerEvents(new Player_Menu(),this);
         ConsoleWriter.writeWithTag("event register loaded");
         return true;
 

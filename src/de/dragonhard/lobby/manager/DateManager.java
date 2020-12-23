@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.manager;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.text.SimpleDateFormat;
@@ -7,7 +8,7 @@ import java.util.Date;
 
 public class DateManager extends PlayerConfigManager{
 
-    private final float expAmount = 60.5f;
+    private final int dailyAmount = 50;
 
     private String getCurrentDate(){
 
@@ -31,7 +32,8 @@ public class DateManager extends PlayerConfigManager{
         this.setFile(p,"config");
 
         if(!getCurrentDate().equals(getPlayerDate(p))){
-            p.setExp(p.getExhaustion() + expAmount);
+            PlayerConfigManager pm = new PlayerConfigManager();
+            pm.setCoins(p, dailyAmount);
             p.sendMessage("§aDu hast dein Geschenk erhalten!");
             setPlayerDate(p);
         }

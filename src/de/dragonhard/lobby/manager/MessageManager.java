@@ -5,6 +5,7 @@ import de.dragonhard.lobby.components.colorGenerator;
 import de.dragonhard.lobby.components.menu.admin.Admin_Menu;
 import de.dragonhard.lobby.components.menu.creativ.Creativ_Menu;
 import de.dragonhard.lobby.components.menu.debug.debug_Menu;
+import de.dragonhard.lobby.components.menu.player.Player_Menu;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -78,7 +79,11 @@ public class MessageManager extends PlayerConfigManager{
                 sm.play(p, msg[1]);
 
 
+        }else if (message.startsWith(prefix + "player")){
+            Player_Menu plm = new Player_Menu();
+            plm.openInventory(p);
         }
+
     }
 
 }

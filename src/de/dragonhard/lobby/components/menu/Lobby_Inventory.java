@@ -78,6 +78,19 @@ public class Lobby_Inventory {
       getInventory().setItem(slot, createItem(title,material,colorTag));
     }
 
+    public void addSkullToInventory( String title, String colorTag, int slot){
+        getInventory().setItem(slot, createSkull(title,colorTag));
+    }
+
+    public ItemStack createSkull(String title, String colorTag){
+        ItemStack item = new ItemStack(Material.SKULL_ITEM,1,(byte)3);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setDisplayName(colorTag + title);
+        item.setItemMeta(itemMeta);
+
+        return item;
+    }
+
     public void addWallItemToInventory(Player p, int slot){//light_gray 160:8
         ConfigManager cm = new ConfigManager();
         addColoredWallPane(p," ",slot,1, cm.getWallColor());
