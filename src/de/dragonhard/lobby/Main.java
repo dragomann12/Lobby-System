@@ -193,7 +193,6 @@ TODO add MY SQL db later
         plm.registerEvents(new Drop_Event(),this);
         plm.registerEvents(new Drag_Event(),this);
         plm.registerEvents(new Build_Event(),this);
-       // plm.registerEvents(new Inventory_Click_Event(),this);
         plm.registerEvents(new Lobby_Menu(),this);
         plm.registerEvents(new Game_Menu(),this);
         plm.registerEvents(new Shop_Menu(),this);
@@ -207,7 +206,6 @@ TODO add MY SQL db later
         plm.registerEvents(new Damage_Event(),this);
         plm.registerEvents(new Hunger_Event(),this);
         plm.registerEvents(new Health_Event(),this);
-        plm.registerEvents(new Bad_Event(),this);
         plm.registerEvents(new Admin_External_Menu(),this);
         ConsoleWriter.writeWithTag("event register loaded");
         return true;

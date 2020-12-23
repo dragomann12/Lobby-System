@@ -38,6 +38,7 @@ public class PlayerConfigManager extends ConfigReader {
         this.setDefault("warpUpgraded", false);
         this.setDefault("UserTag","" + p.getFoodLevel() + p.getUniqueId());
         this.setDefault("passwd","");
+        this.setDefault("Online","");
         // keytemplate: <UserName><UserId><userTag><passwd><AccessLevel><securityTag>
     }
 

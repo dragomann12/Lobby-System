@@ -91,6 +91,10 @@ public class Settings_Menu extends Lobby_Inventory implements Listener {
 
                     default:
 
+                        if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Spawn Nachricht")){cm.toggleWelcomeMessage(p);}
+                        if(e.getCurrentItem().getItemMeta().getDisplayName().contains("")){}
+                        if(e.getCurrentItem().getItemMeta().getDisplayName().contains("")){}
+                        if(e.getCurrentItem().getItemMeta().getDisplayName().contains("")){}
 
                       break;
 

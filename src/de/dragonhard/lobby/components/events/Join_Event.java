@@ -4,10 +4,14 @@ import de.dragonhard.lobby.components.ConsoleWriter;
 import de.dragonhard.lobby.components.PermissionList;
 import de.dragonhard.lobby.manager.*;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.scoreboard.*;
+
+import java.util.Set;
 
 public class Join_Event implements Listener {
     @EventHandler
@@ -15,6 +19,8 @@ public class Join_Event implements Listener {
 
         Player p = e.getPlayer();
         e.setJoinMessage("");
+        DateManager dm = new DateManager();
+        dm.checkPlayerActivity(p);
         p.setNoDamageTicks(999999);
         PlayerConfigManager pm = new PlayerConfigManager();
         PluginWithlistManager pwm = new PluginWithlistManager();

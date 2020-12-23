@@ -2,6 +2,7 @@ package de.dragonhard.lobby.manager;
 
 import de.dragonhard.lobby.components.ConsoleWriter;
 import de.dragonhard.lobby.reader.PluginConfigReader;
+import org.bukkit.entity.Player;
 
 import java.io.File;
 
@@ -386,6 +387,13 @@ public class ConfigManager extends PluginConfigReader {
     public String getMessageStart(){
         this.setFile(getDefaultConfigName());
         return this.getString("MessageStart");
+    }
+
+    public void toggleWelcomeMessage(Player p){
+        this.setFile(getDefaultConfigName());
+        boolean status = showWelcome();
+        if(status){status = false; p.sendMessage("§4off");}else{status = true; p.sendMessage("§4on");}
+        this.set("showWelcome", status);
     }
 
     public boolean showWelcome(){
