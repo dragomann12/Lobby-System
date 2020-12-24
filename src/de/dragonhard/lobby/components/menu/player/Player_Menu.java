@@ -22,7 +22,7 @@ public class Player_Menu extends Lobby_Inventory implements Listener {
    private PlayerConfigManager pm = new PlayerConfigManager();
    private PluginWithlistManager pwm = new PluginWithlistManager();
    private String menuName = "Player";
-   private String prefix = "@";
+   private String prefix = "#";
    private static ArrayList<Integer> wall_item_id = new ArrayList<Integer>();
 
 
