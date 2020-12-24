@@ -29,6 +29,20 @@ public class InventoryManager {
         return item;
     }
 
+    private ItemStack createSkull(String title){
+        ItemStack item = new ItemStack(Material.SKULL_ITEM,1,(byte)3);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setDisplayName(title);
+        item.setItemMeta(itemMeta);
+
+        return item;
+    }
+
+    public void addSkull(Player p,String title, String colorTag, int slotId){
+        getInv(p).setItem(slotId,createSkull( colorTag + title));
+
+    }
+
     private ItemStack addGlassItem(String title, Material material, int id){
 
         ItemStack item = new ItemStack(material, 1,(short)id);

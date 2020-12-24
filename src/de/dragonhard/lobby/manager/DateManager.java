@@ -32,8 +32,8 @@ public class DateManager extends PlayerConfigManager{
         this.setFile(p,"config");
 
         if(!getCurrentDate().equals(getPlayerDate(p))){
-            PlayerConfigManager pm = new PlayerConfigManager();
-            pm.setCoins(p, dailyAmount);
+            CoinManager cm = new CoinManager();
+            cm.addCoins(p,dailyAmount);
             p.sendMessage("§aDu hast dein Geschenk erhalten!");
             setPlayerDate(p);
         }

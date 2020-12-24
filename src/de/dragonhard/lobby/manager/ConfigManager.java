@@ -75,6 +75,7 @@ public class ConfigManager extends PluginConfigReader {
     public String getHotbarTitle(String menuName){
         String file = menuName + "_menu_config";
         String slot = "Hotbar_Item_Title";
+
         return this.getStringOfItem(file,slot);
     }
 
@@ -104,7 +105,7 @@ public class ConfigManager extends PluginConfigReader {
 
     public String getHotbarMaterial(String menuName){
         String file = menuName + "_menu_config";
-        String slot = "Hotbar_Item_Title";
+        String slot = "Hotbar_Item_Material";
         return this.getStringOfItem(file,slot);
     }
 
@@ -251,6 +252,8 @@ public class ConfigManager extends PluginConfigReader {
             this.setDefault("AccessLevel_Tag_8","Owner");
             this.setDefault("AccessLevel_99","plugin_owner");
             this.setDefault("AccessLevel_Tag_99","Lobby-System Owner");
+            this.setDefault("Teamspeak","non");
+            this.setDefault("Discord","non");
 
         }catch (Exception e){
             ConsoleWriter.writeWithTag("An error occurred while creating the config");
@@ -271,6 +274,16 @@ public class ConfigManager extends PluginConfigReader {
     public String getQuitMessage(){
         this.setFile(getDefaultConfigName());
         return this.getString("QuitMessage");
+    }
+
+    public String getTeamspeak(){
+        this.setFile(getDefaultConfigName());
+        return this.getString("Teamspeak");
+    }
+
+    public String getDiscord(){
+        this.setFile(getDefaultConfigName());
+        return this.getString("Discord");
     }
 
     public boolean isQuitMessageEnabled(){

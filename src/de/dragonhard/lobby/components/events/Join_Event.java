@@ -72,31 +72,34 @@ public class Join_Event implements Listener {
         im.clearInv(p);
 
         if(pm.isBuildModeEnabled(p)){return;}
-
-        menu.createItem(p, Material.NETHER_STAR,"§5Lobby",0);
-        menu.createItem(p, Material.DIAMOND,"§5Shop",1);
+        // Lobby = Material.NETHER_STAR
+        // Shop = Material.DIAMOND
+        // Admin = Material.BEACON
+        // Game = Material.REDSTONE
+        // Settings = Material.BOOK
+        // Player = Material.skull_item
+        menu.createItem(p,Material.getMaterial(cm.getHotbarMaterial("Lobby")),cm.getHotbarTitleColor("Lobby") + cm.getHotbarTitle("Lobby"),0);
+        menu.createItem(p, Material.getMaterial(cm.getHotbarMaterial("shop")),cm.getHotbarTitleColor("shop") + cm.getHotbarTitle("shop"),1);
         menu.createItem(p, Material.STAINED_GLASS_PANE,"§4 ",2);
 
         if(p.hasPermission(PermissionList.getPermission("Menu",0)) && pwm.isAdmin(p) || pwm.isOwner(p) || pwm.isPluginDeveloper(p)){
-            menu.createItem(p, Material.BEACON,"§5Admin - Menu ",3);
+            menu.createItem(p, Material.getMaterial(cm.getHotbarMaterial("Admin")),cm.getHotbarTitleColor("Admin") + cm.getHotbarTitle("Admin"),3);
         }else{
             menu.createItem(p, Material.STAINED_GLASS_PANE,"§3 ",3);
         }
 
-        menu.createItem(p, Material.REDSTONE,"§5Minispiele",4);
+        menu.createItem(p, Material.getMaterial(cm.getHotbarMaterial("Game")),cm.getHotbarTitleColor("Game") + cm.getHotbarTitle("Game"),4);
 
         if(p.hasPermission(PermissionList.getPermission("Menu",0)) && pwm.isOwner(p) || pwm.isPluginDeveloper(p)){
-            menu.createItem(p, Material.BOOK,"§5Einstellungen ",5);
+            menu.createItem(p, Material.getMaterial(cm.getHotbarMaterial("Settings")),cm.getHotbarTitleColor("Settings") +cm.getHotbarTitle("Settings"),5);
         }else{
             menu.createItem(p, Material.STAINED_GLASS_PANE,"§2 ",5);
         }
 
         menu.createItem(p, Material.STAINED_GLASS_PANE,"§1 ",6);
         menu.createItem(p, pm.getHideStatusMaterial(p),"§5Spieler verstecken",7);
-        menu.createItem(p, Material.BANNER,"§5Freunde",8);
-
-       // if(p.hasPermission(PermissionList.getPermission("external",0)) && pwm.isOwner(p) || pwm.isPluginDeveloper(p)){menu.createInventoryItem(p, Material.COMMAND,"Magic-Item",22);}else{menu.createInventoryItem(p, Material.WEB,"§4Admin-item",22);} // Item 22
-
+        menu.addSkull(p,"§5" + cm.getHotbarTitle("Player"),cm.getHotbarTitleColor("Player"),8);
+        //menu.createItem(p, Material.getMaterial(cm.getHotbarMaterial("Player")),cm.getHotbarTitleColor("Player") + cm.getHotbarTitle("Player"),8);
 
     }
 

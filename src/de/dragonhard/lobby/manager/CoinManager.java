@@ -3,7 +3,7 @@ package de.dragonhard.lobby.manager;
 import org.bukkit.entity.Player;
 
 public class CoinManager extends PlayerConfigManager {
- private static int maxCoins = 1000000;
+ private static int maxCoins = 999999999;
  private static final int defaultValue_Coins = 0;
 
 public void addCoins(Player p, int value){
@@ -24,7 +24,7 @@ if(this.getCoins(p)< value) {
 
     public void setCoins(Player p, int value){
         this.setCoins(p, value);
-        getMessage(p,"add", value);
+        getMessage(p,"set", value);
     }
 
     public int getCurrentCoins(Player p){
