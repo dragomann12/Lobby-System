@@ -1,5 +1,6 @@
 package de.dragonhard.lobby;
 import de.dragonhard.lobby.commands.cmdblock;
+import de.dragonhard.lobby.commands.coins.cmdCoins;
 import de.dragonhard.lobby.commands.teleport.cmdAutoWarp;
 import de.dragonhard.lobby.commands.teleport.cmdGlobalWarp;
 import de.dragonhard.lobby.commands.teleport.cmdSpawn;
@@ -26,6 +27,7 @@ public class Main extends JavaPlugin{
 
 /*
 TODO add MY SQL db later
+TODO add Yes/No question to admin items
  */
 
     ConfigManager cm = new ConfigManager();
@@ -158,7 +160,7 @@ TODO add MY SQL db later
         this.getCommand("autowarp").setExecutor(new cmdAutoWarp());
         this.getCommand("InvWarp").setExecutor(new cmdGlobalWarp());
         this.getCommand("block").setExecutor(new cmdblock());
-        //this.getCommand("coins").setExecutor(new cmdCoins());
+        this.getCommand("coins").setExecutor(new cmdCoins());
         //this.getCommand("cr").setExecutor(new cmdcreate());
         //this.getCommand("join").setExecutor(new cmdJoin());
         //this.getCommand("left").setExecutor(new cmdleft());

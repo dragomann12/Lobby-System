@@ -74,6 +74,8 @@ public class PluginWithlistManager {
         for (int i = 0; i <= developer_list.length; i++){
             if(developer_list[i].equals(p.getName())){
                 return true;
+            }else{
+                break;
             }
 
         }

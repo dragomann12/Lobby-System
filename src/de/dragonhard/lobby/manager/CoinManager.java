@@ -30,7 +30,7 @@ if(this.getCoins(p)< value) {
 
     public void setCoins(Player p, int value){
         this.setFile(p,"config");
-        this.setCoins(p, value);
+        this.set("Coins", value);
         getMessage(p,"set", value);
     }
 

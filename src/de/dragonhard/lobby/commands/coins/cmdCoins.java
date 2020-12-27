@@ -25,15 +25,13 @@ public class cmdCoins extends CoinManager implements CommandExecutor {
                 switch (args[0]){
 
                     case "see":
-                        p.sendMessage("§5"+target.getName() + " §bhat " + this.getCoins(target) + " §aCC");break;
+                        p.sendMessage("§5"+target.getName() + " §bhat §a" + this.getCoins(target) + " CC");break;
                     case "set":
                         if(args[2].isEmpty()){help(p);}
-                        this.setCoins(target, Integer.parseInt(args[2]));
-                        p.sendMessage("§5"+target.getName() + " §bhat jetzt" + this.getCoins(target) + " §aCC");break;
+                        this.setCoins(target, Integer.parseInt(args[2]));break;
                     case "add":
                         if(args[2].isEmpty()){help(p);}
-                        this.setCoins(target, this.getCoins(p) + Integer.parseInt(args[2]));
-                        p.sendMessage("§5"+target.getName() + " §bwurden " + this.getCoins(target) + " §aCC hinzugefügt");break;
+                        this.setCoins(target, this.getCoins(p) + Integer.parseInt(args[2]));break;
                 }
             }else{
                 help(p);

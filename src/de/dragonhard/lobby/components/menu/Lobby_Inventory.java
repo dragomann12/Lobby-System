@@ -73,9 +73,7 @@ public class Lobby_Inventory {
 
     public String getTag(String value){ return " §e[§b"+value+"§e]"; }
 
-    public String getClosedBetaTestTag(){
-        return " §e[§bBeta-Test§e]";
-    }
+    public String getClosedBetaTestTag(){ return " §e[§bBeta-Test§e]";}
 
     public void addItemToInventory( String title, Material material, String colorTag, int slot){
       getInventory().setItem(slot, createItem(title,material,colorTag));

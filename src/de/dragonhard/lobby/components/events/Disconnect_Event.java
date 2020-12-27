@@ -12,13 +12,13 @@ public class Disconnect_Event implements Listener {
     @EventHandler
     public void onDisconnect(PlayerQuitEvent e){
         ConfigManager cm = new ConfigManager();
-
+        Player p = e.getPlayer();
         if(cm.isQuitMessageEnabled()){
-            String message = cm.getQuitMessage().replaceAll("/c","§");
+            String message = p.getName() + " " + cm.getQuitMessage().replaceAll("/c","§");
             e.setQuitMessage(message);
         }
         PluginWithlistManager pwm = new PluginWithlistManager();
-        Player p = e.getPlayer();
+
 
         if(pwm.isOwner(p) ||
         pwm.isTeam_lead(p) ||

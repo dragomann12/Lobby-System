@@ -33,10 +33,7 @@ public class Join_Event implements Listener {
         String key = p.getName() +"."+ p.getUniqueId() +"."+  pm.getUserTag(p) +"."+  pm.getPasswd(p) +"."+  pm.getAccessLevel(p) +"."+  cm.getSecurityTag();
         String title = "";
         title = cm.getAccessLevelTag(pm.getAccessLevel(p));
-      //  if(pm.getAccessLevel(p) == 99 && pwm.isPluginDeveloper(p)){title = "Lobby-System Owner";}
         ConsoleWriter.writeWithTag("Player " + p.getName() + " with the UUID: " + p.getUniqueId() + " joined as " + title + "!");
-
-        if(pm.getHideStatus(p)){pm.toggleHideStatus(p);}
 
         if(pm.isBuildModeEnabled(p)){
             ConsoleWriter.writeWithTag("[ALERT] Player " + p.getName() + " uuid: "+ p.getUniqueId() + " joined with build-mode enabled");

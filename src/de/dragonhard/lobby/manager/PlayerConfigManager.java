@@ -188,9 +188,9 @@ public class PlayerConfigManager extends ConfigReader {
     public Material getHideStatusMaterial(Player p){
 
         if(getHideStatus(p)){
-            return  Material.STICK;
-        }else{
             return Material.BLAZE_ROD;
+        }else{
+            return  Material.STICK;
         }
 
     }
@@ -208,10 +208,11 @@ public class PlayerConfigManager extends ConfigReader {
         this.setFile(p,"config");
         if(getHideStatus(p)){
             this.set("hide",false);
-            p.sendMessage("§aEs werden alle Spieler angezeigt!");
+            p.sendMessage("§4Es werden keine Spieler angezeigt!");
+
         }else{
             this.set("hide",true);
-            p.sendMessage("§4Es werden keine Spieler angezeigt!");
+            p.sendMessage("§aEs werden alle Spieler angezeigt!");
         }
     }
 
