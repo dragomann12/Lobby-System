@@ -8,8 +8,6 @@ import java.util.Date;
 
 public class DateManager extends PlayerConfigManager{
 
-    private final int dailyAmount = 50;
-
     private String getCurrentDate(){
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
@@ -29,11 +27,10 @@ public class DateManager extends PlayerConfigManager{
     }
 
     public boolean checkPlayerActivity(Player p){
-        this.setFile(p,"config");
 
         if(!getCurrentDate().equals(getPlayerDate(p))){
             CoinManager cm = new CoinManager();
-            cm.addCoins(p,dailyAmount);
+            cm.addDailyCoins(p);
             p.sendMessage("§aDu hast dein Geschenk erhalten!");
             setPlayerDate(p);
         }

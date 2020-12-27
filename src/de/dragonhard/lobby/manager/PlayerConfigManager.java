@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 
 public class PlayerConfigManager extends ConfigReader {
 
+    private static final String defaultConfig = "config";
+
     public void checkPlayer(Player p){
 
     if(!this.exists(p, "config")){getDefaultPlayerConfig(p);}
@@ -42,54 +44,146 @@ public class PlayerConfigManager extends ConfigReader {
         // keytemplate: <UserName><UserId><userTag><passwd><AccessLevel><securityTag>
     }
 
-    public void toggleUpdate(Player p){
-        this.setFile(p,"config");
-        if(isUpdate(p)){
-            this.set("updateMenu",false);
-        }else{
-            this.set("updateMenu",true);
-        }
+    public String getStringOf(Player p, String item){
+        this.setFile(p, defaultConfig);
+        return this.getString(item);
+    }
+
+    public int getIntegerOf(Player p, String item){
+        this.setFile(p, defaultConfig);
+        return this.getInteger(item);
+    }
+
+    public Boolean getBooleanOf(Player p, String item){
+        this.setFile(p, defaultConfig);
+        return this.getBoolean(item);
+    }
+
+    public void setStringOf(Player p, String item, String value){
+        this.setFile(p, defaultConfig);
+        this.set(item, value);
+    }
+
+    public void setIntegerOf(Player p, String item, int value){
+        this.setFile(p, defaultConfig);
+        this.set(item, value);
+    }
+
+    public void setBooleanOf(Player p, String item, boolean value){
+        this.setFile(p, defaultConfig);
+        this.set(item, value);
+    }
+
+    public void setWarpEnabled(Player p, boolean status){
+        setBooleanOf(p,"WarpEnabled", status);
     }
 
     public void setCoins(Player p, int value){
-        this.setFile(p,"config");
-        this.set("Coins", value);
+        setIntegerOf(p,"Coins", value);
     }
+
+        /*
+                    under this are the Integer
+     */
 
     public int getCoins(Player p){
-        this.setFile(p,"config");
-        return this.getInteger("Coins");
-    }
-
-    public boolean hasWarpUpgrade(Player p){
-        this.setFile(p,"config");
-        return this.getBoolean("warpUpgraded");
+        return getIntegerOf(p,"Coins");
     }
 
     public int getAccessLevel(Player p){
-        this.setFile(p,"config");
-        return this.getInteger("AccessLevel");
+        return getIntegerOf(p,"AccessLevel");
     }
 
+    public int getPlayerDBVersion(Player p){
+        return getIntegerOf(p,"DBVersion");
+    }
+
+    public int getCurrentWarps(Player p){
+        return getIntegerOf(p,"usedWarps");
+    }
+
+    public int getMaxWarps(Player p){
+        return getIntegerOf(p,"maxWarps");
+    }
+
+        /*
+                    under this are the Strings
+     */
+
     public String getPasswd(Player p){
-        this.setFile(p,"config");
-        return this.getString("passwd");
+        return getStringOf(p,"passwd");
     }
 
     public String getUserTag(Player p){
-        this.setFile(p,"config");
-        return this.getString("UserTag");
+        return getStringOf(p,"UserTag");
+    }
+
+    public String getChatSeperatorColor(Player p){
+        return getStringOf(p,"ChatSeperatorColor");
+    }
+
+    public String getChatNameColor(Player p){
+        return getStringOf(p,"ChatNameColor");
+    }
+
+    public String getAutoWarpLocation(Player p){
+        return getStringOf(p,"AutoWarpLocation");
+    }
+
+    /*
+                    under this are the Boolean
+     */
+
+    public Boolean getChatStyleEnabled(Player p){
+        return getBooleanOf(p,"ChatStyle");
+    }
+
+    public Boolean isBuildModeEnabled(Player p){
+        return getBooleanOf(p,"isBuildModeEnabled");
     }
 
     public boolean isUpdate(Player p){
-        this.setFile(p,"config");
-        return this.getBoolean("updateMenu");
+        return getBooleanOf(p,"updateMenu");
     }
 
     public boolean getHideStatus(Player p){
-        this.setFile(p,"config");
-        return this.getBoolean("hide");
+        return getBooleanOf(p,"hide");
     }
+
+    public boolean getAutoWarpStatus(Player p){
+        return getBooleanOf(p,"AutoWarp");
+    }
+
+    public boolean isFirstJoin(Player p){
+        return getBooleanOf(p,"FirstTime");
+    }
+
+    public boolean isWarpEnabled(Player p){
+        return getBooleanOf(p,"WarpEnabled");
+    }
+
+    public boolean hasAutoWarp(Player p){
+        return getBooleanOf(p,"AutoWarp");
+    }
+
+    public boolean hasInf(Player p){
+        return getBooleanOf(p,"hasInf");
+    }
+
+    public boolean hasWarpUpgrade(Player p){
+        return getBooleanOf(p,"warpUpgraded");
+    }
+
+    public boolean isMax(Player p){
+        if(getCurrentWarps(p) == getMaxWarps(p)){
+            return true;
+        }
+        return false;
+    }
+
+        /*
+                    under this are the other stuff
+     */
 
     public Material getHideStatusMaterial(Player p){
 
@@ -101,6 +195,15 @@ public class PlayerConfigManager extends ConfigReader {
 
     }
 
+    public void toggleUpdate(Player p){
+        this.setFile(p,"config");
+        if(isUpdate(p)){
+            this.set("updateMenu",false);
+        }else{
+            this.set("updateMenu",true);
+        }
+    }
+
     public void toggleHideStatus(Player p){
         this.setFile(p,"config");
         if(getHideStatus(p)){
@@ -110,26 +213,6 @@ public class PlayerConfigManager extends ConfigReader {
             this.set("hide",true);
             p.sendMessage("§4Es werden keine Spieler angezeigt!");
         }
-    }
-
-    public String getChatSeperatorColor(Player p){
-        this.setFile(p,"config");
-        return this.getString("ChatSeperatorColor");
-    }
-
-    public String getChatNameColor(Player p){
-        this.setFile(p,"config");
-        return this.getString("ChatNameColor");
-    }
-
-    public Boolean getChatStyleEnabled(Player p){
-        this.setFile(p,"config");
-        return this.getBoolean("ChatStyle");
-    }
-
-    public Boolean isBuildModeEnabled(Player p){
-        this.setFile(p,"config");
-        return this.getBoolean("isBuildModeEnabled");
     }
 
     public void toggleBuildMode(Player p){
@@ -145,72 +228,34 @@ public class PlayerConfigManager extends ConfigReader {
         }
     }
 
-    public boolean getAutoWarpStatus(Player p){
-        this.setFile(p,"config");
-        return this.getBoolean("AutoWarp");
-    }
-
-    public boolean isFirstJoin(Player p){
-        this.setFile(p,"config");
-        return this.getBoolean("FirstTime");
-    }
-
     public void toggleFirstJoin(Player p){
-        this.setFile(p,"config");
-        if(this.getBoolean("FirstTime")){
-            this.set("FirstTime", false);
+        if(getBooleanOf(p,"FirstTime")){
+            setBooleanOf(p,"FirstTime", false);
         }
-    }
-
-    public int getPlayerDBVersion(Player p){
-        this.setFile(p,"config");
-            return this.getInteger("DBVersion");
     }
 
     public boolean isMatching(Player p){
         ConfigManager cm = new ConfigManager();
-
         String currentDbVersion = cm.getDBVersion();
 
-        if(currentDbVersion.equals(getPlayerDBVersion(p))){
-            return true;
-        }
+        if(currentDbVersion.equals(getPlayerDBVersion(p))){ return true;}
         return false;
-
-    }
-
-    public boolean isWarpEnabled(Player p){
-        this.setFile(p,"config");
-        return this.getBoolean("WarpEnabled");
-    }
-
-    public void setWarpEnabled(Player p, boolean status){
-        this.setFile(p,"config");
-
-        this.set("WarpEnabled", status);
-
     }
 
     public void toggleAutoWarp(Player p){
         this.setFile(p,"config");
         if(hasAutoWarp(p)){
-            this.set("AutoWarp", false);
+            setBooleanOf(p,"AutoWarp",false);
         }else {
-            this.set("AutoWarp", true);
+            setBooleanOf(p,"AutoWarp",true);
         }
     }
 
-    public String getAutoWarpLocation(Player p){
-        this.setFile(p,"config");
-        return this.getString("AutoWarpLocation");
-    }
-
     public void setAutoWarpLocation(Player p, String warp){
-        this.setFile(p,"config");
         if(warp != "" && warp != " "){
             WarpManager wm = new WarpManager();
             if(wm.exists(p,warp)) {
-                this.set("AutoWarpLocation", warp);
+                setStringOf(p,"AutoWarpLocation", warp);
                 p.sendMessage("§ader Warp wurde gesetzt");
             }else{
                 p.sendMessage("§4Es muss ein gültiger Warp angegeben werden!");
@@ -221,72 +266,34 @@ public class PlayerConfigManager extends ConfigReader {
 
     }
 
-    public boolean hasAutoWarp(Player p){
-        this.setFile(p,"config");
-        return this.getBoolean("AutoWarp");
-    }
-
-    public boolean hasInf(Player p){
-        this.setFile(p, "config");
-        return this.getBoolean("hasInf");
-    }
-
     public void setInf(Player p, String status){
-        this.setFile(p, "config");
-
         if(status == "enable"){
-            this.set("hasInf", true);
+            setBooleanOf(p,"hasInf", true);
         }else{
-            this.set("hasInf", false);
+            setBooleanOf(p,"hasInf", false);
         }
 
     }
 
-    public int getCurrentWarps(Player p){
-        this.setFile(p, "config");
-        return this.getInteger("usedWarps");
-    }
-    
-    public int getMaxWarps(Player p){
-        this.setFile(p, "config");
-        return this.getInteger("maxWarps");
-    }
-
     public void setMaxWarps(Player p, int warpCount){
-        this.setFile(p,"config");
-        this.set("maxWarps", warpCount);
-
+        setIntegerOf(p,"maxWarps", warpCount);
         if(getMaxWarps(p) == warpCount){
             p.sendMessage("§aDeine Warps wurden auf §e" + getMaxWarps(p) + " §agesetzt");
         }
     }
 
     public void addWarpToCount(Player p){
-        this.setFile(p, "config");
-        if(this.getInteger("usedWarps") <= this.getInteger("maxWarps")){
-            int Ammount = getCurrentWarps(p) + 1;
-            this.set("usedWarps", Ammount);
+        if(getIntegerOf(p,"usedWarps") <= getIntegerOf(p,"maxWarps")){
+            int amount = getCurrentWarps(p) + 1;
+            setIntegerOf(p,"usedWarps", amount);
         }
     }
 
     public void delWarpFromCount(Player p){
-        this.setFile(p, "config");
-        if(this.getInteger("usedWarps") <= this.getInteger("maxWarps")){
-            int Ammount = getCurrentWarps(p) - 1;
-            this.set("usedWarps", Ammount);
+        if(getIntegerOf(p,"usedWarps") <= getIntegerOf(p,"maxWarps")){
+            int amount = getCurrentWarps(p) - 1;
+            setIntegerOf(p,"usedWarps", amount);
         }
     }
 
-    public boolean isMax(Player p){
-        this.setFile(p, "config");
-        if(getCurrentWarps(p) == getMaxWarps(p)){
-            return true;
-        }
-            return false;
-    }
-
-    public String getLanguage(Player p){
-        this.setFile(p,"config");
-        return this.getString("language");
-    }
 }

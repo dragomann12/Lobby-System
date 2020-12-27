@@ -19,12 +19,11 @@ public class Join_Event implements Listener {
 
         Player p = e.getPlayer();
         e.setJoinMessage("");
-        DateManager dm = new DateManager();
-        dm.checkPlayerActivity(p);
         p.setNoDamageTicks(999999);
         PlayerConfigManager pm = new PlayerConfigManager();
         PluginWithlistManager pwm = new PluginWithlistManager();
         ConfigManager cm = new ConfigManager();
+        DateManager dm = new DateManager();
 
         pm.checkPlayer(p);
         pwm.addPlayerToGroup(p);
@@ -70,7 +69,7 @@ public class Join_Event implements Listener {
         }
 
         im.clearInv(p);
-
+        dm.checkPlayerActivity(p);
         if(pm.isBuildModeEnabled(p)){return;}
         // Lobby = Material.NETHER_STAR
         // Shop = Material.DIAMOND

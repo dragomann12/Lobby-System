@@ -25,7 +25,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin{
 
 /*
-TODO Bugfix (NULL Pointer) in the menu when click outside of th menu
 TODO add MY SQL db later
  */
 
@@ -115,21 +114,26 @@ TODO add MY SQL db later
 
     public boolean registerOutgoingChannel(){
         ConsoleWriter.writeWithTag("setting up outgoing communication channel ...");
+
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, BungeeCordManager.getChannel());
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, PluginComunicationManager.getChannelOut());
+
         ConsoleWriter.writeWithTag("done");
         return true;
     }
 
     public boolean registerIngoingChannel(){
         ConsoleWriter.writeWithTag("setting up ingoing communication channel ...");
+
         Bukkit.getMessenger().registerIncomingPluginChannel(this, PluginComunicationManager.getChannelIn(), pcm.getListener());
+
         ConsoleWriter.writeWithTag("done");
         return true;
     }
 
     public boolean loadMenuConfig(){
         ConsoleWriter.writeWithTag("loading menu configuration");
+
         loadConfig("creativ","BEACON",5);
         loadConfig("shop","DIAMOND",5);
         loadConfig("Admin","BEACON",5);
@@ -141,13 +145,14 @@ TODO add MY SQL db later
         loadConfig("Debug","DIAMOND",5);
         loadConfig("Admin_External","DIAMOND",5);
         loadConfig("Player","DIAMOND",5);
-        ConsoleWriter.writeWithTag("menu configuration loaded");
 
+        ConsoleWriter.writeWithTag("menu configuration loaded");
         return true;
     }
 
     public boolean registerCommand(){
         ConsoleWriter.writeWithTag("loading command register");
+
         this.getCommand("warp").setExecutor(new cmdWarp());
         this.getCommand("spawn").setExecutor(new cmdSpawn());
         this.getCommand("autowarp").setExecutor(new cmdAutoWarp());
@@ -157,6 +162,7 @@ TODO add MY SQL db later
         //this.getCommand("cr").setExecutor(new cmdcreate());
         //this.getCommand("join").setExecutor(new cmdJoin());
         //this.getCommand("left").setExecutor(new cmdleft());
+
         ConsoleWriter.writeWithTag("command register loaded");
         return true;
 
@@ -192,6 +198,7 @@ TODO add MY SQL db later
 
     public boolean registerEvents(){
         ConsoleWriter.writeWithTag("loading event register");
+
         plm.registerEvents(new Interact_Event(),this);
         plm.registerEvents(new Join_Event(),this);
         plm.registerEvents(new Chat_Event(),this);
@@ -214,6 +221,7 @@ TODO add MY SQL db later
         plm.registerEvents(new Health_Event(),this);
         plm.registerEvents(new Admin_External_Menu(),this);
         plm.registerEvents(new Player_Menu(),this);
+
         ConsoleWriter.writeWithTag("event register loaded");
         return true;
 
