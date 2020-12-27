@@ -88,7 +88,7 @@ public class Lobby_Inventory {
     public ItemStack createSkull(Player p,String title, String colorTag){
         ItemStack item = new ItemStack(Material.SKULL_ITEM,1,(byte)3);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.setDisplayName(title);
+        itemMeta.setDisplayName(colorTag + title);
         item.setItemMeta(itemMeta);
         return item;
     }
