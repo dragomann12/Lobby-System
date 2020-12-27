@@ -1,10 +1,19 @@
 package de.dragonhard.lobby.manager;
 
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class InventoryManager {
         String defaultColor = "§5";
@@ -34,12 +43,11 @@ public class InventoryManager {
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setDisplayName(title);
         item.setItemMeta(itemMeta);
-
         return item;
     }
 
     public void addSkull(Player p,String title, String colorTag, int slotId){
-        getInv(p).setItem(slotId,createSkull( colorTag + title));
+        getInv(p).setItem(slotId,createSkull(colorTag + title));
 
     }
 

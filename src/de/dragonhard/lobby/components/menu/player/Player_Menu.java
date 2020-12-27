@@ -1,8 +1,7 @@
 package de.dragonhard.lobby.components.menu.player;
 
 import de.dragonhard.lobby.components.menu.Lobby_Inventory;
-import de.dragonhard.lobby.components.menu.shop.Shop_Menu;
-import de.dragonhard.lobby.components.menu.shop.Shop_XP_Menu;
+import de.dragonhard.lobby.components.menu.shop.Shop_Coin_Menu;
 import de.dragonhard.lobby.manager.*;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -47,7 +46,7 @@ public class Player_Menu extends Lobby_Inventory implements Listener {
                     this.addItemToInventory(title, Material.getMaterial(cm.getSlotMaterial(menuName,i)),"§" + cm.getSlotTitleColor(menuName,i),i);
                 }else if(cm.getSlotTitle(menuName,i).contains(" " + prefix + InteractionType.VISUAL + " /nick")){
                     String title = cm.getSlotTitle(menuName, i).replace(prefix + InteractionType.VISUAL + " /nick","Name: §e" + p.getName());
-                    this.addSkullToInventory(title,"§" + cm.getSlotTitleColor(menuName,i),i);
+                    this.addSkullToInventory(p,title,"§" + cm.getSlotTitleColor(menuName,i),i);
                 }else if(cm.getSlotTitle(menuName,i).contains(" " + prefix + InteractionType.VISUAL + " /id")){
                     String title = cm.getSlotTitle(menuName, i).replace(prefix + InteractionType.VISUAL + " /id","UUID: §e" + p.getUniqueId());
                     this.addItemToInventory(title, Material.getMaterial(cm.getSlotMaterial(menuName,i)),"§" + cm.getSlotTitleColor(menuName,i),i);
@@ -109,8 +108,8 @@ public class Player_Menu extends Lobby_Inventory implements Listener {
 
                  if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Coin-Shop"))) {
                      p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                     Shop_XP_Menu shm = new Shop_XP_Menu();
-                     shm.openInventory(p);
+                     Shop_Coin_Menu scm = new Shop_Coin_Menu();
+                     scm.openInventory(p);
 
                 }else if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Player-Settings"))){
                      p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);

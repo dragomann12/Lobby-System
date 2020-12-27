@@ -14,8 +14,8 @@ import de.dragonhard.lobby.components.menu.creativ.Creativ_Menu;
 import de.dragonhard.lobby.components.menu.debug.debug_Menu;
 import de.dragonhard.lobby.components.menu.friend.Friend_Menu;
 import de.dragonhard.lobby.components.menu.player.Player_Menu;
+import de.dragonhard.lobby.components.menu.shop.Shop_Coin_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Menu;
-import de.dragonhard.lobby.components.menu.shop.Shop_XP_Menu;
 import de.dragonhard.lobby.manager.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -82,7 +82,8 @@ TODO add MY SQL db later
 
     public boolean setWallIdLists(){
         ConsoleWriter.writeWithTag("setting up Menu IDs ...");
-        Shop_XP_Menu sxp = new Shop_XP_Menu();
+
+        Shop_Coin_Menu scm = new Shop_Coin_Menu();
         Shop_Menu sm = new Shop_Menu();
         Game_Menu gm = new Game_Menu();
         Lobby_Menu lm = new Lobby_Menu();
@@ -106,7 +107,8 @@ TODO add MY SQL db later
         lm.addWallIDs();
         gm.addWallIDs();
         sm.addWallIDs();
-        sxp.addWallIDs();
+        scm.addWallIDs();
+
         ConsoleWriter.writeWithTag("done");
         return true;
     }
@@ -134,7 +136,7 @@ TODO add MY SQL db later
         loadConfig("Settings","DIAMOND",5);
         loadConfig("Lobby","NETHER_STAR",5);
         loadConfig("Game","DIAMOND",5);
-        loadConfig("XP_shop","DIAMOND",5);
+        loadConfig("Coin_shop","DIAMOND",5);
         loadConfig("Friend","DIAMOND",5);
         loadConfig("Debug","DIAMOND",5);
         loadConfig("Admin_External","DIAMOND",5);
@@ -151,7 +153,7 @@ TODO add MY SQL db later
         this.getCommand("autowarp").setExecutor(new cmdAutoWarp());
         this.getCommand("InvWarp").setExecutor(new cmdGlobalWarp());
         this.getCommand("block").setExecutor(new cmdblock());
-        //this.getCommand("coins").setExecutor(new cmdCoins()); //@TODO bugfix ArreyindexoutoffBounds
+        //this.getCommand("coins").setExecutor(new cmdCoins());
         //this.getCommand("cr").setExecutor(new cmdcreate());
         //this.getCommand("join").setExecutor(new cmdJoin());
         //this.getCommand("left").setExecutor(new cmdleft());

@@ -95,8 +95,8 @@ public class Shop_Menu extends Lobby_Inventory implements Listener {
                     if(!e.getClick().isShiftClick() && e.getSlot() == 20){
 
                         p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                        Shop_XP_Menu sxpm = new Shop_XP_Menu();
-                        sxpm.openInventory(p);return;
+                        Shop_Coin_Menu scm = new Shop_Coin_Menu();
+                        scm.openInventory(p);return;
 
                     }else if(!e.getClick().isShiftClick() && e.getSlot() == 22){
 

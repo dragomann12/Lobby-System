@@ -8,6 +8,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
+
+import java.lang.reflect.Field;
 
 public class Lobby_Inventory {
     private String title = "";
@@ -78,16 +81,15 @@ public class Lobby_Inventory {
       getInventory().setItem(slot, createItem(title,material,colorTag));
     }
 
-    public void addSkullToInventory( String title, String colorTag, int slot){
-        getInventory().setItem(slot, createSkull(title,colorTag));
+    public void addSkullToInventory(Player p, String title, String colorTag, int slot){
+        getInventory().setItem(slot, createSkull(p,title,colorTag));
     }
 
-    public ItemStack createSkull(String title, String colorTag){
+    public ItemStack createSkull(Player p,String title, String colorTag){
         ItemStack item = new ItemStack(Material.SKULL_ITEM,1,(byte)3);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.setDisplayName(colorTag + title);
+        itemMeta.setDisplayName(title);
         item.setItemMeta(itemMeta);
-
         return item;
     }
 
