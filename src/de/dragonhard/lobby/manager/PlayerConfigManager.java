@@ -44,36 +44,6 @@ public class PlayerConfigManager extends ConfigReader {
         // keytemplate: <UserName><UserId><userTag><passwd><AccessLevel><securityTag>
     }
 
-    public String getStringOf(Player p, String item){
-        this.setFile(p, defaultConfig);
-        return this.getString(item);
-    }
-
-    public int getIntegerOf(Player p, String item){
-        this.setFile(p, defaultConfig);
-        return this.getInteger(item);
-    }
-
-    public Boolean getBooleanOf(Player p, String item){
-        this.setFile(p, defaultConfig);
-        return this.getBoolean(item);
-    }
-
-    public void setStringOf(Player p, String item, String value){
-        this.setFile(p, defaultConfig);
-        this.set(item, value);
-    }
-
-    public void setIntegerOf(Player p, String item, int value){
-        this.setFile(p, defaultConfig);
-        this.set(item, value);
-    }
-
-    public void setBooleanOf(Player p, String item, boolean value){
-        this.setFile(p, defaultConfig);
-        this.set(item, value);
-    }
-
     public void setWarpEnabled(Player p, boolean status){
         setBooleanOf(p,"WarpEnabled", status);
     }
@@ -85,6 +55,16 @@ public class PlayerConfigManager extends ConfigReader {
         /*
                     under this are the Integer
      */
+
+    public int getIntegerOf(Player p, String item){
+        this.setFile(p, defaultConfig);
+        return this.getInteger(item);
+    }
+
+    public void setIntegerOf(Player p, String item, int value){
+        this.setFile(p, defaultConfig);
+        this.set(item, value);
+    }
 
     public int getCoins(Player p){
         return getIntegerOf(p,"Coins");
@@ -110,6 +90,16 @@ public class PlayerConfigManager extends ConfigReader {
                     under this are the Strings
      */
 
+    public void setStringOf(Player p, String item, String value){
+        this.setFile(p, defaultConfig);
+        this.set(item, value);
+    }
+
+    public String getStringOf(Player p, String item){
+        this.setFile(p, defaultConfig);
+        return this.getString(item);
+    }
+
     public String getPasswd(Player p){
         return getStringOf(p,"passwd");
     }
@@ -133,6 +123,16 @@ public class PlayerConfigManager extends ConfigReader {
     /*
                     under this are the Boolean
      */
+
+    public Boolean getBooleanOf(Player p, String item){
+        this.setFile(p, defaultConfig);
+        return this.getBoolean(item);
+    }
+
+    public void setBooleanOf(Player p, String item, boolean value){
+        this.setFile(p, defaultConfig);
+        this.set(item, value);
+    }
 
     public Boolean getChatStyleEnabled(Player p){
         return getBooleanOf(p,"ChatStyle");
