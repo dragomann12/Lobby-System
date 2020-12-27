@@ -28,7 +28,7 @@ commands:
     usage:
     description: keine Information!
     permission:
-  clear:
+  chclear:
     usage:
     description: zum leeren des Chats
     permission:

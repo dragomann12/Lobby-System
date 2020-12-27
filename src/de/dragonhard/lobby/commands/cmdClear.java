@@ -24,7 +24,7 @@ public class cmdClear extends SpawnManager implements CommandExecutor {
             if(pwm.isPluginDeveloper(p) || pwm.isDeveloper(p) || pwm.isAdmin(p) || pwm.isTeam_lead(p)||
             pwm.isModerator(p) || pwm.isSupporter(p) || pwm.isBuilder(p)){
 
-                clearChat();
+                clearChat(p);
 
             }else{
                 noPermission(p);
@@ -58,7 +58,7 @@ public class cmdClear extends SpawnManager implements CommandExecutor {
 
     }
 
-    private static void clearChat(){
+    private static void clearChat(Player p){
 
         Bukkit.broadcastMessage("");
         Bukkit.broadcastMessage("");
@@ -636,7 +636,7 @@ public class cmdClear extends SpawnManager implements CommandExecutor {
         Bukkit.broadcastMessage("");
         Bukkit.broadcastMessage("");
 
-
+        Bukkit.broadcastMessage("§5" + p.getName() + " §bhat den Chat geleert!");
     }
 
 }

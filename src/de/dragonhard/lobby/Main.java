@@ -1,4 +1,5 @@
 package de.dragonhard.lobby;
+import de.dragonhard.lobby.commands.cmdClear;
 import de.dragonhard.lobby.commands.cmdblock;
 import de.dragonhard.lobby.commands.coins.cmdCoins;
 import de.dragonhard.lobby.commands.teleport.cmdAutoWarp;
@@ -161,6 +162,7 @@ TODO add Yes/No question to admin items
         this.getCommand("InvWarp").setExecutor(new cmdGlobalWarp());
         this.getCommand("block").setExecutor(new cmdblock());
         this.getCommand("coins").setExecutor(new cmdCoins());
+        this.getCommand("chclear").setExecutor(new cmdClear());
         //this.getCommand("cr").setExecutor(new cmdcreate());
         //this.getCommand("join").setExecutor(new cmdJoin());
         //this.getCommand("left").setExecutor(new cmdleft());
