@@ -16,7 +16,6 @@ public class Chat_Event implements Listener {
         String message = e.getMessage();
         PlayerConfigManager pm = new PlayerConfigManager();
 
-
         if(message.startsWith(MessageManager.prefix) && p.hasPermission(PermissionList.getPermission("Message",0))) {
             e.setCancelled(true);
             MessageManager.getFunktion(message, p);return;
