@@ -43,8 +43,7 @@ public class cmdClear extends SpawnManager implements CommandExecutor {
         }else{
             p.sendMessage("§4Fehler benutze den Befehl so: ");
         }
-        p.sendMessage("                                 §4Hilfe >> §e/block §4add");
-        p.sendMessage("                                 §4Hilfe >> §e/block §4del");
+        p.sendMessage("                                 §4Hilfe >> §e/chclear");
     }
 
     private static void noPermission(Player p){
