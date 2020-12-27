@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class PluginWithlistManager {
     PlayerConfigManager pm = new PlayerConfigManager();
     ConfigManager cm = new ConfigManager();
-   private static String[] developer_list = {"Dragonhard117"};
+   private static String[] developer_list = {"Dragonhard117","SLINIcraftet204"};
     ArrayList<String> plugin_developer = new ArrayList<String>();
     ArrayList<String> player = new ArrayList<String>(),
                       tester = new ArrayList<String>(),
