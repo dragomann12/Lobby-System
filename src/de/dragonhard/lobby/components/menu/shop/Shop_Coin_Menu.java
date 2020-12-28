@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemFlag;
 
 import java.util.ArrayList;
 
@@ -17,9 +18,12 @@ public class Shop_Coin_Menu extends Lobby_Inventory implements Listener {
 
 
     private Player p;
-    private String menuName = "Coin_shop";
-    private String prefix = "#";
+    private static String menuName = "Coin_shop";
+    private static String prefix = "#";
+    private static ShopItemManager sim = new ShopItemManager();
     private static ArrayList<Integer> wall_item_id = new ArrayList<Integer>();
+    private static PlayerConfigManager pm = new PlayerConfigManager();
+
     public void openInventory(Player p){
         AcessManager acm = new AcessManager();
         this.p = p;
@@ -40,26 +44,13 @@ public class Shop_Coin_Menu extends Lobby_Inventory implements Listener {
 
             if(cm.slotIsEnabled(menuName,i)){
 
-                if(cm.getSlotTitle(menuName,i).contains(prefix + ItemTypes.BOOTS)){
-                    String title = cm.getSlotTitle(menuName, i).replace(prefix + ItemTypes.BOOTS,this.getTag("§6Preis: " + PriceList.getPriceOf("Boots") ) + " " + this.getTag("Item"));
-                    this.addItemToInventory(title, Material.getMaterial(cm.getSlotMaterial(menuName, i)), "§" + cm.getSlotTitleColor(menuName, i), i);
-                }else if(cm.getSlotTitle(menuName,i).contains(prefix + ItemTypes.HEAD)){
-                    String title = cm.getSlotTitle(menuName, i).replace(prefix + ItemTypes.HEAD,this.getTag("§6Preis: " + PriceList.getPriceOf("HEAD") ) + " " + this.getTag("Item"));
-                    this.addItemToInventory(title, Material.getMaterial(cm.getSlotMaterial(menuName, i)), "§" + cm.getSlotTitleColor(menuName, i), i);
-                }else if(cm.getSlotTitle(menuName,i).contains(prefix + ItemTypes.EFFECT)){
-                    String title = cm.getSlotTitle(menuName, i).replace(prefix + ItemTypes.EFFECT,this.getTag("§6Preis: " + PriceList.getPriceOf("EFFECT") ) + " " + this.getTag("Item"));
-                    this.addItemToInventory(title, Material.getMaterial(cm.getSlotMaterial(menuName, i)), "§" + cm.getSlotTitleColor(menuName, i), i);
-                }else if(cm.getSlotTitle(menuName,i).contains(prefix + ItemTypes.PLACEHOLDER)){
-                    String title = cm.getSlotTitle(menuName, i).replace(prefix + ItemTypes.PLACEHOLDER, this.getTag("§4- §ekein verkauf §4-"));
-                    this.addItemToInventory(title, Material.getMaterial(cm.getSlotMaterial(menuName, i)), "§" + cm.getSlotTitleColor(menuName, i), i);
-                }else if(cm.getSlotTitle(menuName,i).contains(prefix + ItemTypes.POTION)){
-                    String title = cm.getSlotTitle(menuName, i).replace(prefix + ItemTypes.POTION,this.getTag("§6Preis: " + PriceList.getPriceOf("POTION") ) + " " + this.getTag("Item"));
-                    this.addItemToInventory(title, Material.getMaterial(cm.getSlotMaterial(menuName, i)), "§" + cm.getSlotTitleColor(menuName, i), i);
-                }else if(cm.getSlotTitle(menuName,i).contains(prefix + ItemTypes.TICKED)){
-                    String title = cm.getSlotTitle(menuName, i).replace(prefix + ItemTypes.TICKED,this.getTag("§6Preis: " + PriceList.getPriceOf("TICKED") ) + " " + this.getTag("Item"));
-                    this.addItemToInventory(title, Material.getMaterial(cm.getSlotMaterial(menuName, i)), "§" + cm.getSlotTitleColor(menuName, i), i);
-                }else if(cm.getSlotTitle(menuName,i).contains(prefix + ItemTypes.WEAPON)){
-                    String title = cm.getSlotTitle(menuName, i).replace(prefix + ItemTypes.WEAPON,this.getTag("§6Preis: " + PriceList.getPriceOf("WEAPON") ) + " " + this.getTag("Item"));
+                if(cm.getSlotTitle(menuName,i).contains(prefix + ItemTypes.TICKED)){
+                    String title = cm.getSlotTitle(menuName, i).replace(prefix + ItemTypes.TICKED,this.getTag("§6Preis: §a" + PriceList.getPriceOf("TICKED","Karte") ) + " " + this.getTag("Item"));
+                    if(title.contains("§6Preis: §") && pm.getCoins(p) < PriceList.getPriceOf("TICKED","Karte")){
+                        title.replace("§6Preis: §", "§6Preis: §4");
+                    }else if(title.contains("§6Preis: §") && pm.getCoins(p) == PriceList.getPriceOf("TICKED","Karte")){
+                        title.replace("§6Preis: §", "§6Preis: §e");
+                    }else if(title.contains("§6Preis: §") && pm.getCoins(p) > PriceList.getPriceOf("TICKED","Karte")){ }
                     this.addItemToInventory(title, Material.getMaterial(cm.getSlotMaterial(menuName, i)), "§" + cm.getSlotTitleColor(menuName, i), i);
                 }else{
                     this.addItemToInventory(cm.getSlotTitle(menuName,i) + this.getTag("Item"), Material.getMaterial(cm.getSlotMaterial(menuName,i)),"§" + cm.getSlotTitleColor(menuName,i),i);
@@ -113,17 +104,10 @@ public class Shop_Coin_Menu extends Lobby_Inventory implements Listener {
                 if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Item"))) {
 
                     if(e.getCurrentItem().getItemMeta().getDisplayName().contains( this.getTag("§4- §ekein verkauf §4-"))){return;}else{
-                        if(cm.getSlotTitle(menuName,e.getSlot()).contains(prefix + ItemTypes.BOOTS)){}
-                        if(cm.getSlotTitle(menuName,e.getSlot()).contains(prefix + ItemTypes.HEAD)){}
-                        if(cm.getSlotTitle(menuName,e.getSlot()).contains(prefix + ItemTypes.EFFECT)){
-                            switch(e.getCurrentItem().getItemMeta().getDisplayName()){
-                                case "fly":
-                            }
-                        }
-                        if(cm.getSlotTitle(menuName,e.getSlot()).contains(prefix + ItemTypes.POTION)){}
-                        if(cm.getSlotTitle(menuName,e.getSlot()).contains(prefix + ItemTypes.TICKED)){}
-                        if(cm.getSlotTitle(menuName,e.getSlot()).contains(prefix + ItemTypes.WEAPON)){}
+                        if(cm.getSlotTitle(menuName, e.getSlot()).contains(prefix)){
+                            p.playSound(p.getLocation(), Sound.CLICK,1.0F,1.0F);
 
+                        }
 
                     }
 
@@ -140,18 +124,11 @@ public class Shop_Coin_Menu extends Lobby_Inventory implements Listener {
 
     private static class PriceList {
 
-        public static int getPriceOf(String item){
+        public static int getPriceOf(String category, String item){
 
-            switch(item){
-                case "BOOTS": return 200;
-                case "HEAD": return 450;
-                case "EFFECT": return 300;
-                case "POTION": return 250;
-                case "TICKED": return 500;
-                case "WEAPON": return 1000;
-            }
+            String shop = menuName.replace("_","-");
 
-            return 0;
+            return sim.getPriceOfItem(shop,category,item);
         }
 
     }

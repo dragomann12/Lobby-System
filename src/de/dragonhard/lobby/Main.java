@@ -80,6 +80,12 @@ TODO add Yes/No question to admin items
             cm.getDefaultConfig();
         }
 
+        ShopItemManager sim = new ShopItemManager();
+        //Debug only
+        sim.addItemToShop("Coin-shop","TICKED","Beschreibung","Admin","Karte","",20,0);
+        ConsoleWriter.writeDebug(sim.getDisplayNameOfItem("Coin-shop","TICKED","Karte"));
+        ConsoleWriter.writeDebug(sim.getDescriptionOfItem("Coin-shop","TICKED","Karte"));
+        ConsoleWriter.writeDebug("" + sim.getPriceOfItem("Coin-shop","TICKED","Karte"));
     }
 
     public boolean setWallIdLists(){
@@ -225,6 +231,7 @@ TODO add Yes/No question to admin items
         plm.registerEvents(new Health_Event(),this);
         plm.registerEvents(new Admin_External_Menu(),this);
         plm.registerEvents(new Player_Menu(),this);
+        plm.registerEvents(new Shop_Coin_Menu(),this);
 
         ConsoleWriter.writeWithTag("event register loaded");
         return true;
