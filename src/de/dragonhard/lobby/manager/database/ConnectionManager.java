@@ -19,8 +19,15 @@ public class ConnectionManager extends ConfigManager {
         return currentState;
     }
 
+    public boolean checkConfig(){
+        if(!cm.getHost().equals("") && !cm.getPort().equals("") && !cm.getDatabase().equals("") && !cm.getUsername().equals("") && !cm.getPassword().equals("")){return true;}
+        return false;
 
-    private void connect(){
+    }
+
+
+    public void connect(){
+        if(!checkConfig()){Bukkit.getConsoleSender().sendMessage(cm.getTag() + "§4Error information required please check the config_main and fill all mysql stuff"); return;}
         setState(ConnectionState.CONNECTING);
         try (Connection conn = DriverManager.getConnection(this.getHost_url(), this.getUsername(), this.getPassword())) {
             Class.forName("com.mysql.jdbc.Driver");

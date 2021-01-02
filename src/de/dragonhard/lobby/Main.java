@@ -19,6 +19,7 @@ import de.dragonhard.lobby.components.menu.player.Player_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Coin_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Menu;
 import de.dragonhard.lobby.manager.*;
+import de.dragonhard.lobby.manager.database.ConnectionManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -36,8 +37,9 @@ TODO add Yes/No question to admin items
     PluginManager plm = Bukkit.getServer().getPluginManager();
     PluginComunicationManager pcm = new PluginComunicationManager();
     PluginWithlistManager pwm = new PluginWithlistManager();
+    ConnectionManager com = new ConnectionManager();
 
-   static Plugin plugin;
+    static Plugin plugin;
 
     public static Plugin getPlugin() {
         return plugin;
@@ -73,6 +75,8 @@ TODO add Yes/No question to admin items
                 pwm.onLoad();
 
                 sm.addSoundsToList();
+
+                com.connect();
 
         }else{
             ConsoleWriter.writeWithTag("installing ...");

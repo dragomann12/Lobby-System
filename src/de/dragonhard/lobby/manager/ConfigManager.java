@@ -197,11 +197,11 @@ public class ConfigManager extends PluginConfigReader {
         return defaultConfigFile;
     }
 
-    private String getHost(){return getStringOfItem(getDefaultConfigName(),"MySQL.Host");}
+    public String getHost(){return getStringOfItem(getDefaultConfigName(),"MySQL.Host");}
 
-    private String getPort(){return getStringOfItem(getDefaultConfigName(),"MySQL.Port");}
+    public String getPort(){return getStringOfItem(getDefaultConfigName(),"MySQL.Port");}
 
-    private String getDatabase(){return getStringOfItem(getDefaultConfigName(),"MySQL.Database");}
+    public String getDatabase(){return getStringOfItem(getDefaultConfigName(),"MySQL.Database");}
 
     public String getUsername(){return getStringOfItem(getDefaultConfigName(),"MySQL.Username");}
 
