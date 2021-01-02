@@ -18,7 +18,6 @@ public class PlayerConfigManager extends ConfigReader {
 
     private void getDefaultPlayerConfig(Player p){
         this.setFile(p,"config");
-
         this.setDefault("usedWarps",0);
         this.setDefault("maxWarps",5);
         this.setDefault("InventorySlots", 10);

@@ -197,6 +197,19 @@ public class ConfigManager extends PluginConfigReader {
         return defaultConfigFile;
     }
 
+    private String getHost(){return getStringOfItem(getDefaultConfigName(),"MySQL.Host");}
+
+    private String getPort(){return getStringOfItem(getDefaultConfigName(),"MySQL.Port");}
+
+    private String getDatabase(){return getStringOfItem(getDefaultConfigName(),"MySQL.Database");}
+
+    public String getUsername(){return getStringOfItem(getDefaultConfigName(),"MySQL.Username");}
+
+    public String getPassword(){return getStringOfItem(getDefaultConfigName(),"MySQL.Password");}
+
+    public String getHost_url(){return "jdbc:mysql://" + getHost() + ":" + getPort() + "/" + getDatabase();}
+
+
     public void setDefaultConfigFile(String configName){
         defaultConfigFile = configName;
     }
@@ -206,6 +219,11 @@ public class ConfigManager extends PluginConfigReader {
         try{
             this.setFile(getDefaultConfigName());
 
+            this.setDefault("MySQL.Host","localhost");
+            this.setDefault("MySQL.Port","3306");
+            this.setDefault("MySQL.Database","drago");
+            this.setDefault("MySQL.Username","drago");
+            this.setDefault("MySQL.Password","");
             this.setDefault("UseTag", true);
             this.setDefault("TagStart", "[");
             this.setDefault("Tag","Lobby");
@@ -213,7 +231,6 @@ public class ConfigManager extends PluginConfigReader {
             this.setDefault("StartTagColor", "5");
             this.setDefault("TagColor", "a");
             this.setDefault("EndTagColor", "5");
-
             this.setDefault("DBVersion","1.1");
             this.setDefault("ConfigVersion","1.5");
             this.setDefault("UpdateReady",false);
