@@ -10,7 +10,7 @@ import java.io.File;
 public class ConfigManager extends PluginConfigReader {
 
     private static String defaultConfigFile = "config_main";
-    private static final String configVersion = "1.4";
+    private static final String configVersion = "1.5";
 
     public void createConfig(String fileName , String item, String value){
         this.setFile(fileName);
@@ -215,7 +215,7 @@ public class ConfigManager extends PluginConfigReader {
             this.setDefault("EndTagColor", "5");
 
             this.setDefault("DBVersion","1.1");
-            this.setDefault("ConfigVersion","1.4");
+            this.setDefault("ConfigVersion","1.5");
             this.setDefault("UpdateReady",false);
             this.setDefault("showWelcome",true);
             this.setDefault("MessageColor","b");
