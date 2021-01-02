@@ -82,7 +82,7 @@ TODO add Yes/No question to admin items
 
         ShopItemManager sim = new ShopItemManager();
         //Debug only
-        sim.addItemToShop("Coin-shop","TICKED","Beschreibung","Admin","Karte","",20,0);
+        sim.addItemToShop("Coin-shop","TICKED","Beschreibung","Admin","Karte","",20,50);
         ConsoleWriter.writeDebug(sim.getDisplayNameOfItem("Coin-shop","TICKED","Karte"));
         ConsoleWriter.writeDebug(sim.getDescriptionOfItem("Coin-shop","TICKED","Karte"));
         ConsoleWriter.writeDebug("" + sim.getPriceOfItem("Coin-shop","TICKED","Karte"));

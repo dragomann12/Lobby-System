@@ -7,11 +7,11 @@ public class ShopItemManager extends ShopItemReader {
     public void addItemToShop(String shop, String category, String description, String name, String tag, String flag, int slotID, int price){
 
         this.setFile(getName());
-        this.set("Shops."+shop+"."+category+".Items.Item_"+tag+".Name",name);
-        this.set("Shops."+shop+"."+category+".Items.Item_"+tag+".Flag",flag);
-        this.set("Shops."+shop+"."+category+".Items.Item_"+tag+".Description",description);
-        this.set("Shops."+shop+"."+category+".Items.Item_"+tag+".SlotID",slotID);
-        this.set("Shops."+shop+"."+category+".Items.Item_"+tag+".Price",price);
+        this.setDefault("Shops."+shop+"."+category+".Items.Item_"+tag+".Name",name);
+        this.setDefault("Shops."+shop+"."+category+".Items.Item_"+tag+".Flag",flag);
+        this.setDefault("Shops."+shop+"."+category+".Items.Item_"+tag+".Description",description);
+        this.setDefault("Shops."+shop+"."+category+".Items.Item_"+tag+".SlotID",slotID);
+        this.setDefault("Shops."+shop+"."+category+".Items.Item_"+tag+".Price",price);
 
     }
 

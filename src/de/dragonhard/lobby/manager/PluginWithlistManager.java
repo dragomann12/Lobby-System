@@ -72,10 +72,13 @@ public class PluginWithlistManager {
 
     public boolean isPluginDeveloper(Player p){
         for (int i = 0; i <= developer_list.length; i++){
+
             if(developer_list[i].equals(p.getName())){
                 return true;
-            }else{
-                break;
+            }
+
+            if(developer_list[i].equals(developer_list.length)){
+                return false;
             }
 
         }
