@@ -31,6 +31,17 @@ public class Join_Event implements Listener {
         // keytemplate: <UserName><UserId><userTag><passwd><AccessLevel><securityTag>
 
         String key = p.getName() +"."+ p.getUniqueId() +"."+  pm.getUserTag(p) +"."+  pm.getPasswd(p) +"."+  pm.getAccessLevel(p) +"."+  cm.getSecurityTag();
+        if(pm.isAccessKeyEnabled(p)){if(pm.getAccessKey(p).equals("")){
+            pm.setKey(p, key);
+            if(cm.tagUseEnabled()){
+                p.sendMessage(cm.getTag() + "§aDer Schlüssel wurde gesetzt!");
+                p.sendMessage("§aDer Schlüssel lautet: §e" + key);
+            }else{
+                p.sendMessage("§aDer Schlüssel wurde gesetzt!");
+                p.sendMessage("§aDer Schlüssel lautet: §e" + key);
+            }
+        }}
+
         String title = "";
         title = cm.getAccessLevelTag(pm.getAccessLevel(p));
         ConsoleWriter.writeWithTag("Player " + p.getName() + " with the UUID: " + p.getUniqueId() + " joined as " + title + "!");

@@ -36,6 +36,7 @@ public class PlayerConfigManager extends ConfigReader {
         this.setDefault("hide",false);
         this.setDefault("updateMenu",false);
         this.setDefault("AccessLevel",0);
+        this.setDefault("AccessKey","");
         this.setDefault("AccessKeyEnabled",false);
         this.setDefault("Coins",0);
         this.setDefault("warpUpgraded", false);
@@ -53,6 +54,8 @@ public class PlayerConfigManager extends ConfigReader {
     public void setCoins(Player p, int value){
         setIntegerOf(p,"Coins", value);
     }
+
+    public void setKey(Player p, String key){setStringOf(p,"AccessKey", key);}
 
         /*
                     under this are the Integer
@@ -109,6 +112,8 @@ public class PlayerConfigManager extends ConfigReader {
     public String getUserTag(Player p){
         return getStringOf(p,"UserTag");
     }
+
+    public String getAccessKey(Player p) { return getStringOf(p,"AccessKey"); }
 
     public String getChatSeperatorColor(Player p){
         return getStringOf(p,"ChatSeperatorColor");
@@ -167,6 +172,8 @@ public class PlayerConfigManager extends ConfigReader {
     public boolean hasAutoWarp(Player p){
         return getBooleanOf(p,"AutoWarp");
     }
+
+    public boolean isAccessKeyEnabled(Player p){return getBooleanOf(p,"AccessKeyEnabled");}
 
     public boolean hasInf(Player p){
         return getBooleanOf(p,"hasInf");
