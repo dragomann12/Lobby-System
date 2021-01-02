@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 public class PlayerConfigManager extends ConfigReader {
 
     private static final String defaultConfig = "config";
+    private static final String defaultItemBase = "Player.";
 
     public void checkPlayer(Player p){
 
@@ -41,6 +42,7 @@ public class PlayerConfigManager extends ConfigReader {
         this.setDefault("UserTag","" + p.getFoodLevel() + p.getUniqueId());
         this.setDefault("passwd","");
         this.setDefault("Online","");
+
         // keytemplate: <UserName><UserId><userTag><passwd><AccessLevel><securityTag>
     }
 
