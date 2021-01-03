@@ -77,19 +77,28 @@ TODO add Yes/No question to admin items
                 sm.addSoundsToList();
 
                 com.connect();
-
         }else{
             ConsoleWriter.writeWithTag("installing ...");
             loadMenuConfig(); // load the Config for the Menu
             cm.getDefaultConfig();
         }
 
-        ShopItemManager sim = new ShopItemManager();
-        //Debug only
-        sim.addItemToShop("Coin-shop","TICKED","Beschreibung","Admin","Karte","",20,50);
-        ConsoleWriter.writeDebug(sim.getDisplayNameOfItem("Coin-shop","TICKED","Karte"));
-        ConsoleWriter.writeDebug(sim.getDescriptionOfItem("Coin-shop","TICKED","Karte"));
-        ConsoleWriter.writeDebug("" + sim.getPriceOfItem("Coin-shop","TICKED","Karte"));
+        //loading debug operations
+        loadDebug();
+
+    }
+
+    private boolean loadDebug(){
+        if(cm.isDebugMode()){
+
+            ShopItemManager sim = new ShopItemManager();
+
+            sim.addItemToShop("Coins-Shop","Test","this is a Test item!","Debug","Test","non",22,9999);
+
+            return true;
+        }
+
+        return false;
     }
 
     public boolean setWallIdLists(){

@@ -3,6 +3,7 @@ package de.dragonhard.lobby.components.events;
 import de.dragonhard.lobby.components.ConsoleWriter;
 import de.dragonhard.lobby.components.PermissionList;
 import de.dragonhard.lobby.manager.*;
+import de.dragonhard.lobby.manager.database.ConnectionManager;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -30,17 +31,19 @@ public class Join_Event implements Listener {
         pm.setFile(p,"config");
         // keytemplate: <UserName><UserId><userTag><passwd><AccessLevel><securityTag>
 
-        String key = p.getName() +"."+ p.getUniqueId() +"."+  pm.getUserTag(p) +"."+  pm.getPasswd(p) +"."+  pm.getAccessLevel(p) +"."+  cm.getSecurityTag();
-        if(pm.isAccessKeyEnabled(p)){if(pm.getAccessKey(p).equals("")){
-            pm.setKey(p, key);
-            if(cm.tagUseEnabled()){
-                p.sendMessage(cm.getTag() + "§aDer Schlüssel wurde gesetzt!");
-                p.sendMessage("§aDer Schlüssel lautet: §e" + key);
-            }else{
-                p.sendMessage("§aDer Schlüssel wurde gesetzt!");
-                p.sendMessage("§aDer Schlüssel lautet: §e" + key);
-            }
-        }}
+       // String key = p.getName() +"."+ p.getUniqueId() +"."+  pm.getUserTag(p) +"."+  pm.getPasswd(p) +"."+  pm.getAccessLevel(p) +"."+  cm.getSecurityTag();
+        //if(pm.isAccessKeyEnabled(p)){if(pm.getAccessKey(p).equals("")){
+         //   pm.setKey(p, key);
+          //  if(cm.tagUseEnabled()){
+            //    p.sendMessage(cm.getTag() + "§aDer Schlüssel wurde gesetzt!");
+              //  p.sendMessage("§aDer Schlüssel lautet: §e" + key);
+            //}else{
+             //   p.sendMessage("§aDer Schlüssel wurde gesetzt!");
+              //  p.sendMessage("§aDer Schlüssel lautet: §e" + key);
+            //}
+        //}}
+        ConnectionManager con = new ConnectionManager();
+        con.addPlayerToDb(p);
 
         String title = "";
         title = cm.getAccessLevelTag(pm.getAccessLevel(p));

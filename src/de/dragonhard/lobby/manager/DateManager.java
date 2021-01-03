@@ -16,7 +16,7 @@ public class DateManager extends PlayerConfigManager{
         return orginal;
     }
 
-    private String getPlayerDate(Player p){
+    public String getPlayerDate(Player p){
         this.setFile(p,"config");
         return this.getString("Online");
     }
