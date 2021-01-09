@@ -92,31 +92,28 @@ TODO add Yes/No question to admin items
     public boolean setWallIdLists(){
         ConsoleWriter.writeWithTag("setting up Menu IDs ...");
 
-        Shop_Coin_Menu scm = new Shop_Coin_Menu();
-        Shop_Menu sm = new Shop_Menu();
-        Game_Menu gm = new Game_Menu();
-        Lobby_Menu lm = new Lobby_Menu();
-        Creativ_Menu cm = new Creativ_Menu();
-        Settings_Menu stm = new Settings_Menu();
-        Friend_Menu fm = new Friend_Menu();
-        debug_Menu dm = new debug_Menu();
-        Admin_Menu am = new Admin_Menu();
-        Admin_Server_Menu asm = new Admin_Server_Menu();
-        Admin_External_Menu aem = new Admin_External_Menu();
-        Player_Menu plm = new Player_Menu();
+        //Admin-Menu
+        manager.getMenuManager().getAdminMenu().addWallIDs();
+        manager.getMenuManager().getAdminServerMenu().addWallIDs();
+        manager.getMenuManager().getAdminExternalMenu().addWallIDs();
+        //Shop-Menu
+        manager.getMenuManager().getShopMenu().addWallIDs();
+        manager.getMenuManager().getCoinShopMenu().addWallIDs();
+        //Game-Menu
+        manager.getMenuManager().getGameMenu().addWallIDs();
+        //Lobby-Menu
+        manager.getMenuManager().getLobbyMenu().addWallIDs();
+        //Creative-Menu
+        manager.getMenuManager().getCreativeMenu().addWallIDs();
+        //Settings-Menu
+        manager.getMenuManager().getSettingsMenu().addWallIDs();
+        //Friend-Menu
+        manager.getMenuManager().getFriendMenu().addWallIDs();
+        //Debug-Menu
+        manager.getMenuManager().getDebugMenu().addWallIDs();
+        //Player-Menu
+        manager.getMenuManager().getPlayerMenu().addWallIDs();
 
-        plm.addWallIDs();
-        aem.addWallIDs();
-        asm.addWallIDs();
-        am.addWallIDs();
-        dm.addWallIDs();
-        fm.addWallIDs();
-        stm.addWallIDs();
-        cm.addWallIDs();
-        lm.addWallIDs();
-        gm.addWallIDs();
-        sm.addWallIDs();
-        scm.addWallIDs();
         ConsoleWriter.writeWithTag("done");
         return true;
     }

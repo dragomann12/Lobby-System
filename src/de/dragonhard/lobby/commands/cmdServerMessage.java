@@ -12,7 +12,7 @@ public class cmdServerMessage extends ServerMessageManager implements CommandExe
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
         if(sender != null){
-
+            if(!(sender instanceof Player)){ return false;}
             Player p = (Player) sender;
 
             switch (args[0]){

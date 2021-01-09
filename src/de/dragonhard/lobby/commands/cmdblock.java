@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.commands;
 
+import de.dragonhard.lobby.manager.Managers;
 import de.dragonhard.lobby.manager.other.AcessManager;
 import de.dragonhard.lobby.manager.other.ConfigManager;
 import de.dragonhard.lobby.manager.other.SpawnManager;
@@ -9,10 +10,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class cmdblock extends SpawnManager implements CommandExecutor {
+public class cmdblock extends Managers implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        ConfigManager cm = new ConfigManager();
         AcessManager acm = new AcessManager();
         Player p = (Player) sender;
         Player reqPlayer = null;
@@ -54,11 +54,10 @@ public class cmdblock extends SpawnManager implements CommandExecutor {
         return false;
     }
 
-    private static void help(Player p){
-        ConfigManager cm = new ConfigManager();
+    private void help(Player p){
 
-        if(cm.tagUseEnabled()){
-            p.sendMessage(cm.getTag() + "§4Fehler benutze den Befehl so: ");
+        if(this.getConfigManager().tagUseEnabled()){
+            p.sendMessage(this.getConfigManager().getTag() + "§4Fehler benutze den Befehl so: ");
         }else{
             p.sendMessage("§4Fehler benutze den Befehl so: ");
         }
@@ -66,11 +65,10 @@ public class cmdblock extends SpawnManager implements CommandExecutor {
         p.sendMessage("                                 §4Hilfe >> §e/block §4del");
     }
 
-    private static void noPermission(Player p){
-        ConfigManager cm = new ConfigManager();
+    private void noPermission(Player p){
 
-        if (cm.tagUseEnabled()) {
-            p.sendMessage(cm.getTag() + "§4Du hast nicht die Berechtigung für diesen Befehl!");
+        if (this.getConfigManager().tagUseEnabled()) {
+            p.sendMessage(this.getConfigManager().getTag() + "§4Du hast nicht die Berechtigung für diesen Befehl!");
         }else{
             p.sendMessage("§4Du hast nicht die Berechtigung für diesen Befehl!");
         }

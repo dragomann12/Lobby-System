@@ -6,11 +6,12 @@ import de.dragonhard.lobby.components.menu.admin.Admin_Menu;
 import de.dragonhard.lobby.components.menu.creativ.Creativ_Menu;
 import de.dragonhard.lobby.components.menu.debug.debug_Menu;
 import de.dragonhard.lobby.components.menu.player.Player_Menu;
+import de.dragonhard.lobby.manager.Managers;
 import de.dragonhard.lobby.manager.database.ConnectionManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class MessageManager extends PlayerConfigManager{
+public class MessageManager extends Managers {
     private static ConfigManager cm = new ConfigManager();
     public static String prefix = cm.getMessagePrefix();
     private static String[] seperator = {"/","#", ">>"};
@@ -44,8 +45,8 @@ public class MessageManager extends PlayerConfigManager{
             Admin_Menu am = new Admin_Menu();
             am.openInventory(p);
         } else if (message.startsWith(prefix + "testInv")){
-            Creativ_Menu cm = new Creativ_Menu();
-            cm.openInventory(p);
+            Creativ_Menu creative = new Creativ_Menu();
+            creative.openInventory(p);
         } else if (message.startsWith(prefix + "devInv")){
             debug_Menu dm = new debug_Menu();
             dm.openInventory(p);
@@ -53,7 +54,6 @@ public class MessageManager extends PlayerConfigManager{
             colorGenerator cGen = new colorGenerator();
             p.sendMessage("Nummer: " + cGen.getColor(9,"test-generator"));
         }else if (message.startsWith(prefix + "checkUpdate")){
-           ConfigManager cm = new ConfigManager();
            if(!cm.isCurrentVersion()){
                ConsoleWriter.writeWithTag("[Update] Ein Update für die Config ist verfügbar!");
                p.sendMessage("§eEin Update für die Config ist verfügbar!");
@@ -65,7 +65,6 @@ public class MessageManager extends PlayerConfigManager{
            }
 
         }else if (message.startsWith(prefix + "update")){
-        ConfigManager cm = new ConfigManager();
         if(cm.isUpdateReady()) {
             p.sendMessage("§aDas Update wird geladen ...");
             cm.updateConfig();

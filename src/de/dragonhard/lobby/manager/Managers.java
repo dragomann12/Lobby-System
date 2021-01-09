@@ -63,6 +63,12 @@ public class Managers {
         return new PluginComunicationManager();
     }
 
+    public GlobalWarpManager getGlobalWarpManager(){return new GlobalWarpManager();}
+
+    public BungeeCordManager getBungeeCordManager(){return new BungeeCordManager();}
+
+    public MenuManager getMenuManager(){return new MenuManager();}
+
     public PluginManager getPluginManager(){
         return Bukkit.getPluginManager();
     }
