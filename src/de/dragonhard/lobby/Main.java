@@ -19,7 +19,6 @@ import de.dragonhard.lobby.components.menu.player.Player_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Coin_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Menu;
 import de.dragonhard.lobby.manager.*;
-import de.dragonhard.lobby.manager.database.ConnectionManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -28,17 +27,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin{
 
 /*
-TODO add MY SQL db later
 TODO add Yes/No question to admin items
  */
-
-    ConfigManager cm = new ConfigManager();
-    SoundManager sm = new SoundManager();
-    PluginManager plm = Bukkit.getServer().getPluginManager();
-    PluginComunicationManager pcm = new PluginComunicationManager();
-    PluginWithlistManager pwm = new PluginWithlistManager();
-    ConnectionManager com = new ConnectionManager();
-
+    Managers manager = new Managers();
     static Plugin plugin;
 
     public static Plugin getPlugin() {
@@ -47,16 +38,16 @@ TODO add Yes/No question to admin items
 
     public void onEnable(){
         plugin = this;
-        if(cm.configExists()){
+        if(manager.getConfigManager().configExists()){
             ConsoleWriter.writeWithTag("checking Config ...");
 
-            if(!cm.isCurrentVersion()){
+            if(!manager.getConfigManager().isCurrentVersion()){
                 ConsoleWriter.writeWithTag("old Config version detected! ...");
-                if(cm.isUpdateReady()){
-                    cm.updateConfig();
+                if(manager.getConfigManager().isUpdateReady()){
+                    manager.getConfigManager().updateConfig();
                 }else{
                     ConsoleWriter.writeWithTag(" [Update] an update for the config is available! write (in-game) @update to Update now or restart the Server");
-                    cm.setUpdateReady(true);
+                    manager.getConfigManager().setUpdateReady(true);
                 }
             }
 
@@ -72,15 +63,14 @@ TODO add Yes/No question to admin items
 
                 ConsoleWriter.writeWithTag("Enabled!");
 
-                pwm.onLoad();
+                manager.getPluginWhitelistManager().onLoad();
+                manager.getSoundManager().addSoundsToList();
+                manager.getConnectionManager().connect();
 
-                sm.addSoundsToList();
-
-                com.connect();
         }else{
             ConsoleWriter.writeWithTag("installing ...");
             loadMenuConfig(); // load the Config for the Menu
-            cm.getDefaultConfig();
+            manager.getConfigManager().getDefaultConfig();
         }
 
         //loading debug operations
@@ -89,12 +79,9 @@ TODO add Yes/No question to admin items
     }
 
     private boolean loadDebug(){
-        if(cm.isDebugMode()){
+        if(manager.getConfigManager().isDebugMode()){
 
-            ShopItemManager sim = new ShopItemManager();
-
-            sim.addItemToShop("Coins-Shop","Test","this is a Test item!","Debug","Test","non",22,9999);
-
+            manager.getShopManager().addItemToShop("Coins-Shop","Test","this is a Test item!","Debug","Test","non",22,9999);
             return true;
         }
 
@@ -129,7 +116,6 @@ TODO add Yes/No question to admin items
         gm.addWallIDs();
         sm.addWallIDs();
         scm.addWallIDs();
-
         ConsoleWriter.writeWithTag("done");
         return true;
     }
@@ -139,16 +125,13 @@ TODO add Yes/No question to admin items
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, BungeeCordManager.getChannel());
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, PluginComunicationManager.getChannelOut());
-
         ConsoleWriter.writeWithTag("done");
         return true;
     }
 
     public boolean registerIngoingChannel(){
         ConsoleWriter.writeWithTag("setting up ingoing communication channel ...");
-
-        Bukkit.getMessenger().registerIncomingPluginChannel(this, PluginComunicationManager.getChannelIn(), pcm.getListener());
-
+        Bukkit.getMessenger().registerIncomingPluginChannel(this, PluginComunicationManager.getChannelIn(), manager.getCommunicationManager().getListener());
         ConsoleWriter.writeWithTag("done");
         return true;
     }
@@ -182,38 +165,29 @@ TODO add Yes/No question to admin items
         this.getCommand("block").setExecutor(new cmdblock());
         this.getCommand("coins").setExecutor(new cmdCoins());
         this.getCommand("chclear").setExecutor(new cmdClear());
-        //this.getCommand("cr").setExecutor(new cmdcreate());
-        //this.getCommand("join").setExecutor(new cmdJoin());
-        //this.getCommand("left").setExecutor(new cmdleft());
 
         ConsoleWriter.writeWithTag("command register loaded");
         return true;
 
     }
 
-
-
     public boolean loadConfig(String menuName, String material ,int lineAmount){
-        ConfigManager cm = new ConfigManager();
+        manager.getConfigManager().setFile(menuName + "_menu_config");
 
-        cm.setFile(menuName + "_menu_config");
-
-        cm.setDefault("Title", menuName);
-        cm.setDefault("Title_Color","5");
-
-        cm.setDefault("Hotbar_Item_Title", menuName);
-        cm.setDefault("Hotbar_Item_Title_Color","5");
-        cm.setDefault("Hotbar_Item_Material", material);
+        manager.getConfigManager().setDefault("Title", menuName);
+        manager.getConfigManager().setDefault("Title_Color","5");
+        manager.getConfigManager().setDefault("Hotbar_Item_Title", menuName);
+        manager.getConfigManager().setDefault("Hotbar_Item_Title_Color","5");
+        manager.getConfigManager().setDefault("Hotbar_Item_Material", material);
         int i = 0;
         int items = lineAmount * 9;
 
         for (i=0; i< items +1; i++ ){
 
-            cm.setDefault("Slot_"+i+"_Item_Title","");
-            cm.setDefault("Slot_"+i+"_Item_Title_Color","");
-            cm.setDefault("Slot_"+i+"_Item_Material","STAINED_GLASS_PANE");
-            cm.setDefault("Slot_"+i+"_isEnabled",false);
-
+            manager.getConfigManager().setDefault("Slot_"+i+"_Item_Title","");
+            manager.getConfigManager().setDefault("Slot_"+i+"_Item_Title_Color","");
+            manager.getConfigManager().setDefault("Slot_"+i+"_Item_Material","STAINED_GLASS_PANE");
+            manager.getConfigManager().setDefault("Slot_"+i+"_isEnabled",false);
         }
 
         return true;
@@ -222,29 +196,29 @@ TODO add Yes/No question to admin items
     public boolean registerEvents(){
         ConsoleWriter.writeWithTag("loading event register");
 
-        plm.registerEvents(new Interact_Event(),this);
-        plm.registerEvents(new Join_Event(),this);
-        plm.registerEvents(new Chat_Event(),this);
-        plm.registerEvents(new Click_Event(),this);
-        plm.registerEvents(new Drop_Event(),this);
-        plm.registerEvents(new Drag_Event(),this);
-        plm.registerEvents(new Build_Event(),this);
-        plm.registerEvents(new Lobby_Menu(),this);
-        plm.registerEvents(new Game_Menu(),this);
-        plm.registerEvents(new Shop_Menu(),this);
-        plm.registerEvents(new Admin_Menu(),this);
-        plm.registerEvents(new Settings_Menu(),this);
-        plm.registerEvents(new Admin_Server_Menu(),this);
-        plm.registerEvents(new Event_Blocker(),this);
-        plm.registerEvents(new Hide_Event(),this);
-        plm.registerEvents(new debug_Menu(),this);
-        plm.registerEvents(new Disconnect_Event(),this);
-        plm.registerEvents(new Damage_Event(),this);
-        plm.registerEvents(new Hunger_Event(),this);
-        plm.registerEvents(new Health_Event(),this);
-        plm.registerEvents(new Admin_External_Menu(),this);
-        plm.registerEvents(new Player_Menu(),this);
-        plm.registerEvents(new Shop_Coin_Menu(),this);
+        manager.getPluginManager().registerEvents(new Interact_Event(),this);
+        manager.getPluginManager().registerEvents(new Join_Event(),this);
+        manager.getPluginManager().registerEvents(new Chat_Event(),this);
+        manager.getPluginManager().registerEvents(new Click_Event(),this);
+        manager.getPluginManager().registerEvents(new Drop_Event(),this);
+        manager.getPluginManager().registerEvents(new Drag_Event(),this);
+        manager.getPluginManager().registerEvents(new Build_Event(),this);
+        manager.getPluginManager().registerEvents(new Lobby_Menu(),this);
+        manager.getPluginManager().registerEvents(new Game_Menu(),this);
+        manager.getPluginManager().registerEvents(new Shop_Menu(),this);
+        manager.getPluginManager().registerEvents(new Admin_Menu(),this);
+        manager.getPluginManager().registerEvents(new Settings_Menu(),this);
+        manager.getPluginManager().registerEvents(new Admin_Server_Menu(),this);
+        manager.getPluginManager().registerEvents(new Event_Blocker(),this);
+        manager.getPluginManager().registerEvents(new Hide_Event(),this);
+        manager.getPluginManager().registerEvents(new debug_Menu(),this);
+        manager.getPluginManager().registerEvents(new Disconnect_Event(),this);
+        manager.getPluginManager().registerEvents(new Damage_Event(),this);
+        manager.getPluginManager().registerEvents(new Hunger_Event(),this);
+        manager.getPluginManager().registerEvents(new Health_Event(),this);
+        manager.getPluginManager().registerEvents(new Admin_External_Menu(),this);
+        manager.getPluginManager().registerEvents(new Player_Menu(),this);
+        manager.getPluginManager().registerEvents(new Shop_Coin_Menu(),this);
 
         ConsoleWriter.writeWithTag("event register loaded");
         return true;

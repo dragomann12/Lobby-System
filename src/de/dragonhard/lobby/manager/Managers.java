@@ -1,6 +1,8 @@
 package de.dragonhard.lobby.manager;
 
 import de.dragonhard.lobby.manager.database.ConnectionManager;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.PluginManager;
 
 public class Managers {
 
@@ -40,12 +42,28 @@ public class Managers {
         return new InventoryManager();
     }
 
+    public ShopItemManager getShopManager(){
+        return new ShopItemManager();
+    }
+
     public WarpManager getWarpManager(){
         return new WarpManager();
     }
 
     public SpawnManager getSpawnManager(){
         return new SpawnManager();
+    }
+
+    public SoundManager getSoundManager(){
+        return new SoundManager();
+    }
+
+    public PluginComunicationManager getCommunicationManager(){
+        return new PluginComunicationManager();
+    }
+
+    public PluginManager getPluginManager(){
+        return Bukkit.getPluginManager();
     }
 
 }
