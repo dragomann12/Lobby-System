@@ -39,8 +39,8 @@ public class ConnectionManager extends ConfigManager {
         return bool ? 1 : 0;
     }
 
-    public void getCoins(Player p){
-        if(!checkConfig()){Bukkit.getConsoleSender().sendMessage(cm.getTag() + "§4Error information required please check the config_main and fill all mysql stuff"); return;}
+    public int getCoins(Player p){
+        if(!checkConfig()){Bukkit.getConsoleSender().sendMessage(cm.getTag() + "§4Error information required please check the config_main and fill all mysql stuff"); return 0;}
 
         if(!currentState.equals(ConnectionState.CONNECTION_ESTABLISHED)) { Bukkit.getConsoleSender().sendMessage(cm.getTag() + "§etry to connect with MySQL Database!  §b[§5"+ cm.getDatabase() +"§b]" );
             setState(ConnectionState.CONNECTING);}
@@ -56,16 +56,10 @@ public class ConnectionManager extends ConfigManager {
                 }
                 //uuid VARCHAR(36), username VARCHAR(35),login DATE, coins INTEGER(8), Level INTEGER(8), buildmode INTEGER(0), blacklisted INTEGER(0), hide INTEGER(0))
                 Bukkit.getConsoleSender().sendMessage(cm.getTag() + "§esending request to the Server!  §b[§5" + cm.getDatabase() + "§b]");
-              PreparedStatement result = conn.prepareStatement("SELECT coins FROM LobbySystem WHERE uuid = "+p.getUniqueId()+"");
-               // try(ResultSet result = statement.executeQuery("SELECT money FROM PlayerData WHERE uuid = " + p.getUniqueId().toString() + "")){
-
-                        if(result.getResultSet().next())
-                        {
-
-                        }
-
-
+                ResultSet rset = conn.createStatement().executeQuery("SELECT * FROM LobbySystem WHERE uuid = '" + p.getUniqueId() + "'");
                 Bukkit.getConsoleSender().sendMessage(cm.getTag() + "§arequest send to the Server!  §b[§5" + cm.getDatabase() + "§b]");
+                return rset.getInt("coins");
+
             } else {
 
                 //nicht erfolgreich
@@ -94,6 +88,17 @@ public class ConnectionManager extends ConfigManager {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+            return 0;
+    }
+
+    public ResultSet getResult(Connection conn, String qry){
+
+        try{
+            return conn.createStatement().executeQuery(qry);
+        }catch (SQLException ex){
+            return null;
+        }
+
 
     }
 
@@ -172,7 +177,7 @@ public class ConnectionManager extends ConfigManager {
                     setState(ConnectionState.CONNECTION_ESTABLISHED);
                 }
                 Bukkit.getConsoleSender().sendMessage(cm.getTag() + "§esending request to the Server!  §b[§5" + cm.getDatabase() + "§b]");
-                PreparedStatement st1 = conn.prepareStatement("CREATE TABLE LobbySystem (uuid VARCHAR(36), username VARCHAR(35),login VARCHAR(255), coins INTEGER(8), Level INTEGER(8), buildmode INTEGER(0), blacklisted INTEGER(0), hide INTEGER(0));");
+                PreparedStatement st1 = conn.prepareStatement("CREATE TABLE LobbySystem (id INT(6) AUTO_INCREMENT UNIQUE, uuid VARCHAR(36), username VARCHAR(35),login VARCHAR(255), coins INTEGER(8), Level INTEGER(8), buildmode INTEGER(0), blacklisted INTEGER(0), hide INTEGER(0));");
                 st1.executeUpdate();
                 Bukkit.getConsoleSender().sendMessage(cm.getTag() + "§arequest send to the Server!  §b[§5" + cm.getDatabase() + "§b]");
             } else {

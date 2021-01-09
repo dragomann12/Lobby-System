@@ -20,6 +20,7 @@ public class PlayerConfigManager extends ConfigReader {
         this.setFile(p,"config");
         this.setDefault("usedWarps",0);
         this.setDefault("maxWarps",5);
+        this.setDefault("DbCreated",false);
         this.setDefault("InventorySlots", 10);
         this.setDefault("hasInf",false);
         this.setDefault("AutoWarp",false);
@@ -172,6 +173,8 @@ public class PlayerConfigManager extends ConfigReader {
         return getBooleanOf(p,"AutoWarp");
     }
 
+    public boolean hasDBPlace(Player p){return getBooleanOf(p,"DbCreated");}
+
     public boolean isAccessKeyEnabled(Player p){return getBooleanOf(p,"AccessKeyEnabled");}
 
     public boolean hasInf(Player p){
@@ -201,6 +204,11 @@ public class PlayerConfigManager extends ConfigReader {
             return  Material.STICK;
         }
 
+    }
+
+    public void disableDbcreation(Player p){
+        this.setFile(p,"config");
+        this.set("DbCreated",true);
     }
 
     public void toggleUpdate(Player p){

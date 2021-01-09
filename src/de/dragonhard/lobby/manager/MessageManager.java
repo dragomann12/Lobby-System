@@ -6,6 +6,7 @@ import de.dragonhard.lobby.components.menu.admin.Admin_Menu;
 import de.dragonhard.lobby.components.menu.creativ.Creativ_Menu;
 import de.dragonhard.lobby.components.menu.debug.debug_Menu;
 import de.dragonhard.lobby.components.menu.player.Player_Menu;
+import de.dragonhard.lobby.manager.database.ConnectionManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -82,7 +83,10 @@ public class MessageManager extends PlayerConfigManager{
         }else if (message.startsWith(prefix + "player")){
             Player_Menu plm = new Player_Menu();
             plm.openInventory(p);
-        }
+        }else if (message.startsWith(prefix + "sql coins")){
+            ConnectionManager cm = new ConnectionManager();
+            p.sendMessage("Coins: " + cm.getCoins(p));
+    }
 
     }
 
