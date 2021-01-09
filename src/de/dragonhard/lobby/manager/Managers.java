@@ -1,6 +1,7 @@
 package de.dragonhard.lobby.manager;
 
 import de.dragonhard.lobby.manager.database.ConnectionManager;
+import de.dragonhard.lobby.manager.other.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 

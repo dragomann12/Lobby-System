@@ -1,9 +1,9 @@
 package de.dragonhard.lobby.commands;
 
-import de.dragonhard.lobby.manager.AcessManager;
-import de.dragonhard.lobby.manager.ConfigManager;
-import de.dragonhard.lobby.manager.PluginWithlistManager;
-import de.dragonhard.lobby.manager.SpawnManager;
+import de.dragonhard.lobby.manager.other.AcessManager;
+import de.dragonhard.lobby.manager.other.ConfigManager;
+import de.dragonhard.lobby.manager.other.PluginWithlistManager;
+import de.dragonhard.lobby.manager.other.SpawnManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

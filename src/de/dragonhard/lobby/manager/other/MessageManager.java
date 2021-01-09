@@ -1,4 +1,4 @@
-package de.dragonhard.lobby.manager;
+package de.dragonhard.lobby.manager.other;
 
 import de.dragonhard.lobby.components.ConsoleWriter;
 import de.dragonhard.lobby.components.colorGenerator;

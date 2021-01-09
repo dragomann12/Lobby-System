@@ -1,6 +1,5 @@
-package de.dragonhard.lobby.manager;
+package de.dragonhard.lobby.manager.other;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.text.SimpleDateFormat;

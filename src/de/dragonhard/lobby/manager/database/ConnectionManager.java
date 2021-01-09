@@ -1,9 +1,9 @@
 package de.dragonhard.lobby.manager.database;
 
-import de.dragonhard.lobby.manager.AcessManager;
-import de.dragonhard.lobby.manager.ConfigManager;
-import de.dragonhard.lobby.manager.DateManager;
-import de.dragonhard.lobby.manager.PlayerConfigManager;
+import de.dragonhard.lobby.manager.other.AcessManager;
+import de.dragonhard.lobby.manager.other.ConfigManager;
+import de.dragonhard.lobby.manager.other.DateManager;
+import de.dragonhard.lobby.manager.other.PlayerConfigManager;
 import io.netty.handler.timeout.TimeoutException;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

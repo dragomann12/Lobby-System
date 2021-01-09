@@ -1,8 +1,8 @@
 package de.dragonhard.lobby.commands.teleport;
 
 import de.dragonhard.lobby.components.PermissionList;
-import de.dragonhard.lobby.manager.ConfigManager;
-import de.dragonhard.lobby.manager.GlobalWarpManager;
+import de.dragonhard.lobby.manager.other.ConfigManager;
+import de.dragonhard.lobby.manager.other.GlobalWarpManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

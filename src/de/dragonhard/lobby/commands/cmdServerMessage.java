@@ -1,13 +1,11 @@
 package de.dragonhard.lobby.commands;
 
 import de.dragonhard.lobby.components.ConsoleWriter;
-import de.dragonhard.lobby.manager.ServerMessageManager;
+import de.dragonhard.lobby.manager.other.ServerMessageManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.io.File;
 
 public class cmdServerMessage extends ServerMessageManager implements CommandExecutor {
     @Override

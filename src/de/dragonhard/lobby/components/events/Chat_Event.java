@@ -1,8 +1,8 @@
 package de.dragonhard.lobby.components.events;
 
 import de.dragonhard.lobby.components.PermissionList;
-import de.dragonhard.lobby.manager.MessageManager;
-import de.dragonhard.lobby.manager.PlayerConfigManager;
+import de.dragonhard.lobby.manager.other.MessageManager;
+import de.dragonhard.lobby.manager.other.PlayerConfigManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

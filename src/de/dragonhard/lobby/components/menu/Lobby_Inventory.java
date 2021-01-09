@@ -1,16 +1,13 @@
 package de.dragonhard.lobby.components.menu;
 
-import de.dragonhard.lobby.manager.ConfigManager;
-import de.dragonhard.lobby.manager.InventoryManager;
+import de.dragonhard.lobby.manager.other.ConfigManager;
+import de.dragonhard.lobby.manager.other.InventoryManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
-
-import java.lang.reflect.Field;
 
 public class Lobby_Inventory {
     private String title = "";

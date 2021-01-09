@@ -1,4 +1,4 @@
-package de.dragonhard.lobby.manager;
+package de.dragonhard.lobby.manager.other;
 
 import de.dragonhard.lobby.reader.LanguageReader;
 import org.bukkit.entity.Player;

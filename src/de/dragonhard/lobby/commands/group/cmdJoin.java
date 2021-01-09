@@ -1,6 +1,6 @@
 package de.dragonhard.lobby.commands.group;
 
-import de.dragonhard.lobby.manager.GroupManager;
+import de.dragonhard.lobby.manager.other.GroupManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

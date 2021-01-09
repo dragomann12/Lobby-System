@@ -19,9 +19,10 @@ import de.dragonhard.lobby.components.menu.player.Player_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Coin_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Menu;
 import de.dragonhard.lobby.manager.*;
+import de.dragonhard.lobby.manager.other.BungeeCordManager;
+import de.dragonhard.lobby.manager.other.PluginComunicationManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin{

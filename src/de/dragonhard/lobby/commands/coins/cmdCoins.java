@@ -1,8 +1,7 @@
 package de.dragonhard.lobby.commands.coins;
 
-import de.dragonhard.lobby.components.PermissionList;
-import de.dragonhard.lobby.manager.CoinManager;
-import de.dragonhard.lobby.manager.ConfigManager;
+import de.dragonhard.lobby.manager.other.CoinManager;
+import de.dragonhard.lobby.manager.other.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

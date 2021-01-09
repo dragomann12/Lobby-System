@@ -1,4 +1,4 @@
-package de.dragonhard.lobby.manager;
+package de.dragonhard.lobby.manager.other;
 
 import de.dragonhard.lobby.Main;
 import org.bukkit.entity.Player;

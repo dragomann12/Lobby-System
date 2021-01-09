@@ -1,11 +1,10 @@
 package de.dragonhard.lobby.components.menu.friend;
 
 import de.dragonhard.lobby.components.menu.Lobby_Inventory;
-import de.dragonhard.lobby.manager.ConfigManager;
-import de.dragonhard.lobby.manager.GlobalWarpManager;
-import de.dragonhard.lobby.manager.InventoryManager;
-import de.dragonhard.lobby.manager.PlayerConfigManager;
-import org.bukkit.Material;
+import de.dragonhard.lobby.manager.other.ConfigManager;
+import de.dragonhard.lobby.manager.other.GlobalWarpManager;
+import de.dragonhard.lobby.manager.other.InventoryManager;
+import de.dragonhard.lobby.manager.other.PlayerConfigManager;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

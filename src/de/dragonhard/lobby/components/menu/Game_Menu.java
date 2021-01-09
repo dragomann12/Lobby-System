@@ -1,13 +1,11 @@
 package de.dragonhard.lobby.components.menu;
 
-import de.dragonhard.lobby.components.PermissionList;
-import de.dragonhard.lobby.manager.*;
+import de.dragonhard.lobby.manager.other.*;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.util.ArrayList;

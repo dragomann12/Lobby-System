@@ -1,13 +1,11 @@
-package de.dragonhard.lobby.manager;
+package de.dragonhard.lobby.manager.other;
 
-import com.sun.org.apache.xpath.internal.operations.Variable;
 import de.dragonhard.lobby.components.ConsoleWriter;
 import de.dragonhard.lobby.reader.MessageReader;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.io.File;
-import java.util.ArrayList;
 
 public class ServerMessageManager extends MessageReader {
 

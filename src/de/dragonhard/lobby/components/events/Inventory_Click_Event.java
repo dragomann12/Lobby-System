@@ -1,12 +1,10 @@
 package de.dragonhard.lobby.components.events;
 
 import de.dragonhard.lobby.components.PermissionList;
-import de.dragonhard.lobby.manager.InventoryManager;
-import de.dragonhard.lobby.manager.PluginWithlistManager;
+import de.dragonhard.lobby.manager.other.InventoryManager;
+import de.dragonhard.lobby.manager.other.PluginWithlistManager;
 import org.bukkit.Bukkit;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 

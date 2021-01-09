@@ -2,7 +2,7 @@ package de.dragonhard.lobby.components.menu.player;
 
 import de.dragonhard.lobby.components.menu.Lobby_Inventory;
 import de.dragonhard.lobby.components.menu.shop.Shop_Coin_Menu;
-import de.dragonhard.lobby.manager.*;
+import de.dragonhard.lobby.manager.other.*;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

@@ -2,8 +2,8 @@ package de.dragonhard.lobby.commands.teleport;
 
 import de.dragonhard.lobby.components.Message;
 import de.dragonhard.lobby.components.PermissionList;
-import de.dragonhard.lobby.manager.ConfigManager;
-import de.dragonhard.lobby.manager.SpawnManager;
+import de.dragonhard.lobby.manager.other.ConfigManager;
+import de.dragonhard.lobby.manager.other.SpawnManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
