@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 
 public class cmdAutoWarp extends PlayerConfigManager implements CommandExecutor {
 
+//@TODO remove later?
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

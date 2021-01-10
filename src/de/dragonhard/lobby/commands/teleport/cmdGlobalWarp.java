@@ -1,15 +1,15 @@
 package de.dragonhard.lobby.commands.teleport;
 
 import de.dragonhard.lobby.components.PermissionList;
-import de.dragonhard.lobby.manager.other.ConfigManager;
-import de.dragonhard.lobby.manager.other.GlobalWarpManager;
+import de.dragonhard.lobby.manager.Managers;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class cmdGlobalWarp extends GlobalWarpManager implements CommandExecutor {
+public class cmdGlobalWarp extends Managers implements CommandExecutor {
 
+//@TODO remove later?
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -27,13 +27,13 @@ public class cmdGlobalWarp extends GlobalWarpManager implements CommandExecutor 
                         case "set":
 
                             if(args[1] != ""){
-                                this.createWarp(p, args[1], p.getWorld());
+                                this.getGlobalWarpManager().createWarp(p, args[1], p.getWorld());
                             }else{help(p);}break;
 
                         case "remove":
 
                             if(args[1] != ""){
-                                this.delWarp(p, args[1]);
+                                this.getGlobalWarpManager().delWarp(p, args[1]);
                             }else{help(p);}break;
 
                         default: help(p);
@@ -57,10 +57,9 @@ public class cmdGlobalWarp extends GlobalWarpManager implements CommandExecutor 
     }
 
     private void help(Player p){
-        ConfigManager cm = new ConfigManager();
 
-        if(cm.tagUseEnabled()){
-            p.sendMessage(cm.getTag() + "§4Fehler benutze den Befehl so: ");
+        if(this.getConfigManager().tagUseEnabled()){
+            p.sendMessage(this.getConfigManager().getTag() + "§4Fehler benutze den Befehl so: ");
         }else{
             p.sendMessage("§4Fehler benutze den Befehl so: ");
         }

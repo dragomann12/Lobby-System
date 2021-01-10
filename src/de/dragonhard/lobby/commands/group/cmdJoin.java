@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 public class cmdJoin extends GroupManager implements CommandExecutor {
 
+    //@TODO remove later?
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 

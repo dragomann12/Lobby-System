@@ -12,7 +12,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class Join_Event extends Managers implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e){
-
         Player p = e.getPlayer();
         e.setJoinMessage("");
 

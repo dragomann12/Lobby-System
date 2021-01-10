@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.components.events;
 
+import de.dragonhard.lobby.manager.Managers;
 import de.dragonhard.lobby.manager.other.PlayerConfigManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,14 +12,14 @@ public class Drop_Event implements Listener {
     @EventHandler
     public void onDrop(PlayerDropItemEvent e){
         Player p = e.getPlayer();
-        PlayerConfigManager pm = new PlayerConfigManager();
+        Managers managers = new Managers();
 
         if(Event_Blocker.isMenu()){
             e.setCancelled(true);
             return;
         }
 
-        if(pm.isBuildModeEnabled(p)){
+        if(managers.getPlayerManager().isBuildModeEnabled(p)){
             e.setCancelled(false);
             return;
         }
