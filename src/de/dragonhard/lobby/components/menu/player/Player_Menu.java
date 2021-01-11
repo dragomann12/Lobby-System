@@ -2,6 +2,7 @@ package de.dragonhard.lobby.components.menu.player;
 
 import de.dragonhard.lobby.components.menu.Lobby_Inventory;
 import de.dragonhard.lobby.components.menu.shop.Shop_Coin_Menu;
+import de.dragonhard.lobby.manager.Managers;
 import de.dragonhard.lobby.manager.other.*;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -23,7 +24,7 @@ public class Player_Menu extends Lobby_Inventory implements Listener {
    private String menuName = "Player";
    private String prefix = "#";
    private static ArrayList<Integer> wall_item_id = new ArrayList<Integer>();
-
+    Managers manager = new Managers();
 
     public void openInventory(Player p){
         this.p = p;
@@ -42,7 +43,7 @@ public class Player_Menu extends Lobby_Inventory implements Listener {
                     String title = cm.getSlotTitle(menuName, i).replace(" /nonTag", "");
                     this.addItemToInventory(title, Material.getMaterial(cm.getSlotMaterial(menuName, i)), "§" + cm.getSlotTitleColor(menuName, i), i);
                 }else if(cm.getSlotTitle(menuName,i).contains(" " + prefix + InteractionType.VISUAL + " /coins")){
-                    String title = cm.getSlotTitle(menuName, i).replace(prefix + InteractionType.VISUAL + " /coins","Chaos-Coins: §e" + pm.getCoins(p));
+                    String title = cm.getSlotTitle(menuName, i).replace(prefix + InteractionType.VISUAL + " /coins","Chaos-Coins: §e" + manager.getConnectionManager().callRowCoins(p) );
                     this.addItemToInventory(title, Material.getMaterial(cm.getSlotMaterial(menuName,i)),"§" + cm.getSlotTitleColor(menuName,i),i);
                 }else if(cm.getSlotTitle(menuName,i).contains(" " + prefix + InteractionType.VISUAL + " /nick")){
                     String title = cm.getSlotTitle(menuName, i).replace(prefix + InteractionType.VISUAL + " /nick","Name: §e" + p.getName());

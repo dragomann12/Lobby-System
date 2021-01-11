@@ -1,13 +1,14 @@
 package de.dragonhard.lobby.manager.other;
 
+import de.dragonhard.lobby.manager.Managers;
 import org.bukkit.entity.Player;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DateManager extends PlayerConfigManager{
+public class DateManager extends Managers {
 
-    private String getCurrentDate(){
+    public String getCurrentDate(){
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         String orginal = sdf.format(new Date());
@@ -16,22 +17,16 @@ public class DateManager extends PlayerConfigManager{
     }
 
     public String getPlayerDate(Player p){
-        this.setFile(p,"config");
-        return this.getString("Online");
-    }
-
-    public void setPlayerDate(Player p){
-        this.setFile(p,"config");
-        this.set("Online", getCurrentDate());
+        return this.getConnectionManager().callRowDate(p);
     }
 
     public boolean checkPlayerActivity(Player p){
 
         if(!getCurrentDate().equals(getPlayerDate(p))){
             CoinManager cm = new CoinManager();
-            cm.addDailyCoins(p);
+            this.getConnectionManager().setRowCoins(p,this.getConnectionManager().callRowCoins(p) + 500);
             p.sendMessage("§aDu hast dein Geschenk erhalten!");
-            setPlayerDate(p);
+            this.getConnectionManager().setRowDate(p);
         }
 
 

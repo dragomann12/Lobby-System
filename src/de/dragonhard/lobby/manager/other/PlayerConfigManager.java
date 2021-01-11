@@ -1,12 +1,13 @@
 package de.dragonhard.lobby.manager.other;
 
+import de.dragonhard.lobby.manager.Managers;
 import de.dragonhard.lobby.reader.ConfigReader;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 public class PlayerConfigManager extends ConfigReader {
-
+    private static Managers manager = new Managers();
     private static final String defaultConfig = "config";
     private static final String defaultItemBase = "Player.";
 
@@ -38,7 +39,6 @@ public class PlayerConfigManager extends ConfigReader {
         this.setDefault("AccessLevel",0);
         this.setDefault("AccessKey","");
         this.setDefault("AccessKeyEnabled",false);
-        this.setDefault("Coins",0);
         this.setDefault("warpUpgraded", false);
         this.setDefault("UserTag","" + p.getFoodLevel() + p.getUniqueId());
         this.setDefault("passwd","");
@@ -49,10 +49,6 @@ public class PlayerConfigManager extends ConfigReader {
 
     public void setWarpEnabled(Player p, boolean status){
         setBooleanOf(p,"WarpEnabled", status);
-    }
-
-    public void setCoins(Player p, int value){
-        setIntegerOf(p,"Coins", value);
     }
 
     public void setKey(Player p, String key){setStringOf(p,"AccessKey", key);}
@@ -69,10 +65,6 @@ public class PlayerConfigManager extends ConfigReader {
     public void setIntegerOf(Player p, String item, int value){
         this.setFile(p, defaultConfig);
         this.set(item, value);
-    }
-
-    public int getCoins(Player p){
-        return getIntegerOf(p,"Coins");
     }
 
     public int getAccessLevel(Player p){
@@ -146,7 +138,7 @@ public class PlayerConfigManager extends ConfigReader {
     }
 
     public Boolean isBuildModeEnabled(Player p){
-        return getBooleanOf(p,"isBuildModeEnabled");
+        return manager.getConnectionManager().callRowBuildMode(p) == 1;
     }
 
     public boolean isUpdate(Player p){
@@ -206,11 +198,6 @@ public class PlayerConfigManager extends ConfigReader {
 
     }
 
-    public void disableDbcreation(Player p){
-        this.setFile(p,"config");
-        this.set("DbCreated",true);
-    }
-
     public void toggleUpdate(Player p){
         this.setFile(p,"config");
         if(isUpdate(p)){
@@ -233,15 +220,14 @@ public class PlayerConfigManager extends ConfigReader {
     }
 
     public void toggleBuildMode(Player p){
-        this.setFile(p,"config");
-        if(this.getBoolean("isBuildModeEnabled")){
-            this.set("isBuildModeEnabled", false);
-            p.setGameMode(GameMode.SURVIVAL);
-            p.sendMessage("§4Du bist nun nicht mehr im Bau-Modus!");
-        }else{
-            this.set("isBuildModeEnabled", true);
+        manager.getConnectionManager().toggleRowBuildMode(p);
+        if(manager.getConnectionManager().callRowBuildMode(p) == 1){
             p.setGameMode(GameMode.CREATIVE);
             p.sendMessage("§aDu bist nun im Bau-Modus!");
+        }else{
+            p.setGameMode(GameMode.SURVIVAL);
+            p.sendMessage("§4Du bist nun nicht mehr im Bau-Modus!");
+
         }
     }
 

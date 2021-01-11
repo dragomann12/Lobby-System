@@ -43,13 +43,6 @@ public class Shop_Coin_Menu extends Lobby_Inventory implements Listener {
 
                 if(cm.getSlotTitle(menuName,i).contains(prefix + ItemTypes.TICKED)){
                     String title = cm.getSlotTitle(menuName, i).replace(prefix + ItemTypes.TICKED,this.getTag("§6Preis: §a" + PriceList.getPriceOf("TICKED","Karte") ) + " " + this.getTag("Item"));
-                    if(title.contains("§6Preis: §") && pm.getCoins(p) < PriceList.getPriceOf("TICKED","Karte")){
-                        title.replace("§6Preis: §", "§6Preis: §4");
-                    }else if(title.contains("§6Preis: §") && pm.getCoins(p) == PriceList.getPriceOf("TICKED","Karte")){
-                        title.replace("§6Preis: §", "§6Preis: §e");
-                    }else if(title.contains("§6Preis: §") && pm.getCoins(p) > PriceList.getPriceOf("TICKED","Karte")){ }
-                    this.addItemToInventory(title, Material.getMaterial(cm.getSlotMaterial(menuName, i)), "§" + cm.getSlotTitleColor(menuName, i), i);
-                }else{
                     this.addItemToInventory(cm.getSlotTitle(menuName,i) + this.getTag("Item"), Material.getMaterial(cm.getSlotMaterial(menuName,i)),"§" + cm.getSlotTitleColor(menuName,i),i);
                 }
 

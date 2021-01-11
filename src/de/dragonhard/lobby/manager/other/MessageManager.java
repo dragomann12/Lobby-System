@@ -16,13 +16,14 @@ public class MessageManager extends Managers {
     public static String prefix = cm.getMessagePrefix();
     private static String[] seperator = {"/","#", ">>"};
 
-    public static void getChatFunktion(String message, Player p){
+    public void getChatFunktion(String message, Player p){
 
         brodcast.sendChat(p, message, seperator[2]);
 
     }
 
-    public static void getFunktion(String message, Player p) {
+    public void getFunktion(String message, Player p) {
+
             GlobalWarpManager gwm = new GlobalWarpManager();
         if (message.startsWith(prefix + "config")) {
 
@@ -82,11 +83,7 @@ public class MessageManager extends Managers {
         }else if (message.startsWith(prefix + "player")){
             Player_Menu plm = new Player_Menu();
             plm.openInventory(p);
-        }else if (message.startsWith(prefix + "sql coins")){
-            ConnectionManager cm = new ConnectionManager();
-            p.sendMessage("Coins: " + cm.getCoins(p));
-    }
-
+        }
     }
 
 }

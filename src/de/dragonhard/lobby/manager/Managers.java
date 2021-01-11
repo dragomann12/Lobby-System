@@ -1,6 +1,8 @@
 package de.dragonhard.lobby.manager;
 
 import de.dragonhard.lobby.manager.database.ConnectionManager;
+import de.dragonhard.lobby.manager.database.ConnectionStateManager;
+import de.dragonhard.lobby.manager.database.MySQLManager;
 import de.dragonhard.lobby.manager.other.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -73,4 +75,7 @@ public class Managers {
         return Bukkit.getPluginManager();
     }
 
+    public ConnectionStateManager getConnectionStateManager(){return new ConnectionStateManager();}
+
+    public MySQLManager getMySqlManager(){return new MySQLManager();}
 }

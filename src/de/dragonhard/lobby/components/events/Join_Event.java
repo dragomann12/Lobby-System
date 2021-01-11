@@ -9,21 +9,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import java.sql.SQLException;
+
 public class Join_Event extends Managers implements Listener {
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent e){
+    public void onPlayerJoin(PlayerJoinEvent e) throws SQLException {
         Player p = e.getPlayer();
         e.setJoinMessage("");
 
         this.getPlayerManager().checkPlayer(p);
         this.getPluginWhitelistManager().addPlayerToGroup(p);
         this.getPlayerManager().setFile(p,"config");
-
-        if(!this.getPlayerManager().hasDBPlace(p)) {
-
-            this.getConnectionManager().addPlayerToDb(p);
-            this.getPlayerManager().disableDbcreation(p);
-        }
+        this.getConnectionManager().createRow(p);
 
         String title = "";
         title = this.getConfigManager().getAccessLevelTag(this.getAccessManager().getAccessLevel(p));

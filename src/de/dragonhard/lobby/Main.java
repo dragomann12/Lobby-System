@@ -17,11 +17,15 @@ import de.dragonhard.lobby.components.menu.player.Player_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Coin_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Menu;
 import de.dragonhard.lobby.manager.*;
+import de.dragonhard.lobby.manager.database.ConnectionManager;
+import de.dragonhard.lobby.manager.database.MySQLManager;
 import de.dragonhard.lobby.manager.other.BungeeCordManager;
 import de.dragonhard.lobby.manager.other.PluginComunicationManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.sql.SQLException;
 
 public class Main extends JavaPlugin{
 
@@ -50,6 +54,8 @@ TODO add Yes/No question to admin items
                 }
             }
 
+            Bukkit.getConsoleSender().sendMessage("§aEine Verbindung mit der Datenbank wird hergestellt.");
+            manager.getMySqlManager().connect("createTable", null);
                 ConsoleWriter.writeWithTag("Config is up to date ...");
 
                 registerOutgoingChannel();
@@ -64,7 +70,6 @@ TODO add Yes/No question to admin items
 
                 manager.getPluginWhitelistManager().onLoad();
                 manager.getSoundManager().addSoundsToList();
-                manager.getConnectionManager().connect();
 
         }else{
             ConsoleWriter.writeWithTag("installing ...");
@@ -215,6 +220,7 @@ TODO add Yes/No question to admin items
         manager.getPluginManager().registerEvents(new Admin_External_Menu(),this);
         manager.getPluginManager().registerEvents(new Player_Menu(),this);
         manager.getPluginManager().registerEvents(new Shop_Coin_Menu(),this);
+        manager.getPluginManager().registerEvents(new ConnectionManager(),this);
 
         ConsoleWriter.writeWithTag("event register loaded");
         return true;

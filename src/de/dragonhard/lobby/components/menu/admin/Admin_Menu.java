@@ -2,6 +2,7 @@ package de.dragonhard.lobby.components.menu.admin;
 
 import de.dragonhard.lobby.components.PermissionList;
 import de.dragonhard.lobby.components.menu.Lobby_Inventory;
+import de.dragonhard.lobby.manager.Managers;
 import de.dragonhard.lobby.manager.other.*;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class Admin_Menu extends Lobby_Inventory implements Listener {
     private Player p;
     private String menuName = "Admin";
+    private Managers manager = new Managers();
     PluginWithlistManager pwm = new PluginWithlistManager();
     private static ArrayList<Integer> wall_item_id = new ArrayList<Integer>();
 
@@ -84,8 +86,6 @@ public class Admin_Menu extends Lobby_Inventory implements Listener {
     public void onModeClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
         InventoryManager im = new InventoryManager();
-        GlobalWarpManager gwm = new GlobalWarpManager();
-        PlayerConfigManager pm = new PlayerConfigManager();
         ConfigManager cm = new ConfigManager();
         try {
             if (e.getInventory().getName().equals("§" + cm.getMenuTitleColor(menuName) + cm.getMenuTitle(menuName))) {
@@ -102,7 +102,7 @@ public class Admin_Menu extends Lobby_Inventory implements Listener {
                                 switch (e.getSlot()) {
                                     case 20:
                                         if (p.hasPermission(PermissionList.getPermission("Menu_Item", 2))) {
-                                            pm.toggleBuildMode(p);
+                                            manager.getPlayerManager().toggleBuildMode(p);
                                             im.clearInv(p);
                                         } else {
                                             p.sendMessage("§4keine Berechtigung!");

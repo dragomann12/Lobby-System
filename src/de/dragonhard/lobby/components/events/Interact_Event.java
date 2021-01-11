@@ -92,12 +92,13 @@ public class Interact_Event extends Managers implements Listener {
                                     if (e.getItem().getType().equals(Material.getMaterial(this.getConfigManager().getHotbarMaterial("Lobby")))) {
                                         //Lobby Item
                                         p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                                        this.getMenuManager().getLobbyMenu();
+                                        this.getMenuManager().getLobbyMenu().openInventory(p);
 
                                     } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
                                         if (e.getItem().getType().equals(Material.SKULL_ITEM)) {
                                             //Player Item
                                             p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                                            this.getMySqlManager().connect("callRowCoins", p);
                                             this.getMenuManager().getPlayerMenu().openInventory(p);
 
                                         } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {

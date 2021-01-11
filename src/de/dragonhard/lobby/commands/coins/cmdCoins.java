@@ -17,19 +17,33 @@ public class cmdCoins extends Managers implements CommandExecutor {
 
             if(args[0].isEmpty()){
                 if(args[0].equals("help")){help(p); return false;}
-                p.sendMessage("§aDu hast §b"+ this.getCoinManager().getCoins(p) + " §aChaos-Coins");
+                p.sendMessage("§aDu hast §b"+ this.getConnectionManager().callRowCoins(p) + " §aChaos-Coins");
             }else if(!args[1].isEmpty()){
                 Player target = Bukkit.getPlayer(args[1]);
                 switch (args[0]){
 
                     case "see":
-                        p.sendMessage("§5"+target.getName() + " §bhat §a" + this.getCoinManager().getCoins(target) + " CC");break;
+                        p.sendMessage("§5"+target.getName() + " §bhat §a" + this.getConnectionManager().callRowCoins(target) + " CC");break;
                     case "set":
                         if(args[2].isEmpty()){help(p);}
-                        this.getCoinManager().setCoins(target, Integer.parseInt(args[2]));break;
+                        this.getConnectionManager().setRowCoins(target,Integer.parseInt(args[2]));
+                        if(p.getName().equals(target.getName())){
+                            p.sendMessage("§bDu hast jetzt §5" + this.getConnectionManager().callRowCoins(p) + "§bCC");
+                        }else{
+                            p.sendMessage("§bDu hast die Chaos-Coins des Spielers auf §e" + this.getConnectionManager().callRowCoins(target) + "§bCC gesetzt");
+                            target.sendMessage("§bDu hast jetzt §5" + this.getConnectionManager().callRowCoins(p) + "§bCC");
+                        }
+                        break;
                     case "add":
                         if(args[2].isEmpty()){help(p);}
-                        this.getCoinManager().setCoins(target, this.getCoinManager().getCoins(p) + Integer.parseInt(args[2]));break;
+                        this.getConnectionManager().setRowCoins(target,this.getConnectionManager().callRowCoins(p) + Integer.parseInt(args[2]));
+                        if(p.getName().equals(target.getName())){
+                            p.sendMessage("§bDu hast jetzt §5" + this.getConnectionManager().callRowCoins(p) + "§bCC");
+                        }else{
+                            p.sendMessage("§bDu hast die Chaos-Coins des Spielers auf §e" + this.getConnectionManager().callRowCoins(target) + "§bCC gesetzt");
+                            target.sendMessage("§bDu hast jetzt §5" + this.getConnectionManager().callRowCoins(p) + "§bCC");
+                        }
+                        break;
                 }
             }else{
                 help(p);
