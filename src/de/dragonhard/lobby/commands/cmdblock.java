@@ -33,12 +33,7 @@ public class cmdblock extends Managers implements CommandExecutor {
                         switch (args[0]) {
                             case "add":
                                    tp = Bukkit.getPlayer(args[1]);
-                                   acm.addPlayerToBlackList(p,tp);
-                                   p.sendMessage("§aDer Spieler §e" + tp.getName() + " §awurde erfolgreich ausgeschlossen!");break;
-                            case "del":
-                                tp = Bukkit.getPlayer(args[1]);
-                                acm.delPlayerFromBlackList(p,tp);
-                                p.sendMessage("§aDer Spieler §e" + tp.getName() + " §aist jetzt nicht mehr ausgeschlossen!");break;
+                                   acm.addPlayerToBlackList(p,tp);break;
                             default:
                               help(p);
                         }

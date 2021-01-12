@@ -11,20 +11,23 @@ import java.util.ArrayList;
 
 public class Hide_Event extends Managers implements Listener {
 
+//@TODO fix hide-mode : broken after my sql database implementation
+// @TODO fix Blacklist : broken after my sql database implementation
+
     ArrayList<String> hide = new ArrayList<String>();
 
     @EventHandler
     public void onInteract(PlayerInteractEvent e){
         Player p = (Player) e.getPlayer();
 
-        if(this.getPlayerManager().getHideStatus(p)){
+        if(this.getConnectionManager().callRowHideMode(p) == 0){
 
                 hide.remove(p.getName());
                 for (Player players : Bukkit.getOnlinePlayers()) {
                     p.showPlayer(players);
                 }
 
-        }else {
+        }else if(this.getConnectionManager().callRowHideMode(p) == 1){
             hide.add(p.getName());
             for (Player players : Bukkit.getOnlinePlayers()) {
                 p.hidePlayer(players);

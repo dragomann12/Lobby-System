@@ -18,12 +18,11 @@ public class Join_Event extends Managers implements Listener {
         e.setJoinMessage("");
 
         this.getPlayerManager().checkPlayer(p);
-        this.getPluginWhitelistManager().addPlayerToGroup(p);
         this.getPlayerManager().setFile(p,"config");
         this.getConnectionManager().createRow(p);
 
         String title = "";
-        title = this.getConfigManager().getAccessLevelTag(this.getAccessManager().getAccessLevel(p));
+        title = this.getConfigManager().getAccessLevelTag(Integer.parseInt(this.getConnectionManager().callRowLevel(p)));
         ConsoleWriter.writeWithTag("Player " + p.getName() + " with the UUID: " + p.getUniqueId() + " joined as " + title + "!");
 
         if(this.getConfigManager().showWelcome()){

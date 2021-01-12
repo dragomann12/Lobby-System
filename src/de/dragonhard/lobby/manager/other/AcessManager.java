@@ -1,30 +1,22 @@
 package de.dragonhard.lobby.manager.other;
 
+import de.dragonhard.lobby.manager.Managers;
 import org.bukkit.entity.Player;
 
-public class AcessManager extends PlayerConfigManager {
+import java.util.Objects;
+
+public class AcessManager extends Managers {
 
     public void addPlayerToBlackList(Player p, Player target){
-        this.setFile(target,"config");
-        if(this.getBoolean("isBlacklisted")){
-            p.sendMessage("§4Dieser Spieler ist bereits auf der Blacklist!");
-        }else{
-            this.set("isBlacklisted", true);
-        }
-    }
 
-    public void delPlayerFromBlackList(Player p, Player target){
-        this.setFile(target,"config");
-        if(!this.getBoolean("isBlacklisted")){
-            p.sendMessage("§4Dieser Spieler ist nicht auf der Blacklist!");
-        }else{
-            this.set("isBlacklisted", false);
-        }
+        this.getConnectionManager().setRowBlacklist(target);
+        p.sendMessage("§aDer Spieler §4" + target.getName() + " §awurde erfolgreich ausgeschlossen!");
+        target.sendMessage("§4Du wurdest gesperrt du hast nun kein Adminzugang mehr");
+
     }
 
     public boolean isBlacklisted(Player p){
-        this.setFile(p,"config");
-        return this.getBoolean("isBlacklisted");
+        return Objects.equals(p.getUniqueId().toString(), this.getConnectionManager().callRowBlacklist(p));
     }
 
 }

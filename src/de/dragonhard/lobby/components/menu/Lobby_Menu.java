@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.components.menu;
 
+import de.dragonhard.lobby.manager.Managers;
 import de.dragonhard.lobby.manager.other.*;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 public class Lobby_Menu extends Lobby_Inventory implements Listener {
     private Player p;
     private String menuName = "Lobby";
+    private Managers manager = new Managers();
     private static ArrayList<Integer> wall_item_id = new ArrayList<Integer>();
     public void openInventory(Player p){
         this.p = p;
@@ -28,21 +30,8 @@ public class Lobby_Menu extends Lobby_Inventory implements Listener {
 
             if(cm.slotIsEnabled(menuName,i)){
 
-                if(cm.getSlotTitle(menuName,i).contains(" /nonTag")) {
-                    String title = cm.getSlotTitle(menuName, i).replace(" /nonTag", "");
-                    this.addItemToInventory(title, Material.getMaterial(cm.getSlotMaterial(menuName, i)), "§" + cm.getSlotTitleColor(menuName, i), i);
-                }else if(cm.getSlotTitle(menuName,i).contains(" - Wartung")){
-                    String title = cm.getSlotTitle(menuName, i).replace(" - Wartung", " §4Wartung");
-                    this.addItemToInventory(title + this.getGameTag(), Material.getMaterial(cm.getSlotMaterial(menuName, i)), "§" + cm.getSlotTitleColor(menuName, i), i);
-                }else if(cm.getSlotTitle(menuName,i).contains(" - offline")){
-                    String title = cm.getSlotTitle(menuName, i).replace(" - offline", " §4offline");
-                    this.addItemToInventory(title + this.getTag("Item"), Material.getMaterial(cm.getSlotMaterial(menuName, i)), "§" + cm.getSlotTitleColor(menuName, i), i);
-                }else if(cm.getSlotTitle(menuName,i).contains(" - err")){
-                    String title = cm.getSlotTitle(menuName, i).replace(" - err", " §4offline §e[§4Fehler§e]");
-                    this.addItemToInventory(title + this.getTag("Item"), Material.getMaterial(cm.getSlotMaterial(menuName, i)), "§" + cm.getSlotTitleColor(menuName, i), i);
-                }else{
-                    this.addItemToInventory(cm.getSlotTitle(menuName,i) + this.getTag("Item"), Material.getMaterial(cm.getSlotMaterial(menuName,i)),"§" + cm.getSlotTitleColor(menuName,i),i);
-                }
+                    this.addItemToInventory( manager.getConnectionManager().callRowServer(i,"NAME") + this.getTag("Item"), Material.getMaterial(cm.getSlotMaterial(menuName,i)),"§" + cm.getSlotTitleColor(menuName,i),i);
+
 
             }else{
 
@@ -86,11 +75,11 @@ public class Lobby_Menu extends Lobby_Inventory implements Listener {
         SpawnManager sm = new SpawnManager();
         ConfigManager cm = new ConfigManager();
 
-        if(e.getInventory().getName().equals("§"+ cm.getMenuTitleColor(menuName) + cm.getMenuTitle(menuName))){
-            if (e.getCurrentItem() == null) {return;} else{
+        if(e.getInventory().getName().equals("§"+ manager.getConfigManager().getMenuTitleColor(menuName) + manager.getConfigManager().getMenuTitle(menuName))){
+            if (e.getCurrentItem() != null) {
                 if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Item"))) {
 
-                    String slot = cm.getSlotTitle(menuName,e.getSlot());
+                    String slot = manager.getConfigManager().getSlotTitle(menuName,e.getSlot());
 
                     if(slot.contains("?")){p.sendMessage("§4Die Lobby ist nicht verfügbar!"); return;}
                     else if(slot.contains("Wartung")){p.sendMessage("§4Die Lobby ist wegen arbeiten offline!"); return;}
@@ -99,13 +88,10 @@ public class Lobby_Menu extends Lobby_Inventory implements Listener {
                     else if(slot.contains("Spawn")){sm.teleportPlayerToSpawn(p); return;}
 
                     p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-
-                    BungeeCordManager.sendPlayerToServer(p, slot);
+                    BungeeCordManager.sendPlayerToServer(p, manager.getConnectionManager().callRowServer(e.getSlot(),"SERVER"));
 
                 }
             }
-
-            return;
         }
 
     }

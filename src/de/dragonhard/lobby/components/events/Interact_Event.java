@@ -67,7 +67,8 @@ public class Interact_Event extends Managers implements Listener {
                         //Hide Item
                         p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
                         p.getInventory().remove(this.getPlayerManager().getHideStatusMaterial(p));
-                        this.getPlayerManager().toggleHideStatus(p);
+                        this.getMySqlManager().connect("callRowHide",p);
+                        this.getConnectionManager().toggleRowHideMode(p);
                         this.getInventoryManager().createItem(p, this.getPlayerManager().getHideStatusMaterial(p), "§5Spieler verstecken", 7);
 
                     } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {

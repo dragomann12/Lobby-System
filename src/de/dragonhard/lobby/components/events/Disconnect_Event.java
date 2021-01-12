@@ -17,18 +17,6 @@ public class Disconnect_Event implements Listener {
             String message = p.getName() + " " + cm.getQuitMessage().replaceAll("/c","§");
             e.setQuitMessage(message);
         }
-        PluginWithlistManager pwm = new PluginWithlistManager();
-
-
-        if(pwm.isOwner(p) ||
-        pwm.isTeam_lead(p) ||
-        pwm.isDeveloper(p) ||
-        pwm.isModerator(p) ||
-        pwm.isSupporter(p) ||
-        pwm.isPlayer(p)){
-            pwm.removePlayerFromGroup(p);
-        }
-
 
     }
 }
