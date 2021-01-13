@@ -20,14 +20,14 @@ public class Hide_Event extends Managers implements Listener {
     public void onInteract(PlayerInteractEvent e){
         Player p = (Player) e.getPlayer();
 
-        if(this.getConnectionManager().callRowHideMode(p) == 0){
+        if(this.getPlayerManager().getHideStatus(p)){
 
                 hide.remove(p.getName());
                 for (Player players : Bukkit.getOnlinePlayers()) {
                     p.showPlayer(players);
                 }
 
-        }else if(this.getConnectionManager().callRowHideMode(p) == 1){
+        }else {
             hide.add(p.getName());
             for (Player players : Bukkit.getOnlinePlayers()) {
                 p.hidePlayer(players);

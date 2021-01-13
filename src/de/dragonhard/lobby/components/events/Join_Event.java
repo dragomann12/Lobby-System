@@ -3,6 +3,7 @@ package de.dragonhard.lobby.components.events;
 import de.dragonhard.lobby.components.ConsoleWriter;
 import de.dragonhard.lobby.components.PermissionList;
 import de.dragonhard.lobby.manager.*;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -48,7 +49,11 @@ public class Join_Event extends Managers implements Listener {
         if(this.getPlayerManager().isBuildModeEnabled(p)){ //build-mode check
 
             ConsoleWriter.writeWithTag("[ALERT] Player " + p.getName() + " uuid: "+ p.getUniqueId() + " joined with build-mode enabled");
-            p.sendMessage("§eAchtung du bist noch im Bau-Modus!");
+            p.sendMessage("§l---------------------------------------------");
+            p.sendMessage("§e*§4Achtung§e* §4" + p.getName());
+            p.sendMessage("§l---------------------------------------------");
+            p.sendMessage("§4du bist noch im Bau-Modus!");
+            p.sendMessage("§l---------------------------------------------");
             return;}
 
             //all lines under this: creating of the Menu

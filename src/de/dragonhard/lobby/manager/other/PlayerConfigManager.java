@@ -146,7 +146,7 @@ public class PlayerConfigManager extends ConfigReader {
     }
 
     public boolean getHideStatus(Player p){
-        return getBooleanOf(p,"hide");
+        return manager.getConnectionManager().callRowHideMode(p) == 1;
     }
 
     public boolean getAutoWarpStatus(Player p){
@@ -208,13 +208,10 @@ public class PlayerConfigManager extends ConfigReader {
     }
 
     public void toggleHideStatus(Player p){
-        this.setFile(p,"config");
+        manager.getConnectionManager().toggleRowHideMode(p);
         if(getHideStatus(p)){
-            this.set("hide",false);
             p.sendMessage("§4Es werden keine Spieler angezeigt!");
-
         }else{
-            this.set("hide",true);
             p.sendMessage("§aEs werden alle Spieler angezeigt!");
         }
     }
@@ -286,16 +283,14 @@ public class PlayerConfigManager extends ConfigReader {
     }
 
     public void addWarpToCount(Player p){
-        if(getIntegerOf(p,"usedWarps") <= getIntegerOf(p,"maxWarps")){
-            int amount = getCurrentWarps(p) + 1;
-            setIntegerOf(p,"usedWarps", amount);
+        if(manager.getConnectionManager().callRowWarpUsed(p) <= manager.getConnectionManager().callRowWarpMax(p)){
+           manager.getConnectionManager().setRowWarp(p);
         }
     }
 
     public void delWarpFromCount(Player p){
-        if(getIntegerOf(p,"usedWarps") <= getIntegerOf(p,"maxWarps")){
-            int amount = getCurrentWarps(p) - 1;
-            setIntegerOf(p,"usedWarps", amount);
+        if(manager.getConnectionManager().callRowWarpUsed(p) <= manager.getConnectionManager().callRowWarpMax(p)){
+            manager.getConnectionManager().delRowWarp(p);
         }
     }
 
