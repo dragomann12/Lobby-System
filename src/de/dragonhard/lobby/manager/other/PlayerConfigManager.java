@@ -67,20 +67,16 @@ public class PlayerConfigManager extends ConfigReader {
         this.set(item, value);
     }
 
-    public int getAccessLevel(Player p){
-        return getIntegerOf(p,"AccessLevel");
-    }
-
     public int getPlayerDBVersion(Player p){
         return getIntegerOf(p,"DBVersion");
     }
 
     public int getCurrentWarps(Player p){
-        return getIntegerOf(p,"usedWarps");
+        return manager.getConnectionManager().callRowWarpUsed(p);
     }
 
     public int getMaxWarps(Player p){
-        return getIntegerOf(p,"maxWarps");
+        return manager.getConnectionManager().callRowWarpMax(p);
     }
 
         /*
@@ -96,16 +92,6 @@ public class PlayerConfigManager extends ConfigReader {
         this.setFile(p, defaultConfig);
         return this.getString(item);
     }
-
-    public String getPasswd(Player p){
-        return getStringOf(p,"passwd");
-    }
-
-    public String getUserTag(Player p){
-        return getStringOf(p,"UserTag");
-    }
-
-    public String getAccessKey(Player p) { return getStringOf(p,"AccessKey"); }
 
     public String getChatSeperatorColor(Player p){
         return getStringOf(p,"ChatSeperatorColor");
@@ -283,13 +269,13 @@ public class PlayerConfigManager extends ConfigReader {
     }
 
     public void addWarpToCount(Player p){
-        if(manager.getConnectionManager().callRowWarpUsed(p) <= manager.getConnectionManager().callRowWarpMax(p)){
+        if(manager.getConnectionManager().callRowWarpUsed(p) != manager.getConnectionManager().callRowWarpMax(p)){
            manager.getConnectionManager().setRowWarp(p);
         }
     }
 
     public void delWarpFromCount(Player p){
-        if(manager.getConnectionManager().callRowWarpUsed(p) <= manager.getConnectionManager().callRowWarpMax(p)){
+        if(manager.getConnectionManager().callRowWarpUsed(p) != 0){
             manager.getConnectionManager().delRowWarp(p);
         }
     }

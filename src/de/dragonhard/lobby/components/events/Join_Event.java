@@ -62,23 +62,24 @@ public class Join_Event extends Managers implements Listener {
         this.getInventoryManager().createItem(p, Material.getMaterial(this.getConfigManager().getHotbarMaterial("shop")),this.getConfigManager().getHotbarTitleColor("shop") + this.getConfigManager().getHotbarTitle("shop"),1);
         this.getInventoryManager().createItem(p, Material.STAINED_GLASS_PANE,"§4 ",2);
 
-        if(p.hasPermission(PermissionList.getPermission("Menu",0)) && this.getPluginWhitelistManager().isAdmin(p) || this.getPluginWhitelistManager().isOwner(p) || this.getPluginWhitelistManager().isPluginDeveloper(p)){
+            if(this.getPluginWhitelistManager().isAdmin(p) || this.getPluginWhitelistManager().isOwner(p) || this.getPluginWhitelistManager().isPluginDeveloper(p)){
 
-            this.getInventoryManager().createItem(p, Material.getMaterial(this.getConfigManager().getHotbarMaterial("Admin")),this.getConfigManager().getHotbarTitleColor("Admin") + this.getConfigManager().getHotbarTitle("Admin"),3);
-        }else{
+                this.getInventoryManager().createItem(p, Material.getMaterial(this.getConfigManager().getHotbarMaterial("Admin")),this.getConfigManager().getHotbarTitleColor("Admin") + this.getConfigManager().getHotbarTitle("Admin"),3);
+            }else{
 
-            this.getInventoryManager().createItem(p, Material.STAINED_GLASS_PANE,"§3 ",3);
-        }
+                this.getInventoryManager().createItem(p, Material.STAINED_GLASS_PANE,"§3 ",3);
+            }
+
 
         this.getInventoryManager().createItem(p, Material.getMaterial(this.getConfigManager().getHotbarMaterial("Game")),this.getConfigManager().getHotbarTitleColor("Game") + this.getConfigManager().getHotbarTitle("Game"),4);
 
-        if(p.hasPermission(PermissionList.getPermission("Menu",0)) && this.getPluginWhitelistManager().isOwner(p) || this.getPluginWhitelistManager().isPluginDeveloper(p)){
+            if (this.getPluginWhitelistManager().isOwner(p) || this.getPluginWhitelistManager().isPluginDeveloper(p)) {
 
-            this.getInventoryManager().createItem(p, Material.getMaterial(this.getConfigManager().getHotbarMaterial("Settings")),this.getConfigManager().getHotbarTitleColor("Settings") + this.getConfigManager().getHotbarTitle("Settings"),5);
-        }else{
+                this.getInventoryManager().createItem(p, Material.getMaterial(this.getConfigManager().getHotbarMaterial("Settings")), this.getConfigManager().getHotbarTitleColor("Settings") + this.getConfigManager().getHotbarTitle("Settings"), 5);
+            } else {
 
-            this.getInventoryManager().createItem(p, Material.STAINED_GLASS_PANE,"§2 ",5);
-        }
+                this.getInventoryManager().createItem(p, Material.STAINED_GLASS_PANE, "§2 ", 5);
+            }
 
         this.getInventoryManager().createItem(p, Material.STAINED_GLASS_PANE,"§1 ",6);
         this.getInventoryManager().createItem(p, this.getPlayerManager().getHideStatusMaterial(p),"§5Spieler verstecken",7);

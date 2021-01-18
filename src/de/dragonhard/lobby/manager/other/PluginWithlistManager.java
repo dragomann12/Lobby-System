@@ -36,6 +36,10 @@ public class PluginWithlistManager {
         owner.add(cm.getAccessLevelTag(8));
     }
 
+    public boolean nullCheck(Player p){
+       return manager.getConnectionManager().callRowLevel(p).isEmpty();
+    }
+
     public boolean isPlayer(Player p){
         return manager.getConnectionManager().callRowLevel(p).equals("0");
     }

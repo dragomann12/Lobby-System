@@ -81,13 +81,13 @@ public class cmdWarp extends Managers implements CommandExecutor {
                                         if(this.getPlayerManager().hasInf(p)){
                                             if(!this.getWarpManager().exists(p, args[1])){
                                                 this.getWarpManager().createWarp(p, args[1],p.getWorld());
-                                                this.getPlayerManager().addWarpToCount(p);
+                                                this.getMySqlManager().connect("setRowWarpUsed",p);
                                             }
                                         }else{
                                             if(this.getPlayerManager().getCurrentWarps(p) != this.getPlayerManager().getMaxWarps(p)){
                                                 if(!this.getWarpManager().exists(p, args[1])){
                                                     this.getWarpManager().createWarp(p, args[1],p.getWorld());
-                                                    this.getPlayerManager().addWarpToCount(p);
+                                                    this.getMySqlManager().connect("setRowWarp",p);
                                                 }
                                             }else{
                                                 p.sendMessage("§4Du hast alle deine Warps in Verwändung!");
@@ -119,8 +119,8 @@ public class cmdWarp extends Managers implements CommandExecutor {
                                         p.sendMessage("§aAlle warps wurden erfolgreich entfernt!");
                                     }else {
 
-                                        if (this.getWarpManager().exists(p, args[1]) && this.getPlayerManager().getCurrentWarps(p) != 0) {
-                                            this.getPlayerManager().delWarpFromCount(p);
+                                        if (this.getWarpManager().exists(p, args[1]) && this.getPlayerManager().getCurrentWarps(p) > 0) {
+                                            this.getMySqlManager().connect("delRowWarp",p);
                                         }
                                         this.getWarpManager().delWarp(p, args[1]);
                                     }
