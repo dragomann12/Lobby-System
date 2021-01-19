@@ -3,6 +3,7 @@ import de.dragonhard.lobby.commands.cmdClear;
 import de.dragonhard.lobby.commands.cmdblock;
 import de.dragonhard.lobby.commands.coins.cmdCoins;
 import de.dragonhard.lobby.commands.network.cmdCreateServer;
+import de.dragonhard.lobby.commands.other.cmdBuild;
 import de.dragonhard.lobby.commands.teleport.cmdAutoWarp;
 import de.dragonhard.lobby.commands.teleport.cmdGlobalWarp;
 import de.dragonhard.lobby.commands.teleport.cmdSpawn;
@@ -168,6 +169,7 @@ TODO add Yes/No question to admin items
         this.getCommand("coins").setExecutor(new cmdCoins());
         this.getCommand("chclear").setExecutor(new cmdClear());
         this.getCommand("crServer").setExecutor(new cmdCreateServer());
+        this.getCommand("bm").setExecutor(new cmdBuild());
 
         ConsoleWriter.writeWithTag("command register loaded");
         return true;

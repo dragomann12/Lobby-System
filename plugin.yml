@@ -1,5 +1,5 @@
 name: LobbySystem
-version: '1.3.7  beta-Build: 137.4'
+version: '1.4.0  beta-Build: 140.5'
 author: Dragonhard117
 main: de.dragonhard.lobby.Main
 
@@ -35,4 +35,8 @@ commands:
   crServer:
     usage:
     description: zum erstellen eines Servers!
+    permission:
+  bm:
+    usage:
+    description: keine Information!
     permission:
