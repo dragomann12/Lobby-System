@@ -28,7 +28,7 @@ public class ConnectionManager extends Managers implements Listener {
         if (this.getConnectionStateManager().isConnected()) {
             if (isInDatabase(p)) {
                 try {
-                    PreparedStatement st1 = getCon().prepareStatement("INSERT INTO Users(UUID,PLAYERNAME,LASTLOGIN) VALUES (?,?,?)");
+                    PreparedStatement st1 = getCon().prepareStatement("INSERT INTO Users(UUID,PLAYERNAME,LASTLOGIN,WARP_USED,WARP_MAX) VALUES (?,?,?,?,?)");
                     st1.setString(1, p.getUniqueId().toString());
                     st1.setString(2, p.getName());
                     st1.setString(3, this.getDateManager().getCurrentDate());
@@ -95,12 +95,12 @@ public class ConnectionManager extends Managers implements Listener {
         return 0;
     }
 
-    public int toggleRowBuildMode(Player p) {
+    public int toggleRowBuildMode(Player p) throws SQLException {
         if (this.getConnectionStateManager().isConnected()) {
-            if (callRowCoins(p) == 0) {
+            if (isInDatabase(p)) {
                 try {
 
-                    PreparedStatement st = getCon().prepareStatement("INSERT INTO Users (UUID,BUILD,HIDE) VALUES (?,?,?)");
+                    PreparedStatement st = getCon().prepareStatement("INSERT INTO Modes(UUID,BUILD,HIDE) VALUES (?,?,?)");
                     st.setString(1, p.getUniqueId().toString());
                     st.setInt(2, callRowBuildMode(p));
                     st.setInt(2, callRowHideMode(p));
@@ -136,7 +136,7 @@ public class ConnectionManager extends Managers implements Listener {
             if (callRowCoins(p) == 0) {
                 try {
 
-                    PreparedStatement st = getCon().prepareStatement("INSERT INTO Users (UUID,BUILD,HIDE) VALUES (?,?,?)");
+                    PreparedStatement st = getCon().prepareStatement("INSERT INTO Modes(UUID,BUILD,HIDE) VALUES (?,?,?)");
                     st.setString(1, p.getUniqueId().toString());
                     st.setInt(2, callRowBuildMode(p));
                     st.setInt(2, callRowHideMode(p));
@@ -213,7 +213,7 @@ public class ConnectionManager extends Managers implements Listener {
             if (status.equals("add")) {
                 try {
 
-                    PreparedStatement st = getCon().prepareStatement("INSERT INTO Network (NAME,SERVER,MATERIAL,SLOT) VALUES (?,?,?,?)");
+                    PreparedStatement st = getCon().prepareStatement("INSERT INTO Network(NAME,SERVER,MATERIAL,SLOT) VALUES (?,?,?,?)");
                     st.setString(1, name);
                     st.setString(2, server);
                     st.setString(3, material);
@@ -256,7 +256,7 @@ public class ConnectionManager extends Managers implements Listener {
             if (callRowWarpUsed(p) == 0) {
                 try {
 
-                    PreparedStatement st = getCon().prepareStatement("INSERT INTO Users (UUID,PLAYERNAME,LASTLOGIN,WARP_USED,WARP_MAX) VALUES (?,?,?,?,?)");
+                    PreparedStatement st = getCon().prepareStatement("INSERT INTO Users(UUID,PLAYERNAME,LASTLOGIN,WARP_USED,WARP_MAX) VALUES (?,?,?,?,?)");
                     st.setString(1, p.getUniqueId().toString());
                     st.setString(2, p.getName());
                     st.setString(3, this.getDateManager().getCurrentDate());
@@ -290,7 +290,7 @@ public class ConnectionManager extends Managers implements Listener {
             if (callRowWarpMax(p) == 0) {
                 try {
 
-                    PreparedStatement st = getCon().prepareStatement("INSERT INTO Users (UUID,PLAYERNAME,LASTLOGIN,WARP_USED,WARP_MAX) VALUES (?,?,?,?,?)");
+                    PreparedStatement st = getCon().prepareStatement("INSERT INTO Users(UUID,PLAYERNAME,LASTLOGIN,WARP_USED,WARP_MAX) VALUES (?,?,?,?,?)");
                     st.setString(1, p.getUniqueId().toString());
                     st.setString(2, p.getName());
                     st.setString(3, this.getDateManager().getCurrentDate());
@@ -384,7 +384,7 @@ public class ConnectionManager extends Managers implements Listener {
             if (callRowCoins(p) == 0) {
                 try {
 
-                    PreparedStatement st = getCon().prepareStatement("INSERT INTO Users (UUID,PLAYERNAME,LASTLOGIN,WARP_USED,WARP_MAX) VALUES (?,?,?,?,?)");
+                    PreparedStatement st = getCon().prepareStatement("INSERT INTO Users(UUID,PLAYERNAME,LASTLOGIN,WARP_USED,WARP_MAX) VALUES (?,?,?,?,?)");
                     st.setString(1, p.getUniqueId().toString());
                     st.setString(2, p.getName());
                     st.setString(3, this.getDateManager().getCurrentDate());
@@ -439,7 +439,7 @@ public class ConnectionManager extends Managers implements Listener {
                 try {
 
                     String uuid = p.getUniqueId().toString();
-                    PreparedStatement st = getCon().prepareStatement("INSERT INTO Coins (UUID,COINS) VALUES (?,?)");
+                    PreparedStatement st = getCon().prepareStatement("INSERT INTO Coins(UUID,COINS) VALUES (?,?)");
                     st.setString(1, uuid);
                     st.setInt(2, coins);
                     st.executeUpdate();
@@ -490,7 +490,7 @@ public class ConnectionManager extends Managers implements Listener {
             if (callRowCoins(p) == 0) {
                 try {
 
-                    PreparedStatement st = getCon().prepareStatement("INSERT INTO Blacklist (UUID,PLAYERNAME) VALUES (?,?)");
+                    PreparedStatement st = getCon().prepareStatement("INSERT INTO Blacklist(UUID,PLAYERNAME) VALUES (?,?)");
                     st.setString(1, p.getUniqueId().toString());
                     st.setString(2, p.getName());
                     st.executeUpdate();
@@ -506,22 +506,22 @@ public class ConnectionManager extends Managers implements Listener {
     public void createTable() {
         if (this.getConnectionStateManager().isConnected()) {
             try {
-                PreparedStatement st1 = getCon().prepareStatement("CREATE TABLE IF NOT EXISTS Users (id INT(6) AUTO_INCREMENT UNIQUE, UUID VARCHAR(255), PLAYERNAME VARCHAR(255), LASTLOGIN VARCHAR(255), WARP_USED INT(255), WARP_MAX INT(255))");
+                PreparedStatement st1 = getCon().prepareStatement("CREATE TABLE IF NOT EXISTS Users(id INT(6) AUTO_INCREMENT UNIQUE, UUID VARCHAR(255), PLAYERNAME VARCHAR(255), LASTLOGIN VARCHAR(255), WARP_USED INT(255), WARP_MAX INT(255))");
                 st1.executeUpdate();
 
-                PreparedStatement st2 = getCon().prepareStatement("CREATE TABLE IF NOT EXISTS Coins (id INT(6) AUTO_INCREMENT UNIQUE, UUID VARCHAR(255), COINS INT(255))");
+                PreparedStatement st2 = getCon().prepareStatement("CREATE TABLE IF NOT EXISTS Coins(id INT(6) AUTO_INCREMENT UNIQUE, UUID VARCHAR(255), COINS INT(255))");
                 st2.executeUpdate();
 
-                PreparedStatement st3 = getCon().prepareStatement("CREATE TABLE IF NOT EXISTS Level (id INT(6) AUTO_INCREMENT UNIQUE, UUID VARCHAR(255), LEVEL INT(255))");
+                PreparedStatement st3 = getCon().prepareStatement("CREATE TABLE IF NOT EXISTS Level(id INT(6) AUTO_INCREMENT UNIQUE, UUID VARCHAR(255), LEVEL INT(255))");
                 st3.executeUpdate();
 
-                PreparedStatement st4 = getCon().prepareStatement("CREATE TABLE IF NOT EXISTS Modes (id INT(6) AUTO_INCREMENT UNIQUE, UUID VARCHAR(255), BUILD INT(255), HIDE INT(255))");
+                PreparedStatement st4 = getCon().prepareStatement("CREATE TABLE IF NOT EXISTS Modes(id INT(6) AUTO_INCREMENT UNIQUE, UUID VARCHAR(255), BUILD INT(255), HIDE INT(255))");
                 st4.executeUpdate();
 
-                PreparedStatement st5 = getCon().prepareStatement("CREATE TABLE IF NOT EXISTS Blacklist (id INT(6) AUTO_INCREMENT UNIQUE, UUID VARCHAR(255), PLAYERNAME VARCHAR(255))");
+                PreparedStatement st5 = getCon().prepareStatement("CREATE TABLE IF NOT EXISTS Blacklist(id INT(6) AUTO_INCREMENT UNIQUE, UUID VARCHAR(255), PLAYERNAME VARCHAR(255))");
                 st5.executeUpdate();
 
-                PreparedStatement st6 = getCon().prepareStatement("CREATE TABLE IF NOT EXISTS Network (id INT(6) AUTO_INCREMENT UNIQUE, NAME VARCHAR(255), SERVER VARCHAR(255), MATERIAL VARCHAR(255), SLOT INT(255))");
+                PreparedStatement st6 = getCon().prepareStatement("CREATE TABLE IF NOT EXISTS Network(id INT(6) AUTO_INCREMENT UNIQUE, NAME VARCHAR(255), SERVER VARCHAR(255), MATERIAL VARCHAR(255), SLOT INT(255))");
                 st6.executeUpdate();
 
                 Bukkit.getConsoleSender().sendMessage(mysql + "§aTables erfolgreich erstellt.");

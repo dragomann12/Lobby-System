@@ -8,6 +8,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.sql.SQLException;
+
 public class cmdBuild extends Managers implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -51,7 +53,7 @@ public class cmdBuild extends Managers implements CommandExecutor {
                 this.getInventoryManager().clearInv(target);
                 sender.sendMessage("§aDu hast den Spieler §b" + target.getName() + " §aerfolgreich in den Bau-Modus gesetzt");
             }
-        }catch(NullPointerException e){
+        }catch(NullPointerException | SQLException e){
 
         }
 

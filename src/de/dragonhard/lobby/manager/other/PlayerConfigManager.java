@@ -7,6 +7,8 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+import java.sql.SQLException;
+
 public class PlayerConfigManager extends ConfigReader {
     private static Managers manager = new Managers();
     private static final String defaultConfig = "config";
@@ -203,7 +205,7 @@ public class PlayerConfigManager extends ConfigReader {
         }
     }
 
-    public void toggleBuildMode(Player p){
+    public void toggleBuildMode(Player p) throws SQLException {
         InventorySetter is = new InventorySetter();
         manager.getConnectionManager().toggleRowBuildMode(p);
         if(manager.getConnectionManager().callRowBuildMode(p) == 1){
