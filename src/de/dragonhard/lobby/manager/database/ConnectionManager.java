@@ -388,6 +388,8 @@ public class ConnectionManager extends Managers implements Listener {
                     st.setString(1, p.getUniqueId().toString());
                     st.setString(2, p.getName());
                     st.setString(3, this.getDateManager().getCurrentDate());
+                    st.setInt(4, callRowWarpUsed(p));
+                    st.setInt(5, callRowWarpMax(p));
                     st.executeUpdate();
 
                 } catch (SQLException throwables) {

@@ -2,6 +2,7 @@ package de.dragonhard.lobby.components.menu.admin;
 
 import de.dragonhard.lobby.components.PermissionList;
 import de.dragonhard.lobby.components.menu.Lobby_Inventory;
+import de.dragonhard.lobby.components.util.InventorySetter;
 import de.dragonhard.lobby.manager.Managers;
 import de.dragonhard.lobby.manager.other.*;
 import org.bukkit.GameMode;
@@ -104,6 +105,8 @@ public class Admin_Menu extends Lobby_Inventory implements Listener {
                                         if (p.hasPermission(PermissionList.getPermission("Menu_Item", 2))) {
                                             manager.getPlayerManager().toggleBuildMode(p);
                                             im.clearInv(p);
+                                            InventorySetter is = new InventorySetter();
+                                            if(!manager.getPlayerManager().isBuildModeEnabled(p)){is.getHotbarItems(p);}
                                         } else {
                                             p.sendMessage("§4keine Berechtigung!");
                                         }

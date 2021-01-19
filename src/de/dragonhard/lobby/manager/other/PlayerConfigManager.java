@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.manager.other;
 
+import de.dragonhard.lobby.components.util.InventorySetter;
 import de.dragonhard.lobby.manager.Managers;
 import de.dragonhard.lobby.reader.ConfigReader;
 import org.bukkit.GameMode;
@@ -203,6 +204,7 @@ public class PlayerConfigManager extends ConfigReader {
     }
 
     public void toggleBuildMode(Player p){
+        InventorySetter is = new InventorySetter();
         manager.getConnectionManager().toggleRowBuildMode(p);
         if(manager.getConnectionManager().callRowBuildMode(p) == 1){
             p.setGameMode(GameMode.CREATIVE);
@@ -210,6 +212,7 @@ public class PlayerConfigManager extends ConfigReader {
         }else{
             p.setGameMode(GameMode.SURVIVAL);
             p.sendMessage("§4Du bist nun nicht mehr im Bau-Modus!");
+            is.getHotbarItems(p);
 
         }
     }
