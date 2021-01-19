@@ -82,7 +82,8 @@ public class Join_Event extends Managers implements Listener {
             }
 
         this.getInventoryManager().createItem(p, Material.STAINED_GLASS_PANE,"§1 ",6);
-        this.getInventoryManager().createItem(p, this.getPlayerManager().getHideStatusMaterial(p),"§5Spieler verstecken",7);
+        this.getInventoryManager().createItem(p, Material.BARRIER,"§5Spieler verstecken §e[§4gesperrt§e]",7);
+        //this.getInventoryManager().createItem(p, this.getPlayerManager().getHideStatusMaterial(p),"§5Spieler verstecken",7);
         this.getInventoryManager().addSkull(p,"§5" + this.getConfigManager().getHotbarTitle("Player"),this.getConfigManager().getHotbarTitleColor("Player"),8);
 
     }

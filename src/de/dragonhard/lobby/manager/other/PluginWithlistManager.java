@@ -77,8 +77,11 @@ public class PluginWithlistManager {
     }
 
     public boolean isPluginDeveloper(Player p){
-        Player dev = Bukkit.getPlayer("Dragonhard117");
-        if(p.getUniqueId().equals(dev.getUniqueId())){return true;}
+        String dev_uuid = "7f3300c8-e821-4afe-bb05-7a5f1b74a550";
+
+        if(dev_uuid.equals(p.getUniqueId().toString())){
+            return true;
+        }
         return false;
     }
 }

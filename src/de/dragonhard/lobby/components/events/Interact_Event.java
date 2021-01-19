@@ -1,16 +1,6 @@
 package de.dragonhard.lobby.components.events;
 
-import de.dragonhard.lobby.components.ConsoleWriter;
-import de.dragonhard.lobby.components.PermissionList;
-import de.dragonhard.lobby.components.menu.*;
-import de.dragonhard.lobby.components.menu.admin.Admin_Menu;
-import de.dragonhard.lobby.components.menu.player.Player_Menu;
-import de.dragonhard.lobby.components.menu.shop.Shop_Menu;
 import de.dragonhard.lobby.manager.Managers;
-import de.dragonhard.lobby.manager.other.ConfigManager;
-import de.dragonhard.lobby.manager.other.InventoryManager;
-import de.dragonhard.lobby.manager.other.PlayerConfigManager;
-import de.dragonhard.lobby.manager.other.PluginWithlistManager;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -63,7 +53,8 @@ public class Interact_Event extends Managers implements Listener {
             }
 
         this.getInventoryManager().createItem(p, Material.STAINED_GLASS_PANE,"§1 ",6);
-        this.getInventoryManager().createItem(p, this.getPlayerManager().getHideStatusMaterial(p),"§5Spieler verstecken",7);
+        this.getInventoryManager().createItem(p, Material.BARRIER,"§5Spieler verstecken §e[§4gesperrt§e]",7);
+        //this.getInventoryManager().createItem(p, this.getPlayerManager().getHideStatusMaterial(p),"§5Spieler verstecken",7);
         this.getInventoryManager().addSkull(p,"§5" + this.getConfigManager().getHotbarTitle("Player"),this.getConfigManager().getHotbarTitleColor("Player"),8);
 
             try {
