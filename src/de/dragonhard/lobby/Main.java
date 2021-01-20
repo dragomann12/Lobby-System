@@ -18,6 +18,7 @@ import de.dragonhard.lobby.components.menu.debug.debug_Menu;
 import de.dragonhard.lobby.components.menu.player.Player_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Coin_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Menu;
+import de.dragonhard.lobby.components.util.PAPI_Support;
 import de.dragonhard.lobby.manager.*;
 import de.dragonhard.lobby.manager.database.ConnectionManager;
 import de.dragonhard.lobby.manager.database.MySQLManager;
@@ -56,6 +57,7 @@ TODO add Yes/No question to admin items
                 }
             }
 
+
             Bukkit.getConsoleSender().sendMessage("§aEine Verbindung mit der Datenbank wird hergestellt.");
             manager.getMySqlManager().connect("createTable", null);
                 ConsoleWriter.writeWithTag("Config is up to date ...");
@@ -72,6 +74,11 @@ TODO add Yes/No question to admin items
 
                 manager.getPluginWhitelistManager().onLoad();
                 manager.getSoundManager().addSoundsToList();
+
+            if (manager.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+                PAPI_Support pS = new PAPI_Support(this);
+                pS.register();
+            }
 
         }else{
             ConsoleWriter.writeWithTag("installing ...");

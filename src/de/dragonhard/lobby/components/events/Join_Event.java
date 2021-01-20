@@ -1,8 +1,10 @@
 package de.dragonhard.lobby.components.events;
 
+import de.dragonhard.lobby.Main;
 import de.dragonhard.lobby.components.ConsoleWriter;
 import de.dragonhard.lobby.components.PermissionList;
 import de.dragonhard.lobby.components.util.InventorySetter;
+import de.dragonhard.lobby.components.util.PAPI_Support;
 import de.dragonhard.lobby.manager.*;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
