@@ -34,17 +34,9 @@ public class Join_Event extends Managers implements Listener {
             String msgColor = "§" + this.getConfigManager().getMessageColor();
             String nameColor = "§" + this.getConfigManager().getNameColor();
             String startColor = "§" + this.getConfigManager().getStartColor();
-            p.sendMessage(  "§l" + startColor + this.getConfigManager().getMessageStart() + " " + nameColor + p.getName()+ " " + msgColor  + this.getConfigManager().getWelcomeMessage());
-        }
-
-        if(this.getPlayerManager().hasAutoWarp(p)){     //check for the first spawn location
+            p.sendMessage("§l" + startColor + this.getConfigManager().getMessageStart() + " " + nameColor + p.getName()+ " " + msgColor  + this.getConfigManager().getWelcomeMessage()); }
 
             this.getSpawnManager().teleportPlayerToSpawn(p);
-            this.getWarpManager().teleportPlayer(p, this.getPlayerManager().getAutoWarpLocation(p));
-        }else {
-
-            this.getSpawnManager().teleportPlayerToSpawn(p);
-        }
 
         this.getInventoryManager().clearInv(p);     //clear the Inventory
         this.getDateManager().checkPlayerActivity(p); //checks last join
@@ -57,6 +49,7 @@ public class Join_Event extends Managers implements Listener {
             p.sendMessage("§l---------------------------------------------");
             p.sendMessage("§4du bist noch im Bau-Modus!");
             p.sendMessage("§l---------------------------------------------");
+
             return;}
 
         //all lines under this: creating of the Menu

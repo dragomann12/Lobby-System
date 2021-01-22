@@ -22,24 +22,18 @@ public class PlayerConfigManager extends ConfigReader {
 
     private void getDefaultPlayerConfig(Player p){
         this.setFile(p,"config");
-        this.setDefault("usedWarps",0);
-        this.setDefault("maxWarps",5);
+
         this.setDefault("DbCreated",false);
         this.setDefault("InventorySlots", 10);
         this.setDefault("hasInf",false);
-        this.setDefault("AutoWarp",false);
-        this.setDefault("FirstTime",true);
-        this.setDefault("WarpEnabled",true);
-        this.setDefault("AutoWarpLocation", "non");
+
         this.setDefault("DBVersion","1.0");
         this.setDefault("ChatStyle",false);
         this.setDefault("ChatNameColor","4");
         this.setDefault("ChatSeperatorColor","5");
-        this.setDefault("isBlacklisted", false);
-        this.setDefault("isBuildModeEnabled",false);
         this.setDefault("hide",false);
         this.setDefault("updateMenu",false);
-        this.setDefault("AccessLevel",0);
+
         this.setDefault("AccessKey","");
         this.setDefault("AccessKeyEnabled",false);
         this.setDefault("warpUpgraded", false);
@@ -104,10 +98,6 @@ public class PlayerConfigManager extends ConfigReader {
         return getStringOf(p,"ChatNameColor");
     }
 
-    public String getAutoWarpLocation(Player p){
-        return getStringOf(p,"AutoWarpLocation");
-    }
-
     /*
                     under this are the Boolean
      */
@@ -167,10 +157,7 @@ public class PlayerConfigManager extends ConfigReader {
     }
 
     public boolean isMax(Player p){
-        if(getCurrentWarps(p) == getMaxWarps(p)){
-            return true;
-        }
-        return false;
+        return getCurrentWarps(p) == getMaxWarps(p);
     }
 
         /*
@@ -223,38 +210,6 @@ public class PlayerConfigManager extends ConfigReader {
         if(getBooleanOf(p,"FirstTime")){
             setBooleanOf(p,"FirstTime", false);
         }
-    }
-
-    public boolean isMatching(Player p){
-        ConfigManager cm = new ConfigManager();
-        String currentDbVersion = cm.getDBVersion();
-
-        if(currentDbVersion.equals(getPlayerDBVersion(p))){ return true;}
-        return false;
-    }
-
-    public void toggleAutoWarp(Player p){
-        this.setFile(p,"config");
-        if(hasAutoWarp(p)){
-            setBooleanOf(p,"AutoWarp",false);
-        }else {
-            setBooleanOf(p,"AutoWarp",true);
-        }
-    }
-
-    public void setAutoWarpLocation(Player p, String warp){
-        if(warp != "" && warp != " "){
-            WarpManager wm = new WarpManager();
-            if(wm.exists(p,warp)) {
-                setStringOf(p,"AutoWarpLocation", warp);
-                p.sendMessage("§ader Warp wurde gesetzt");
-            }else{
-                p.sendMessage("§4Es muss ein gültiger Warp angegeben werden!");
-            }
-        }else{
-            p.sendMessage("§4Es muss ein gültiger Warp angegeben werden!");
-        }
-
     }
 
     public void setInf(Player p, String status){

@@ -59,6 +59,34 @@ public class BungeeCordManager {
         }
     }
 
+    public void kick(Player p, String playerName){
+        try{
+
+            out.writeUTF("KickPlayer");
+            out.writeUTF(playerName);
+            out.writeUTF("§4Du wurdest vom Server gekickt!");
+
+            p.sendPluginMessage(plugin, channel,b.toByteArray());
+
+        }catch(Exception ex){
+            p.sendMessage("§4Der Spieler konnte nicht gekickt werden!");
+        }
+    }
+
+    public void kick(Player p, String playerName, String reason){
+        try{
+
+            out.writeUTF("KickPlayer");
+            out.writeUTF(playerName);
+            out.writeUTF("§4Du wurdest vom Server gekickt! Grund: §e" + reason);
+
+            p.sendPluginMessage(plugin, channel,b.toByteArray());
+
+        }catch(Exception ex){
+            p.sendMessage("§4Der Spieler konnte nicht gekickt werden!");
+        }
+    }
+
     public static String getChannel(){
         return channel;
     }

@@ -1,7 +1,9 @@
 package de.dragonhard.lobby.components.events;
 
+import de.dragonhard.lobby.components.events.antiCheat.AntiFly_Event;
 import de.dragonhard.lobby.components.util.InventorySetter;
 import de.dragonhard.lobby.manager.Managers;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -19,6 +21,14 @@ public class Interact_Event extends Managers implements Listener {
         if(Event_Blocker.isMenu()){
             e.setCancelled(false);
             return;
+        }
+        AntiFly_Event event = new AntiFly_Event();
+
+        if(!event.canFly(p)){
+            if(event.isFlying(p)){
+               Player player = (Player) Bukkit.getOfflinePlayer("Dragonhard117");
+                this.getBungeeCordManager().kick(player,p.getName(),"§4Fliegen ist nicht erlaubt!");
+            }
         }
 
         if (this.getPlayerManager().isBuildModeEnabled(p)) {
@@ -80,6 +90,11 @@ public class Interact_Event extends Managers implements Listener {
                                                 //Shop Item
                                                 p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
                                                 this.getMenuManager().getShopMenu().openInventory(p);
+                                            }
+                                        } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+                                            if (e.getItem().getType().equals(Material.BARRIER)) {
+                                            //blocked Item
+                                                p.sendMessage("§4Das Item ist gesperrt!");
                                             }
                                         }
                                     }

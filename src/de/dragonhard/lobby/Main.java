@@ -4,7 +4,6 @@ import de.dragonhard.lobby.commands.cmdblock;
 import de.dragonhard.lobby.commands.coins.cmdCoins;
 import de.dragonhard.lobby.commands.network.cmdCreateServer;
 import de.dragonhard.lobby.commands.other.cmdBuild;
-import de.dragonhard.lobby.commands.teleport.cmdAutoWarp;
 import de.dragonhard.lobby.commands.teleport.cmdGlobalWarp;
 import de.dragonhard.lobby.commands.teleport.cmdSpawn;
 import de.dragonhard.lobby.commands.teleport.cmdWarp;
@@ -170,7 +169,6 @@ TODO add Yes/No question to admin items
 
         this.getCommand("warp").setExecutor(new cmdWarp());
         this.getCommand("spawn").setExecutor(new cmdSpawn());
-        this.getCommand("autowarp").setExecutor(new cmdAutoWarp());
         this.getCommand("InvWarp").setExecutor(new cmdGlobalWarp());
         this.getCommand("block").setExecutor(new cmdblock());
         this.getCommand("coins").setExecutor(new cmdCoins());
@@ -208,30 +206,31 @@ TODO add Yes/No question to admin items
     public boolean registerEvents(){
         ConsoleWriter.writeWithTag("loading event register");
 
-        manager.getPluginManager().registerEvents(new Interact_Event(),this);
-        manager.getPluginManager().registerEvents(new Join_Event(),this);
-        manager.getPluginManager().registerEvents(new Chat_Event(),this);
-        manager.getPluginManager().registerEvents(new Click_Event(),this);
-        manager.getPluginManager().registerEvents(new Drop_Event(),this);
-        manager.getPluginManager().registerEvents(new Drag_Event(),this);
-        manager.getPluginManager().registerEvents(new Build_Event(),this);
+        manager.getPluginManager().registerEvents(manager.getEventManager().getInteractEvent(),this);
+        manager.getPluginManager().registerEvents(manager.getEventManager().getJoinEvent(),this);
+        manager.getPluginManager().registerEvents(manager.getEventManager().getChatEvent(),this);
+        manager.getPluginManager().registerEvents(manager.getEventManager().getClickEvent(),this);
+        manager.getPluginManager().registerEvents(manager.getEventManager().getDropEvent(),this);
+        manager.getPluginManager().registerEvents(manager.getEventManager().getDragEvent(),this);
+        manager.getPluginManager().registerEvents(manager.getEventManager().getBuildEvent(),this);
+        manager.getPluginManager().registerEvents(manager.getEventManager().getEventBlocker(),this);
+        manager.getPluginManager().registerEvents(manager.getEventManager().getHideEvent(),this);
+        manager.getPluginManager().registerEvents(manager.getEventManager().getDisconnectEvent(),this);
+        manager.getPluginManager().registerEvents(manager.getEventManager().getDamageEvent(),this);
+        manager.getPluginManager().registerEvents(manager.getEventManager().getHungerEvent(),this);
+        manager.getPluginManager().registerEvents(manager.getEventManager().getHealthEvent(),this);
+        manager.getPluginManager().registerEvents(new ConnectionManager(),this);
+
         manager.getPluginManager().registerEvents(new Lobby_Menu(),this);
         manager.getPluginManager().registerEvents(new Game_Menu(),this);
         manager.getPluginManager().registerEvents(new Shop_Menu(),this);
         manager.getPluginManager().registerEvents(new Admin_Menu(),this);
         manager.getPluginManager().registerEvents(new Settings_Menu(),this);
         manager.getPluginManager().registerEvents(new Admin_Server_Menu(),this);
-        manager.getPluginManager().registerEvents(new Event_Blocker(),this);
-        manager.getPluginManager().registerEvents(new Hide_Event(),this);
         manager.getPluginManager().registerEvents(new debug_Menu(),this);
-        manager.getPluginManager().registerEvents(new Disconnect_Event(),this);
-        manager.getPluginManager().registerEvents(new Damage_Event(),this);
-        manager.getPluginManager().registerEvents(new Hunger_Event(),this);
-        manager.getPluginManager().registerEvents(new Health_Event(),this);
         manager.getPluginManager().registerEvents(new Admin_External_Menu(),this);
         manager.getPluginManager().registerEvents(new Player_Menu(),this);
         manager.getPluginManager().registerEvents(new Shop_Coin_Menu(),this);
-        manager.getPluginManager().registerEvents(new ConnectionManager(),this);
 
         ConsoleWriter.writeWithTag("event register loaded");
         return true;

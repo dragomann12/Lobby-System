@@ -14,10 +14,6 @@ commands:
     usage:
     description: keine Information!
     permission:
-  autowarp:
-    usage:
-    description: keine Informmation!
-    permission:
   InvWarp:
     usage:
     description: zum erstellen eines Minispiel Teleport

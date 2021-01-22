@@ -78,4 +78,6 @@ public class Managers {
     public ConnectionStateManager getConnectionStateManager(){return new ConnectionStateManager();}
 
     public MySQLManager getMySqlManager(){return new MySQLManager();}
+
+    public EventManager getEventManager(){return new EventManager();}
 }
