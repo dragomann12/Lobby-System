@@ -19,11 +19,11 @@ public class Join_Event extends Managers implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) throws SQLException {
         Player p = e.getPlayer();
+        this.getConnectionManager().createRow(p);
         e.setJoinMessage("");
 
         this.getPlayerManager().checkPlayer(p);
         this.getPlayerManager().setFile(p,"config");
-        this.getConnectionManager().createRow(p);
 
         String title = "";
         title = this.getConfigManager().getAccessLevelTag(Integer.parseInt(this.getConnectionManager().callRowLevel(p)));

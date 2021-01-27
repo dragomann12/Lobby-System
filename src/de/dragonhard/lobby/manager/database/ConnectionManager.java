@@ -32,6 +32,8 @@ public class ConnectionManager extends Managers implements Listener {
                     st1.setString(1, p.getUniqueId().toString());
                     st1.setString(2, p.getName());
                     st1.setString(3, this.getDateManager().getCurrentDate());
+                    st1.setInt(4, 0);
+                    st1.setInt(5, 5);
                     st1.executeUpdate();
                     PreparedStatement st2 = getCon().prepareStatement("INSERT INTO Coins(UUID,COINS) VALUES (?,?)");
                     st2.setString(1, p.getUniqueId().toString());
@@ -44,7 +46,7 @@ public class ConnectionManager extends Managers implements Listener {
                     PreparedStatement st4 = getCon().prepareStatement("INSERT INTO Modes(UUID,BUILD,HIDE) VALUES (?,?,?)");
                     st4.setString(1, p.getUniqueId().toString());
                     st4.setInt(2,0);
-                    st4.setInt(3,0);
+                    st4.setInt(3,1);
                     st4.executeUpdate();
                     Bukkit.getConsoleSender().sendMessage(mysql + "§aTable des Spielers " + p.getName() + " erfolgreich erstellt.");
                     this.getConnectionStateManager().setState(ConnectionState.OFFLINE);

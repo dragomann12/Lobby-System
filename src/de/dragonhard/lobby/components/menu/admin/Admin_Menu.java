@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class Admin_Menu extends Lobby_Inventory implements Listener {
     private Player p;
     private String menuName = "Admin";
-    private Managers manager = new Managers();
+    private final Managers manager = new Managers();
     PluginWithlistManager pwm = new PluginWithlistManager();
     private static ArrayList<Integer> wall_item_id = new ArrayList<Integer>();
 
@@ -83,6 +83,14 @@ public class Admin_Menu extends Lobby_Inventory implements Listener {
 
     }
 
+    private boolean hasPermission(Player p){
+        return manager.getPluginWhitelistManager().isPluginDeveloper(p) ||
+                manager.getPluginWhitelistManager().isOwner(p) ||
+                manager.getPluginWhitelistManager().isAdmin(p) ||
+                manager.getPluginWhitelistManager().isTeam_lead(p) ||
+                manager.getPluginWhitelistManager().isDeveloper(p);
+    }
+
     @EventHandler
     public void onModeClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
@@ -112,7 +120,7 @@ public class Admin_Menu extends Lobby_Inventory implements Listener {
                                         }
                                         break;
                                     case 22:
-                                        if (p.hasPermission(PermissionList.getPermission("Menu_Item", 3)) && p.getGameMode() != GameMode.CREATIVE) {
+                                        if (hasPermission(p)&& p.getGameMode() != GameMode.CREATIVE) {
                                             Admin_Server_Menu asm = new Admin_Server_Menu();
                                             asm.openInventory(p);
                                         } else {

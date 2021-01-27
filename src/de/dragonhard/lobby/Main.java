@@ -8,26 +8,13 @@ import de.dragonhard.lobby.commands.teleport.cmdGlobalWarp;
 import de.dragonhard.lobby.commands.teleport.cmdSpawn;
 import de.dragonhard.lobby.commands.teleport.cmdWarp;
 import de.dragonhard.lobby.components.ConsoleWriter;
-import de.dragonhard.lobby.components.events.*;
-import de.dragonhard.lobby.components.menu.*;
-import de.dragonhard.lobby.components.menu.admin.Admin_External_Menu;
-import de.dragonhard.lobby.components.menu.admin.Admin_Menu;
-import de.dragonhard.lobby.components.menu.admin.Admin_Server_Menu;
-import de.dragonhard.lobby.components.menu.debug.debug_Menu;
-import de.dragonhard.lobby.components.menu.player.Player_Menu;
-import de.dragonhard.lobby.components.menu.shop.Shop_Coin_Menu;
-import de.dragonhard.lobby.components.menu.shop.Shop_Menu;
 import de.dragonhard.lobby.components.util.PAPI_Support;
 import de.dragonhard.lobby.manager.*;
-import de.dragonhard.lobby.manager.database.ConnectionManager;
-import de.dragonhard.lobby.manager.database.MySQLManager;
 import de.dragonhard.lobby.manager.other.BungeeCordManager;
 import de.dragonhard.lobby.manager.other.PluginComunicationManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.sql.SQLException;
 
 public class Main extends JavaPlugin{
 
@@ -130,23 +117,23 @@ TODO add Yes/No question to admin items
     }
 
     public boolean registerOutgoingChannel(){
-        ConsoleWriter.writeWithTag("setting up outgoing communication channel ...");
+        ConsoleWriter.writeLoadingStart("setting up outgoing communication channel ...");
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, BungeeCordManager.getChannel());
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, PluginComunicationManager.getChannelOut());
-        ConsoleWriter.writeWithTag("done");
+        ConsoleWriter.writeLoadingEnd("done");
         return true;
     }
 
     public boolean registerIngoingChannel(){
-        ConsoleWriter.writeWithTag("setting up ingoing communication channel ...");
+        ConsoleWriter.writeLoadingStart("setting up ingoing communication channel ...");
         Bukkit.getMessenger().registerIncomingPluginChannel(this, PluginComunicationManager.getChannelIn(), manager.getCommunicationManager().getListener());
-        ConsoleWriter.writeWithTag("done");
+        ConsoleWriter.writeLoadingEnd("done");
         return true;
     }
 
     public boolean loadMenuConfig(){
-        ConsoleWriter.writeWithTag("loading menu configuration");
+        ConsoleWriter.writeLoadingStart("loading menu configuration");
 
         loadConfig("creativ","BEACON",5);
         loadConfig("shop","DIAMOND",5);
@@ -160,12 +147,12 @@ TODO add Yes/No question to admin items
         loadConfig("Admin_External","DIAMOND",5);
         loadConfig("Player","DIAMOND",5);
 
-        ConsoleWriter.writeWithTag("menu configuration loaded");
+        ConsoleWriter.writeLoadingEnd("menu configuration loaded");
         return true;
     }
 
     public boolean registerCommand(){
-        ConsoleWriter.writeWithTag("loading command register");
+        ConsoleWriter.writeLoadingStart("loading command register");
 
         this.getCommand("warp").setExecutor(new cmdWarp());
         this.getCommand("spawn").setExecutor(new cmdSpawn());
@@ -176,7 +163,7 @@ TODO add Yes/No question to admin items
         this.getCommand("crServer").setExecutor(new cmdCreateServer());
         this.getCommand("bm").setExecutor(new cmdBuild());
 
-        ConsoleWriter.writeWithTag("command register loaded");
+        ConsoleWriter.writeLoadingEnd("command register loaded");
         return true;
 
     }
@@ -204,8 +191,9 @@ TODO add Yes/No question to admin items
     }
 
     public boolean registerEvents(){
-        ConsoleWriter.writeWithTag("loading event register");
+        ConsoleWriter.writeLoadingStart("loading event register");
 
+        //Plugin core events
         manager.getPluginManager().registerEvents(manager.getEventManager().getInteractEvent(),this);
         manager.getPluginManager().registerEvents(manager.getEventManager().getJoinEvent(),this);
         manager.getPluginManager().registerEvents(manager.getEventManager().getChatEvent(),this);
@@ -219,20 +207,21 @@ TODO add Yes/No question to admin items
         manager.getPluginManager().registerEvents(manager.getEventManager().getDamageEvent(),this);
         manager.getPluginManager().registerEvents(manager.getEventManager().getHungerEvent(),this);
         manager.getPluginManager().registerEvents(manager.getEventManager().getHealthEvent(),this);
-        manager.getPluginManager().registerEvents(new ConnectionManager(),this);
+        manager.getPluginManager().registerEvents(manager.getConnectionManager(),this);
 
-        manager.getPluginManager().registerEvents(new Lobby_Menu(),this);
-        manager.getPluginManager().registerEvents(new Game_Menu(),this);
-        manager.getPluginManager().registerEvents(new Shop_Menu(),this);
-        manager.getPluginManager().registerEvents(new Admin_Menu(),this);
-        manager.getPluginManager().registerEvents(new Settings_Menu(),this);
-        manager.getPluginManager().registerEvents(new Admin_Server_Menu(),this);
-        manager.getPluginManager().registerEvents(new debug_Menu(),this);
-        manager.getPluginManager().registerEvents(new Admin_External_Menu(),this);
-        manager.getPluginManager().registerEvents(new Player_Menu(),this);
-        manager.getPluginManager().registerEvents(new Shop_Coin_Menu(),this);
+        //Menu internal Events only
+        manager.getPluginManager().registerEvents(manager.getMenuManager().getLobbyMenu(),this);
+        manager.getPluginManager().registerEvents(manager.getMenuManager().getGameMenu(),this);
+        manager.getPluginManager().registerEvents(manager.getMenuManager().getShopMenu(),this);
+        manager.getPluginManager().registerEvents(manager.getMenuManager().getAdminMenu(),this);
+        manager.getPluginManager().registerEvents(manager.getMenuManager().getSettingsMenu(),this);
+        manager.getPluginManager().registerEvents(manager.getMenuManager().getAdminServerMenu(),this);
+        manager.getPluginManager().registerEvents(manager.getMenuManager().getDebugMenu(),this);
+        manager.getPluginManager().registerEvents(manager.getMenuManager().getAdminExternalMenu(),this);
+        manager.getPluginManager().registerEvents(manager.getMenuManager().getPlayerMenu(),this);
+        manager.getPluginManager().registerEvents(manager.getMenuManager().getCoinShopMenu(),this);
 
-        ConsoleWriter.writeWithTag("event register loaded");
+        ConsoleWriter.writeLoadingEnd("event register loaded");
         return true;
 
     }
