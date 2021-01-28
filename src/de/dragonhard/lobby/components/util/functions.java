@@ -8,7 +8,7 @@ public class functions {
 
         for(int i = 1; i == amount; i++){
 
-            Bukkit.broadcastMessage("");
+            Bukkit.broadcastMessage(" ");
 
         }
 
