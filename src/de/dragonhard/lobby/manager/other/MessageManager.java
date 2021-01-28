@@ -6,6 +6,7 @@ import de.dragonhard.lobby.components.menu.admin.Admin_Menu;
 import de.dragonhard.lobby.components.menu.creativ.Creativ_Menu;
 import de.dragonhard.lobby.components.menu.debug.debug_Menu;
 import de.dragonhard.lobby.components.menu.player.Player_Menu;
+import de.dragonhard.lobby.components.util.functions;
 import de.dragonhard.lobby.manager.Managers;
 import de.dragonhard.lobby.manager.database.ConnectionManager;
 import org.bukkit.Bukkit;
@@ -80,9 +81,6 @@ public class MessageManager extends Managers {
                 sm.play(p, msg[1]);
 
 
-        }else if (message.startsWith(prefix + "player")){
-            Player_Menu plm = new Player_Menu();
-            plm.openInventory(p);
         }
     }
 
@@ -91,71 +89,40 @@ public class MessageManager extends Managers {
 class brodcast{
 
     public static void sendChat(Player p, String message, String sep){
-
         PlayerConfigManager pm = new PlayerConfigManager();
         String msg = message.replaceAll(" /c ","§");
         Bukkit.broadcastMessage("§" + pm.getChatNameColor(p) + p.getName() + "  §" +  pm.getChatSeperatorColor(p) + sep + "  §f" + msg);
-
     }
+    private static int spacer_amount = 4;
 
     public static void sendAlert(String Message){
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
+        functions.sendSpacer(spacer_amount);
         Bukkit.broadcastMessage("§4§l[§e§lAlarm§4§l] §e§l" + Message);
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
+        functions.sendSpacer(spacer_amount/2);
     }
 
     public static void sendInfo(String Message){
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
+        functions.sendSpacer(spacer_amount);
         Bukkit.broadcastMessage("§f§l[§b§lInformation§f§l] §b§l" + Message );
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
+        functions.sendSpacer(spacer_amount/2);
     }
 
     public static void sendWarning(String Message){
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
+        functions.sendSpacer(spacer_amount);
         Bukkit.broadcastMessage("§e§l[§4§lAchtung§e§l] §4§l"  + Message);
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
+        functions.sendSpacer(spacer_amount/2);
     }
 
     public static void sendRestart(){
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
+        functions.sendSpacer(spacer_amount);
         Bukkit.broadcastMessage("§e§l[§4§lAchtung - Neustart§e§l] §4§lDer Server wird gleich neu gestartet!");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
+        functions.sendSpacer(spacer_amount/2);
     }
 
     public static void sendService(){
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
+        functions.sendSpacer(spacer_amount);
         Bukkit.broadcastMessage("§e§l[§4§lWartungsarbeiten§e§l] §4§lDer Server wird auf Grund von Wartungsarbeiten gleich gestoppt!");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("");
+        functions.sendSpacer(spacer_amount/2);
     }
 
 }
