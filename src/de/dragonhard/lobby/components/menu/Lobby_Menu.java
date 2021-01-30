@@ -30,7 +30,7 @@ public class Lobby_Menu extends Lobby_Inventory implements Listener {
 
             if(cm.slotIsEnabled(menuName,i)){
 
-                    this.addItemToInventory( manager.getConnectionManager().callRowServer(i,"NAME") + this.getTag("Item"), Material.getMaterial(cm.getSlotMaterial(menuName,i)),"§" + cm.getSlotTitleColor(menuName,i),i);
+                    this.addItemToInventory( manager.getConfigManager().getSlotTitle(menuName, i) + this.getTag("Item"), Material.getMaterial(cm.getSlotMaterial(menuName,i)),"§" + cm.getSlotTitleColor(menuName,i),i);
 
             }else{
 
@@ -84,10 +84,9 @@ public class Lobby_Menu extends Lobby_Inventory implements Listener {
                     else if(slot.contains("Wartung")){p.sendMessage("§4Die Lobby ist wegen arbeiten offline!"); return;}
                     else if(slot.contains("offline")){p.sendMessage("§4Die Lobby ist derzeit offline!"); return;}
                     else if(slot.contains("err")){p.sendMessage("§4Die Lobby ist aufgrund eines Problems offline!"); return;}
-                    else if(slot.contains("Spawn")){sm.teleportPlayerToSpawn(p); return;}
 
                     p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                    BungeeCordManager.sendPlayerToServer(p, manager.getConnectionManager().callRowServer(e.getSlot(),"SERVER"));
+                    BungeeCordManager.sendPlayerToServer(p, manager.getConfigManager().getSlotTitle(menuName,e.getSlot()));
 
                 }
             }
