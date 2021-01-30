@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.components.menu;
 
+import de.dragonhard.lobby.manager.Managers;
 import de.dragonhard.lobby.manager.other.*;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -13,6 +14,7 @@ public class Settings_Menu extends Lobby_Inventory implements Listener {
 
     private Player p;
     private String menuName = "Settings";
+    private final Managers manager = new Managers();
     private static ArrayList<Integer> wall_item_id = new ArrayList<Integer>();
     public void openInventory(Player p){
         this.p = p;
@@ -77,29 +79,22 @@ public class Settings_Menu extends Lobby_Inventory implements Listener {
     @EventHandler
     public void onModeClick(InventoryClickEvent e){
         Player p = (Player) e.getWhoClicked();
-        InventoryManager im = new InventoryManager();
-        GlobalWarpManager gwm = new GlobalWarpManager();
-        PlayerConfigManager pm = new PlayerConfigManager();
-        ConfigManager cm = new ConfigManager();
 
-        if(e.getInventory().getName().equals("§"+ cm.getMenuTitleColor(menuName) + cm.getMenuTitle(menuName))){
+        if(e.getInventory().getName().equals("§"+ manager.getConfigManager().getMenuTitleColor(menuName) + manager.getConfigManager().getMenuTitle(menuName))){
             if (e.getCurrentItem() == null) {return;} else{
                 if(e.getCurrentItem().getItemMeta().getDisplayName().contains(this.getTag("Item"))) {
 
-                    switch(e.getClick()){
+                    if(e.getCurrentItem().getItemMeta().getDisplayName().equals("1")){
 
-                        default:
+                    }else if(e.getCurrentItem().getItemMeta().getDisplayName().equals("2")){
+                    }else if(e.getCurrentItem().getItemMeta().getDisplayName().equals("3")){
+                    }else if(e.getCurrentItem().getItemMeta().getDisplayName().equals("4")){
 
-                            if(e.getCurrentItem().getItemMeta().getDisplayName().contains("Spawn Nachricht")){cm.toggleWelcomeMessage(p);}
-                            if(e.getCurrentItem().getItemMeta().getDisplayName().contains("")){}
-                            if(e.getCurrentItem().getItemMeta().getDisplayName().contains("")){}
-                            if(e.getCurrentItem().getItemMeta().getDisplayName().contains("")){}
 
-                            break;
 
                     }
-            }
 
+                }
             }
 
             return;

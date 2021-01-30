@@ -6,7 +6,7 @@ public class functions {
 
     public static void sendSpacer(int amount){
 
-        for(int i = 1; i == amount; i++){
+        for(int i = 1; i <= amount; i++){
 
             Bukkit.broadcastMessage(" ");
 

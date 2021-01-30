@@ -38,3 +38,7 @@ commands:
     usage:
     description: keine Information!
     permission:
+  info:
+    usage:
+    description: zeigt Informationen über den Spieler!
+    permission:

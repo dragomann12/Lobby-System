@@ -1,17 +1,12 @@
 package de.dragonhard.lobby.manager.other;
 
 import de.dragonhard.lobby.components.events.*;
-import de.dragonhard.lobby.components.events.antiCheat.AntiFly_Event;
 import de.dragonhard.lobby.components.menu.Game_Menu;
 import de.dragonhard.lobby.components.menu.Lobby_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Menu;
 import de.dragonhard.lobby.manager.database.ConnectionManager;
 
 public class EventManager {
-
-    public AntiFly_Event getAntiFlyEvent(){
-        return new AntiFly_Event();
-    }
 
     public Bad_Event getBadEvent(){
         return new Bad_Event();

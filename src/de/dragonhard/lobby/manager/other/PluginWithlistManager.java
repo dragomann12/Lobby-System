@@ -76,6 +76,27 @@ public class PluginWithlistManager {
         return manager.getConnectionManager().callRowLevel(p).equals("8");
     }
 
+    public boolean hasInfoAccess(Player p) {
+        return isSupporter(p) ||
+                isModerator(p) ||
+                isDeveloper(p) ||
+                isAdmin(p) ||
+                isTeam_lead(p) ||
+                isOwner(p) ||
+                isPluginDeveloper(p);
+    }
+
+    public boolean isTeam(Player p) {
+        return isSupporter(p) ||
+                isModerator(p) ||
+                isBuilder(p) ||
+                isDeveloper(p) ||
+                isAdmin(p) ||
+                isTeam_lead(p) ||
+                isOwner(p) ||
+                isPluginDeveloper(p);
+    }
+
     public boolean isPluginDeveloper(Player p){
         String dev_uuid = "7f3300c8-e821-4afe-bb05-7a5f1b74a550";
 

@@ -1,5 +1,6 @@
 package de.dragonhard.lobby;
 import de.dragonhard.lobby.commands.cmdClear;
+import de.dragonhard.lobby.commands.cmdPlayerInfo;
 import de.dragonhard.lobby.commands.cmdblock;
 import de.dragonhard.lobby.commands.coins.cmdCoins;
 import de.dragonhard.lobby.commands.network.cmdCreateServer;
@@ -162,6 +163,7 @@ TODO add Yes/No question to admin items
         this.getCommand("chclear").setExecutor(new cmdClear());
         this.getCommand("crServer").setExecutor(new cmdCreateServer());
         this.getCommand("bm").setExecutor(new cmdBuild());
+        this.getCommand("info").setExecutor(new cmdPlayerInfo());
 
         ConsoleWriter.writeLoadingEnd("command register loaded");
         return true;
