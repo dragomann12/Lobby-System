@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 public class cmdPlayerInfo extends Managers implements CommandExecutor {
     final String item_color = "§6";
-    final String item_value_color = "§e";
+    String item_value_color = "§e";
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -54,9 +54,22 @@ public class cmdPlayerInfo extends Managers implements CommandExecutor {
                              p.sendMessage(item_color + "IP-Adresse: " + item_value_color + ip);
                              p.sendMessage(item_color + "Port: " + item_value_color + port);
 
-                             p.sendMessage("§f￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭  §bstats");
+                             p.sendMessage("§f￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭  §bStatistic");
+
                              p.sendMessage("      §4nach Update verfügbar");
-                             p.sendMessage("§f￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭  §bsonstiges");
+
+                             if(this.getConfigManager().exists("perm_list")) {
+                                 p.sendMessage("§f￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭  §bRechte");
+
+                                 for (int i = 0; i < this.getConfigManager().getPermissionCount(); i++) {
+                                     if(this.getConfigManager().getPermissionName(i) != null) {
+                                         if(this.getConfigManager().hasPermission(target, i)){item_value_color = "§a";}else{item_value_color = "§4";}
+                                         p.sendMessage(item_color + this.getConfigManager().getPermissionName(i) + ": " + item_value_color + this.getConfigManager().hasPermission(target, i));
+                                     }
+                                 }
+                                 item_value_color = "§e";
+                             }
+                             p.sendMessage("§f￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭  §bStatus");
 
                              p.sendMessage(item_color + "läuft: " + item_value_color + target.isSprinting());
                              p.sendMessage(item_color + "schläft: " + item_value_color + target.isSleeping());

@@ -21,10 +21,19 @@ public class ConfigManager extends PluginConfigReader {
         String file = menuName + "_menu_config";
         String slot = "Slot_" + slotID + "_isEnabled";
 
-        if(this.getBooleanOfItem(file, slot)){
-            return true;
-        }
-        return false;
+        return this.getBooleanOfItem(file, slot);
+    }
+
+    public boolean hasPermission(Player p, int permissionID){
+        return p.hasPermission(this.getStringOfItem("perm_list","perm_" + permissionID));
+    }
+
+    public int getPermissionCount(){
+        return this.getIntegerOfItem("perm_list","perm_count");
+    }
+
+    public String getPermissionName(int permissionID){
+        return this.getStringOfItem("perm_list","perm_" + permissionID);
     }
 
     public String getSlotTitle(String menuName, int slotID){
