@@ -98,13 +98,7 @@ public class cmdWarp extends Managers implements CommandExecutor {
 
                                     }else{help(p);}
                                 }else {
-                                    if(this.getConfigManager().tagUseEnabled()) {
-                                        p.sendMessage( this.getConfigManager().getTag() + "§4Die Warp Funktion ist derzeit nicht verfügbar!");
-                                        p.sendMessage(this.getConfigManager().getTag() + "§4Bitte an das Server-Team melden!");
-                                    } else {
-                                        p.sendMessage("§4Die Warp Funktion ist derzeit nicht verfügbar!");
-                                        p.sendMessage("§4Bitte an das Server-Team melden!");
-                                    }
+                                    this.getCommandActionManager().Action_notActive(p);
                                     break;
                                 } break;
 
@@ -130,29 +124,15 @@ public class cmdWarp extends Managers implements CommandExecutor {
                                 break;
 
                             case "count":
-                                if(this.getConfigManager().tagUseEnabled()){
-                                    if(this.getPlayerManager().hasInf(p)){
-                                        p.sendMessage(this.getConfigManager().getTag() + "§eDu benutzt §4" + this.getPlayerManager().getCurrentWarps(p) + "§e/§a unbegrenzt §eWarps");
-                                    }else{
-                                        p.sendMessage(this.getConfigManager().getTag() + "§eDu benutzt §4" + this.getPlayerManager().getCurrentWarps(p) + "§e/§4" + this.getPlayerManager().getMaxWarps(p) + " §eWarps");
-                                    }
-                                }else{
-                                    if(this.getPlayerManager().hasInf(p)){
-                                        p.sendMessage("§eDu benutzt §4" + this.getPlayerManager().getCurrentWarps(p) + "§e/§a unbegrenzt §eWarps");
-                                    }else{
-                                        p.sendMessage("§eDu benutzt §4" + this.getPlayerManager().getCurrentWarps(p) + "§e/§4" + this.getPlayerManager().getMaxWarps(p) + " §eWarps");
-                                    }
-                                }
-                                break;
+                                this.getCommandActionManager().Action_WarpCount(p); break;
 
                             case "ls": this.getWarpManager().getWarpList(p); break;
 
                                 default:
                                     if(this.getPlayerManager().isWarpEnabled(p)){
-                                        this.getWarpManager().teleportPlayer(p, args[0]);
+                                        this.getCommandActionManager().Action_WarpTeleport(p, args[0]);
                                     }else{
-                                        p.sendMessage("§4Die Warp Funktion ist derzeit nicht verfügbar!");
-                                        p.sendMessage("§4Bitte an das Server-Team melden!");
+                                        this.getCommandActionManager().Action_notActive(p);
                                     }
 
                         }
@@ -163,11 +143,7 @@ public class cmdWarp extends Managers implements CommandExecutor {
                 }
 
             }else{
-                if(this.getConfigManager().tagUseEnabled()){
-                    p.sendMessage(this.getConfigManager().getTag() + "§4Du hast nicht die Berechtigung für diesen Befehl!");
-                }else {
-                    p.sendMessage("§4Du hast nicht die Berechtigung für diesen Befehl!");
-                }
+                this.getCommandActionManager().Action_noPermission(p);
             }
 
         }

@@ -23,30 +23,21 @@ public class cmdSpawn extends Managers implements CommandExecutor {
 
                         switch (args[0]) {
                             case "set":
-                                    if(p.hasPermission(PermissionList.getPermission("Config",1))){
-                                       this.getSpawnManager().createSpawn(p, p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), p.getLocation().getPitch(), p.getLocation().getYaw(), p.getWorld());
-                                    }else{noPermission(p);} break;
+                                        this.getCommandActionManager().Action_createSpawn(p);
+                                   break;
                             case "del":
-                                    if(p.hasPermission(PermissionList.getPermission("Config",2))){
-                                        this.getSpawnManager().delSpawn(p);
-                                    }else{noPermission(p);} break;
+                                        this.getCommandActionManager().Action_delSpawn(p);
+                                 break;
                             default:
                               help(p);
                         }
 
                 }else{
-
-                    if(this.getSpawnManager().exists(this.getSpawnManager().getFile("Spawn"))) {
-                        this.getSpawnManager().teleportPlayerToSpawn(p);
-                        Message.sendMessageByTag(Message.getMessageByTag("tpSpawn"),p);
-                    }else{
-                        p.sendMessage("§4Der Spawn wurde nicht gefunden!");
-
-                    }
+                    this.getCommandActionManager().Action_teleportToSpawn(p);
                 }
 
             }else{
-                noPermission(p);
+                this.getCommandActionManager().Action_noPermission(p);
             }
 
         }
@@ -65,16 +56,6 @@ public class cmdSpawn extends Managers implements CommandExecutor {
         p.sendMessage("                                 §4Hilfe >> §e/spawn ");
         p.sendMessage("                                 §4Hilfe >> §e/spawn §4set");
         p.sendMessage("                                 §4Hilfe >> §e/spawn §4del");
-    }
-
-    private void noPermission(Player p){
-
-        if (this.getConfigManager().tagUseEnabled()) {
-            p.sendMessage(this.getConfigManager().getTag() + "§4Du hast nicht die Berechtigung für diesen Befehl!");
-        }else{
-            p.sendMessage("§4Du hast nicht die Berechtigung für diesen Befehl!");
-        }
-
     }
 
 }

@@ -29,6 +29,10 @@ public class Managers {
         return new ConnectionManager();
     }
 
+    public CommandActionManager getCommandActionManager(){
+        return new CommandActionManager();
+    }
+
     public MessageManager getMessageManager(){
         return new MessageManager();
     }

@@ -23,68 +23,14 @@ public class cmdPlayerInfo extends Managers implements CommandExecutor {
                          p.sendMessage("§4Fehler§e: §4du musst einen Namen angeben!");
                      }else{
                          try{
-                             Player target = Bukkit.getPlayer(args[0]);
-                             p.sendMessage("§f￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭");
-                             p.sendMessage("                  §bÜbersicht");
-                             p.sendMessage("§f￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭  §bSpieler§f-§bInfo");
-
-                             p.sendMessage(item_color + "Name: " + item_value_color + target.getName());
-                             p.sendMessage(item_color + "Nickname: " + item_value_color + item_value_color + target.getDisplayName());
-                             p.sendMessage(item_color + "UUID: " + item_value_color + target.getUniqueId());
-                             p.sendMessage(item_color + "Operator: " + item_value_color + target.isOp());
-                             p.sendMessage(item_color + "Login: " + item_value_color + this.getDateManager().getPlayerDate(target));
-                             p.sendMessage(item_color + "Chaos-Coins: " + item_value_color + this.getConnectionManager().callRowCoins(p));
-
-                             p.sendMessage("§f￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭  §bGruppe");
-
-                             String group = "";
-                             if(this.getPluginWhitelistManager().isTeam(target)){
-                                 group = "Team";
-                             }else{
-                                 group = "Standard";
-                             }
-                             p.sendMessage(item_color + "Gruppe: " + item_value_color + group);
-                             p.sendMessage(item_color + "Rang: " + item_value_color + this.getConfigManager().getAccessLevelTag(Integer.parseInt(this.getConnectionManager().callRowLevel(target))));
-
-                             p.sendMessage("§f￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭  §bNetzwerk");
-
-                             String[] ip_port = target.getAddress().toString().replace("/","").split(":");
-                             String ip = ip_port[0];
-                             String port = ip_port[1];
-                             p.sendMessage(item_color + "IP-Adresse: " + item_value_color + ip);
-                             p.sendMessage(item_color + "Port: " + item_value_color + port);
-
-                             p.sendMessage("§f￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭  §bStatistic");
-
-                             p.sendMessage("      §4nach Update verfügbar");
-
-                             if(this.getConfigManager().exists("perm_list")) {
-                                 p.sendMessage("§f￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭  §bRechte");
-
-                                 for (int i = 0; i < this.getConfigManager().getPermissionCount(); i++) {
-                                     if(this.getConfigManager().getPermissionName(i) != null) {
-                                         if(this.getConfigManager().hasPermission(target, i)){item_value_color = "§a";}else{item_value_color = "§4";}
-                                         p.sendMessage(item_color + this.getConfigManager().getPermissionName(i) + ": " + item_value_color + this.getConfigManager().hasPermission(target, i));
-                                     }
-                                 }
-                                 item_value_color = "§e";
-                             }
-                             p.sendMessage("§f￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭  §bStatus");
-
-                             p.sendMessage(item_color + "läuft: " + item_value_color + target.isSprinting());
-                             p.sendMessage(item_color + "schläft: " + item_value_color + target.isSleeping());
-                             p.sendMessage(item_color + "fliegt: " + item_value_color + target.isFlying());
-                             p.sendMessage(item_color + "schleicht: " + item_value_color + target.isSneaking());
-
-                             p.sendMessage("§f￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭");
+                            this.getCommandActionManager().Action_PlayerInformation(p, Bukkit.getPlayer(args[0]));
                          }catch (NullPointerException e){
-                             p.sendMessage("§4Fehler§e: §4Der Spieler §e" + args[0] + " §4ist offline oder existiert nicht!");
+                         p.sendMessage("§4Fehler§e: §4Der Spieler §e" + args[0] + " §4ist offline oder existiert nicht!");
                          }
-
                      }
 
                  }else{
-                     p.sendMessage("§4Fehler§e: §4du hast nicht die Berechtigung!");
+                     this.getCommandActionManager().Action_noPermission(p);
                  }
 
         }

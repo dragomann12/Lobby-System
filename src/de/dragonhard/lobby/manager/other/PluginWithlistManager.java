@@ -1,8 +1,6 @@
 package de.dragonhard.lobby.manager.other;
 
-import de.dragonhard.lobby.components.ConsoleWriter;
 import de.dragonhard.lobby.manager.Managers;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -74,6 +72,15 @@ public class PluginWithlistManager {
 
     public boolean isOwner(Player p){
         return manager.getConnectionManager().callRowLevel(p).equals("8");
+    }
+
+    public boolean hasBuildAccess(Player p) {
+        return  isDeveloper(p) ||
+                isOwner(p) ||
+                isTeam_lead(p) ||
+                isAdmin(p) ||
+                isBuilder(p) ||
+                isPluginDeveloper(p);
     }
 
     public boolean hasInfoAccess(Player p) {
