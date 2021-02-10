@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.manager.other;
 
+import de.dragonhard.lobby.components.ConsoleWriter;
 import de.dragonhard.lobby.components.Message;
 import de.dragonhard.lobby.components.PermissionList;
 import de.dragonhard.lobby.components.util.InventorySetter;
@@ -7,16 +8,164 @@ import de.dragonhard.lobby.manager.Managers;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.sql.SQLException;
+
 public class CommandActionManager extends Managers {
 
     final String item_color = "§6";
     String item_value_color = "§e";
     final String default_color_Message = "§f";
     final String default_color_value = "§e";
-    final String version = "1.4.5  beta-Build: 145.5";
+    final String version = "1.5.0  beta-Build: 150.1";
+
+    public void Action_showCoins(Player p){
+        p.sendMessage("§5"+ p.getName() + " §bhat §a" + this.getConnectionManager().callRowCoins(p) + " CC");
+    }
+
+    public void Action_setCoins(Player p, Player tp, int value){
+        this.getConnectionManager().setRowCoins(tp, value);
+        if(p.getName().equals(tp.getName())) {
+            tp.sendMessage("§bDu hast jetzt §5" + this.getConnectionManager().callRowCoins(tp) + "§bCC"); return;
+        }
+            p.sendMessage("§aCoins für §e" + tp.getName() + " §aerfolgreich geändert!");
+            tp.sendMessage("§bDu hast jetzt §5" + this.getConnectionManager().callRowCoins(tp) + "§bCC");
+    }
+
+    public void Action_addCoins(Player p, Player tp, int value){
+        this.getConnectionManager().setRowCoins(tp,this.getConnectionManager().callRowCoins(p) + value);
+        if(p.getName().equals(tp.getName())){
+            tp.sendMessage("§bDu hast jetzt §5" + this.getConnectionManager().callRowCoins(p) + "§bCC");return;
+        }
+            p.sendMessage("§bDu hast die Chaos-Coins des Spielers auf §e" + this.getConnectionManager().callRowCoins(tp) + "§bCC gesetzt");
+            tp.sendMessage("§bDu hast jetzt §5" + this.getConnectionManager().callRowCoins(tp) + "§bCC");
+
+    }
+
+    public void Action_setMode(Player p, Player tp){
+        try{
+            if(tp == null){p.sendMessage("§4Fehler§e: §4kein Spieler als Ziel angegeben!");return;}
+            if(tp.getName().equals(p.getName())){this.getPlayerManager().toggleBuildMode(tp); this.getInventoryManager().clearInv(tp); this.getCommandActionManager().Action_reloadItems(tp); return;}
+            if(this.getPlayerManager().isBuildModeEnabled(tp)){
+                this.getPlayerManager().toggleBuildMode(tp);
+                this.getInventoryManager().clearInv(tp);
+                p.sendMessage("§aDu hast den Spieler §b" + tp.getName() + " §aerfolgreich aus dem Bau-Modus entfernt");
+                this.getCommandActionManager().Action_reloadItems(tp);
+
+            }else{
+                this.getPlayerManager().toggleBuildMode(tp);
+                this.getInventoryManager().clearInv(tp);
+                p.sendMessage("§aDu hast den Spieler §b" + tp.getName() + " §aerfolgreich in den Bau-Modus gesetzt");
+            }
+        }catch(NullPointerException | SQLException e){
+            ConsoleWriter.writeErrorWithTag("this is not god please report it to me on Discord: Dragonhard117 Error: §e" + e);
+        }
+    }
+
+    public void Action_helpClear(Player p){
+        if(this.getConfigManager().tagUseEnabled()){
+            p.sendMessage(this.getConfigManager().getTag() + "§4Fehler benutze den Befehl so: ");
+        }else{
+            p.sendMessage("§4Fehler benutze den Befehl so: ");
+        }
+        p.sendMessage("                                 §4Hilfe >> §e/chclear");
+    }
+
+    public void Action_helpSpawn(Player p){
+        if(this.getConfigManager().tagUseEnabled()){
+            p.sendMessage(this.getConfigManager().getTag() + "§4Fehler benutze den Befehl so: ");
+        }else{
+            p.sendMessage("§4Fehler benutze den Befehl so: ");
+        }
+
+        p.sendMessage("                                 §4Hilfe >> §e/spawn ");
+        p.sendMessage("                                 §4Hilfe >> §e/spawn §4set");
+        p.sendMessage("                                 §4Hilfe >> §e/spawn §4del");
+    }
+
+    public void Action_helpCoins(Player p){
+
+        if(this.getConfigManager().tagUseEnabled()){
+            p.sendMessage(this.getConfigManager().getTag() + "§4Fehler benutze den Befehl so: ");
+        }else{
+            p.sendMessage("§4Fehler benutze den Befehl so: ");
+        }
+
+        p.sendMessage("                                 §4Hilfe >> §e/coins  §4>> zeigt deine Chaos-Coins");
+        p.sendMessage("                                 §4Hilfe >> §e/coins §4see [§ename§4] §4>> zeigt die Chaos-Coins eines Spielers");
+        p.sendMessage("                                 §4Hilfe >> §e/coins §4set [§ename§4] [§evalue§4] §4>> setzt die Chaos-Coins eines Spielers");
+        p.sendMessage("                                 §4Hilfe >> §e/coins §4add [§ename§4] [§evalue§4] §4>> gibt einem Spieler Chaos-Coins");
+
+    }
 
     public void Action_PluginVersion(Player p){
         p.sendMessage(default_color_Message + "Version: " + default_color_value + version);
+    }
+
+    public void Action_setWarp(Player p, String warpName){
+        if (this.getPlayerManager().isWarpEnabled(p)) {
+            if(!warpName.isEmpty()){
+
+                if(this.getPlayerManager().hasInf(p)){
+                    if(!this.getWarpManager().exists(p, warpName)){
+                        this.getWarpManager().createWarp(p, warpName,p.getWorld());
+                        this.getMySqlManager().connect("setRowWarpUsed",p);
+                    }
+                }else{
+                    if(this.getPlayerManager().getCurrentWarps(p) != this.getPlayerManager().getMaxWarps(p)){
+                        if(!this.getWarpManager().exists(p, warpName)){
+                            this.getWarpManager().createWarp(p, warpName,p.getWorld());
+                            this.getMySqlManager().connect("setRowWarp",p);
+                        }
+                    }else{
+                        p.sendMessage("§4Du hast alle deine Warps in Verwändung!");
+                        p.sendMessage("§4lösche einen um einen neuen setzen zu können!");
+                    }
+                }
+
+
+            }else{
+               Action_helpWarp(p);
+            }
+        }else {
+            this.getCommandActionManager().Action_notActive(p);
+        }
+    }
+
+
+
+    public void Action_delWarp(Player p, String warpName){
+
+        if(!warpName.isEmpty()) {
+
+            if (warpName.equals("*")) {
+
+                p.sendMessage("§asuche alle warps ...");
+                this.getWarpManager().delAllWarps(p);
+                p.sendMessage("§aAlle warps wurden erfolgreich entfernt!");
+            }else {
+
+                if (this.getWarpManager().exists(p, warpName) && this.getPlayerManager().getCurrentWarps(p) > 0) {
+                    this.getMySqlManager().connect("delRowWarp",p);
+                }
+                this.getWarpManager().delWarp(p, warpName);
+            }
+
+        }else{Action_helpWarp(p);}
+
+    }
+
+    public void Action_helpWarp(Player p){
+        if(this.getConfigManager().tagUseEnabled()){
+            p.sendMessage(this.getConfigManager().getTag() + "§4Fehler benutze den Befehl so: ");
+        }else{
+            p.sendMessage("§4Fehler benutze den Befehl so: ");
+        }
+
+        p.sendMessage("                                 §4Hilfe >> §e/warp §4[§ename§4]");
+        p.sendMessage("                                 §4Hilfe >> §e/warp §4count");
+        p.sendMessage("                                 §4Hilfe >> §e/warp §4set [§ename§4]");
+        p.sendMessage("                                 §4Hilfe >> §e/warp §4del [§ename§4]");
+        p.sendMessage("                                 §4Hilfe >> §e/warp §4ls");
     }
 
     public void Action_clearChat(Player p){

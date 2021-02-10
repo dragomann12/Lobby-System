@@ -8,8 +8,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class cmdPlayerInfo extends Managers implements CommandExecutor {
-    final String item_color = "§6";
-    String item_value_color = "§e";
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
