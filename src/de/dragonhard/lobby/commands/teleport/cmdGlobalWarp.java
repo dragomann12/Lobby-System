@@ -24,25 +24,15 @@ public class cmdGlobalWarp extends Managers implements CommandExecutor {
 
                     switch(args[0]){
 
-                        case "set":
-
-                            if(args[1] != ""){
-                                this.getGlobalWarpManager().createWarp(p, args[1], p.getWorld());
-                            }else{help(p);}break;
-
-                        case "remove":
-
-                            if(args[1] != ""){
-                                this.getGlobalWarpManager().delWarp(p, args[1]);
-                            }else{help(p);}break;
-
-                        default: help(p);
+                        case "set": this.getCommandActionManager().Action_setGlobalWarp(p,args[1]); break;
+                        case "remove": this.getCommandActionManager().Action_delGlobalWarp(p,args[1]); break;
+                        default: this.getCommandActionManager().Action_helpGlobalWarp(p);
                     }
 
-                }else{help(p);}
+                }else{this.getCommandActionManager().Action_helpGlobalWarp(p);}
 
             }else{
-                noPermission(p);
+                this.getCommandActionManager().Action_noPermission(p);
             }
 
         }
@@ -50,22 +40,4 @@ public class cmdGlobalWarp extends Managers implements CommandExecutor {
         return false;
     }
 
-    private void noPermission(Player p){
-
-        p.sendMessage("§4Du hast nicht die erforderlichen Rechte für diesen Befehl!");
-
-    }
-
-    private void help(Player p){
-
-        if(this.getConfigManager().tagUseEnabled()){
-            p.sendMessage(this.getConfigManager().getTag() + "§4Fehler benutze den Befehl so: ");
-        }else{
-            p.sendMessage("§4Fehler benutze den Befehl so: ");
-        }
-
-        p.sendMessage("                                 §4Hilfe >> §e/InvWarp §4set [§ename§4]");
-        p.sendMessage("                                 §4Hilfe >> §e/InvWarp §4del [§ename§4]");
-
-    }
 }

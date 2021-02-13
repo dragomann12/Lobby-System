@@ -41,6 +41,38 @@ public class CommandActionManager extends Managers {
 
     }
 
+    public void Action_errorMessage(Player p, String cmdName, Exception e){
+        p.sendMessage("§4Fehler§e: §4Im Befehl: §e" + cmdName + " §4ist es zu einem Fehler gekommen der Fehler: " + e.getLocalizedMessage());
+        ConsoleWriter.writeErrorWithTag("§4Fehler§e: §4Im Befehl: §e" + cmdName + " §4ist es zu einem Fehler gekommen der Fehler: " + e.getLocalizedMessage());
+    }
+
+    public void Action_setGlobalWarp(Player p, String warpName){
+        if(!warpName.equals("")){
+            this.getGlobalWarpManager().createWarp(p, warpName, p.getWorld());
+        }else{Action_helpGlobalWarp(p);}
+    }
+
+    public void Action_delGlobalWarp(Player p, String warpName){
+        if(!warpName.equals("")){
+            this.getGlobalWarpManager().delWarp(p, warpName);
+        }else{Action_helpGlobalWarp(p);}
+    }
+
+    public void Action_helpGlobalWarp(Player p){
+        if(this.getConfigManager().tagUseEnabled()){
+            p.sendMessage(this.getConfigManager().getTag() + "§4Fehler benutze den Befehl so: ");
+        }else{
+            p.sendMessage("§4Fehler benutze den Befehl so: ");
+        }
+
+        p.sendMessage("                                 §4Hilfe >> §e/InvWarp §4set [§ename§4]");
+        p.sendMessage("                                 §4Hilfe >> §e/InvWarp §4del [§ename§4]");
+    }
+
+    public void Action_showPlayerCoins(Player p){
+        p.sendMessage("§aDu hast §b"+ this.getConnectionManager().callRowCoins(p) + " §aChaos-Coins");
+    }
+
     public void Action_setMode(Player p, Player tp){
         try{
             if(tp == null){p.sendMessage("§4Fehler§e: §4kein Spieler als Ziel angegeben!");return;}
@@ -67,7 +99,53 @@ public class CommandActionManager extends Managers {
         }else{
             p.sendMessage("§4Fehler benutze den Befehl so: ");
         }
-        p.sendMessage("                                 §4Hilfe >> §e/chclear");
+        Action_sendHelpLine(p,"chclear","","zum leeren des Chats");
+    }
+
+    public void Action_showHelp(Player p, String cmd){
+        Action_sendHelpHeader(p,"Befehl: §f" + cmd);
+        switch(cmd){
+            case "warp":
+                Action_sendInfoLine(p,"warp",getInfoArgs("","name"),"um sich zu einem Warp zu teleportieren");
+                Action_sendInfoLine(p,"warp",getInfoArgs("set","name"),"um sich einen Warp zu setzen");
+                Action_sendInfoLine(p,"warp",getInfoArgs("del","name"),"um einen gesetzten Warp wieder zu löschen");
+                break;
+            case "spawn":
+                Action_sendInfoLine(p,"spawn","","um zum Spawn zu gelangen");
+                Action_sendInfoLine(p,"spawn",getInfoArgs("set",""),"zum erstellen eines Spawns");
+                Action_sendInfoLine(p,"spawn",getInfoArgs("del",""),"zum löschen eines Spawns");
+                break;
+            case "InvWarp":
+                Action_sendInfoLine(p,"invWarp",getInfoArgs("set","warpName"),"setzt einen Mini-Spiel Warp");
+                Action_sendInfoLine(p,"invWarp",getInfoArgs("del","warpName"),"zum löschen eines Mini-Spiel Warp");
+                break;
+            case "block":
+                Action_sendInfoLine(p,"block",getInfoArgs("",""),"keine Information!");
+                break;
+            case "coins":
+                Action_sendInfoLine(p,"coins","","zeigt deine Chaos-Coins");
+                Action_sendInfoLine(p,"coins",getInfoArgs("see","name"),"zeigt die Chaos-Coins eines Spielers");
+                Action_sendInfoLine(p,"coins",getInfoArgs("set","name") + getInfoArgs("","value"),"setzt die Chaos-Coins eines Spielers");
+                Action_sendInfoLine(p,"coins",getInfoArgs("add","name") + getInfoArgs("","value"),"gibt einem Spieler Chaos-Coins");
+                break;
+            case "chclear":
+                Action_sendInfoLine(p,"chclear","","zum leeren des Chats");
+                break;
+            case "crServer":
+                Action_sendInfoLine(p,"crServer",getInfoArgs("",""),"keine Information!");
+                break;
+            case "bm":
+                Action_sendInfoLine(p,"bm",getInfoArgs("","Spieler"),"setzt den Spieler in den Bau-Modus");
+                break;
+            case "info":
+                Action_sendInfoLine(p,"info",getInfoArgs("","Spieler"),"zeigt eine Liste von nützlichen Informationen");
+                break;
+            case "lbv":
+                Action_sendInfoLine(p,"lbv","","zeigt die aktuelle Version des Lobby-Systems");
+                break;
+            default:p.sendMessage("§4Befehl existiert nicht");
+        }
+
     }
 
     public void Action_helpSpawn(Player p){
@@ -77,9 +155,10 @@ public class CommandActionManager extends Managers {
             p.sendMessage("§4Fehler benutze den Befehl so: ");
         }
 
-        p.sendMessage("                                 §4Hilfe >> §e/spawn ");
-        p.sendMessage("                                 §4Hilfe >> §e/spawn §4set");
-        p.sendMessage("                                 §4Hilfe >> §e/spawn §4del");
+        Action_sendHelpLine(p,"spawn","","um zum Spawn zu gelangen");
+        Action_sendHelpLine(p,"spawn",getHelpArgs("set",""),"zum erstellen eines Spawns");
+        Action_sendHelpLine(p,"spawn",getHelpArgs("del",""),"zum löschen eines Spawns");
+
     }
 
     public void Action_helpCoins(Player p){
@@ -90,11 +169,39 @@ public class CommandActionManager extends Managers {
             p.sendMessage("§4Fehler benutze den Befehl so: ");
         }
 
-        p.sendMessage("                                 §4Hilfe >> §e/coins  §4>> zeigt deine Chaos-Coins");
-        p.sendMessage("                                 §4Hilfe >> §e/coins §4see [§ename§4] §4>> zeigt die Chaos-Coins eines Spielers");
-        p.sendMessage("                                 §4Hilfe >> §e/coins §4set [§ename§4] [§evalue§4] §4>> setzt die Chaos-Coins eines Spielers");
-        p.sendMessage("                                 §4Hilfe >> §e/coins §4add [§ename§4] [§evalue§4] §4>> gibt einem Spieler Chaos-Coins");
+        Action_sendHelpLine(p,"coins","","zeigt deine Chaos-Coins");
+        Action_sendHelpLine(p,"coins",getHelpArgs("see","name"),"zeigt die Chaos-Coins eines Spielers");
+        Action_sendHelpLine(p,"coins",getHelpArgs("set","name") + getHelpArgs("","value"),"setzt die Chaos-Coins eines Spielers");
+        Action_sendHelpLine(p,"coins",getHelpArgs("add","name") + getHelpArgs("","value"),"gibt einem Spieler Chaos-Coins");
 
+    }
+
+    private String getHelpArgs(String argTitle, String requireContent){
+        if(argTitle.equals("") && requireContent.equals("")){return "";}
+        if(argTitle.equals("")){return " §4<§e"+requireContent+"§4>";}
+        if(requireContent.equals("")){return  " §4"+argTitle;}
+
+        return " §4"+argTitle+" <§e"+requireContent+"§4>";
+    }
+
+    private String getInfoArgs(String argTitle, String requireContent){
+        if(argTitle.equals("") && requireContent.equals("")){return "";}
+        if(argTitle.equals("")){return " §b<§f"+requireContent+"§b>";}
+        if(requireContent.equals("")){return  " §b"+argTitle;}
+
+        return " §b"+argTitle+" <§f"+requireContent+"§b>";
+    }
+
+    private void Action_sendHelpLine(Player p, String cmdName, String args, String description){
+        p.sendMessage("                                 §4Hilfe >> §e/"+cmdName + args+" §4-> " + description);
+    }
+
+    private void Action_sendInfoLine(Player p, String cmdName, String args, String description){
+        p.sendMessage("§bInfo >> §f/"+cmdName + args+" §b-> " + description);
+    }
+
+    public void Action_sendHelpHeader(Player p, String title){
+        p.sendMessage("§f----------------------------------------------------------| §5" + title + " §f|----------------------------------------------------------" );
     }
 
     public void Action_PluginVersion(Player p){
@@ -154,6 +261,10 @@ public class CommandActionManager extends Managers {
 
     }
 
+    public String getStatusTag(String value){
+        return " §e[§4"+value+"§e]";
+    }
+
     public void Action_helpWarp(Player p){
         if(this.getConfigManager().tagUseEnabled()){
             p.sendMessage(this.getConfigManager().getTag() + "§4Fehler benutze den Befehl so: ");
@@ -161,11 +272,10 @@ public class CommandActionManager extends Managers {
             p.sendMessage("§4Fehler benutze den Befehl so: ");
         }
 
-        p.sendMessage("                                 §4Hilfe >> §e/warp §4[§ename§4]");
-        p.sendMessage("                                 §4Hilfe >> §e/warp §4count");
-        p.sendMessage("                                 §4Hilfe >> §e/warp §4set [§ename§4]");
-        p.sendMessage("                                 §4Hilfe >> §e/warp §4del [§ename§4]");
-        p.sendMessage("                                 §4Hilfe >> §e/warp §4ls");
+        Action_sendHelpLine(p,"warp",getHelpArgs("","name"),"um sich zu einem Warp zu teleportieren");
+        Action_sendHelpLine(p,"warp",getHelpArgs("set","name"),"um sich einen Warp zu setzen");
+        Action_sendHelpLine(p,"warp",getHelpArgs("del","name"),"um einen gesetzten Warp wieder zu löschen");
+
     }
 
     public void Action_clearChat(Player p){
@@ -226,9 +336,7 @@ public class CommandActionManager extends Managers {
     }
 
     public void Action_noPermission(Player p){
-
         p.sendMessage("§4Fehler§e: §4Du hast nicht die erforderliche Berechtigung!");
-
     }
 
     public void Action_WarpCount(Player p){
@@ -273,10 +381,6 @@ public class CommandActionManager extends Managers {
             String port = ip_port[1];
             p.sendMessage(item_color + "IP-Adresse: " + item_value_color + ip);
             p.sendMessage(item_color + "Port: " + item_value_color + port);
-
-            p.sendMessage("§f￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭  §bStatistic");
-
-            p.sendMessage("      §4nach Update verfügbar");
 
             if(this.getConfigManager().exists("perm_list")) {
                 p.sendMessage("§f￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭  §bRechte");

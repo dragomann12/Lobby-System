@@ -16,7 +16,7 @@ public class cmdCoins extends Managers implements CommandExecutor {
             Player p = (Player)sender;
 
             if(args[0] == null){
-                p.sendMessage("§aDu hast §b"+ this.getConnectionManager().callRowCoins(p) + " §aChaos-Coins");
+                this.getCommandActionManager().Action_showPlayerCoins(p);
             }else if(!args[1].isEmpty()){
                 try{
                     Player target = Bukkit.getPlayer(args[1]);
@@ -26,7 +26,7 @@ public class cmdCoins extends Managers implements CommandExecutor {
                         case "add": this.getCommandActionManager().Action_addCoins(p,target, Integer.parseInt(args[2])); break;
                     }
                 }catch(NullPointerException e){
-                    p.sendMessage("§4Es ist ein Fehler aufgetreten!");
+                    this.getCommandActionManager().Action_errorMessage(p,"Coins",e);
                 }
 
             }else{

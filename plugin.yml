@@ -46,3 +46,7 @@ commands:
     usage:
     description: zeigt die Lobby-System version!
     permission:
+  lbHelp:
+    usage:
+    description: keine Information!
+    permission:

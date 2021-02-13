@@ -1,8 +1,5 @@
 package de.dragonhard.lobby;
-import de.dragonhard.lobby.commands.cmdClear;
-import de.dragonhard.lobby.commands.cmdPlayerInfo;
-import de.dragonhard.lobby.commands.cmdVersion;
-import de.dragonhard.lobby.commands.cmdblock;
+import de.dragonhard.lobby.commands.*;
 import de.dragonhard.lobby.commands.coins.cmdCoins;
 import de.dragonhard.lobby.commands.network.cmdCreateServer;
 import de.dragonhard.lobby.commands.other.cmdBuild;
@@ -166,6 +163,7 @@ TODO add Yes/No question to admin items
         this.getCommand("bm").setExecutor(new cmdBuild());
         this.getCommand("info").setExecutor(new cmdPlayerInfo());
         this.getCommand("lbv").setExecutor(new cmdVersion());
+        this.getCommand("lbHelp").setExecutor(new cmdHelp());
 
         ConsoleWriter.writeLoadingEnd("command register loaded");
         return true;
