@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.manager.other;
 
+import de.dragonhard.lobby.manager.Managers;
 import de.dragonhard.lobby.reader.WarpListReader;
 import de.dragonhard.lobby.reader.WarpReader;
 import de.dragonhard.lobby.components.*;
@@ -12,9 +13,8 @@ import java.io.File;
 
 public class WarpManager extends WarpReader {
 
-    PlayerConfigManager pm = new PlayerConfigManager();
+    Managers manager = new Managers();
     WarpListReader wlr = new WarpListReader();
-
     public void teleportPlayer(Player p, String warpName){  //call to teleport the Player to a Warp
         if(this.exists(p, warpName)){
             this.setFile(p, warpName);
@@ -34,19 +34,19 @@ public class WarpManager extends WarpReader {
 
     private void addWarpToList(Player p, String warpName){
         wlr.setFile(p);
-        wlr.addToList("warp_" + pm.getCurrentWarps(p), warpName);
+        wlr.addToList("warp_" + manager.getPlayerManager().getCurrentWarps(p), warpName);
         ConsoleWriter.writeWithTag("The Player " + p.getName() + " with the uuid " + p.getUniqueId() + " created the Warp "+ warpName + " and the Warp has ben added to the list");
     }
 
     public void delAllWarps(Player p){
         wlr.setFile(p);
-        if(pm.getCurrentWarps(p) == 0 && pm.getMaxWarps(p) != 0){p.sendMessage("§4Du hast keine Warps gesetzt!");return;}
+        if(manager.getPlayerManager().getCurrentWarps(p) == 0 && manager.getPlayerManager().getMaxWarps(p) != 0){p.sendMessage("§4Du hast keine Warps gesetzt!");return;}
 
-        for(int i = 0; i < pm.getMaxWarps(p); i++) {
+        for(int i = 0; i < manager.getPlayerManager().getMaxWarps(p); i++) {
 
             if(!exists(p,wlr.getString("warp_"+i))){wlr.set("warp_" + i, "frei");}else{
                 this.delWarp(p, wlr.getString("warp_" + i));
-                pm.delWarpFromCount(p);
+                manager.getPlayerManager().delWarpFromCount(p);
             }
 
         }
@@ -56,12 +56,12 @@ public class WarpManager extends WarpReader {
     public void getWarpList(Player p){ //call for a list of all the warps from a player
         wlr.setFile(p);
 
-        if(pm.getCurrentWarps(p) == 0 && pm.getMaxWarps(p) == 0){p.sendMessage("§4Du kannst keine Warps setzen!");return;}
-        if(pm.getCurrentWarps(p) == 0 && pm.getMaxWarps(p) != 0){p.sendMessage("§4Du hast keine Warps gesetzt!");return;}
+        if(manager.getPlayerManager().getCurrentWarps(p) == 0 && manager.getPlayerManager().getMaxWarps(p) == 0){p.sendMessage("§4Du kannst keine Warps setzen!");return;}
+        if(manager.getPlayerManager().getCurrentWarps(p) == 0 && manager.getPlayerManager().getMaxWarps(p) != 0){p.sendMessage("§4Du hast keine Warps gesetzt!");return;}
 
-        p.sendMessage("§aListe der Warps    Verwendung: §e" + pm.getCurrentWarps(p) + "§a/§e" + pm.getMaxWarps(p));
+        p.sendMessage("§aListe der Warps    Verwendung: §e" + manager.getPlayerManager().getCurrentWarps(p) + "§a/§e" + manager.getPlayerManager().getMaxWarps(p));
 
-        for(int i = 0; i < pm.getMaxWarps(p); i++) {
+        for(int i = 0; i < manager.getPlayerManager().getMaxWarps(p); i++) {
 
                 if(!exists(p,wlr.getString("warp_"+i))){wlr.set("warp_" + i, "frei");}else{
                     p.sendMessage("§a| §e" + wlr.getString("warp_" + i));

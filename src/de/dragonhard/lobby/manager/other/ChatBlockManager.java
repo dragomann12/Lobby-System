@@ -17,9 +17,9 @@ public class ChatBlockManager {
 
     public boolean isContainNumber(String value){
 
-        int[] blacklist = {0,1,3,4,5,6,7,8,9};
+        int[] list = {0,1,3,4,5,6,7,8,9};
 
-        for (int j : blacklist) {
+        for (int j : list) {
             if (value.contains("" + j)) {
                 return true;
             }
