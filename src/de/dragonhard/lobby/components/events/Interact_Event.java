@@ -1,8 +1,8 @@
 package de.dragonhard.lobby.components.events;
 
+import de.dragonhard.lobby.components.ConsoleWriter;
 import de.dragonhard.lobby.components.util.InventorySetter;
 import de.dragonhard.lobby.manager.Managers;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -34,8 +34,8 @@ public class Interact_Event extends Managers implements Listener {
         is.getHotbarItems(p);
 
             try {
-                if (e.getItem().getType().equals(Material.COMPASS)) {
-
+                if (e.getItem().getType().equals(Material.COMPASS)) { // this Item is not in use!
+                    ConsoleWriter.writeWithTag("Compass are disabled for the Lobby-System");
                 } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
                     if (e.getItem().getType().equals(this.getPlayerManager().getHideStatusMaterial(p))) {
                         //Hide Item
@@ -97,7 +97,7 @@ public class Interact_Event extends Managers implements Listener {
 
 
             } catch (Exception var20) {
-
+                ConsoleWriter.writeErrorWithTag("" + var20.getMessage());
             }
 
         }

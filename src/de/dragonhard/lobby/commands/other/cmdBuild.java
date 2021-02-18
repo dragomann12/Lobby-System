@@ -11,7 +11,7 @@ public class cmdBuild extends Managers implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-        if(sender instanceof Player){
+        if(sender != null){
             Player p = (Player) sender;
             try{
                 if(args.length == 0) {p.sendMessage("§4Fehler§e: §e/§4bm §e<§4player§e>"); return false;}

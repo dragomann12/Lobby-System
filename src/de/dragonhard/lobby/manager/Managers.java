@@ -41,6 +41,8 @@ public class Managers {
         return new PluginWithlistManager();
     }
 
+    public ChatBlockManager getChatBlockManager(){return new ChatBlockManager();}
+
     public DateManager getDateManager(){
         return new DateManager();
     }

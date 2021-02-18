@@ -12,7 +12,6 @@ public class cmdCoins extends Managers implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
         if(sender != null){
-
             Player p = (Player)sender;
 
             if(args[0] == null){

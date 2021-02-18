@@ -10,10 +10,9 @@ import org.bukkit.entity.Player;
 public class cmdSpawn extends Managers implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        Player p = (Player) sender;
 
         if(sender != null){
-
+            Player p = (Player) sender;
             if(p.hasPermission(PermissionList.getPermission("Use",1))){
 
                 if(args.length != 0){

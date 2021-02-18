@@ -16,7 +16,7 @@ public class CommandActionManager extends Managers {
     String item_value_color = "§e";
     final String default_color_Message = "§f";
     final String default_color_value = "§e";
-    final String version = "1.5.0  beta-Build: 150.1";
+    final String version = "1.5.0  beta-Build: 150.5";
 
     public void Action_showCoins(Player p){
         p.sendMessage("§5"+ p.getName() + " §bhat §a" + this.getConnectionManager().callRowCoins(p) + " CC");
@@ -65,8 +65,8 @@ public class CommandActionManager extends Managers {
             p.sendMessage("§4Fehler benutze den Befehl so: ");
         }
 
-        p.sendMessage("                                 §4Hilfe >> §e/InvWarp §4set [§ename§4]");
-        p.sendMessage("                                 §4Hilfe >> §e/InvWarp §4del [§ename§4]");
+        Action_sendHelpLine(p,"InvWarp",getHelpArgs("set","name"),"setzt einen Mini-Spiel Warp");
+        Action_sendHelpLine(p,"InvWarp",getHelpArgs("del","name"),"zum löschen eines Mini-Spiel Warp");
     }
 
     public void Action_showPlayerCoins(Player p){
@@ -103,50 +103,130 @@ public class CommandActionManager extends Managers {
     }
 
     public void Action_showHelp(Player p, String cmd){
-        Action_sendHelpHeader(p,"Befehl: §f" + cmd);
+
         switch(cmd){
+            case "*":
+                cmd = "warp";
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
+                Action_sendInfoLine(p,"warp",getInfoArgs("","name"),"um sich zu einem Warp zu teleportieren");
+                Action_sendInfoLine(p,"warp",getInfoArgs("set","name"),"um sich einen Warp zu setzen");
+                Action_sendInfoLine(p,"warp",getInfoArgs("del","name"),"um einen gesetzten Warp wieder zu löschen");
+
+                Action_addSpacer(p);
+
+                cmd = "spawn";
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
+                Action_sendInfoLine(p,"spawn","","um zum Spawn zu gelangen");
+                Action_sendInfoLine(p,"spawn",getInfoArgs("set",""),"zum erstellen eines Spawns");
+                Action_sendInfoLine(p,"spawn",getInfoArgs("del",""),"zum löschen eines Spawns");
+
+                Action_addSpacer(p);
+
+                cmd = "invWarp";
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
+                Action_sendInfoLine(p,"invWarp",getInfoArgs("set","warpName"),"zum setzt einen Mini-Spiel Warp");
+                Action_sendInfoLine(p,"invWarp",getInfoArgs("del","warpName"),"zum löschen eines Mini-Spiel Warp");
+
+                Action_addSpacer(p);
+
+                cmd = "block";
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
+                Action_sendInfoLine(p,"block",getInfoArgs("",""),"keine Information!");
+
+                Action_addSpacer(p);
+
+                cmd = "coins";
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
+                Action_sendInfoLine(p,"coins","","zeigt deine Chaos-Coins");
+                Action_sendInfoLine(p,"coins",getInfoArgs("see","name"),"zeigt die Chaos-Coins eines Spielers");
+                Action_sendInfoLine(p,"coins",getInfoArgs("set","name") + getInfoArgs("","value"),"setzt die Chaos-Coins eines Spielers");
+                Action_sendInfoLine(p,"coins",getInfoArgs("add","name") + getInfoArgs("","value"),"gibt einem Spieler Chaos-Coins");
+
+                Action_addSpacer(p);
+
+                cmd = "chclear";
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
+                Action_sendInfoLine(p,"chclear","","zum leeren des Chats");
+
+                Action_addSpacer(p);
+
+                cmd = "crServer";
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
+                Action_sendInfoLine(p,"crServer",getInfoArgs("",""),"keine Information!");
+
+                Action_addSpacer(p);
+
+                cmd = "bm";
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
+                Action_sendInfoLine(p,"bm",getInfoArgs("","Spieler"),"setzt den Spieler in den Bau-Modus");
+
+                Action_addSpacer(p);
+
+                cmd = "info";
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
+                Action_sendInfoLine(p,"info",getInfoArgs("","Spieler"),"zeigt eine Liste von nützlichen Informationen");
+
+                Action_addSpacer(p);
+
+                cmd = "lbv";
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
+                Action_sendInfoLine(p,"lbv","","zeigt die aktuelle Version des Lobby-Systems");
+
+                break;
             case "warp":
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
                 Action_sendInfoLine(p,"warp",getInfoArgs("","name"),"um sich zu einem Warp zu teleportieren");
                 Action_sendInfoLine(p,"warp",getInfoArgs("set","name"),"um sich einen Warp zu setzen");
                 Action_sendInfoLine(p,"warp",getInfoArgs("del","name"),"um einen gesetzten Warp wieder zu löschen");
                 break;
             case "spawn":
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
                 Action_sendInfoLine(p,"spawn","","um zum Spawn zu gelangen");
                 Action_sendInfoLine(p,"spawn",getInfoArgs("set",""),"zum erstellen eines Spawns");
                 Action_sendInfoLine(p,"spawn",getInfoArgs("del",""),"zum löschen eines Spawns");
                 break;
             case "InvWarp":
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
                 Action_sendInfoLine(p,"invWarp",getInfoArgs("set","warpName"),"setzt einen Mini-Spiel Warp");
                 Action_sendInfoLine(p,"invWarp",getInfoArgs("del","warpName"),"zum löschen eines Mini-Spiel Warp");
                 break;
             case "block":
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
                 Action_sendInfoLine(p,"block",getInfoArgs("",""),"keine Information!");
                 break;
             case "coins":
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
                 Action_sendInfoLine(p,"coins","","zeigt deine Chaos-Coins");
                 Action_sendInfoLine(p,"coins",getInfoArgs("see","name"),"zeigt die Chaos-Coins eines Spielers");
                 Action_sendInfoLine(p,"coins",getInfoArgs("set","name") + getInfoArgs("","value"),"setzt die Chaos-Coins eines Spielers");
                 Action_sendInfoLine(p,"coins",getInfoArgs("add","name") + getInfoArgs("","value"),"gibt einem Spieler Chaos-Coins");
                 break;
             case "chclear":
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
                 Action_sendInfoLine(p,"chclear","","zum leeren des Chats");
                 break;
             case "crServer":
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
                 Action_sendInfoLine(p,"crServer",getInfoArgs("",""),"keine Information!");
                 break;
             case "bm":
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
                 Action_sendInfoLine(p,"bm",getInfoArgs("","Spieler"),"setzt den Spieler in den Bau-Modus");
                 break;
             case "info":
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
                 Action_sendInfoLine(p,"info",getInfoArgs("","Spieler"),"zeigt eine Liste von nützlichen Informationen");
                 break;
             case "lbv":
+                Action_sendHelpHeader(p,"Befehl: §f" + cmd);
                 Action_sendInfoLine(p,"lbv","","zeigt die aktuelle Version des Lobby-Systems");
                 break;
             default:p.sendMessage("§4Befehl existiert nicht");
         }
 
     }
+
+    public void Action_addSpacer(Player p){p.sendMessage("");}
 
     public void Action_helpSpawn(Player p){
         if(this.getConfigManager().tagUseEnabled()){

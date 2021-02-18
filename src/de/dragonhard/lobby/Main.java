@@ -76,17 +76,15 @@ TODO add Yes/No question to admin items
 
     }
 
-    private boolean loadDebug(){
+    private void loadDebug(){
         if(manager.getConfigManager().isDebugMode()){
 
             manager.getShopManager().addItemToShop("Coins-Shop","Test","this is a Test item!","Debug","Test","non",22,9999);
-            return true;
         }
 
-        return false;
     }
 
-    public boolean setWallIdLists(){
+    public void setWallIdLists(){
         ConsoleWriter.writeWithTag("setting up Menu IDs ...");
 
         //Admin-Menu
@@ -112,26 +110,23 @@ TODO add Yes/No question to admin items
         manager.getMenuManager().getPlayerMenu().addWallIDs();
 
         ConsoleWriter.writeWithTag("done");
-        return true;
     }
 
-    public boolean registerOutgoingChannel(){
+    public void registerOutgoingChannel(){
         ConsoleWriter.writeLoadingStart("setting up outgoing communication channel ...");
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, BungeeCordManager.getChannel());
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, PluginComunicationManager.getChannelOut());
         ConsoleWriter.writeLoadingEnd("done");
-        return true;
     }
 
-    public boolean registerIngoingChannel(){
+    public void registerIngoingChannel(){
         ConsoleWriter.writeLoadingStart("setting up ingoing communication channel ...");
         Bukkit.getMessenger().registerIncomingPluginChannel(this, PluginComunicationManager.getChannelIn(), manager.getCommunicationManager().getListener());
         ConsoleWriter.writeLoadingEnd("done");
-        return true;
     }
 
-    public boolean loadMenuConfig(){
+    public void loadMenuConfig(){
         ConsoleWriter.writeLoadingStart("loading menu configuration");
 
         loadConfig("creativ","BEACON",5);
@@ -147,10 +142,9 @@ TODO add Yes/No question to admin items
         loadConfig("Player","DIAMOND",5);
 
         ConsoleWriter.writeLoadingEnd("menu configuration loaded");
-        return true;
     }
 
-    public boolean registerCommand(){
+    public void registerCommand(){
         ConsoleWriter.writeLoadingStart("loading command register");
 
         this.getCommand("warp").setExecutor(new cmdWarp());
@@ -166,11 +160,10 @@ TODO add Yes/No question to admin items
         this.getCommand("lbHelp").setExecutor(new cmdHelp());
 
         ConsoleWriter.writeLoadingEnd("command register loaded");
-        return true;
 
     }
 
-    public boolean loadConfig(String menuName, String material ,int lineAmount){
+    public void loadConfig(String menuName, String material ,int lineAmount){
         manager.getConfigManager().setFile(menuName + "_menu_config");
 
         manager.getConfigManager().setDefault("Title", menuName);
@@ -189,10 +182,9 @@ TODO add Yes/No question to admin items
             manager.getConfigManager().setDefault("Slot_"+i+"_isEnabled",false);
         }
 
-        return true;
     }
 
-    public boolean registerEvents(){
+    public void registerEvents(){
         ConsoleWriter.writeLoadingStart("loading event register");
 
         //Plugin core events
@@ -224,7 +216,6 @@ TODO add Yes/No question to admin items
         manager.getPluginManager().registerEvents(manager.getMenuManager().getCoinShopMenu(),this);
 
         ConsoleWriter.writeLoadingEnd("event register loaded");
-        return true;
 
     }
 

@@ -1,5 +1,5 @@
 name: LobbySystem
-version: '1.5.0  beta-Build: 150.1'
+version: '1.5.0  beta-Build: 150.5'
 author: Dragonhard117
 main: de.dragonhard.lobby.Main
 load: STARTUP

@@ -143,8 +143,12 @@ public class ConnectionManager extends Managers implements Listener {
 
                     PreparedStatement st = getCon().prepareStatement("INSERT INTO Modes(UUID,BUILD,HIDE) VALUES (?,?,?)");
                     st.setString(1, p.getUniqueId().toString());
-                    st.setInt(2, callRowBuildMode(p));
-                    st.setInt(2, callRowHideMode(p));
+                    if(callRowHideMode(p) == 0){
+                        st.setInt(2, 1);
+                    }else{
+                        st.setInt(2, 0);
+                    }
+
                     st.executeUpdate();
 
                 } catch (SQLException throwables) {
