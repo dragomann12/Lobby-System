@@ -3,8 +3,6 @@ package de.dragonhard.lobby.components.events;
 import de.dragonhard.lobby.components.PermissionList;
 import de.dragonhard.lobby.manager.Managers;
 import de.dragonhard.lobby.manager.other.MessageManager;
-import de.dragonhard.lobby.manager.other.PlayerConfigManager;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
