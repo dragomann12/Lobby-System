@@ -7,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.util.Arrays;
 
 public class SpawnManager extends SpawnReader {
 
@@ -18,7 +19,7 @@ public class SpawnManager extends SpawnReader {
                 p.teleport(new Location(w, this.getDouble("X"), this.getDouble("Y"), this.getDouble("Z"), this.getfloat("Yaw"), this.getfloat("Pitch")));
             }catch(Exception ex) {
                 p.sendMessage("§4Es ist ein Fehler aufgetreten Teleport nicht möglich");
-                p.sendMessage("Fehler: " + ex.getStackTrace());
+                p.sendMessage("Fehler: " + Arrays.toString(ex.getStackTrace()));
             }
         }else{
             p.sendMessage("§4Der Spawn wurde nicht gefunden!");

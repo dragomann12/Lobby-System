@@ -14,7 +14,7 @@ public class GlobalWarpManager extends GlobalWarpReader {
         if(this.exists( warpName)){
             this.setFile( warpName);
             World w = Bukkit.getServer().getWorld(this.getString("World"));
-            try{ //this.getfloat("Pitch"), this.getfloat("Yaw")
+            try{
                 p.teleport(new Location(w, this.getDouble("X"), this.getDouble("Y"), this.getDouble("Z"), this.getfloat("Yaw"), this.getfloat("Pitch")));
                 p.sendMessage("§aDu wurdest zum Warp §e" + warpName + " §aTeleportiert");
             }catch(Exception ex) {

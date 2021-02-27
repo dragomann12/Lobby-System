@@ -1,4 +1,5 @@
 package de.dragonhard.lobby;
+
 import de.dragonhard.lobby.commands.*;
 import de.dragonhard.lobby.commands.coins.cmdCoins;
 import de.dragonhard.lobby.commands.network.cmdCreateServer;
@@ -24,7 +25,9 @@ TODO add Yes/No question to admin items
     static Plugin plugin;
 
     public static Plugin getPlugin() {
+
         return plugin;
+
     }
 
     public void onEnable(){
@@ -47,13 +50,13 @@ TODO add Yes/No question to admin items
             manager.getMySqlManager().connect("createTable", null);
                 ConsoleWriter.writeWithTag("Config is up to date ...");
 
-                registerOutgoingChannel();
-                registerIngoingChannel();
+                _registerOutgoingChannel();
+                _registerIngoingChannel();
 
-                setWallIdLists();
+                _setWallIdLists();
 
-                registerCommand(); // Register the Commands
-                registerEvents(); // Register the Events
+                _registerCommand(); // Register the Commands
+                _registerEvents(); // Register the Events
 
                 ConsoleWriter.writeWithTag("Enabled!");
 
@@ -67,16 +70,16 @@ TODO add Yes/No question to admin items
 
         }else{
             ConsoleWriter.writeWithTag("installing ...");
-            loadMenuConfig(); // load the Config for the Menu
+            _loadMenuConfig(); // load the Config for the Menu
             manager.getConfigManager().getDefaultConfig();
         }
 
         //loading debug operations
-        loadDebug();
+        _loadDebug();
 
     }
 
-    private void loadDebug(){
+    private void _loadDebug(){
         if(manager.getConfigManager().isDebugMode()){
 
             manager.getShopManager().addItemToShop("Coins-Shop","Test","this is a Test item!","Debug","Test","non",22,9999);
@@ -84,7 +87,7 @@ TODO add Yes/No question to admin items
 
     }
 
-    public void setWallIdLists(){
+    private void _setWallIdLists(){
         ConsoleWriter.writeWithTag("setting up Menu IDs ...");
 
         //Admin-Menu
@@ -112,7 +115,7 @@ TODO add Yes/No question to admin items
         ConsoleWriter.writeWithTag("done");
     }
 
-    public void registerOutgoingChannel(){
+    private void _registerOutgoingChannel(){
         ConsoleWriter.writeLoadingStart("setting up outgoing communication channel ...");
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, BungeeCordManager.getChannel());
@@ -120,31 +123,31 @@ TODO add Yes/No question to admin items
         ConsoleWriter.writeLoadingEnd("done");
     }
 
-    public void registerIngoingChannel(){
+    private void _registerIngoingChannel(){
         ConsoleWriter.writeLoadingStart("setting up ingoing communication channel ...");
         Bukkit.getMessenger().registerIncomingPluginChannel(this, PluginComunicationManager.getChannelIn(), manager.getCommunicationManager().getListener());
         ConsoleWriter.writeLoadingEnd("done");
     }
 
-    public void loadMenuConfig(){
+    private void _loadMenuConfig(){
         ConsoleWriter.writeLoadingStart("loading menu configuration");
 
-        loadConfig("creativ","BEACON",5);
-        loadConfig("shop","DIAMOND",5);
-        loadConfig("Admin","BEACON",5);
-        loadConfig("Settings","DIAMOND",5);
-        loadConfig("Lobby","NETHER_STAR",5);
-        loadConfig("Game","DIAMOND",5);
-        loadConfig("Coin_shop","DIAMOND",5);
-        loadConfig("Friend","DIAMOND",5);
-        loadConfig("Debug","DIAMOND",5);
-        loadConfig("Admin_External","DIAMOND",5);
-        loadConfig("Player","DIAMOND",5);
+        _loadConfig("creativ","BEACON",5);
+        _loadConfig("shop","DIAMOND",5);
+        _loadConfig("Admin","BEACON",5);
+        _loadConfig("Settings","DIAMOND",5);
+        _loadConfig("Lobby","NETHER_STAR",5);
+        _loadConfig("Game","DIAMOND",5);
+        _loadConfig("Coin_shop","DIAMOND",5);
+        _loadConfig("Friend","DIAMOND",5);
+        _loadConfig("Debug","DIAMOND",5);
+        _loadConfig("Admin_External","DIAMOND",5);
+        _loadConfig("Player","DIAMOND",5);
 
         ConsoleWriter.writeLoadingEnd("menu configuration loaded");
     }
 
-    public void registerCommand(){
+    private void _registerCommand(){
         ConsoleWriter.writeLoadingStart("loading command register");
 
         this.getCommand("warp").setExecutor(new cmdWarp());
@@ -163,7 +166,7 @@ TODO add Yes/No question to admin items
 
     }
 
-    public void loadConfig(String menuName, String material ,int lineAmount){
+    private void _loadConfig(String menuName, String material ,int lineAmount){
         manager.getConfigManager().setFile(menuName + "_menu_config");
 
         manager.getConfigManager().setDefault("Title", menuName);
@@ -184,7 +187,7 @@ TODO add Yes/No question to admin items
 
     }
 
-    public void registerEvents(){
+    private void _registerEvents(){
         ConsoleWriter.writeLoadingStart("loading event register");
 
         //Plugin core events
@@ -220,7 +223,9 @@ TODO add Yes/No question to admin items
     }
 
     public void onDisable(){
+
         ConsoleWriter.writeWithTag("Disabled!");
+
     }
 
 }

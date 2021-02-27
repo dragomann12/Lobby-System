@@ -10,21 +10,24 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.util.Arrays;
 
-public class WarpManager extends WarpReader {
+public class WarpManager extends Managers {
 
-    Managers manager = new Managers();
-    WarpListReader wlr = new WarpListReader();
+
+    WarpReader warpReader = this.getReaderManager().getWarpReader();
+    WarpListReader warpListReader = this.getReaderManager().getWarpListReader();
+
     public void teleportPlayer(Player p, String warpName){  //call to teleport the Player to a Warp
-        if(this.exists(p, warpName)){
-            this.setFile(p, warpName);
-            World w = Bukkit.getServer().getWorld(this.getString("World"));
+        if(warpReader.exists(p, warpName)){
+            warpReader.setFile(p, warpName);
+            World w = Bukkit.getServer().getWorld(warpReader.getString("World"));
             try{
-                p.teleport(new Location(w, this.getDouble("X"), this.getDouble("Y"), this.getDouble("Z"), this.getfloat("Yaw"), this.getfloat("Pitch")));
+                p.teleport(new Location(w, warpReader.getDouble("X"), warpReader.getDouble("Y"), warpReader.getDouble("Z"), warpReader.getfloat("Yaw"), warpReader.getfloat("Pitch")));
                 p.sendMessage("§aDu wurdest zum Warp §e" + warpName + " §aTeleportiert");
             }catch(Exception ex) {
                 p.sendMessage("§4Es ist ein Fehler aufgetreten Teleport nicht möglich");
-                p.sendMessage("Fehler: " + ex.getStackTrace());
+                p.sendMessage("Fehler: " + Arrays.toString(ex.getStackTrace()));
             }
         }else{
             p.sendMessage("§4Der Warp §e" + warpName + " §4wurde nicht gefunden!");
@@ -33,20 +36,20 @@ public class WarpManager extends WarpReader {
     }
 
     private void addWarpToList(Player p, String warpName){
-        wlr.setFile(p);
-        wlr.addToList("warp_" + manager.getPlayerManager().getCurrentWarps(p), warpName);
+        warpListReader.setFile(p);
+        warpListReader.addToList("warp_" + this.getPlayerManager().getCurrentWarps(p), warpName);
         ConsoleWriter.writeWithTag("The Player " + p.getName() + " with the uuid " + p.getUniqueId() + " created the Warp "+ warpName + " and the Warp has ben added to the list");
     }
 
     public void delAllWarps(Player p){
-        wlr.setFile(p);
-        if(manager.getPlayerManager().getCurrentWarps(p) == 0 && manager.getPlayerManager().getMaxWarps(p) != 0){p.sendMessage("§4Du hast keine Warps gesetzt!");return;}
+        warpListReader.setFile(p);
+        if(this.getPlayerManager().getCurrentWarps(p) == 0 && this.getPlayerManager().getMaxWarps(p) != 0){p.sendMessage("§4Du hast keine Warps gesetzt!");return;}
 
-        for(int i = 0; i < manager.getPlayerManager().getMaxWarps(p); i++) {
+        for(int i = 0; i < this.getPlayerManager().getMaxWarps(p); i++) {
 
-            if(!exists(p,wlr.getString("warp_"+i))){wlr.set("warp_" + i, "frei");}else{
-                this.delWarp(p, wlr.getString("warp_" + i));
-                manager.getPlayerManager().delWarpFromCount(p);
+            if(!warpReader.exists(p,warpListReader.getString("warp_"+i))){warpListReader.set("warp_" + i, "frei");}else{
+                this.delWarp(p, warpListReader.getString("warp_" + i));
+                this.getPlayerManager().delWarpFromCount(p);
             }
 
         }
@@ -54,17 +57,17 @@ public class WarpManager extends WarpReader {
     }
 
     public void getWarpList(Player p){ //call for a list of all the warps from a player
-        wlr.setFile(p);
+        warpListReader.setFile(p);
 
-        if(manager.getPlayerManager().getCurrentWarps(p) == 0 && manager.getPlayerManager().getMaxWarps(p) == 0){p.sendMessage("§4Du kannst keine Warps setzen!");return;}
-        if(manager.getPlayerManager().getCurrentWarps(p) == 0 && manager.getPlayerManager().getMaxWarps(p) != 0){p.sendMessage("§4Du hast keine Warps gesetzt!");return;}
+        if(this.getPlayerManager().getCurrentWarps(p) == 0 && this.getPlayerManager().getMaxWarps(p) == 0){p.sendMessage("§4Du kannst keine Warps setzen!");return;}
+        if(this.getPlayerManager().getCurrentWarps(p) == 0 && this.getPlayerManager().getMaxWarps(p) != 0){p.sendMessage("§4Du hast keine Warps gesetzt!");return;}
 
-        p.sendMessage("§aListe der Warps    Verwendung: §e" + manager.getPlayerManager().getCurrentWarps(p) + "§a/§e" + manager.getPlayerManager().getMaxWarps(p));
+        p.sendMessage("§aListe der Warps    Verwendung: §e" + this.getPlayerManager().getCurrentWarps(p) + "§a/§e" + this.getPlayerManager().getMaxWarps(p));
 
-        for(int i = 0; i < manager.getPlayerManager().getMaxWarps(p); i++) {
+        for(int i = 0; i < this.getPlayerManager().getMaxWarps(p); i++) {
 
-                if(!exists(p,wlr.getString("warp_"+i))){wlr.set("warp_" + i, "frei");}else{
-                    p.sendMessage("§a| §e" + wlr.getString("warp_" + i));
+                if(!warpListReader.exists(p,warpListReader.getString("warp_"+i))){warpListReader.set("warp_" + i, "frei");}else{
+                    p.sendMessage("§a| §e" + warpListReader.getString("warp_" + i));
                 }
 
 
@@ -76,19 +79,19 @@ public class WarpManager extends WarpReader {
 
     public void createWarp(Player p, String warpName, World world){    //call to create a new Warp
 
-        File f = this.getCurrentFile(p, warpName);
+        File f = warpReader.getCurrentFile(p, warpName);
 
         if(f.exists()){
             p.sendMessage("§4Der Warp §e"+ warpName +" §4wurde bereits erstellt!");
         }else{
 
-            this.setFile(p, warpName);
-            this.set("World", world.getName());
-            this.set("X", p.getLocation().getX());
-            this.set("Y", p.getLocation().getY());
-            this.set("Z", p.getLocation().getZ());
-            this.set("Pitch", p.getLocation().getPitch());
-            this.set("Yaw", p.getLocation().getYaw());
+            warpReader.setFile(p, warpName);
+            warpReader.set("World", world.getName());
+            warpReader.set("X", p.getLocation().getX());
+            warpReader.set("Y", p.getLocation().getY());
+            warpReader.set("Z", p.getLocation().getZ());
+            warpReader.set("Pitch", p.getLocation().getPitch());
+            warpReader.set("Yaw", p.getLocation().getYaw());
 
             p.sendMessage("§aDer Warp §e"+ warpName +" §awurde erfolgreich erstellt!"); addWarpToList(p, warpName);
         }
@@ -97,9 +100,9 @@ public class WarpManager extends WarpReader {
     }
 
     public void delWarp(Player p, String warpName){//call to delete a existing Warp
-        if(this.exists(p, warpName)){
-            remove(p, this.getFile(warpName));
-            if(!exists(p, warpName)){ p.sendMessage("§aDer Warp §e" + warpName + " §awurde erfolgreich entfernt!");}
+        if(warpReader.exists(p, warpName)){
+            remove(p, warpReader.getFile(warpName));
+            if(!warpReader.exists(p, warpName)){ p.sendMessage("§aDer Warp §e" + warpName + " §awurde erfolgreich entfernt!");}
         }else{
             p.sendMessage("§4Der Warp §e" + warpName + " §4wurde nicht gefunden!");
         }
@@ -110,8 +113,7 @@ public class WarpManager extends WarpReader {
     private boolean remove(Player p, File warpName)  {
 
         try{
-            File file = warpName;
-            file.delete(); return true;
+            warpName.delete(); return true;
         }catch(Exception ex){
             return false;
         }
