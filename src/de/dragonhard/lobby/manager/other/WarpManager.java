@@ -77,11 +77,14 @@ public class WarpManager extends Managers {
 
     }
 
-    public void createWarp(Player p, String warpName, World world){    //call to create a new Warp
+    public Boolean exists(Player p, String warpName){
+        File f = warpReader.getCurrentFile(p,warpName);
+        return f.exists();
+    }
 
-        File f = warpReader.getCurrentFile(p, warpName);
+    public void createWarp(Player p, String warpName, World world){//call to create a new Warp
 
-        if(f.exists()){
+        if(exists(p,warpName)){
             p.sendMessage("§4Der Warp §e"+ warpName +" §4wurde bereits erstellt!");
         }else{
 
@@ -100,9 +103,12 @@ public class WarpManager extends Managers {
     }
 
     public void delWarp(Player p, String warpName){//call to delete a existing Warp
-        if(warpReader.exists(p, warpName)){
+        p.sendMessage("§bDer Warp §e" + warpName + " §bwird gesucht ...");
+        if(exists(p,warpName)){
             remove(p, warpReader.getFile(warpName));
-            if(!warpReader.exists(p, warpName)){ p.sendMessage("§aDer Warp §e" + warpName + " §awurde erfolgreich entfernt!");}
+            if(!exists(p,warpName)){ p.sendMessage("§aDer Warp §e" + warpName + " §awurde erfolgreich entfernt!");}else{
+                p.sendMessage("§4Der warp §e"+warpName+" §4konnte nicht entfernt werden!");
+            }
         }else{
             p.sendMessage("§4Der Warp §e" + warpName + " §4wurde nicht gefunden!");
         }

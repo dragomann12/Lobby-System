@@ -475,11 +475,11 @@ public class CommandActionManager extends Managers {
             }
             p.sendMessage("§f￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭￭  §bStatus");
 
-            String msg_Sprint = item_color + "läuft: " + item_value_color + target.isSprinting(); msg_Sprint.replace("false","§4false"); msg_Sprint.replace("true","§atrue");
-            String msg_Sleep = item_color + "schläft: " + item_value_color + target.isSleeping(); msg_Sleep.replace("false","§4false"); msg_Sleep.replace("true","§atrue");
-            String msg_Fly = item_color + "fliegt: " + item_value_color + target.isFlying(); msg_Fly.replace("false","§4false"); msg_Fly.replace("true","§atrue");
-            String msg_Sneak = item_color + "schleicht: " + item_value_color + target.isSneaking(); msg_Sneak.replace("false","§4false"); msg_Sneak.replace("true","§atrue");
-            String msg_Whithelist = item_color + "Whitelist: " + item_value_color + target.isWhitelisted(); msg_Whithelist.replace("false","§4false"); msg_Whithelist.replace("true","§atrue");
+            String msg_Sprint = (item_color + "läuft: " + item_value_color + target.isSprinting()).replace("false","§4false").replace("true","§atrue");
+            String msg_Sleep = (item_color + "schläft: " + item_value_color + target.isSleeping()).replace("false","§4false").replace("true","§atrue");
+            String msg_Fly = (item_color + "fliegt: " + item_value_color + target.isFlying()).replace("false","§4false").replaceAll("true","§atrue");
+            String msg_Sneak = (item_color + "schleicht: " + item_value_color + target.isSneaking()).replace("false","§4false").replace("true","§atrue");
+            String msg_Whithelist = (item_color + "Whitelist: " + item_value_color + target.isWhitelisted()).replace("false","§4false").replace("true","§atrue");
 
             p.sendMessage(msg_Sprint);
             p.sendMessage(msg_Sleep);
