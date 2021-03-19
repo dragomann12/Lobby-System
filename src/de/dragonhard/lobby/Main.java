@@ -13,6 +13,7 @@ import de.dragonhard.lobby.manager.*;
 import de.dragonhard.lobby.manager.other.BungeeCordManager;
 import de.dragonhard.lobby.manager.other.PluginComunicationManager;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
