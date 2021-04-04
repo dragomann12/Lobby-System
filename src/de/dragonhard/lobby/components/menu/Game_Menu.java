@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.components.menu;
 
+import de.dragonhard.lobby.manager.Managers;
 import de.dragonhard.lobby.manager.other.*;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -12,25 +13,22 @@ import java.util.ArrayList;
 
 public class Game_Menu extends Lobby_Inventory implements Listener {
     private Player p;
+    private final Managers manager = new Managers();
 
    private ConfigManager cm = new ConfigManager();
-   private InventoryManager im = new InventoryManager();
    private GlobalWarpManager gwm = new GlobalWarpManager();
-   private PlayerConfigManager pm = new PlayerConfigManager();
-   private PluginWithlistManager pwm = new PluginWithlistManager();
-   private String menuName = "Game";
-    private static ArrayList<Integer> wall_item_id = new ArrayList<Integer>();
-   //private String title_slot_2 = cm.getSlotTitle(menuName,22).replace("-","_");
-   //private String title_slot_3 = cm.getSlotTitle(menuName,24).replace("-","_");
+
+   private final String menuName = "Game";
+    private static final ArrayList<Integer> wall_item_id = new ArrayList<Integer>();
 
     public void openInventory(Player p){
         this.p = p;
 
-        int lineAmmount = 5;
+        int lineAmount = 5;
         int i = 0;
-        int slots = lineAmmount*9;
+        int slots = lineAmount*9;
 
-        this.setInventory("§"+ cm.getMenuTitleColor(menuName) + cm.getMenuTitle(menuName),lineAmmount);
+        this.setInventory("§"+ cm.getMenuTitleColor(menuName) + cm.getMenuTitle(menuName),lineAmount);
 
         for(i = 0; i<slots; i++){
 
@@ -107,11 +105,23 @@ public class Game_Menu extends Lobby_Inventory implements Listener {
                     else if(slot.contains("/Wartung")){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F); p.sendMessage("§4Der Modus ist wegen arbeiten offline!"); return;}
                     else if(slot.contains("/offline")){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F); p.sendMessage("§4Der Modus ist derzeit offline!"); return;}
                     else if(slot.contains("/err")){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F); p.sendMessage("§4Der Modus ist aufgrund eines Problems offline!"); return;}
-                    else if(slot.contains("/b")){ if(pwm.isTester(p) || pwm.isDeveloper(p) || pwm.isPluginDeveloper(p) || pwm.isOwner(p)){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F); gwm.teleportPlayer(p,slot); return;}else{p.sendMessage("§4Der Modus ist nur für Beta-Tester"); return;}}
-                    else if(slot.contains("/a")){if(pwm.isDeveloper(p) || pwm.isPluginDeveloper(p) || pwm.isOwner(p)){ p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F); gwm.teleportPlayer(p,slot);return;}else{p.sendMessage("§4Der Modus ist nur für Alpha-Tester"); return;}}
+
+                    //@TODO code cleanup later?(all Menus)
+
+                    else if(slot.contains("/b")){ if(manager.getPluginWhitelistManager().isTester(p) || manager.getPluginWhitelistManager().isDeveloper(p) || manager.getPluginWhitelistManager().isPluginDeveloper(p) || manager.getPluginWhitelistManager().isOwner(p)){
+                        p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                        manager.getGlobalWarpManager().teleportPlayer(p,slot); return;
+                    }else{
+                        p.sendMessage("§4Der Modus ist nur für Beta-Tester"); return;}}
+
+                    else if(slot.contains("/a")){if(manager.getPluginWhitelistManager().isDeveloper(p) || manager.getPluginWhitelistManager().isPluginDeveloper(p) || manager.getPluginWhitelistManager().isOwner(p)){
+                        p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                        manager.getGlobalWarpManager().teleportPlayer(p,slot); return;
+                    }else{
+                        p.sendMessage("§4Der Modus ist nur für Alpha-Tester"); return;}}
 
                     p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-                    gwm.teleportPlayer(p,slot);
+                    manager.getGlobalWarpManager().teleportPlayer(p,slot);
                 }
 
 

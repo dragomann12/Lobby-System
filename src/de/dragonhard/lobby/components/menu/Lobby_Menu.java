@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Lobby_Menu extends Lobby_Inventory implements Listener {
     private Player p;
     private String menuName = "Lobby";
-    private Managers manager = new Managers();
+    private final Managers manager = new Managers();
     private static ArrayList<Integer> wall_item_id = new ArrayList<Integer>();
     public void openInventory(Player p){
         this.p = p;
@@ -68,11 +68,6 @@ public class Lobby_Menu extends Lobby_Inventory implements Listener {
     @EventHandler
     public void onModeClick(InventoryClickEvent e){
         Player p = (Player) e.getWhoClicked();
-        InventoryManager im = new InventoryManager();
-        GlobalWarpManager gwm = new GlobalWarpManager();
-        PlayerConfigManager pm = new PlayerConfigManager();
-        SpawnManager sm = new SpawnManager();
-        ConfigManager cm = new ConfigManager();
 
         if(e.getInventory().getName().equals("§"+ manager.getConfigManager().getMenuTitleColor(menuName) + manager.getConfigManager().getMenuTitle(menuName))){
             if (e.getCurrentItem() != null) {
