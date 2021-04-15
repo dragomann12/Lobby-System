@@ -4,7 +4,6 @@ import de.dragonhard.lobby.components.PermissionList;
 import de.dragonhard.lobby.components.menu.Lobby_Inventory;
 import de.dragonhard.lobby.components.util.InventorySetter;
 import de.dragonhard.lobby.manager.Managers;
-import de.dragonhard.lobby.manager.other.*;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -16,38 +15,33 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import java.util.ArrayList;
 
 public class Admin_Menu extends Lobby_Inventory implements Listener {
-    private Player p;
-    private String menuName = "Admin";
+
+    private final String menuName = "Admin";
     private final Managers manager = new Managers();
-    PluginWithlistManager pwm = new PluginWithlistManager();
-    private static ArrayList<Integer> wall_item_id = new ArrayList<Integer>();
+    private static final ArrayList<Integer> wall_item_id = new ArrayList<Integer>();
 
     public void openInventory(Player p) {
-        this.p = p;
 
-        ConfigManager cm = new ConfigManager();
-        AcessManager acm = new AcessManager();
-
-        if (acm.isBlacklisted(p)) {
+        if (manager.getAccessManager().isBlacklisted(p)) {
             p.sendMessage("§4Du wurdest vom Admin - Menu ausgeschlossen!");
             p.sendMessage("§4Bitte wende dich an das Team!");
             return;
         }
 
-        int lineAmmount = 5;
+        int lineAmount = 5;
         int i = 0;
-        int slots = lineAmmount * 9;
+        int slots = lineAmount * 9;
 
-        this.setInventory("§" + cm.getMenuTitleColor(menuName) + cm.getMenuTitle(menuName), lineAmmount);
+        this.setInventory("§" + manager.getConfigManager().getMenuTitleColor(menuName) + manager.getConfigManager().getMenuTitle(menuName), lineAmount);
 
         for (i = 0; i < slots; i++) {
 
-            if (cm.slotIsEnabled(menuName, i)) {
-                if (cm.getSlotTitle(menuName, i).contains(" /nonTag")) {
-                    String title = cm.getSlotTitle(menuName, i).replace(" /nonTag", "");
-                    this.addItemToInventory(title, Material.getMaterial(cm.getSlotMaterial(menuName, i)), "§" + cm.getSlotTitleColor(menuName, i), i);
+            if (manager.getConfigManager().slotIsEnabled(menuName, i)) {
+                if (manager.getConfigManager().getSlotTitle(menuName, i).contains(" /nonTag")) {
+                    String title = manager.getConfigManager().getSlotTitle(menuName, i).replace(" /nonTag", "");
+                    this.addItemToInventory(title, Material.getMaterial(manager.getConfigManager().getSlotMaterial(menuName, i)), "§" + manager.getConfigManager().getSlotTitleColor(menuName, i), i);
                 } else {
-                    this.addItemToInventory(cm.getSlotTitle(menuName, i) + this.getTag("Item"), Material.getMaterial(cm.getSlotMaterial(menuName, i)), "§" + cm.getSlotTitleColor(menuName, i), i);
+                    this.addItemToInventory(manager.getConfigManager().getSlotTitle(menuName, i) + this.getTag("Item"), Material.getMaterial(manager.getConfigManager().getSlotMaterial(menuName, i)), "§" + manager.getConfigManager().getSlotTitleColor(menuName, i), i);
                 }
             } else {
 
@@ -94,10 +88,9 @@ public class Admin_Menu extends Lobby_Inventory implements Listener {
     @EventHandler
     public void onModeClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
-        InventoryManager im = new InventoryManager();
-        ConfigManager cm = new ConfigManager();
+
         try {
-            if (e.getInventory().getName().equals("§" + cm.getMenuTitleColor(menuName) + cm.getMenuTitle(menuName))) {
+            if (e.getInventory().getName().equals("§" + manager.getConfigManager().getMenuTitleColor(menuName) + manager.getConfigManager().getMenuTitle(menuName))) {
 
                 if (e.getCurrentItem() == null) {return;} else{
 
@@ -112,7 +105,7 @@ public class Admin_Menu extends Lobby_Inventory implements Listener {
                                     case 20:
                                         if (p.hasPermission(PermissionList.getPermission("Menu_Item", 2))) {
                                             manager.getPlayerManager().toggleBuildMode(p);
-                                            im.clearInv(p);
+                                            manager.getInventoryManager().clearInv(p);
                                             InventorySetter is = new InventorySetter();
                                             if(!manager.getPlayerManager().isBuildModeEnabled(p)){is.getHotbarItems(p);}
                                         } else {
@@ -121,17 +114,15 @@ public class Admin_Menu extends Lobby_Inventory implements Listener {
                                         break;
                                     case 22:
                                         if (hasPermission(p)&& p.getGameMode() != GameMode.CREATIVE) {
-                                            Admin_Server_Menu asm = new Admin_Server_Menu();
-                                            asm.openInventory(p);
+                                            manager.getMenuManager().getAdminServerMenu().openInventory(p);
                                         } else {
 
                                             p.sendMessage("§4keine Berechtigung!");
                                         }
                                         break;
                                     case 24:
-                                        if (pwm.isOwner(p) || pwm.isPluginDeveloper(p)) {
-                                            Admin_External_Menu aem = new Admin_External_Menu();
-                                            aem.openInventory(p);
+                                        if (manager.getPluginWhitelistManager().isOwner(p) || manager.getPluginWhitelistManager().isPluginDeveloper(p)) {
+                                            manager.getMenuManager().getAdminExternalMenu().openInventory(p);
                                         } else {
                                             p.sendMessage("§4keine Berechtigung!");
                                         }
