@@ -4,7 +4,7 @@ import de.dragonhard.lobby.manager.Managers;
 import org.bukkit.entity.Player;
 
 import java.util.Objects;
-
+@Deprecated
 public class AcessManager extends Managers {
 
     public void addPlayerToBlackList(Player p, Player target){

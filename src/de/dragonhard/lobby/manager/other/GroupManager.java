@@ -5,7 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.io.File;
-
+@Deprecated
 public class GroupManager extends GroupReader {
 
     public void createGroup(Player p, String groupName, String groupColor, int maxPlayer, String password){

@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
-
+@Deprecated
 public class PlayerInventory implements Inventory {
     @Override
     public int getSize() {

@@ -5,7 +5,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-
+@Deprecated
 public class SoundManager extends PluginConfigReader {
 
     private static final String fileName = "sound_config";

@@ -1,6 +1,5 @@
 package de.dragonhard.lobby.components.util;
 
-import de.dragonhard.lobby.Main;
 import de.dragonhard.lobby.manager.Managers;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
@@ -45,7 +44,6 @@ public class PAPI_Support extends PlaceholderExpansion {
             return "";
         }
 
-        // %someplugin_placeholder1%
         if(identifier.equals("coins")){
             return "" + manager.getConnectionManager().callRowCoins(p);
         }

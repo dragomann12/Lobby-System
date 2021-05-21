@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.components;
 
+@Deprecated
 public class colorGenerator {
 
   private double tick = 0;
@@ -7,8 +8,6 @@ public class colorGenerator {
   private int tickMaxRange = 500;
   private boolean isEnabled = false;
   private String title = "";
-
-
 
   public String getColor(int tickMax, String title){
 
@@ -35,11 +34,6 @@ public class colorGenerator {
 
     }
     return " §" + this.tick;
-  }
-
-  public void generate(){
-
-
   }
 
 

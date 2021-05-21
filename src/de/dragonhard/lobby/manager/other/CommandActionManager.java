@@ -76,7 +76,11 @@ public class CommandActionManager extends Managers {
     public void Action_setMode(Player p, Player tp){
         try{
             if(tp == null){p.sendMessage("§4Fehler§e: §4kein Spieler als Ziel angegeben!");return;}
-            if(tp.getName().equals(p.getName())){this.getPlayerManager().toggleBuildMode(tp); this.getInventoryManager().clearInv(tp); this.getCommandActionManager().Action_reloadItems(tp); return;}
+            if(tp.getName().equals(p.getName())){
+                this.getPlayerManager().toggleBuildMode(tp);
+                this.getInventoryManager().clearInv(tp);
+                this.getCommandActionManager().Action_reloadItems(tp); return;}
+
             if(this.getPlayerManager().isBuildModeEnabled(tp)){
                 this.getPlayerManager().toggleBuildMode(tp);
                 this.getInventoryManager().clearInv(tp);

@@ -2,7 +2,7 @@ package de.dragonhard.lobby.manager.other;
 
 import de.dragonhard.lobby.reader.LanguageReader;
 import org.bukkit.entity.Player;
-
+@Deprecated
 public class LanguageManager extends LanguageReader {
 
     public void sendMessageInLanguage(String language, String textID, Player p){

@@ -3,7 +3,7 @@ package de.dragonhard.lobby.components.util;
 import de.dragonhard.lobby.manager.Managers;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-
+@Deprecated
 public class InventorySetter extends Managers {
         private String prefix = "§5Bau-Modus §b";
     public void getItemPreset(Player p, String id){

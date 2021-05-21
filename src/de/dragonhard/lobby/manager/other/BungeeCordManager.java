@@ -30,7 +30,7 @@ public class BungeeCordManager {
             p.sendMessage("§4Verbindung zum Server §e" + server + " §4nicht möglich!");
         }
     }
-
+    @Deprecated
     public static void kickPlayer(Player p, String playerName){
         try{
 
@@ -44,7 +44,7 @@ public class BungeeCordManager {
             p.sendMessage("§4Der Spieler konnte nicht gekickt werden!");
         }
     }
-
+    @Deprecated
     public static void kickPlayer(Player p, String playerName, String reason){
         try{
 
@@ -58,7 +58,7 @@ public class BungeeCordManager {
             p.sendMessage("§4Der Spieler konnte nicht gekickt werden!");
         }
     }
-
+    @Deprecated
     public void kick(Player p, String playerName){
         try{
 
@@ -72,7 +72,7 @@ public class BungeeCordManager {
             p.sendMessage("§4Der Spieler konnte nicht gekickt werden!");
         }
     }
-
+    @Deprecated
     public void kick(Player p, String playerName, String reason){
         try{
 

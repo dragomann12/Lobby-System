@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 
 import java.util.ArrayList;
 
+@Deprecated
 public class Creativ_Menu extends Lobby_Inventory implements Listener {
 
     private Player p;

@@ -15,7 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.util.ArrayList;
-
+@Deprecated
 public class debug_Menu extends Lobby_Inventory implements Listener {
     private Player p;
     private String menuName = "Debug";

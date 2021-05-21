@@ -6,7 +6,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
 import java.io.*;
-
+@Deprecated
 public class PluginComunicationManager implements PluginMessageListener {
 
     private static Plugin plugin = Main.getPlugin();

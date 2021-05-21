@@ -35,7 +35,7 @@ public class Interact_Event extends Managers implements Listener {
 
             try {
                 if (e.getItem().getType().equals(Material.COMPASS)) { // this Item is not in use!
-                    ConsoleWriter.writeWithTag("Compass are disabled for the Lobby-System");
+                    ConsoleWriter.writeWithTag("Compass are disabled for the Lobby-System"); return;
                 } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
                     if (e.getItem().getType().equals(this.getPlayerManager().getHideStatusMaterial(p))) {
                         //Hide Item

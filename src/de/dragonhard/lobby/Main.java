@@ -14,8 +14,11 @@ import de.dragonhard.lobby.manager.other.BungeeCordManager;
 import de.dragonhard.lobby.manager.other.PluginComunicationManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.EventListener;
 
 public class Main extends JavaPlugin{
 
@@ -80,7 +83,7 @@ TODO add Yes/No question to admin items
 
     }
 
-    private void _loadDebug(){
+    private void _loadDebug(){//not required
         if(manager.getConfigManager().isDebugMode()){
 
             manager.getShopManager().addItemToShop("Coins-Shop","Test","this is a Test item!","Debug","Test","non",22,9999);
@@ -116,7 +119,7 @@ TODO add Yes/No question to admin items
         ConsoleWriter.writeWithTag("done");
     }
 
-    private void _registerOutgoingChannel(){
+    private void _registerOutgoingChannel(){//not implemented
         ConsoleWriter.writeLoadingStart("setting up outgoing communication channel ...");
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, BungeeCordManager.getChannel());
@@ -130,7 +133,7 @@ TODO add Yes/No question to admin items
         ConsoleWriter.writeLoadingEnd("done");
     }
 
-    private void _loadMenuConfig(){
+    private void _loadMenuConfig(){//required for all menu functions!! do not change!!!
         ConsoleWriter.writeLoadingStart("loading menu configuration");
 
         _loadConfig("creativ","BEACON",5);
@@ -148,7 +151,7 @@ TODO add Yes/No question to admin items
         ConsoleWriter.writeLoadingEnd("menu configuration loaded");
     }
 
-    private void _registerCommand(){
+    private void _registerCommand(){//required for all plugin functions!! do not change!!!
         ConsoleWriter.writeLoadingStart("loading command register");
 
         this.getCommand("warp").setExecutor(new cmdWarp());
@@ -167,7 +170,7 @@ TODO add Yes/No question to admin items
 
     }
 
-    private void _loadConfig(String menuName, String material ,int lineAmount){
+    private void _loadConfig(String menuName, String material ,int lineAmount){//required
         manager.getConfigManager().setFile(menuName + "_menu_config");
 
         manager.getConfigManager().setDefault("Title", menuName);
@@ -188,42 +191,46 @@ TODO add Yes/No question to admin items
 
     }
 
-    private void _registerEvents(){
+    private void _registerEvents(){//required
         ConsoleWriter.writeLoadingStart("loading event register");
 
         //Plugin core events
-        manager.getPluginManager().registerEvents(manager.getEventManager().getInteractEvent(),this);
-        manager.getPluginManager().registerEvents(manager.getEventManager().getJoinEvent(),this);
-        manager.getPluginManager().registerEvents(manager.getEventManager().getChatEvent(),this);
-        manager.getPluginManager().registerEvents(manager.getEventManager().getClickEvent(),this);
-        manager.getPluginManager().registerEvents(manager.getEventManager().getDropEvent(),this);
-        manager.getPluginManager().registerEvents(manager.getEventManager().getDragEvent(),this);
-        manager.getPluginManager().registerEvents(manager.getEventManager().getBuildEvent(),this);
-        manager.getPluginManager().registerEvents(manager.getEventManager().getEventBlocker(),this);
-        manager.getPluginManager().registerEvents(manager.getEventManager().getHideEvent(),this);
-        manager.getPluginManager().registerEvents(manager.getEventManager().getDisconnectEvent(),this);
-        manager.getPluginManager().registerEvents(manager.getEventManager().getDamageEvent(),this);
-        manager.getPluginManager().registerEvents(manager.getEventManager().getHungerEvent(),this);
-        manager.getPluginManager().registerEvents(manager.getEventManager().getHealthEvent(),this);
-        manager.getPluginManager().registerEvents(manager.getConnectionManager(),this);
+        _register(manager.getEventManager().getInteractEvent());
+        _register(manager.getEventManager().getJoinEvent());
+        _register(manager.getEventManager().getChatEvent());
+        _register(manager.getEventManager().getClickEvent());
+        _register(manager.getEventManager().getDropEvent());
+        _register(manager.getEventManager().getDragEvent());
+        _register(manager.getEventManager().getBuildEvent());
+        _register(manager.getEventManager().getEventBlocker());
+        _register(manager.getEventManager().getHideEvent());
+        _register(manager.getEventManager().getDisconnectEvent());
+        _register(manager.getEventManager().getDamageEvent());
+        _register(manager.getEventManager().getHungerEvent());
+        _register(manager.getEventManager().getHealthEvent());
+        _register(manager.getConnectionManager());
 
         //Menu internal Events only
-        manager.getPluginManager().registerEvents(manager.getMenuManager().getLobbyMenu(),this);
-        manager.getPluginManager().registerEvents(manager.getMenuManager().getGameMenu(),this);
-        manager.getPluginManager().registerEvents(manager.getMenuManager().getShopMenu(),this);
-        manager.getPluginManager().registerEvents(manager.getMenuManager().getAdminMenu(),this);
-        manager.getPluginManager().registerEvents(manager.getMenuManager().getSettingsMenu(),this);
-        manager.getPluginManager().registerEvents(manager.getMenuManager().getAdminServerMenu(),this);
-        manager.getPluginManager().registerEvents(manager.getMenuManager().getDebugMenu(),this);
-        manager.getPluginManager().registerEvents(manager.getMenuManager().getAdminExternalMenu(),this);
-        manager.getPluginManager().registerEvents(manager.getMenuManager().getPlayerMenu(),this);
-        manager.getPluginManager().registerEvents(manager.getMenuManager().getCoinShopMenu(),this);
+        _register(manager.getMenuManager().getLobbyMenu());
+        _register(manager.getMenuManager().getShopMenu());
+        _register(manager.getMenuManager().getAdminMenu());
+        _register(manager.getMenuManager().getGameMenu());
+        _register(manager.getMenuManager().getSettingsMenu());
+        _register(manager.getMenuManager().getAdminExternalMenu());
+        _register(manager.getMenuManager().getAdminServerMenu());
+        _register(manager.getMenuManager().getDebugMenu());
+        _register(manager.getMenuManager().getPlayerMenu());
+        _register(manager.getMenuManager().getCoinShopMenu());
 
         ConsoleWriter.writeLoadingEnd("event register loaded");
 
     }
 
-    public void onDisable(){
+    private void _register(Listener listener){ //called from _registerEvents (required for all plugin functions!! do not change!!!)
+        manager.getPluginManager().registerEvents(listener,this);
+    }
+
+    public void onDisable(){//required
 
         ConsoleWriter.writeWithTag("Disabled!");
 

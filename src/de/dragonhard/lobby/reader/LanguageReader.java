@@ -5,7 +5,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-
+@Deprecated
 public class LanguageReader {
 	private static String fileName;
 	private static String languageBase;
