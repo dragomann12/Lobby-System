@@ -114,13 +114,13 @@ public class MessageReader {
 	
 	private File getFile() {
 		
-		return new File("plugins/LobbySystem/Data/Message/Server",fileName + ".yml");
+		return new File(Config.path_reader_message,fileName + ".yml");
 		
 	}
-	//plugins/LobbySystem/Data/Player/pUUID/warps
+
 	public File getFile(String filename) {
 
-		return new File("plugins/LobbySystem/Data/Message/Server", "msg_" + filename + ".yml");
+		return new File(Config.path_reader_message, "msg_" + filename + ".yml");
 
 	}
 
@@ -132,14 +132,14 @@ public class MessageReader {
 	}
 
 	public boolean exists(){
-		File file = new File("plugins/LobbySystem/Data/Message/Server",fileName + ".yml");
+		File file = new File(Config.path_reader_message,fileName + ".yml");
 
 		if(file.exists()){return true;}else{return false;}
 
 	}
 	public File getCurrentFile(){
 
-		return new File("plugins/LobbySystem/Data/Message/Server",fileName + ".yml");
+		return new File(Config.path_reader_message,fileName + ".yml");
 	}
 	
 	private FileConfiguration getFileConfiguration() {

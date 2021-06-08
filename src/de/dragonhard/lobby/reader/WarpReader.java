@@ -129,20 +129,20 @@ public class WarpReader {
 	}
 	
 	private File getFile() {
-		
-		return new File("plugins/LobbySystem/Data/Player/"+pUUID+"/warps", fileName + ".yml");
+		String _path = Config.path_reader_warp.replace("%pid%",pUUID.toString());
+		return new File(_path, fileName + ".yml");
 		
 	}
-	//plugins/LobbySystem/Data/Player/pUUID/warps
-	public File getFile(String filename) {
 
-		return new File("plugins/LobbySystem/Data/Player/"+pUUID+"/warps", "warp_" + filename + ".yml");
+	public File getFile(String filename) {
+		String _path = Config.path_reader_warp.replace("%pid%",pUUID.toString());
+		return new File(_path, filename + ".yml");
 
 	}
 
 	private File getList() {
-
-		return new File("plugins/LobbySystem/Data/Player/"+pUUID+"/warps", fileName + ".yml");
+		String _path = Config.path_reader_warp.replace("%pid%",pUUID.toString());
+		return new File(_path, fileName + ".yml");
 
 	}
 
@@ -156,7 +156,8 @@ public class WarpReader {
 
 	public boolean exists(Player p, String warpName){
 		pUUID = p.getUniqueId();
-		File file = new File("plugins/LobbySystem/Data/Player/"+pUUID+"/warps",  "warp_" + warpName + ".yml");
+		String _path = Config.path_reader_warp.replace("%pid%",pUUID.toString());
+		File file = new File(_path,  "warp_" + warpName + ".yml");
 
 		if(file.exists()){return true;}else{return false;}
 

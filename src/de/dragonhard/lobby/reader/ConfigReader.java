@@ -116,14 +116,14 @@ public class ConfigReader {
 	}
 	
 	private File getFile() {
-		
-		return new File("plugins/LobbySystem/Data/Player/"+pUUID+"/config", fileName + ".yml");
+		String _path = Config.path_reader_config.replace("%pid%",pUUID.toString());
+		return new File(_path, fileName + ".yml");
 		
 	}
-	//plugins/LobbySystem/Data/Player/pUUID/warps
-	public File getFile(String filename) {
 
-		return new File("plugins/LobbySystem/Data/Player/"+pUUID+"/config", filename + ".yml");
+	public File getFile(String filename) {
+		String _path = Config.path_reader_config.replace("%pid%",pUUID.toString());
+		return new File(_path, filename + ".yml");
 
 	}
 	
@@ -134,7 +134,8 @@ public class ConfigReader {
 
 	public boolean exists(Player p, String configName){
 		pUUID = p.getUniqueId();
-		File file = new File("plugins/LobbySystem/Data/Player/"+pUUID+"/config",  configName + ".yml");
+		String _path = Config.path_reader_config.replace("%pid%",pUUID.toString());
+		File file = new File(_path,  configName + ".yml");
 
 		if(file.exists()){return true;}else{return false;}
 

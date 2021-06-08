@@ -114,13 +114,13 @@ public class ShopItemReader {
 	
 	private File getFile() {
 		
-		return new File("plugins/LobbySystem/Data/Config/Shop", fileName + ".yml");
+		return new File(Config.path_reader_shop, fileName + ".yml");
 		
 	}
 
 	public File getFile(String filename) {
 
-		return new File("plugins/LobbySystem/Data/Config/Shop", filename + ".yml");
+		return new File(Config.path_reader_shop, filename + ".yml");
 
 	}
 	
@@ -130,7 +130,7 @@ public class ShopItemReader {
 
 	public boolean exists(String configName){
 
-		File file = new File("plugins/LobbySystem/Data/Config/Shop",  configName + ".yml");
+		File file = new File(Config.path_reader_shop,  configName + ".yml");
 
 		if(file.exists()){return true;}else{return false;}
 

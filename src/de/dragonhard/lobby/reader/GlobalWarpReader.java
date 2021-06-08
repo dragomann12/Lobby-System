@@ -114,13 +114,13 @@ public class GlobalWarpReader {
 	
 	private File getFile() {
 		
-		return new File("plugins/LobbySystem/Data/World/Items", "item_" +fileName + ".yml");
+		return new File(Config.path_reader_global_warp, "item_" +fileName + ".yml");
 		
 	}
 
 	public File getFile(String filename) {
 
-		return new File("plugins/LobbySystem/Data/World/Items", "item_warp_" + filename + ".yml");
+		return new File(Config.path_reader_global_warp, "item_warp_" + filename + ".yml");
 
 	}
 	
@@ -130,13 +130,13 @@ public class GlobalWarpReader {
 	}
 
 	public boolean exists( String warpName){
-		File file = new File("plugins/LobbySystem/Data/World/Items",  "item_warp_" + warpName + ".yml");
+		File file = new File(Config.path_reader_global_warp,  "item_warp_" + warpName + ".yml");
 
 		if(file.exists()){return true;}else{return false;}
 
 	}
 	public File getCurrentFile( String warpName){
-		return new File("plugins/LobbySystem/Data/World/Items", "item_warp_" + warpName + ".yml");
+		return new File(Config.path_reader_global_warp, "item_warp_" + warpName + ".yml");
 	}
 	
 	private FileConfiguration getFileConfiguration() {

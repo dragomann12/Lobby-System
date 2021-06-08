@@ -115,13 +115,13 @@ public class LanguageReader {
 	
 	private File getFile() {
 		
-		return new File("plugins/LobbySystem/Data/Language/" + languageBase, fileName + ".yml");
+		return new File(Config.path_reader_language + languageBase, fileName + ".yml");
 		
 	}
 
 	public File getFile(String filename) {
 
-		return new File("plugins/LobbySystem/Data/Language/" + languageBase, filename  + ".yml");
+		return new File(Config.path_reader_language + languageBase, filename  + ".yml");
 
 	}
 	
@@ -135,7 +135,7 @@ public class LanguageReader {
 	}
 
 	public boolean exists( String languageItem){
-		File file = new File("plugins/LobbySystem/Data/Language/" + languageBase,  languageItem + ".yml");
+		File file = new File(Config.path_reader_language + languageBase,  languageItem + ".yml");
 
 		if(file.exists()){return true;}else{return false;}
 

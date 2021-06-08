@@ -6,7 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
-
+@Deprecated
 public class GroupReader {
 	private static String fileName;
 	
@@ -115,13 +115,13 @@ public class GroupReader {
 	
 	private File getFile() {
 		
-		return new File("plugins/LobbySystem/Data/Player/Groups", fileName + ".yml");
+		return new File(Config.path_reader_group, fileName + ".yml");
 		
 	}
-	//plugins/LobbySystem/Data/Player/pUUID/warps
+
 	public File getFile(String filename) {
 
-		return new File("plugins/LobbySystem/Data/Player/Groups", "group_" + filename + ".yml");
+		return new File(Config.path_reader_group, "group_" + filename + ".yml");
 
 	}
 	
@@ -130,7 +130,7 @@ public class GroupReader {
 	}
 
 	public boolean exists(String groupName){
-		File file = new File("plugins/LobbySystem/Data/Player/Groups",  "group_" + groupName + ".yml");
+		File file = new File(Config.path_reader_group,  "group_" + groupName + ".yml");
 
 		if(file.exists()){return true;}else{return false;}
 

@@ -114,13 +114,13 @@ public class PluginConfigReader {
 	
 	private File getFile() {
 		
-		return new File("plugins/LobbySystem/Data/Config", fileName + ".yml");
+		return new File(Config.path_reader_plugin_config, fileName + ".yml");
 		
 	}
 
 	public File getFile(String filename) {
 
-		return new File("plugins/LobbySystem/Data/Config", filename + ".yml");
+		return new File(Config.path_reader_plugin_config, filename + ".yml");
 
 	}
 	
@@ -130,7 +130,7 @@ public class PluginConfigReader {
 
 	public boolean exists(String configName){
 
-		File file = new File("plugins/LobbySystem/Data/Config",  configName + ".yml");
+		File file = new File(Config.path_reader_plugin_config,  configName + ".yml");
 
 		if(file.exists()){return true;}else{return false;}
 

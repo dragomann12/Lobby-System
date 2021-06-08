@@ -117,13 +117,13 @@ public class SpawnReader {
 	
 	private File getFile() {
 		
-		return new File("plugins/LobbySystem/Data/Spawn", fileName + ".yml");
+		return new File(Config.path_reader_spawn, fileName + ".yml");
 		
 	}
 
 	public File getFile(String filename) {
 
-		return new File("plugins/LobbySystem/Data/Spawn", filename + ".yml");
+		return new File(Config.path_reader_spawn, filename + ".yml");
 
 	}
 	
