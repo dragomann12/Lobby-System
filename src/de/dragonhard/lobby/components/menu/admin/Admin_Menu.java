@@ -2,7 +2,6 @@ package de.dragonhard.lobby.components.menu.admin;
 
 import de.dragonhard.lobby.components.PermissionList;
 import de.dragonhard.lobby.components.menu.Lobby_Inventory;
-import de.dragonhard.lobby.components.util.InventorySetter;
 import de.dragonhard.lobby.manager.Managers;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -21,12 +20,6 @@ public class Admin_Menu extends Lobby_Inventory implements Listener {
     private static final ArrayList<Integer> wall_item_id = new ArrayList<Integer>();
 
     public void openInventory(Player p) {
-
-        if (manager.getAccessManager().isBlacklisted(p)) {
-            p.sendMessage("§4Du wurdest vom Admin - Menu ausgeschlossen!");
-            p.sendMessage("§4Bitte wende dich an das Team!");
-            return;
-        }
 
         int lineAmount = 5;
         int i = 0;
@@ -104,10 +97,7 @@ public class Admin_Menu extends Lobby_Inventory implements Listener {
                                 switch (e.getSlot()) {
                                     case 20:
                                         if (p.hasPermission(PermissionList.getPermission("Menu_Item", 2))) {
-                                            manager.getPlayerManager().toggleBuildMode(p);
-                                            manager.getInventoryManager().clearInv(p);
-                                            InventorySetter is = new InventorySetter();
-                                            if(!manager.getPlayerManager().isBuildModeEnabled(p)){is.getHotbarItems(p);}
+
                                         } else {
                                             p.sendMessage("§4keine Berechtigung!");
                                         }

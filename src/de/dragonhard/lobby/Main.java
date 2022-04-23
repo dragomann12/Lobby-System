@@ -1,18 +1,13 @@
 package de.dragonhard.lobby;
 
 import de.dragonhard.lobby.commands.*;
-import de.dragonhard.lobby.commands.coins.cmdCoins;
 import de.dragonhard.lobby.commands.network.cmdCreateServer;
 import de.dragonhard.lobby.commands.other.cmdBuild;
 import de.dragonhard.lobby.commands.teleport.cmdGlobalWarp;
 import de.dragonhard.lobby.commands.teleport.cmdSpawn;
 import de.dragonhard.lobby.commands.teleport.cmdWarp;
 import de.dragonhard.lobby.components.ConsoleWriter;
-import de.dragonhard.lobby.components.util.PAPI_Support;
 import de.dragonhard.lobby.manager.*;
-import de.dragonhard.lobby.manager.other.BungeeCordManager;
-import de.dragonhard.lobby.manager.other.PluginComunicationManager;
-import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -34,25 +29,6 @@ TODO add Yes/No question to admin items
     public void onEnable(){
         plugin = this;
         if(manager.getConfigManager().configExists()){
-            ConsoleWriter.writeWithTag("checking Config ...");
-
-            if(!manager.getConfigManager().isCurrentVersion()){
-                ConsoleWriter.writeWithTag("old Config version detected! ...");
-                if(manager.getConfigManager().isUpdateReady()){
-                    manager.getConfigManager().updateConfig();
-                }else{
-                    ConsoleWriter.writeWithTag(" [Update] an update for the config is available! write (in-game) @update to Update now or restart the Server");
-                    manager.getConfigManager().setUpdateReady(true);
-                }
-            }
-
-
-            Bukkit.getConsoleSender().sendMessage("§aEine Verbindung mit der Datenbank wird hergestellt.");
-            manager.getMySqlManager().connect("createTable", null);
-                ConsoleWriter.writeWithTag("Config is up to date ...");
-
-                _registerOutgoingChannel();
-                _registerIngoingChannel();
 
                 _setWallIdLists();
 
@@ -62,7 +38,6 @@ TODO add Yes/No question to admin items
                 ConsoleWriter.writeWithTag("Enabled!");
 
                 manager.getPluginWhitelistManager().onLoad();
-                manager.getSoundManager().addSoundsToList();
 
         }else{
             ConsoleWriter.writeWithTag("installing ...");
@@ -70,18 +45,8 @@ TODO add Yes/No question to admin items
             manager.getConfigManager().getDefaultConfig();
         }
 
-        //loading debug operations
-        _loadDebug();
-
     }
 
-    private void _loadDebug(){//not required
-        if(manager.getConfigManager().isDebugMode()){
-
-            manager.getShopManager().addItemToShop("Coins-Shop","Test","this is a Test item!","Debug","Test","non",22,9999);
-        }
-
-    }
 
     private void _setWallIdLists(){
         ConsoleWriter.writeWithTag("setting up Menu IDs ...");
@@ -97,35 +62,15 @@ TODO add Yes/No question to admin items
         manager.getMenuManager().getGameMenu().addWallIDs();
         //Lobby-Menu
         manager.getMenuManager().getLobbyMenu().addWallIDs();
-        //Creative-Menu
-        manager.getMenuManager().getCreativeMenu().addWallIDs();
-        //Settings-Menu
-        manager.getMenuManager().getSettingsMenu().addWallIDs();
         //Friend-Menu
         manager.getMenuManager().getFriendMenu().addWallIDs();
-        //Debug-Menu
-        manager.getMenuManager().getDebugMenu().addWallIDs();
         //Player-Menu
         manager.getMenuManager().getPlayerMenu().addWallIDs();
 
         ConsoleWriter.writeWithTag("done");
     }
 
-    private void _registerOutgoingChannel(){//not implemented
-        ConsoleWriter.writeLoadingStart("setting up outgoing communication channel ...");
-
-        Bukkit.getMessenger().registerOutgoingPluginChannel(this, BungeeCordManager.getChannel());
-        Bukkit.getMessenger().registerOutgoingPluginChannel(this, PluginComunicationManager.getChannelOut());
-        ConsoleWriter.writeLoadingEnd("done");
-    }
-
-    private void _registerIngoingChannel(){
-        ConsoleWriter.writeLoadingStart("setting up ingoing communication channel ...");
-        Bukkit.getMessenger().registerIncomingPluginChannel(this, PluginComunicationManager.getChannelIn(), manager.getCommunicationManager().getListener());
-        ConsoleWriter.writeLoadingEnd("done");
-    }
-
-    private void _loadMenuConfig(){//required for all menu functions!! do not change!!!
+    private void _loadMenuConfig(){                                         //required for all menu functions!! do not change!!!
         ConsoleWriter.writeLoadingStart("loading menu configuration");
 
         _loadConfig("creativ","BEACON",5);
@@ -143,14 +88,13 @@ TODO add Yes/No question to admin items
         ConsoleWriter.writeLoadingEnd("menu configuration loaded");
     }
 
-    private void _registerCommand(){//required for all plugin functions!! do not change!!!
+    private void _registerCommand(){                                        //required for all plugin functions!! do not change!!!
         ConsoleWriter.writeLoadingStart("loading command register");
 
         this.getCommand("warp").setExecutor(new cmdWarp());
         this.getCommand("spawn").setExecutor(new cmdSpawn());
         this.getCommand("InvWarp").setExecutor(new cmdGlobalWarp());
         this.getCommand("block").setExecutor(new cmdblock());
-        this.getCommand("coins").setExecutor(new cmdCoins());
         this.getCommand("chclear").setExecutor(new cmdClear());
         this.getCommand("crServer").setExecutor(new cmdCreateServer());
         this.getCommand("bm").setExecutor(new cmdBuild());
@@ -210,7 +154,6 @@ TODO add Yes/No question to admin items
         _register(manager.getMenuManager().getSettingsMenu());
         _register(manager.getMenuManager().getAdminExternalMenu());
         _register(manager.getMenuManager().getAdminServerMenu());
-        _register(manager.getMenuManager().getDebugMenu());
         _register(manager.getMenuManager().getPlayerMenu());
         _register(manager.getMenuManager().getCoinShopMenu());
 
@@ -220,12 +163,6 @@ TODO add Yes/No question to admin items
 
     private void _register(Listener listener){ //called from _registerEvents (required for all plugin functions!! do not change!!!)
         manager.getPluginManager().registerEvents(listener,this);
-    }
-
-    public void onDisable(){//required
-
-        ConsoleWriter.writeWithTag("Disabled!");
-
     }
 
 }

@@ -1,9 +1,7 @@
 package de.dragonhard.lobby.components.events;
 
 import de.dragonhard.lobby.components.ConsoleWriter;
-import de.dragonhard.lobby.components.util.InventorySetter;
 import de.dragonhard.lobby.manager.*;
-import de.dragonhard.lobby.reader.Config;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,9 +19,6 @@ public class Join_Event extends Managers implements Listener {
 
         this.getConnectionManager().createRow(p);
 
-        this.getPlayerManager().checkPlayer(p);
-        this.getPlayerManager().setFile(p,"config");
-
         String title = "";
         title = this.getConfigManager().getAccessLevelTag(Integer.parseInt(this.getConnectionManager().callRowLevel(p)));
         ConsoleWriter.writeWithTag("Player " + p.getName() + " with the UUID: " + p.getUniqueId() + " joined as " + title + "!");
@@ -34,9 +29,6 @@ public class Join_Event extends Managers implements Listener {
             String nameColor = "§" + this.getConfigManager().getNameColor();
             String startColor = "§" + this.getConfigManager().getStartColor();
             p.sendMessage("§l" + startColor + this.getConfigManager().getMessageStart() + " " + nameColor + p.getName()+ " " + msgColor  + this.getConfigManager().getWelcomeMessage()); }
-
-        this.getInventoryManager().clearInv(p);     //clear the Inventory
-        this.getDateManager().checkPlayerActivity(p); //checks last join
 
         if(this.getPlayerManager().isBuildModeEnabled(p)){ //build-mode check
 
@@ -49,9 +41,6 @@ public class Join_Event extends Managers implements Listener {
 
             return;}
 
-        //hotbar menu
-        InventorySetter is = new InventorySetter();
-        is.getHotbarItems(p);
     }
 
 }

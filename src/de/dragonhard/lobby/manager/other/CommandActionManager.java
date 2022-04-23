@@ -3,7 +3,6 @@ package de.dragonhard.lobby.manager.other;
 import de.dragonhard.lobby.components.ConsoleWriter;
 import de.dragonhard.lobby.components.Message;
 import de.dragonhard.lobby.components.PermissionList;
-import de.dragonhard.lobby.components.util.InventorySetter;
 import de.dragonhard.lobby.manager.Managers;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -17,29 +16,6 @@ public class CommandActionManager extends Managers {
     final String default_color_Message = "§f";
     final String default_color_value = "§e";
     final String version = "1.5.0  beta-Build: 150.5";
-
-    public void Action_showCoins(Player p){
-        p.sendMessage("§5"+ p.getName() + " §bhat §a" + this.getConnectionManager().callRowCoins(p) + " CC");
-    }
-
-    public void Action_setCoins(Player p, Player tp, int value){
-        this.getConnectionManager().setRowCoins(tp, value);
-        if(p.getName().equals(tp.getName())) {
-            tp.sendMessage("§bDu hast jetzt §5" + this.getConnectionManager().callRowCoins(tp) + "§bCC"); return;
-        }
-            p.sendMessage("§aCoins für §e" + tp.getName() + " §aerfolgreich geändert!");
-            tp.sendMessage("§bDu hast jetzt §5" + this.getConnectionManager().callRowCoins(tp) + "§bCC");
-    }
-
-    public void Action_addCoins(Player p, Player tp, int value){
-        this.getConnectionManager().setRowCoins(tp,this.getConnectionManager().callRowCoins(p) + value);
-        if(p.getName().equals(tp.getName())){
-            tp.sendMessage("§bDu hast jetzt §5" + this.getConnectionManager().callRowCoins(p) + "§bCC");return;
-        }
-            p.sendMessage("§bDu hast die Chaos-Coins des Spielers auf §e" + this.getConnectionManager().callRowCoins(tp) + "§bCC gesetzt");
-            tp.sendMessage("§bDu hast jetzt §5" + this.getConnectionManager().callRowCoins(tp) + "§bCC");
-
-    }
 
     public void Action_errorMessage(Player p, String cmdName, Exception e){
         p.sendMessage("§4Fehler§e: §4Im Befehl: §e" + cmdName + " §4ist es zu einem Fehler gekommen der Fehler: " + e.getLocalizedMessage());
@@ -67,43 +43,6 @@ public class CommandActionManager extends Managers {
 
         Action_sendHelpLine(p,"InvWarp",getHelpArgs("set","name"),"setzt einen Mini-Spiel Warp");
         Action_sendHelpLine(p,"InvWarp",getHelpArgs("del","name"),"zum löschen eines Mini-Spiel Warp");
-    }
-
-    public void Action_showPlayerCoins(Player p){
-        p.sendMessage("§aDu hast §b"+ this.getConnectionManager().callRowCoins(p) + " §aChaos-Coins");
-    }
-
-    public void Action_setMode(Player p, Player tp){
-        try{
-            if(tp == null){p.sendMessage("§4Fehler§e: §4kein Spieler als Ziel angegeben!");return;}
-            if(tp.getName().equals(p.getName())){
-                this.getPlayerManager().toggleBuildMode(tp);
-                this.getInventoryManager().clearInv(tp);
-                this.getCommandActionManager().Action_reloadItems(tp); return;}
-
-            if(this.getPlayerManager().isBuildModeEnabled(tp)){
-                this.getPlayerManager().toggleBuildMode(tp);
-                this.getInventoryManager().clearInv(tp);
-                p.sendMessage("§aDu hast den Spieler §b" + tp.getName() + " §aerfolgreich aus dem Bau-Modus entfernt");
-                this.getCommandActionManager().Action_reloadItems(tp);
-
-            }else{
-                this.getPlayerManager().toggleBuildMode(tp);
-                this.getInventoryManager().clearInv(tp);
-                p.sendMessage("§aDu hast den Spieler §b" + tp.getName() + " §aerfolgreich in den Bau-Modus gesetzt");
-            }
-        }catch(NullPointerException | SQLException e){
-            ConsoleWriter.writeErrorWithTag("this is not god please report it to me on Discord: Dragonhard117 Error: §e" + e);
-        }
-    }
-
-    public void Action_helpClear(Player p){
-        if(this.getConfigManager().tagUseEnabled()){
-            p.sendMessage(this.getConfigManager().getTag() + "§4Fehler benutze den Befehl so: ");
-        }else{
-            p.sendMessage("§4Fehler benutze den Befehl so: ");
-        }
-        Action_sendHelpLine(p,"chclear","","zum leeren des Chats");
     }
 
     public void Action_showHelp(Player p, String cmd){
@@ -387,10 +326,7 @@ public class CommandActionManager extends Managers {
     }
 
     public void Action_reloadItems(Player p){
-        InventorySetter is = new InventorySetter();
-        if(!this.getPlayerManager().isBuildModeEnabled(p)){
-            is.getHotbarItems(p);
-        }
+
     }
 
     public void Action_createSpawn(Player p){

@@ -2,22 +2,15 @@ package de.dragonhard.lobby.manager.other;
 
 import de.dragonhard.lobby.components.menu.Game_Menu;
 import de.dragonhard.lobby.components.menu.Lobby_Menu;
-import de.dragonhard.lobby.components.menu.Settings_Menu;
 import de.dragonhard.lobby.components.menu.admin.Admin_External_Menu;
 import de.dragonhard.lobby.components.menu.admin.Admin_Menu;
 import de.dragonhard.lobby.components.menu.admin.Admin_Server_Menu;
-import de.dragonhard.lobby.components.menu.creativ.Creativ_Menu;
-import de.dragonhard.lobby.components.menu.debug.debug_Menu;
 import de.dragonhard.lobby.components.menu.friend.Friend_Menu;
 import de.dragonhard.lobby.components.menu.player.Player_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Coin_Menu;
 import de.dragonhard.lobby.components.menu.shop.Shop_Menu;
 
 public class MenuManager {
-
-    public Settings_Menu getSettingsMenu(){
-        return new Settings_Menu();
-    }
 
     public Lobby_Menu getLobbyMenu(){
         return new Lobby_Menu();
@@ -41,14 +34,6 @@ public class MenuManager {
 
     public Friend_Menu getFriendMenu(){
         return new Friend_Menu();
-    }
-
-    public debug_Menu getDebugMenu(){
-        return new debug_Menu();
-    }
-
-    public Creativ_Menu getCreativeMenu(){
-        return new Creativ_Menu();
     }
 
     public Admin_Menu getAdminMenu(){
