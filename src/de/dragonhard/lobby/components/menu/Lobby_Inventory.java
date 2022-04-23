@@ -13,7 +13,6 @@ public class Lobby_Inventory {
     public void setInventory(String title, int lineAmount){
         this.title = title;
         this.lineAmount = lineAmount;
-        inventory = Bukkit.getServer().createInventory(null, lineAmount*9,title);
     }
 
     public Inventory getInventory(){

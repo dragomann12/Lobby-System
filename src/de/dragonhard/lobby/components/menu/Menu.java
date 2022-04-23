@@ -1,36 +1,43 @@
 package de.dragonhard.lobby.components.menu;
 
 import de.dragonhard.lobby.components.menu.Lobby_Inventory;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+
+
+public class Menu implements Listener {
+    private final String name;
+    private final String color;
+    private final Player player;
+    private final int lines;
+
+    private Inventory inventory = null;
 
 
 
-public class Menu extends Lobby_Inventory implements Listener {
-    private Player p;
+   public Menu(String name, String color, int lines, Player player){
 
+       this.name = name;
+       this.color = color;
+       this.lines = lines;
+       this.player = player;
+   }
 
+    public void openInventory(){
 
-   private String menuName = "Menu";
+        int slots = lines*9;
 
-    public void openInventory(Player p){
-        this.p = p;
-
-        int lineAmount = 5;
-        int i = 0;
-        int slots = lineAmount*9;
-
-        this.setInventory("§",lineAmount);
-
-        for(i = 0; i<slots; i++){
-
+        for(int i = 0; i < slots; i++){
 
 
         }
 
-        p.openInventory(this.getInventory());
+        inventory = Bukkit.getServer().createInventory(null, lines*9, name);
+        player.openInventory(inventory);
 
     }
 
@@ -39,8 +46,6 @@ public class Menu extends Lobby_Inventory implements Listener {
     public void onModeClick(InventoryClickEvent e){
         Player p = (Player) e.getWhoClicked();
 
-
-            return;
     }
 
 }
