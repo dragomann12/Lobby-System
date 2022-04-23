@@ -20,26 +20,8 @@ public class Main extends JavaPlugin{
     public void onEnable(){
         plugin = this;
 
-        _setWallIdLists();
-        _registerCommand();
         _registerEvents();
 
-    }
-
-
-    private void _setWallIdLists(){
-        ConsoleWriter.writeWithTag("setting up Menu IDs ...");
-
-
-
-        ConsoleWriter.writeWithTag("done");
-    }
-
-    private void _registerCommand(){
-        ConsoleWriter.writeLoadingStart("loading command register");
-
-
-        ConsoleWriter.writeLoadingEnd("command register loaded");
     }
 
     private void _registerEvents(){//required
