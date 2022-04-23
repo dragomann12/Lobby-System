@@ -21,60 +21,50 @@ public class Interact_Event extends Managers implements Listener {
             return;
         }
 
-        if (this.getPlayerManager().isBuildModeEnabled(p)) {
-            e.setCancelled(false);
-            return;
-        } else {
-            e.setCancelled(true);
-            this.getInventoryManager().clearInv(p);
-        }
 
+        try {
+            if (e.getItem().getType().equals(Material.COMPASS)) { // this Item is not in use!
+                ConsoleWriter.writeWithTag("Compass are disabled for the Lobby-System"); return;
+            } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+                if (e.getItem().getType().equals(Material.STICK)) {
+                    //Hide Item
+                    p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
 
-            try {
-                if (e.getItem().getType().equals(Material.COMPASS)) { // this Item is not in use!
-                    ConsoleWriter.writeWithTag("Compass are disabled for the Lobby-System"); return;
                 } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                    if (e.getItem().getType().equals(this.getPlayerManager().getHideStatusMaterial(p))) {
-                        //Hide Item
+                    if (e.getItem().getType().equals(Material.getMaterial(null))) {
+                        //Admin Item
                         p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
 
                     } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                        if (e.getItem().getType().equals(Material.getMaterial(this.getConfigManager().getHotbarMaterial("Admin")))) {
-                            //Admin Item
+                        if (e.getItem().getType().equals(Material.getMaterial(null))) {
+                            //Settings Item
                             p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
 
-
                         } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                            if (e.getItem().getType().equals(Material.getMaterial(this.getConfigManager().getHotbarMaterial("Settings")))) {
-                                //Settings Item
+                            if (e.getItem().getType().equals(Material.getMaterial(null))) {
+                                //Game Item
                                 p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
 
                             } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                                if (e.getItem().getType().equals(Material.getMaterial(this.getConfigManager().getHotbarMaterial("Game")))) {
-                                    //Game Item
+                                if (e.getItem().getType().equals(Material.getMaterial(null))) {
+                                    //Lobby Item
                                     p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
 
                                 } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                                    if (e.getItem().getType().equals(Material.getMaterial(this.getConfigManager().getHotbarMaterial("Lobby")))) {
-                                        //Lobby Item
+                                    if (e.getItem().getType().equals(Material.SKULL_ITEM)) {
+                                        //Player Item
                                         p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
 
                                     } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                                        if (e.getItem().getType().equals(Material.SKULL_ITEM)) {
-                                            //Player Item
+                                        if (e.getItem().getType().equals(Material.getMaterial(null))) {
+                                                //Shop Item
                                             p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
 
-                                        } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                                            if (e.getItem().getType().equals(Material.getMaterial(this.getConfigManager().getHotbarMaterial("shop")))) {
-                                                //Shop Item
-                                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
-
-                                            }
-                                        } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                                            if (e.getItem().getType().equals(Material.BARRIER)) {
+                                        }
+                                    } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+                                        if (e.getItem().getType().equals(Material.BARRIER)) {
                                             //blocked Item
-                                                p.sendMessage("§4Das Item ist gesperrt!");
-                                            }
+                                            p.sendMessage("§4Das Item ist gesperrt!");
                                         }
                                     }
                                 }
@@ -82,12 +72,12 @@ public class Interact_Event extends Managers implements Listener {
                         }
                     }
                 }
-
-
-            } catch (Exception var20) {
-                ConsoleWriter.writeErrorWithTag("" + var20.getMessage());
             }
 
+
+        } catch (Exception var20) {
+                ConsoleWriter.writeErrorWithTag("" + var20.getMessage());
         }
     }
+}
 

@@ -10,18 +10,7 @@ public class Click_Event implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent e){
-        PlayerConfigManager pm = new PlayerConfigManager();
         Player p = (Player) e.getWhoClicked();
-
-        if(Event_Blocker.isMenu()){
-            e.setCancelled(true);
-            return;
-        }
-
-        if(pm.isBuildModeEnabled(p)){
-            e.setCancelled(false);
-            return;
-        }
 
         e.setCancelled(true);}
 

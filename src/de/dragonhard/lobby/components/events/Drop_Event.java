@@ -12,17 +12,6 @@ public class Drop_Event implements Listener {
     @EventHandler
     public void onDrop(PlayerDropItemEvent e){
         Player p = e.getPlayer();
-        Managers managers = new Managers();
-
-        if(Event_Blocker.isMenu()){
-            e.setCancelled(true);
-            return;
-        }
-
-        if(managers.getPlayerManager().isBuildModeEnabled(p)){
-            e.setCancelled(false);
-            return;
-        }
 
         e.setCancelled(true);}
 

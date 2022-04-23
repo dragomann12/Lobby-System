@@ -11,11 +11,8 @@ public class Build_Event implements Listener {
     @EventHandler
     public void onBuild(PlayerPickupItemEvent e){
         Player p = e.getPlayer();
-        PlayerConfigManager pm = new PlayerConfigManager();
-       if(pm.isBuildModeEnabled(p)){
-           e.setCancelled(false);
-           return;
-       }
+
+
         e.setCancelled(true);}
 
 }
