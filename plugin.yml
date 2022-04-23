@@ -1,0 +1,52 @@
+name: LobbySystem
+version: '1.5.0  beta-Build: 150.5'
+author: Dragonhard117
+main: de.dragonhard.lobby.Main
+load: STARTUP
+softdepend:
+  - PlaceholderAPI
+commands:
+  warp:
+    usage:
+    description: zum erstellen eines Teleport punktes
+    permission:
+  spawn:
+    usage:
+    description: keine Information!
+    permission:
+  InvWarp:
+    usage:
+    description: zum erstellen eines Minispiel Teleport
+    permission:
+  block:
+    usage:
+    description: keine Information!
+    permission:
+  coins:
+    usage:
+    description: keine Information!
+    permission:
+  chclear:
+    usage:
+    description: zum leeren des Chats
+    permission:
+  crServer:
+    usage:
+    description: zum erstellen eines Servers!
+    permission:
+  bm:
+    usage:
+    description: keine Information!
+    permission:
+  info:
+    usage:
+    description: zeigt Informationen über den Spieler!
+    permission:
+  lbv:
+    usage:
+    description: zeigt die Lobby-System version!
+    permission:
+  lbHelp:
+    usage:
+    description: keine Information!
+    permission:

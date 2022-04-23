@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: LobbySystem/src/de/dragonhard/lobby/Main.java
+
