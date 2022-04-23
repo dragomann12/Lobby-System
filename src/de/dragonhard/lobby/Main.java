@@ -13,12 +13,9 @@ import de.dragonhard.lobby.manager.*;
 import de.dragonhard.lobby.manager.other.BungeeCordManager;
 import de.dragonhard.lobby.manager.other.PluginComunicationManager;
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.EventListener;
 
 public class Main extends JavaPlugin{
 
@@ -66,11 +63,6 @@ TODO add Yes/No question to admin items
 
                 manager.getPluginWhitelistManager().onLoad();
                 manager.getSoundManager().addSoundsToList();
-
-            if (manager.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-                PAPI_Support pS = new PAPI_Support(this);
-                pS.register();
-            }
 
         }else{
             ConsoleWriter.writeWithTag("installing ...");

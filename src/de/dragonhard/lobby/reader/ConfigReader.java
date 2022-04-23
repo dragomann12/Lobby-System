@@ -96,7 +96,7 @@ public class ConfigReader {
 		return cfg.getDouble(item);
 	}
 
-	public float getfloat(String item) {
+	public float getFloat(String item) {
 		FileConfiguration cfg = getFileConfiguration();
 		return (float)cfg.getDouble(item);
 	}

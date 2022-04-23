@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.manager.other;
 
+import de.dragonhard.lobby.reader.Config;
 import de.dragonhard.lobby.reader.SpawnReader;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -14,9 +15,8 @@ public class SpawnManager extends SpawnReader {
     public void teleportPlayerToSpawn(Player p){  //call to teleport the Player to a Spawn
         if(exists(this.getFile("Spawn"))){
             this.setFile(p,"Spawn");
-            World w = Bukkit.getServer().getWorld(this.getString("World"));
             try{
-                p.teleport(new Location(w, this.getDouble("X"), this.getDouble("Y"), this.getDouble("Z"), this.getfloat("Yaw"), this.getfloat("Pitch")));
+                p.teleport(Config.spawn);
             }catch(Exception ex) {
                 p.sendMessage("§4Es ist ein Fehler aufgetreten Teleport nicht möglich");
                 p.sendMessage("Fehler: " + Arrays.toString(ex.getStackTrace()));

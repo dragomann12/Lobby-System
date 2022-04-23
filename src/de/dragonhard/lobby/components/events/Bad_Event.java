@@ -4,7 +4,6 @@ import de.dragonhard.lobby.components.ConsoleWriter;
 import org.bukkit.event.EventException;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.EventExecutor;
 
 public class Bad_Event implements Listener {
 

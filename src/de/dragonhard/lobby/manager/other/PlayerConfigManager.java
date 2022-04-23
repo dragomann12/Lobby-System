@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import java.sql.SQLException;
 
 public class PlayerConfigManager extends ConfigReader {
+    //@TODO fix Hide mode, clean code
     private static Managers manager = new Managers();
     private static final String defaultConfig = "config";
     private static final String defaultItemBase = "Player.";
@@ -47,7 +48,7 @@ public class PlayerConfigManager extends ConfigReader {
     public void setWarpEnabled(Player p, boolean status){
         setBooleanOf(p,"WarpEnabled", status);
     }
-
+    @Deprecated
     public void setKey(Player p, String key){setStringOf(p,"AccessKey", key);}
 
         /*

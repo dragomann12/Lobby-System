@@ -5,16 +5,20 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
-@Deprecated
-public class GroupReader {
-	private static String fileName;
+
+public class Reader {
+	private String fileName;
+	private final String type;
+
+	public Reader(String type, String fileName){
+
+		this.type = type;
+		this.fileName = fileName + ".yml";
+	}
 	
 	public void set(String item, String value) {
 		FileConfiguration cfg = getFileConfiguration();
-		
 			cfg.set(item, value);
-		
 		
 		try {
 			cfg.save(getFile());
@@ -25,9 +29,7 @@ public class GroupReader {
 	
 	public void set(String item, int value) {
 		FileConfiguration cfg = getFileConfiguration();
-		
 			cfg.set(item, value);
-		
 		
 		try {
 			cfg.save(getFile());
@@ -38,10 +40,8 @@ public class GroupReader {
 	
 	public void set(String item, boolean value) {
 		FileConfiguration cfg = getFileConfiguration();
-		
 			cfg.set(item, value);
-		
-		
+
 		try {
 			cfg.save(getFile());
 		} catch(IOException e) {
@@ -51,9 +51,7 @@ public class GroupReader {
 
 	public void set(String item, double value) {
 		FileConfiguration cfg = getFileConfiguration();
-
 		cfg.set(item, value);
-
 
 		try {
 			cfg.save(getFile());
@@ -63,13 +61,9 @@ public class GroupReader {
 	}
 	
 	public void setDefault(String item, String value) {
-		
 		FileConfiguration cfg = getFileConfiguration();
-		
 		cfg.options().copyDefaults(true);
-		
 		cfg.addDefault(item, (String)value);
-		
 		
 		try {
 			cfg.save(getFile());
@@ -94,61 +88,40 @@ public class GroupReader {
 		return cfg.getDouble(item);
 	}
 
-	public float getfloat(String item) {
+	public float getFloat(String item) {
 		FileConfiguration cfg = getFileConfiguration();
 		return (float)cfg.getDouble(item);
 	}
 
 	public int getInteger(String item) {
-		
 		FileConfiguration cfg = getFileConfiguration();
 		return cfg.getInt(item);
-		
 	}
 	
 	public Boolean getBoolean(String item) {
-		
 		FileConfiguration cfg = getFileConfiguration();
 		return cfg.getBoolean(item);
-		
 	}
 	
 	private File getFile() {
-		
-		return new File(Config.path_reader_group, fileName + ".yml");
-		
+		return new File("Data/" + type + "/", fileName + ".yml");
 	}
 
-	public File getFile(String filename) {
+	public boolean exists(){
+		File file = new File("Data/" + type + "/",  fileName + ".yml");
 
-		return new File(Config.path_reader_group, "group_" + filename + ".yml");
-
-	}
-	
-	public void setFile(String groupName) {
-		fileName = "group_" + groupName;
-	}
-
-	public boolean exists(String groupName){
-		File file = new File(Config.path_reader_group,  "group_" + groupName + ".yml");
-
-		if(file.exists()){return true;}else{return false;}
-
+		if(file.exists()){return true;}
+		return false;
 	}
 	
 	private FileConfiguration getFileConfiguration() {
-		
 		return YamlConfiguration.loadConfiguration(getFile());
 	}
 
 	public void setDefault(String item, boolean value) {
-	
 	FileConfiguration cfg = getFileConfiguration();
-		
 		cfg.options().copyDefaults(true);
-		
 		cfg.addDefault(item, value);
-		
 		
 		try {
 			cfg.save(getFile());
@@ -159,20 +132,15 @@ public class GroupReader {
 	}
 	
 	public void setDefault(String item, int value) {
-		
 		FileConfiguration cfg = getFileConfiguration();
-			
 			cfg.options().copyDefaults(true);
-			
 			cfg.addDefault(item, value);
-			
-			
+
 			try {
 				cfg.save(getFile());
 			} catch(IOException e) {
 
 			}
-			
-		}
+	}
 	
 }

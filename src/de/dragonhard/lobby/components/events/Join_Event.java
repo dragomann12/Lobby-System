@@ -3,6 +3,7 @@ package de.dragonhard.lobby.components.events;
 import de.dragonhard.lobby.components.ConsoleWriter;
 import de.dragonhard.lobby.components.util.InventorySetter;
 import de.dragonhard.lobby.manager.*;
+import de.dragonhard.lobby.reader.Config;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,6 +15,7 @@ public class Join_Event extends Managers implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) throws SQLException {
         Player p = e.getPlayer();
+
         e.setJoinMessage("");
         this.getSpawnManager().teleportPlayerToSpawn(p);
 
