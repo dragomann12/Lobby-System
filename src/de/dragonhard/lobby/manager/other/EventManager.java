@@ -1,16 +1,8 @@
 package de.dragonhard.lobby.manager.other;
 
 import de.dragonhard.lobby.components.events.*;
-import de.dragonhard.lobby.components.menu.Game_Menu;
-import de.dragonhard.lobby.components.menu.Lobby_Menu;
-import de.dragonhard.lobby.components.menu.shop.Shop_Menu;
-import de.dragonhard.lobby.manager.database.ConnectionManager;
 
 public class EventManager {
-
-    public Bad_Event getBadEvent(){
-        return new Bad_Event();
-    }
 
     public Build_Event getBuildEvent(){
         return new Build_Event();
@@ -24,16 +16,8 @@ public class EventManager {
         return new Click_Event();
     }
 
-    public CommandListener getCommandListener(){
-        return new CommandListener();
-    }
-
     public Damage_Event getDamageEvent(){
         return new Damage_Event();
-    }
-
-    public Disconnect_Event getDisconnectEvent(){
-        return new Disconnect_Event();
     }
 
     public Drag_Event getDragEvent(){
@@ -62,10 +46,6 @@ public class EventManager {
 
     public Interact_Event getInteractEvent(){
         return new Interact_Event();
-    }
-
-    public Inventory_Click_Event getInventoryClickEvent(){
-        return new Inventory_Click_Event();
     }
 
     public Join_Event getJoinEvent(){

@@ -1,19 +1,12 @@
 package de.dragonhard.lobby.manager.other;
 
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
+
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class InventoryManager {
         String defaultColor = "§5";
@@ -89,13 +82,5 @@ public class InventoryManager {
     public void createInventoryItem(Player p, Material material, String label, int slotID){
         addItemToInventory(p, addItem(label, material), slotID);
     }
-
-    public void getBlocked(Player p, int slotID){
-        int sID = slotID + 1;
-        getInv(p).addItem(addItem("Slot " + sID + " §4gesperrt", Material.BARRIER)); }
-
-    public void noPermission(Player p, int slotID){
-        int sID = slotID +1;
-        getInv(p).addItem(addItem("Slot " + sID + ": §4keine Berechtigung", Material.BARRIER)); }
 
 }

@@ -104,11 +104,11 @@ public class Reader {
 	}
 	
 	private File getFile() {
-		return new File("Data/" + type + "/", fileName + ".yml");
+		return new File("plugins/LobbySystem/Data/" + type , fileName + ".yml");
 	}
 
 	public boolean exists(){
-		File file = new File("Data/" + type + "/",  fileName + ".yml");
+		File file = new File("plugins/LobbySystem/Data/" + type ,  fileName + ".yml");
 
 		if(file.exists()){return true;}
 		return false;
@@ -119,7 +119,7 @@ public class Reader {
 	}
 
 	public void setDefault(String item, boolean value) {
-	FileConfiguration cfg = getFileConfiguration();
+		FileConfiguration cfg = getFileConfiguration();
 		cfg.options().copyDefaults(true);
 		cfg.addDefault(item, value);
 		
@@ -128,19 +128,17 @@ public class Reader {
 		} catch(IOException e) {
 
 		}
-		
 	}
 	
 	public void setDefault(String item, int value) {
 		FileConfiguration cfg = getFileConfiguration();
-			cfg.options().copyDefaults(true);
-			cfg.addDefault(item, value);
+		cfg.options().copyDefaults(true);
+		cfg.addDefault(item, value);
 
-			try {
-				cfg.save(getFile());
-			} catch(IOException e) {
+		try {
+			cfg.save(getFile());
+		} catch(IOException e) {
 
-			}
+		}
 	}
-	
 }
