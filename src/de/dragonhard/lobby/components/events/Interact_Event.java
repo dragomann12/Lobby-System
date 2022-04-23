@@ -16,58 +16,45 @@ public class Interact_Event extends Managers implements Listener {
     public void onPlayerInteraction(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if(Event_Blocker.isMenu()){
-            e.setCancelled(false);
-            return;
-        }
-
-        if (this.getPlayerManager().isBuildModeEnabled(p)) {
-            e.setCancelled(false);
-            return;
-        } else {
-            e.setCancelled(true);
-            this.getInventoryManager().clearInv(p);
-        }
-
 
             try {
                 if (e.getItem().getType().equals(Material.COMPASS)) { // this Item is not in use!
                     ConsoleWriter.writeWithTag("Compass are disabled for the Lobby-System"); return;
                 } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                    if (e.getItem().getType().equals(this.getPlayerManager().getHideStatusMaterial(p))) {
+                    if (e.getItem().getType().equals(null)) {
                         //Hide Item
-                        p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                        p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1.0F, 1.0F);
 
                     } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                        if (e.getItem().getType().equals(Material.getMaterial(this.getConfigManager().getHotbarMaterial("Admin")))) {
+                        if (e.getItem().getType().equals(Material.getMaterial(null))) {
                             //Admin Item
-                            p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                            p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1.0F, 1.0F);
 
 
                         } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                            if (e.getItem().getType().equals(Material.getMaterial(this.getConfigManager().getHotbarMaterial("Settings")))) {
+                            if (e.getItem().getType().equals(Material.getMaterial(null))) {
                                 //Settings Item
-                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                                p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1.0F, 1.0F);
 
                             } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                                if (e.getItem().getType().equals(Material.getMaterial(this.getConfigManager().getHotbarMaterial("Game")))) {
+                                if (e.getItem().getType().equals(Material.getMaterial(null))) {
                                     //Game Item
-                                    p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                                    p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1.0F, 1.0F);
 
                                 } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                                    if (e.getItem().getType().equals(Material.getMaterial(this.getConfigManager().getHotbarMaterial("Lobby")))) {
+                                    if (e.getItem().getType().equals(Material.getMaterial(null))) {
                                         //Lobby Item
-                                        p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                                        p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1.0F, 1.0F);
 
                                     } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                                        if (e.getItem().getType().equals(Material.SKULL_ITEM)) {
+                                        if (e.getItem().getType().equals(null)) {
                                             //Player Item
-                                            p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                                            p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1.0F, 1.0F);
 
                                         } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                                            if (e.getItem().getType().equals(Material.getMaterial(this.getConfigManager().getHotbarMaterial("shop")))) {
+                                            if (e.getItem().getType().equals(Material.getMaterial(null))) {
                                                 //Shop Item
-                                                p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
+                                                p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1.0F, 1.0F);
 
                                             }
                                         } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {

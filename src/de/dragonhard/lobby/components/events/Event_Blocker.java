@@ -12,14 +12,8 @@ private static boolean isMenu;
     @EventHandler
     public void onInvOpen(InventoryOpenEvent e){
         Player p = (Player) e.getPlayer();
-        if(p.getInventory().getName().contains("§")){
-            isMenu = true;
-        }
-        isMenu = false;
+
     }
 
-    public static Boolean isMenu(){
-        return isMenu;
-    }
 
 }

@@ -13,10 +13,6 @@ public class Chat_Event extends Managers implements Listener {
         Player p = e.getPlayer();
         String message = e.getMessage();
 
-
-        e.setMessage(this.getChatBlockManager().stringReplacer(message));
-
-
     }
 
 }

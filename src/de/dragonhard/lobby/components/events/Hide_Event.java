@@ -20,21 +20,6 @@ public class Hide_Event extends Managers implements Listener {
     public void onInteract(PlayerInteractEvent e){
         Player p = (Player) e.getPlayer();
 
-        if(this.getPlayerManager().getHideStatus(p)){
-
-                hide.remove(p.getName());
-                for (Player players : Bukkit.getOnlinePlayers()) {
-                    p.showPlayer(players);
-                }
-
-        }else {
-            hide.add(p.getName());
-            for (Player players : Bukkit.getOnlinePlayers()) {
-                p.hidePlayer(players);
-            }
-
-        }
-
     }
 
 }
