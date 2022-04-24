@@ -1,5 +1,6 @@
 package de.dragonhard.lobby.components.events;
 
+import de.dragonhard.lobby.components.player.Hotbar;
 import de.dragonhard.lobby.manager.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,6 +15,8 @@ public class Join_Event extends Managers implements Listener {
         Player p = e.getPlayer();
 
         e.setJoinMessage("");
+
+        Hotbar.addDefaultInventory(p);
     }
 
 }

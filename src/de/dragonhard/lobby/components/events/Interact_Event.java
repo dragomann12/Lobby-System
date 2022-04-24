@@ -60,6 +60,7 @@ public class Interact_Event extends Managers implements Listener {
                                         } else if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
                                             if (e.getItem().getType().equals(Material.BARRIER)) {
                                             //blocked Item
+                                                p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1.0F, 1.0F);
                                                 p.sendMessage("§4Das Item ist gesperrt!");
                                             }
                                         }
