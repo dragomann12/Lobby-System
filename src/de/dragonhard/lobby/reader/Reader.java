@@ -70,7 +70,6 @@ public class Reader {
 		} catch(IOException e) {
 
 		}
-		
 	}
 
 	public void readData(String item) {
@@ -128,7 +127,6 @@ public class Reader {
 		} catch(IOException e) {
 
 		}
-		
 	}
 	
 	public void setDefault(String item, int value) {
@@ -142,5 +140,4 @@ public class Reader {
 
 		}
 	}
-	
 }

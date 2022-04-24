@@ -6,11 +6,6 @@ import org.bukkit.plugin.PluginManager;
 
 public class Managers {
 
-
-    public InventoryManager getInventoryManager(){
-        return new InventoryManager();
-    }
-
     public WarpManager getWarpManager(){
         return new WarpManager();
     }
