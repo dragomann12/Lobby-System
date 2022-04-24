@@ -1,33 +1,43 @@
 package de.dragonhard.lobby.components;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class Message {
 
-    public static void sendMessageByTag(String tag, Player p){
+   public static void sendToPlayer(Player sender, Player target, String message){
 
-        p.sendMessage(tag);
+       if(Bukkit.getPlayer(target.getUniqueId()) != null){
+           target.sendMessage( "§f" + sender.getName() + " §e-> §f" + message);
+           return;
+       }
 
-    }
+       sender.sendMessage("§4Der Spieler wurde nicht gefunden!");
 
-    public static String getMessageByTag(String tag) {
+   }
 
-        switch (tag) {
+   public static void sendNotify(Player player, String color, String message){
 
-            case "tpSpawn":
-                return "§aDu wurdest zum Spawn Teleportiert";
-            case "tpWarp":
-                return "§aDu wurdest zum Warp Teleportiert";
-            case "tpWarpNotExists":
-                return "§4Der Warp wurde nicht gefunden!";
-            case "tpWarpNoPermission":
-                return "§4Du hast keine Berechtigung um diesen Warp zu nutzen!";
-            case "tpWarpDelete":
-                return "§aDer Warp wurde erfolgreich gelöscht";
-        }
+       player.sendMessage("§" + color + " " + message);
 
-        return "§4keine oder falsche eingabe!";
+   }
 
-    }
+   public static void sendNotifyByServer(Player player, String color, String message){
 
+       player.sendMessage("§f[§b" + Bukkit.getServer().getName() + "§e] §" + color + " " + message);
+
+   }
+
+   public static void clearChat(Player player){
+       int amount = 150;
+       boolean showChatClearBy = true;
+
+       for(int i = 0; i < amount; i ++){
+           Bukkit.broadcastMessage(" ");
+       }
+
+       if(showChatClearBy){
+           Bukkit.broadcastMessage("§aChat von §e" + player.getName() + " §ageleert");
+       }
+   }
 }
