@@ -29,7 +29,7 @@ public class Message {
    }
 
    public static void clearChat(Player player){
-       int amount = 150;
+       int amount = 100;
        boolean showChatClearBy = true;
 
        for(int i = 0; i < amount; i ++){
