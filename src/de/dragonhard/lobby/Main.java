@@ -1,16 +1,15 @@
 package de.dragonhard.lobby;
 
 import de.dragonhard.lobby.components.ConsoleWriter;
+import de.dragonhard.lobby.components.menu.Menu;
 import de.dragonhard.lobby.manager.*;
+import de.dragonhard.lobby.manager.other.MenuManager;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin{
 
-/*
-TODO add Yes/No question to admin items
- */
     Managers manager = new Managers();
     static Plugin plugin;
 
@@ -24,9 +23,21 @@ TODO add Yes/No question to admin items
         plugin = this;
 
         _registerEvents();
+        _menu_register();
 
     }
 
+    private void _menu_register(){
+        Menu    menu_lobby = new Menu("Lobby","5",6),
+                menu_backpack = new Menu("Rucksack","5",6),
+                menu_group = new Menu("Gruppen","5",6);
+
+        MenuManager.addMenu("lobby",menu_lobby);
+        MenuManager.addMenu("backpack",menu_backpack);
+        MenuManager.addMenu("group",menu_group);
+
+
+    }
 
     private void _registerEvents(){
         ConsoleWriter.writeLoadingStart("loading event register");

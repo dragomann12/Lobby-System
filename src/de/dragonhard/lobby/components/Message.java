@@ -28,6 +28,10 @@ public class Message {
 
    }
 
+   public static void broadcast(String sender, String message){
+       Bukkit.broadcastMessage("§7[§5Twitch§7] §5" + sender + " >> " + message);
+   }
+
    public static void clearChat(Player player){
        int amount = 100;
        boolean showChatClearBy = true;

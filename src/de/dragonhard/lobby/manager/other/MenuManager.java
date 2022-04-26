@@ -14,7 +14,6 @@ public class MenuManager {
         if (menu_list.containsKey(id)) {
             ConsoleWriter.write(Color.RED + "[ERROR] menu id " + Color.YELLOW + id + Color.RED + " already exists!"); return;
         }
-
         menu_list.put(id,menu);
 
     }

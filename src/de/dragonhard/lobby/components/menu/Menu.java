@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class Menu implements Listener {
     private final String name;
     private final String color;
-    private final Player player;
     private final int lines;
     private final ArrayList<MenuItem> items = new ArrayList<>();
     private final ArrayList<Integer> usedSlots = new ArrayList<>();
@@ -22,15 +21,14 @@ public class Menu implements Listener {
 
 
 
-   public Menu(String name, String color, int lines, Player player){
+   public Menu(String name, String color, int lines){
 
        this.name = name;
        this.color = color;
        this.lines = lines;
-       this.player = player;
    }
 
-    public void openInventory(){
+    public void openInventory(Player player){
         int slots = lines*9;
 
         inventory = Bukkit.getServer().createInventory(null, slots, name);
