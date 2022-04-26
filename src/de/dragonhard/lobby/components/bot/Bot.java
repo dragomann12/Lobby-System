@@ -10,10 +10,12 @@ import java.util.Arrays;
 public class Bot extends PircBot{
     String con_channel;
     String con_auth;
+    String con_name;
 
-    public Bot(String channel, String auth){
+    public Bot(String name, String channel, String auth){
         con_channel = "#" + channel;
         con_auth = "oauth:" + auth;
+        con_name = name;
         System.out.println(con_channel);
         System.out.println(con_auth);
     }
@@ -21,7 +23,7 @@ public class Bot extends PircBot{
     public void initialize() throws IOException, IrcException {
 
 
-        this.setName("dragomann12");
+        this.setName(con_name);
         this.connect("irc.chat.twitch.tv",6667, con_auth);
         this.joinChannel(con_channel);
         this.setVerbose(true);
